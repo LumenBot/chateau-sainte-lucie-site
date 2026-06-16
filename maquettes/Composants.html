@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Composants transverses — Château de Sainte-Lucie</title>
+<link rel="stylesheet" href="site/site.css">
+<style>
+  body{background:#201f1c;color:#cfc7b6;background-image:radial-gradient(rgba(255,255,255,.022) 1px,transparent 1px);background-size:22px 22px;}
+  .board-head{padding:42px clamp(20px,5vw,60px) 10px;}
+  .board-head .eb{text-transform:uppercase;letter-spacing:.4em;font-size:11px;color:var(--or);font-weight:600;}
+  .board-head h1{font-family:var(--display);font-weight:500;font-size:clamp(30px,4vw,46px);color:#f1ead9;margin:12px 0 6px;}
+  .board-head p{margin:0;max-width:74ch;color:#9a917f;font-size:15px;}
+  .topnav{position:sticky;top:0;z-index:100;background:rgba(20,19,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,164,92,.2);padding:13px clamp(16px,4vw,48px);}
+  .topnav a{font-family:var(--serif);font-size:13px;letter-spacing:.08em;color:#b3aa97;margin-right:18px;}
+  .topnav a:hover{color:#f1ead9;}
+  .topnav .logo{font-family:var(--display);font-size:20px;color:#f1ead9;margin-right:22px;}
+
+  .comp{padding:34px clamp(20px,5vw,60px);border-top:1px solid rgba(200,164,92,.12);}
+  .comp__head{margin-bottom:22px;}
+  .comp__head .n{font-family:var(--display);font-style:italic;font-size:15px;color:var(--or);letter-spacing:.04em;}
+  .comp__head h2{font-family:var(--display);font-weight:500;font-size:27px;color:#f1ead9;margin:4px 0 6px;}
+  .comp__head p{margin:0;color:#9a917f;font-size:14px;max-width:74ch;}
+  .demo{border:1px solid rgba(200,164,92,.2);overflow:hidden;position:relative;}
+  .demo.dark{background:var(--noir);}
+  .demo.light{background:var(--parch);}
+  .demo.pad{padding:30px;}
+  .tag{position:absolute;top:10px;right:12px;z-index:9;font-family:var(--serif);text-transform:uppercase;letter-spacing:.22em;font-size:9px;color:#8a8170;background:rgba(20,19,16,.7);padding:4px 9px;}
+  .row{display:flex;flex-wrap:wrap;gap:16px;align-items:center;}
+  .swatches{display:flex;flex-wrap:wrap;gap:14px;}
+  .sw{width:120px;}
+  .sw .chip{height:60px;border:1px solid rgba(255,255,255,.08);}
+  .sw .nm{font-family:var(--serif);font-size:12px;color:#b3aa97;margin-top:8px;letter-spacing:.04em;}
+  .sw .hex{font-family:var(--serif);font-size:11px;color:#7d7565;}
+  .grid2{display:grid;grid-template-columns:1fr;gap:24px;}
+  @media(min-width:900px){.grid2{grid-template-columns:1fr 1fr;}}
+
+  /* re-declared component styles (usage card + form) for the showcase */
+  .ucard{background:var(--parch-card);border:1px solid var(--rule-l-faint);display:flex;flex-direction:column;overflow:hidden;max-width:360px;}
+  .ucard__img{position:relative;aspect-ratio:3/2;overflow:hidden;}
+  .ucard__img img{width:100%;height:100%;object-fit:cover;}
+  .ucard__img .t{position:absolute;left:0;bottom:0;background:rgba(12,12,11,.72);color:var(--creme);font-family:var(--serif);text-transform:uppercase;letter-spacing:.24em;font-size:10px;padding:7px 13px;}
+  .ucard__body{padding:26px 24px 28px;}
+  .ucard__body h3{font-family:var(--display);font-size:26px;margin:0 0 10px;color:var(--encre);}
+  .ucard__body p{font-size:15px;color:var(--encre-soft);margin:0 0 20px;}
+
+  .field{display:flex;flex-direction:column;gap:9px;margin-bottom:20px;}
+  .field label{font-family:var(--serif);text-transform:uppercase;letter-spacing:.16em;font-size:11.5px;font-weight:600;color:var(--encre-soft);}
+  .field input{font-family:var(--serif);font-size:17px;color:var(--encre);background:var(--parch-card);border:1px solid var(--rule-l);padding:14px 16px;width:100%;}
+  .field input:focus{outline:none;border-color:var(--or-prof);box-shadow:0 0 0 3px rgba(154,123,63,.16);}
+  .field input.focus-demo{border-color:var(--or-prof);box-shadow:0 0 0 3px rgba(154,123,63,.16);}
+  .seg{display:flex;gap:10px;flex-wrap:wrap;}
+  .seg .opt{font-family:var(--serif);font-size:14.5px;color:var(--encre-soft);border:1px solid var(--rule-l);padding:12px 18px;background:var(--parch-card);}
+  .seg .opt.on{background:var(--encre);color:var(--parch);border-color:var(--encre);}
+
+  /* gallery + lightbox mock */
+  .galmock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .galmock a{aspect-ratio:1/1;overflow:hidden;}
+  .galmock img{width:100%;height:100%;object-fit:cover;}
+  .lightbox{position:relative;background:rgba(8,7,5,.92);display:flex;align-items:center;justify-content:center;padding:30px;min-height:300px;}
+  .lightbox img{max-height:300px;border:1px solid rgba(231,205,146,.3);}
+  .lightbox .close{position:absolute;top:14px;right:18px;color:var(--creme);font-size:26px;}
+  .lightbox .nav{position:absolute;top:50%;transform:translateY(-50%);color:var(--creme);font-size:30px;opacity:.7;}
+  .lightbox .nav.l{left:16px;} .lightbox .nav.r{right:16px;}
+  .lightbox .cap{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:var(--serif);text-transform:uppercase;letter-spacing:.24em;font-size:10px;color:var(--creme-dim);}
+
+  .menu-demo{position:relative;height:520px;background:var(--noir);padding:28px var(--gutter);overflow:hidden;}
+  .menu-demo .mtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
+  .menu-demo .mclose{color:var(--creme);font-size:30px;}
+  .menu-demo a.mi{font-family:var(--display);font-size:30px;color:var(--creme);padding:13px 0;border-bottom:1px solid var(--rule-d-faint);display:flex;justify-content:space-between;align-items:center;}
+  .menu-demo a.mi .idx{font-family:var(--serif);font-size:12px;letter-spacing:.2em;color:var(--or);opacity:.7;}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <span class="logo">Sainte-Lucie — Composants</span>
+  <a href="Maquettes_Site.html">↩ Écrans</a>
+  <a href="#nav">Nav</a><a href="#btn">Boutons</a><a href="#card">Cartes</a><a href="#form">Formulaire</a><a href="#gal">Galerie</a><a href="#foot">Footer</a>
+</div>
+
+<div class="board-head">
+  <div class="eb">Château de Sainte-Lucie · Système</div>
+  <h1>Composants transverses</h1>
+  <p>Les briques réutilisables du site, dans les deux registres. Couleurs, typographie, navigation, boutons, cartes d'usage, champs de formulaire, galerie/lightbox et pied de page — tels que définis dans <code style="color:var(--or)">site/site.css</code>.</p>
+</div>
+
+<!-- COULEURS & TYPO -->
+<section class="comp" id="tokens">
+  <div class="comp__head"><span class="n">Fondations</span><h2>Couleurs &amp; typographie</h2><p>Deux palettes : nuit (immersif) et jour (parchemin). Titres Cormorant Garamond, texte EB Garamond, labels en capitales espacées.</p></div>
+  <div class="grid2">
+    <div class="demo dark pad"><span class="tag">Nuit</span>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#0c0c0b"></div><div class="nm">Noir chaud</div><div class="hex">#0c0c0b</div></div>
+        <div class="sw"><div class="chip" style="background:#ece4d4"></div><div class="nm">Crème</div><div class="hex">#ece4d4</div></div>
+        <div class="sw"><div class="chip" style="background:#c8a45c"></div><div class="nm">Or</div><div class="hex">#c8a45c</div></div>
+        <div class="sw"><div class="chip" style="background:#e7cd92"></div><div class="nm">Or clair</div><div class="hex">#e7cd92</div></div>
+      </div>
+      <div style="margin-top:24px;">
+        <div class="eyebrow on-dark"><span class="ln"></span>Label · capitales espacées</div>
+        <h3 class="display-m" style="color:var(--creme);margin:12px 0 6px;">Titre <em class="gold light">en lumière</em></h3>
+        <p style="color:var(--creme-dim);margin:0;font-size:15px;">Texte courant EB Garamond sur fond nuit.</p>
+      </div>
+    </div>
+    <div class="demo light pad"><span class="tag">Jour</span>
+      <div class="swatches">
+        <div class="sw"><div class="chip" style="background:#f4eee2"></div><div class="nm" style="color:#5c5347">Parchemin</div><div class="hex" style="color:#8a7f6d">#f4eee2</div></div>
+        <div class="sw"><div class="chip" style="background:#2a2620"></div><div class="nm" style="color:#5c5347">Encre</div><div class="hex" style="color:#8a7f6d">#2a2620</div></div>
+        <div class="sw"><div class="chip" style="background:#9a7b3f"></div><div class="nm" style="color:#5c5347">Or profond</div><div class="hex" style="color:#8a7f6d">#9a7b3f</div></div>
+        <div class="sw"><div class="chip" style="background:#fbf7ee"></div><div class="nm" style="color:#5c5347">Carte</div><div class="hex" style="color:#8a7f6d">#fbf7ee</div></div>
+      </div>
+      <div style="margin-top:24px;">
+        <div class="eyebrow"><span class="ln"></span>Label · capitales espacées</div>
+        <h3 class="display-m" style="margin:12px 0 6px;">Titre <em class="gold">en lumière</em></h3>
+        <p style="color:var(--encre-soft);margin:0;font-size:15px;">Texte courant EB Garamond sur fond jour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<section class="comp" id="nav">
+  <div class="comp__head"><span class="n">Navigation</span><h2>Header &amp; menu</h2><p>Header transparent sur les heros nuit, sticky léger sur parchemin. Menu mobile plein écran. Logo + liens + CTA contact.</p></div>
+  <div class="demo dark" style="min-height:96px;position:relative;"><span class="tag">Desktop · sur hero (nuit)</span>
+    <div style="position:relative;">
+      <div class="bar" style="padding:22px 34px;">
+        <span class="brand"><span class="bn">Sainte-Lucie</span><span class="bs">Château · Vosges</span></span>
+        <nav class="nav-desktop" style="display:flex;">
+          <a class="navlink" href="#">Le Château</a><a class="navlink" href="#">Séminaires</a>
+          <a class="navlink" href="#">Événements privés</a><a class="navlink" href="#">Tournages</a>
+          <a class="navlink" href="#">Galerie</a><a class="btn btn--ghost-light btn--sm" href="#">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="grid2" style="margin-top:20px;">
+    <div class="demo light" style="min-height:96px;position:relative;"><span class="tag">Desktop · sticky (jour)</span>
+      <div class="bar" style="padding:18px 30px;background:rgba(244,238,226,.96);border-bottom:1px solid var(--rule-l-faint);">
+        <span class="brand"><span class="bn" style="color:var(--encre)">Sainte-Lucie</span><span class="bs" style="color:var(--or-prof)">Château · Vosges</span></span>
+        <nav class="nav-desktop" style="display:flex;">
+          <a class="navlink" href="#" style="color:var(--encre)">Le Château</a><a class="navlink" href="#" style="color:var(--encre)">Séminaires</a>
+          <a class="btn btn--ghost btn--sm" href="#">Contact</a>
+        </nav>
+      </div>
+    </div>
+    <div class="demo" style="position:relative;"><span class="tag">Mobile · menu plein écran</span>
+      <div class="menu-demo">
+        <div class="mtop"><span class="brand"><span class="bn">Sainte-Lucie</span><span class="bs">Château · Vosges</span></span><span class="mclose">×</span></div>
+        <a class="mi" href="#">Le Château <span class="idx">01</span></a>
+        <a class="mi" href="#">Séminaires <span class="idx">02</span></a>
+        <a class="mi" href="#">Événements privés <span class="idx">03</span></a>
+        <a class="mi" href="#">Tournages <span class="idx">04</span></a>
+        <a class="mi" href="#">Galerie <span class="idx">05</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUTONS -->
+<section class="comp" id="btn">
+  <div class="comp__head"><span class="n">Actions</span><h2>Boutons &amp; liens</h2><p>CTA différenciés par cible. Or plein (action primaire), contours (secondaire), lien fléché. Survol : léger soulèvement / inversion.</p></div>
+  <div class="grid2">
+    <div class="demo dark pad"><span class="tag">Sur nuit</span>
+      <div class="row">
+        <a class="btn btn--gold-light" href="#">Demander une proposition</a>
+        <a class="btn btn--ghost-light" href="#">Demander une visite</a>
+      </div>
+      <div class="row" style="margin-top:18px;"><a class="link-or light" href="#">Étudier un tournage <span class="arr">→</span></a></div>
+    </div>
+    <div class="demo light pad"><span class="tag">Sur jour</span>
+      <div class="row">
+        <a class="btn" href="#">Demander une proposition</a>
+        <a class="btn btn--ghost" href="#">Voir le lieu</a>
+      </div>
+      <div class="row" style="margin-top:18px;"><a class="link-or" href="#">Découvrir le château <span class="arr">→</span></a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CARTE D'USAGE -->
+<section class="comp" id="card">
+  <div class="comp__head"><span class="n">Bloc</span><h2>Carte d'usage</h2><p>Une cible = une carte : photo + tag, titre, accroche, CTA dédié. Survol : zoom photo + soulèvement.</p></div>
+  <div class="demo light pad">
+    <div class="row" style="align-items:stretch;gap:24px;">
+      <article class="ucard">
+        <div class="ucard__img"><img src="img/13_facade_jour_piscine.jpeg" alt="Séminaires"><span class="t">Entreprises</span></div>
+        <div class="ucard__body"><h3>Séminaires</h3><p>Salles de caractère, parc, déjeuner maison et bien-être.</p><a class="link-or" href="#">Demander une proposition <span class="arr">→</span></a></div>
+      </article>
+      <article class="ucard">
+        <div class="ucard__img"><img src="img/18_perron_noel.jpeg" alt="Événements privés"><span class="t">Familles</span></div>
+        <div class="ucard__body"><h3>Événements privés</h3><p>Anniversaires, baptêmes, grands repas de famille.</p><a class="link-or" href="#">Demander une visite <span class="arr">→</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULAIRE -->
+<section class="comp" id="form">
+  <div class="comp__head"><span class="n">Conversion</span><h2>Champs de formulaire</h2><p>Champ au repos et au focus (anneau or), sélecteur segmenté « type de demande », consentement RGPD. Validation côté client, honeypot anti-spam.</p></div>
+  <div class="demo light pad">
+    <div class="grid2">
+      <div>
+        <div class="field"><label>Nom *</label><input type="text" placeholder="Votre nom"></div>
+        <div class="field"><label>E-mail * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--encre-faint)">— état focus</span></label><input class="focus-demo" type="email" value="vous@exemple.fr"></div>
+      </div>
+      <div>
+        <div class="field"><label>Type de demande *</label>
+          <div class="seg"><span class="opt on">Séminaire</span><span class="opt">Événement privé</span><span class="opt">Tournage</span><span class="opt">Autre</span></div>
+        </div>
+        <div class="field" style="margin-top:4px;"><label>Date(s) envisagée(s)</label><input type="text" placeholder="ex. mars 2026, ou flexible"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:8px;"><a class="btn" href="#">Envoyer ma demande</a><span style="font-size:13px;color:var(--encre-faint);font-style:italic;">Réponse sous 48 h ouvrées.</span></div>
+  </div>
+</section>
+
+<!-- GALERIE + LIGHTBOX -->
+<section class="comp" id="gal">
+  <div class="comp__head"><span class="n">Photo</span><h2>Galerie &amp; lightbox</h2><p>Mosaïque responsive (registre nuit) ; ouverture en lightbox plein écran avec navigation ←/→. Filtres prévus en v2.</p></div>
+  <div class="grid2">
+    <div class="demo dark pad"><span class="tag">Mosaïque</span>
+      <div class="galmock">
+        <a href="#"><img src="img/05_perron_illumine.jpeg" alt=""></a>
+        <a href="#"><img src="img/12_chene_centenaire.jpeg" alt=""></a>
+        <a href="#"><img src="img/11_piscine_salon.jpeg" alt=""></a>
+        <a href="#"><img src="img/14_daims.jpeg" alt=""></a>
+        <a href="#"><img src="img/09_vue_aerienne.jpeg" alt=""></a>
+        <a href="#"><img src="img/04_blason_perron_crop.jpeg" alt=""></a>
+        <a href="#"><img src="img/18_perron_noel.jpeg" alt=""></a>
+        <a href="#"><img src="img/13_facade_jour_piscine.jpeg" alt=""></a>
+      </div>
+    </div>
+    <div class="demo" style="position:relative;"><span class="tag">Lightbox</span>
+      <div class="lightbox">
+        <span class="nav l">‹</span>
+        <img src="img/07_piscine_nuit.jpeg" alt="La piscine naturelle au crépuscule">
+        <span class="nav r">›</span>
+        <span class="close">×</span>
+        <span class="cap">La piscine naturelle · au crépuscule</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section class="comp" id="foot">
+  <div class="comp__head"><span class="n">Pied de page</span><h2>Footer</h2><p>Contact rapide, navigation, plaquette en lead magnet, mentions légales. Aucune adresse précise.</p></div>
+  <div class="demo" style="position:relative;"><span class="tag">Registre nuit</span>
+    <footer class="site-footer" style="border-top:none;">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand"><div class="bn">Château de Sainte-Lucie</div><div class="bs">Rambervillers · Vosges · Lorraine</div>
+            <p>Un lieu de réception à taille humaine, aux portes des Vosges.</p></div>
+          <div class="foot-col"><h4>Le lieu</h4><a href="#">Le Château</a><a href="#">Séminaires</a><a href="#">Événements privés</a><a href="#">Tournages</a><a href="#">Galerie</a></div>
+          <div class="foot-col"><h4>Contact</h4><a href="#">Demander une proposition</a><a href="#"><span class="__cf_email__" data-cfemail="583b37362c393b2c183b30392c3d392d752b3931362c3d342d3b313d763e2a">[email&#160;protected]</span></a><a href="#">+33 (0)X XX XX XX XX</a><p class="muted">Localisation communiquée aux clients confirmés.</p></div>
+          <div class="foot-col"><h4>La plaquette</h4><p>Le lieu et ses usages en quelques pages.</p><a class="btn btn--ghost-light btn--sm" href="#" style="margin-top:6px;">Télécharger le PDF</a></div>
+        </div>
+        <div class="foot-bottom"><span>© 2026 Château de Sainte-Lucie</span><span class="legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Cookies</a></span></div>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<div style="height:60px;"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

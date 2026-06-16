@@ -1,0 +1,15 @@
+⚠ FICHIERS À AJOUTER ICI (produits par Claude Design, non transmis pour l'instant)
+
+Placer dans ce dossier "site/" les fichiers réels de la maquette :
+  - site.css
+  - home.html
+  - le-chateau.html
+  - seminaires.html
+  - contact.html
+
+Ce sont eux que la planche ../Maquettes_Site.html affiche en iframe, et que
+Claude Code transpose en Astro + Tailwind. Sans eux :
+  - la planche maître reste vide (cadres blancs) ;
+  - Claude Code perd la référence CSS/HTML principale.
+
+Les ajouter AVANT de lancer la session Claude Code.

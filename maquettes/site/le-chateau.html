@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Château — Château de Sainte-Lucie</title>
+<meta name="description" content="Une demeure de caractère de 1876, ≈750 m², au cœur d'un parc boisé aux portes des Vosges. L'histoire, les espaces et la situation du Château de Sainte-Lucie.">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* page hero (compact, immersive) */
+  .phero{position:relative;min-height:62vh;display:flex;align-items:flex-end;color:var(--creme);
+    background:var(--noir);overflow:hidden;}
+  .phero__bg{position:absolute;inset:0;z-index:0;}
+  .phero__bg img{width:100%;height:100%;object-fit:cover;}
+  .phero__bg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(8,7,5,.55),rgba(8,7,5,.25) 40%,rgba(8,7,5,.85));}
+  .phero__in{position:relative;z-index:2;padding:130px 0 56px;}
+  .phero h1{color:var(--creme);margin:16px 0 0;}
+  .phero .place{font-family:var(--serif);text-transform:uppercase;letter-spacing:.42em;font-size:11px;color:var(--creme-dim);}
+
+  /* intro storytelling */
+  .intro .grid{display:grid;grid-template-columns:1fr;gap:30px;}
+  .intro .lead-col p{font-size:20px;line-height:1.6;}
+  @media(min-width:880px){.intro .grid{grid-template-columns:1.1fr .9fr;gap:60px;}}
+
+  /* zigzag espaces */
+  .feature{display:grid;grid-template-columns:1fr;gap:28px;align-items:center;margin-bottom:64px;}
+  .feature:last-child{margin-bottom:0;}
+  .feature__img{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--rule-l-faint);}
+  .feature__img img{width:100%;height:100%;object-fit:cover;}
+  .feature__img .cap{position:absolute;left:0;bottom:0;background:rgba(12,12,11,.7);color:var(--creme);
+    font-family:var(--serif);text-transform:uppercase;letter-spacing:.24em;font-size:10px;padding:7px 12px;}
+  .feature h3{font-size:30px;margin:0 0 14px;}
+  .feature p{color:var(--encre-soft);margin:0 0 14px;}
+  .feature .mini{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .feature .mini span{font-family:var(--serif);text-transform:uppercase;letter-spacing:.14em;font-size:10.5px;
+    color:var(--or-prof);border:1px solid var(--rule-l);padding:5px 11px;}
+  @media(min-width:880px){
+    .feature{grid-template-columns:1fr 1fr;gap:56px;}
+    .feature.rev .feature__img{order:2;}
+  }
+
+  /* chiffres clés */
+  .keyfigs{background:var(--noir);color:var(--creme);}
+  .kf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule-d-faint);
+    border:1px solid var(--rule-d-faint);margin-top:8px;}
+  .kf{background:var(--noir);padding:34px 22px;text-align:center;}
+  .kf .v{font-family:var(--display);font-size:clamp(34px,5vw,50px);color:var(--or-clair);line-height:1;}
+  .kf .l{font-family:var(--serif);text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--creme-dim);margin-top:12px;}
+  @media(min-width:760px){.kf-grid{grid-template-columns:repeat(4,1fr);}}
+
+  /* situation */
+  .situation .grid{display:grid;grid-template-columns:1fr;gap:34px;align-items:center;}
+  .access{list-style:none;margin:18px 0 0;padding:0;}
+  .access li{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--rule-l-faint);}
+  .access li:last-child{border-bottom:none;}
+  .access .where{font-family:var(--display);font-size:21px;color:var(--encre);}
+  .access .dur{font-family:var(--serif);letter-spacing:.04em;color:var(--or-prof);font-size:16px;white-space:nowrap;}
+  .locator{position:relative;aspect-ratio:1/1;border:1px solid var(--rule-l);background:
+    radial-gradient(circle at 50% 42%,rgba(154,123,63,.12),transparent 60%),var(--parch-card);
+    display:flex;align-items:center;justify-content:center;text-align:center;}
+  .locator .pin{position:relative;z-index:2;}
+  .locator .pin .dot{width:14px;height:14px;border-radius:50%;background:var(--or-prof);margin:0 auto 14px;
+    box-shadow:0 0 0 8px rgba(154,123,63,.16),0 0 0 18px rgba(154,123,63,.08);}
+  .locator .pin .t{font-family:var(--display);font-style:italic;font-size:22px;color:var(--encre);}
+  .locator .pin .s{font-family:var(--serif);text-transform:uppercase;letter-spacing:.24em;font-size:10.5px;color:var(--encre-faint);margin-top:8px;}
+  .locator .rings{position:absolute;inset:0;background:
+    repeating-radial-gradient(circle at 50% 42%,transparent 0 38px,rgba(154,123,63,.08) 38px 39px);}
+  @media(min-width:880px){.situation .grid{grid-template-columns:1fr 1fr;gap:60px;}}
+
+  /* CTA */
+  .cta-final{background:var(--noir);color:var(--creme);text-align:center;padding:clamp(70px,10vw,116px) 0;}
+  .cta-final h2{color:var(--creme);margin:0 auto 18px;max-width:18ch;}
+  .cta-final p{color:var(--creme-dim);max-width:50ch;margin:0 auto 32px;}
+  .cta-final .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="home.html"><span class="bn">Sainte-Lucie</span><span class="bs">Château · Vosges</span></a>
+    <nav class="nav-desktop">
+      <a class="navlink" href="le-chateau.html" style="opacity:1;">Le Château</a>
+      <a class="navlink" href="seminaires.html">Séminaires</a>
+      <a class="navlink" href="#">Événements privés</a>
+      <a class="navlink" href="#">Tournages</a>
+      <a class="navlink" href="home.html#galerie">Galerie</a>
+      <a class="btn btn--ghost-light btn--sm" href="contact.html">Contact</a>
+    </nav>
+    <label class="nav-toggle" for="navchk" aria-label="Ouvrir le menu"><span></span><span></span><span></span></label>
+  </div>
+</header>
+<input type="checkbox" id="navchk" class="nav-check">
+<div class="nav-mobile">
+  <div class="mtop"><span class="brand"><span class="bn">Sainte-Lucie</span><span class="bs">Château · Vosges</span></span><label class="mclose" for="navchk">×</label></div>
+  <a href="le-chateau.html">Le Château <span class="idx">01</span></a>
+  <a href="seminaires.html">Séminaires <span class="idx">02</span></a>
+  <a href="#">Événements privés <span class="idx">03</span></a>
+  <a href="#">Tournages <span class="idx">04</span></a>
+  <a href="home.html#galerie">Galerie <span class="idx">05</span></a>
+  <div class="mcta"><a class="btn btn--gold-light" href="contact.html">Nous contacter</a></div>
+</div>
+
+<!-- HERO -->
+<header class="phero">
+  <div class="phero__bg"><img src="../img/10_piscine_jour_chateau.jpeg" alt="La façade du Château de Sainte-Lucie vue du parc" style="object-position:center 60%;"></div>
+  <div class="phero__in wrap">
+    <p class="place">Le lieu</p>
+    <h1 class="display-xl">Le Château</h1>
+  </div>
+</header>
+
+<!-- INTRO STORYTELLING -->
+<section class="sec intro">
+  <div class="wrap">
+    <div class="grid">
+      <div class="lead-col">
+        <p class="eyebrow"><span class="ln"></span>L'âme du lieu</p>
+        <p style="font-family:var(--display);font-style:italic;font-size:clamp(24px,3.2vw,34px);line-height:1.3;color:var(--encre);margin-top:22px;">
+          « Bâti en 1876 comme cadeau de noces, le château porte en ses murs cent cinquante ans d'amour, de deuils et de transmissions. »
+        </p>
+      </div>
+      <div>
+        <p>De la Belle Époque à la Grande Guerre — où il servit de lieu de repos aux combattants — jusqu'à ses gardiens d'aujourd'hui, Sainte-Lucie a traversé le temps sans perdre son âme. Son nom est un hommage à la lumière : celui de l'épouse Lucy, de la sainte de Syracuse, et d'une grand-tante de la famille.</p>
+        <p>C'est cette histoire que l'on accueille, autant que les murs : un lieu habité, vivant, transmis — et désormais ouvert, quelques jours par mois, à ceux qui cherchent un cadre à sa hauteur.</p>
+        <a class="link-or" href="home.html#galerie">Parcourir la galerie <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESPACES (zigzag) -->
+<section class="sec" style="background:var(--parch-2);">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:48px;">
+      <p class="eyebrow"><span class="ln"></span>Les espaces</p>
+      <h2 class="display-l">Deux grandes salles, <em class="gold">un parc entier.</em></h2>
+    </div>
+
+    <div class="feature">
+      <div class="feature__img"><img src="../img/04_blason_perron_crop.jpeg" alt="Boiseries et blason sculpté du château"><span class="cap">Patrimoine</span></div>
+      <div>
+        <h3>Les salles de réception</h3>
+        <p>Boiseries de chêne sculpté, cheminées de marbre, blasons d'époque et parquets en point de Hongrie : deux grandes salles de caractère, baignées de lumière, pour les réunions, les repas et les réceptions.</p>
+        <div class="mini"><span>Boiseries d'origine</span><span>Cheminées de marbre</span><span>Lumière naturelle</span></div>
+      </div>
+    </div>
+
+    <div class="feature rev">
+      <div class="feature__img"><img src="../img/12_chene_centenaire.jpeg" alt="Chênes centenaires du parc"><span class="cap">Le parc</span></div>
+      <div>
+        <h3>Le parc & les chênes centenaires</h3>
+        <p>Plusieurs hectares de parc boisé, des chênes et tilleuls plantés à la construction, des perspectives dégagées sur les prairies vosgiennes. Un écrin pour les pauses, les activités de plein air et les prises de vue.</p>
+        <div class="mini"><span>Plusieurs hectares</span><span>Arbres centenaires</span><span>Sous-bois</span></div>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature__img"><img src="../img/07_piscine_nuit.jpeg" alt="La piscine naturelle au crépuscule"><span class="cap">Art de vivre</span></div>
+      <div>
+        <h3>La piscine naturelle & le bien-être</h3>
+        <p>Un bassin naturel filtré par lagunage, un salon extérieur, un cadre propice à la détente entre deux sessions de travail. L'art de vivre du château, du matin au crépuscule.</p>
+        <div class="mini"><span>Baignade naturelle</span><span>Salon extérieur</span><span>Espace bien-être</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHIFFRES CLÉS -->
+<section class="sec keyfigs">
+  <div class="wrap">
+    <div class="sec-head"><p class="eyebrow on-dark"><span class="ln"></span>En quelques chiffres</p></div>
+    <div class="kf-grid">
+      <div class="kf"><div class="v">≈750 m²</div><div class="l">de demeure</div></div>
+      <div class="kf"><div class="v">50–70</div><div class="l">personnes max</div></div>
+      <div class="kf"><div class="v">≈20</div><div class="l">places de parking</div></div>
+      <div class="kf"><div class="v">1876</div><div class="l">année de naissance</div></div>
+    </div>
+    <p class="note" style="color:var(--creme-faint);margin-top:22px;text-align:center;">La capacité, fixée par la jauge ERP, reste indicative et à confirmer par le bureau de contrôle.</p>
+  </div>
+</section>
+
+<!-- SITUATION -->
+<section class="sec situation">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <p class="eyebrow"><span class="ln"></span>La situation</p>
+        <h2 class="display-m" style="margin:18px 0 14px;">Aux portes de <em class="gold">Rambervillers.</em></h2>
+        <p>Le château se trouve à la sortie de Rambervillers, au cœur des Vosges, à moins d'une heure des principales villes de Lorraine. Demeure habitée, sa localisation exacte est communiquée aux clients confirmés.</p>
+        <ul class="access">
+          <li><span class="where">Épinal</span><span class="dur">≈ 35 min</span></li>
+          <li><span class="where">Nancy</span><span class="dur">≈ 50 min</span></li>
+          <li><span class="where">Gare TGV Lorraine</span><span class="dur">≈ 1 h</span></li>
+          <li><span class="where">Aéroport Metz-Nancy</span><span class="dur">≈ 1 h 10</span></li>
+        </ul>
+      </div>
+      <div class="locator">
+        <div class="rings"></div>
+        <div class="pin">
+          <div class="dot"></div>
+          <div class="t">Aux portes des Vosges</div>
+          <div class="s">Rambervillers · 88</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-final">
+  <div class="wrap halo">
+    <p class="eyebrow on-dark" style="justify-content:center;margin-bottom:18px;"><span class="ln"></span>Venez le découvrir</p>
+    <h2 class="display-l">Une visite vaut <em class="gold light">mille images.</em></h2>
+    <p>Dites-nous votre projet — séminaire, événement de famille ou tournage — et nous organisons une découverte du lieu.</p>
+    <div class="row">
+      <a class="btn btn--gold-light" href="contact.html">Demander une proposition</a>
+      <a class="btn btn--ghost-light" href="contact.html">Demander une visite</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="bn">Château de Sainte-Lucie</div>
+        <div class="bs">Rambervillers · Vosges · Lorraine</div>
+        <p>Un lieu de réception à taille humaine, aux portes des Vosges — pour des séminaires, des moments de famille et des tournages d'exception.</p>
+      </div>
+      <div class="foot-col"><h4>Le lieu</h4>
+        <a href="le-chateau.html">Le Château</a><a href="seminaires.html">Séminaires</a>
+        <a href="#">Événements privés</a><a href="#">Tournages</a><a href="home.html#galerie">Galerie</a></div>
+      <div class="foot-col"><h4>Contact</h4>
+        <a href="contact.html">Demander une proposition</a>
+        <a href="mailto:contact@chateau-saintelucie.fr">contact@chateau-saintelucie.fr</a>
+        <a href="tel:+33000000000">+33 (0)X XX XX XX XX</a>
+        <p class="muted">Localisation exacte communiquée aux clients confirmés.</p></div>
+      <div class="foot-col"><h4>La plaquette</h4>
+        <p>Découvrez le lieu et ses usages en quelques pages.</p>
+        <a class="btn btn--ghost-light btn--sm" href="#" style="margin-top:6px;">Télécharger le PDF</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Château de Sainte-Lucie — Tous droits réservés.</span>
+      <span class="legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta"><a class="btn btn--gold-light" href="contact.html">Demander une proposition</a></div>
+
+</body>
+</html>
