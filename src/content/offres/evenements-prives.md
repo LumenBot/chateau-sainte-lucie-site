@@ -56,7 +56,7 @@ blocks:
     eyebrow: L'esprit des lieux
     titleLead: "La beauté d'un château, "
     titleGold: l'intimité d'une maison.
-    image: salonInterieur
+    image: chiensPerron
     text: >-
       Anniversaires, baptêmes, grands repas de famille : ici, vos invités sont reçus
       comme à la maison — en plus grand. Des salons aux boiseries d'origine au parc

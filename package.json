@@ -11,7 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "placeholders": "node scripts/generate-placeholders.mjs"
+    "og": "node scripts/make-og.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.0",

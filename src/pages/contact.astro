@@ -1,12 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/url";
 import { contactSeo, contactHeader, form, aside } from "../data/contact";
 
 // Service de formulaire : Netlify Forms par défaut ; Web3Forms si une clé
 // publique est fournie (déploiement hors Netlify). Aucun secret n'est commité.
 const web3key = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 const useWeb3 = typeof web3key === "string" && web3key.length > 0;
-const merciUrl = Astro.site ? new URL("/merci", Astro.site).href : "/merci";
+const merciPath = withBase("/merci");
+const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
 ---
 
 <BaseLayout
@@ -33,7 +35,7 @@ const merciUrl = Astro.site ? new URL("/merci", Astro.site).href : "/merci";
             class="contact-form"
             name="contact"
             method="POST"
-            action={useWeb3 ? "https://api.web3forms.com/submit" : "/merci"}
+            action={useWeb3 ? "https://api.web3forms.com/submit" : merciPath}
             data-netlify={useWeb3 ? undefined : "true"}
             netlify-honeypot={useWeb3 ? undefined : "bot-field"}
           >
@@ -128,7 +130,7 @@ const merciUrl = Astro.site ? new URL("/merci", Astro.site).href : "/merci";
             <div class="consent">
               <input id="rgpd" name="consentement" type="checkbox" required />
               <label for="rgpd">
-                {form.consentBefore}<a href={form.consentLink.href}>{form.consentLink.label}</a>{form.consentAfter}
+                {form.consentBefore}<a href={withBase(form.consentLink.href)}>{form.consentLink.label}</a>{form.consentAfter}
               </label>
             </div>
 
@@ -153,7 +155,7 @@ const merciUrl = Astro.site ? new URL("/merci", Astro.site).href : "/merci";
             <div class="cta-list">
               {
                 aside.projects.items.map((it) => (
-                  <a href={it.href}>{it.label} <span class="arr">→</span></a>
+                  <a href={withBase(it.href)}>{it.label} <span class="arr">→</span></a>
                 ))
               }
             </div>

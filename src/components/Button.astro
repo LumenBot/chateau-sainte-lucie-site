@@ -3,6 +3,8 @@
  * Bouton / lien d'action. Reprend les variantes de boutons des maquettes.
  * Rend un <a> par défaut, ou un <button> pour les actions de formulaire.
  */
+import { withBase } from "../utils/url";
+
 type Variant = "solid" | "gold-light" | "ghost" | "ghost-light";
 
 interface Props {
@@ -37,7 +39,7 @@ const classes = ["btn", variantClass[variant], sm ? "btn--sm" : "", className]
 
 {
   href ? (
-    <a class={classes} href={href} {...rest}>
+    <a class={classes} href={withBase(href)} {...rest}>
       <slot />
     </a>
   ) : (

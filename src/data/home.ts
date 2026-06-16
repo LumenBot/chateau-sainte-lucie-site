@@ -36,7 +36,7 @@ export const usages = {
   lede: "Un lieu élégant et discret qui accueille, principalement en semaine, entreprises, familles et équipes de tournage — cinquante à soixante-dix personnes, jamais davantage.",
   cards: [
     {
-      image: images.facadeJourPiscine,
+      image: images.piscineChateauJour,
       tag: "Entreprises",
       title: "Séminaires",
       text: "Salles de caractère, parc, déjeuner maison et bien-être. Une journée loin des bureaux, à moins d'une heure d'Épinal et de Nancy.",
@@ -44,7 +44,7 @@ export const usages = {
       href: "/seminaires",
     },
     {
-      image: images.perronNoel,
+      image: images.perronIllumine,
       tag: "Familles",
       title: "Événements privés",
       text: "Anniversaires, baptêmes, grands repas de famille. La beauté du lieu pour les vôtres, quelques week-ends choisis dans l'année.",
@@ -73,7 +73,7 @@ export const histoire = {
   ],
   cta: "Découvrir le château",
   href: "/le-chateau",
-  image: images.vueAerienne as Visual,
+  image: images.histoireSepia as Visual,
 };
 
 export const galerie = {

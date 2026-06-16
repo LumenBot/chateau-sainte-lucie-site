@@ -4,6 +4,7 @@
  * plaquette (lead magnet) et bas de page légal.
  */
 import { site, mainNav, legalNav, plaquette, ctaLabels } from "../data/site";
+import { withBase } from "../utils/url";
 
 const year = new Date().getFullYear();
 ---
@@ -19,12 +20,12 @@ const year = new Date().getFullYear();
 
       <nav class="foot-col" aria-label="Le lieu">
         <h4>Le lieu</h4>
-        {mainNav.map((item) => <a href={item.href}>{item.label}</a>)}
+        {mainNav.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
       </nav>
 
       <div class="foot-col">
         <h4>Contact</h4>
-        <a href="/contact">{ctaLabels.proposition}</a>
+        <a href={withBase("/contact")}>{ctaLabels.proposition}</a>
         <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
         <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a>
         <p class="muted">Localisation exacte communiquée aux clients confirmés.</p>
@@ -33,7 +34,7 @@ const year = new Date().getFullYear();
       <div class="foot-col">
         <h4>{plaquette.title}</h4>
         <p>{plaquette.text}</p>
-        <a class="btn btn--ghost-light btn--sm" href={plaquette.href} style="margin-top:6px;">
+        <a class="btn btn--ghost-light btn--sm" href={withBase(plaquette.href)} style="margin-top:6px;">
           {plaquette.cta}
         </a>
       </div>
@@ -42,7 +43,7 @@ const year = new Date().getFullYear();
     <div class="foot-bottom">
       <span>© {year} {site.name} — Tous droits réservés.</span>
       <span class="legal">
-        {legalNav.map((item) => <a href={item.href}>{item.label}</a>)}
+        {legalNav.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
       </span>
     </div>
   </div>

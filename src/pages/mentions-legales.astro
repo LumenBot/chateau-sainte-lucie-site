@@ -1,6 +1,7 @@
 ---
 import LegalLayout from "../layouts/LegalLayout.astro";
 import { site } from "../data/site";
+import { withBase } from "../utils/url";
 ---
 
 <LegalLayout
@@ -59,6 +60,6 @@ import { site } from "../data/site";
   <h2>Données personnelles</h2>
   <p>
     Les traitements de données réalisés via ce site (formulaire de contact) sont
-    décrits dans notre <a href="/confidentialite">politique de confidentialité</a>.
+    décrits dans notre <a href={withBase("/confidentialite")}>politique de confidentialité</a>.
   </p>
 </LegalLayout>

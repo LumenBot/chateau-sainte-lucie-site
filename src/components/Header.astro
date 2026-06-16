@@ -8,15 +8,20 @@
  */
 import { site, mainNav } from "../data/site";
 import { ctaLabels } from "../data/site";
+import { withBase, normalizePath } from "../utils/url";
 
 interface Props {
   solid?: boolean;
 }
 const { solid = false } = Astro.props;
 
-const path = Astro.url.pathname.replace(/\/$/, "") || "/";
-const isActive = (href: string) =>
-  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+const path = normalizePath(Astro.url.pathname);
+const isActive = (href: string) => {
+  const target = normalizePath(withBase(href));
+  return target === "/"
+    ? path === target
+    : path === target || path.startsWith(target + "/");
+};
 const contactActive = isActive("/contact");
 ---
 
@@ -29,7 +34,7 @@ const contactActive = isActive("/contact");
 
 <header class={`site-header${solid ? " solid" : ""}`}>
   <div class="bar">
-    <a class="brand" href="/" aria-label={`${site.name} — accueil`}>
+    <a class="brand" href={withBase("/")} aria-label={`${site.name} — accueil`}>
       <span class="bn">{site.shortName}</span>
       <span class="bs">{site.brandLine}</span>
     </a>
@@ -39,7 +44,7 @@ const contactActive = isActive("/contact");
         mainNav.map((item) => (
           <a
             class="navlink"
-            href={item.href}
+            href={withBase(item.href)}
             aria-current={isActive(item.href) ? "page" : undefined}
           >
             {item.label}
@@ -48,7 +53,7 @@ const contactActive = isActive("/contact");
       }
       <a
         class={`btn btn--sm ${contactActive ? "btn--gold-light" : "btn--ghost-light"}`}
-        href="/contact"
+        href={withBase("/contact")}
         aria-current={contactActive ? "page" : undefined}
       >
         Contact
@@ -71,14 +76,14 @@ const contactActive = isActive("/contact");
   </div>
   {
     mainNav.map((item) => (
-      <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+      <a href={withBase(item.href)} aria-current={isActive(item.href) ? "page" : undefined}>
         {item.label}
         <span class="idx">{item.idx}</span>
       </a>
     ))
   }
   <div class="mcta">
-    <a class="btn btn--gold-light" href="/contact">{ctaLabels.contact}</a>
+    <a class="btn btn--gold-light" href={withBase("/contact")}>{ctaLabels.contact}</a>
   </div>
 </div>
 

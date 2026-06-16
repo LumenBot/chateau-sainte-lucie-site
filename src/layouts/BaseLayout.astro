@@ -8,6 +8,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../data/site";
+import { withBase } from "../utils/url";
 
 interface StickyCta {
   label: string;
@@ -57,7 +58,7 @@ const {
     {
       stickyCta && (
         <div class="sticky-cta">
-          <a class="btn btn--gold-light" href={stickyCta.href}>
+          <a class="btn btn--gold-light" href={withBase(stickyCta.href)}>
             {stickyCta.label}
           </a>
         </div>

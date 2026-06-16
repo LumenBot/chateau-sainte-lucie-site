@@ -5,6 +5,7 @@
  * analytics Plausible (sans cookie).
  */
 import { site } from "../data/site";
+import { withBase } from "../utils/url";
 
 interface Props {
   title: string;
@@ -28,7 +29,7 @@ const {
 let path = Astro.url.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
 if (path.length > 1) path = path.replace(/\/$/, "");
 const canonical = new URL(path === "" ? "/" : path, Astro.site).href;
-const ogImage = new URL(image, Astro.site).href;
+const ogImage = new URL(withBase(image), Astro.site).href;
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 
 // Données structurées : lieu d'événement / commerce local.
@@ -72,11 +73,11 @@ const jsonLd = {
 <meta name="theme-color" content="#0c0c0b" />
 
 <!-- Favicon -->
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
 
 <!-- Sitemap -->
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="sitemap" href={withBase("/sitemap-index.xml")} />
 
 <!-- OpenGraph -->
 <meta property="og:type" content={ogType} />
