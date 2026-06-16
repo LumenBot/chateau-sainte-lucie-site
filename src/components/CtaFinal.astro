@@ -1,0 +1,48 @@
+---
+/**
+ * Bandeau d'appel à l'action final (registre nuit), réutilisé en bas des pages
+ * de contenu. Le segment doré du titre est mis en valeur via <em class="gold light">.
+ */
+import Button from "./Button.astro";
+
+type Variant = "solid" | "gold-light" | "ghost" | "ghost-light";
+
+interface Action {
+  label: string;
+  href: string;
+  variant?: Variant;
+}
+
+interface Props {
+  eyebrow: string;
+  titleLead: string;
+  titleGold: string;
+  titleTail?: string;
+  text: string;
+  actions: Action[];
+}
+
+const { eyebrow, titleLead, titleGold, titleTail = "", text, actions } =
+  Astro.props;
+---
+
+<section class="cta-final">
+  <div class="wrap halo">
+    <p class="eyebrow on-dark" style="justify-content:center;margin-bottom:20px;">
+      <span class="ln"></span>{eyebrow}
+    </p>
+    <h2 class="display-l">
+      {titleLead}<em class="gold light">{titleGold}</em>{titleTail}
+    </h2>
+    <p>{text}</p>
+    <div class="row">
+      {
+        actions.map((a) => (
+          <Button href={a.href} variant={a.variant ?? "gold-light"}>
+            {a.label}
+          </Button>
+        ))
+      }
+    </div>
+  </div>
+</section>
