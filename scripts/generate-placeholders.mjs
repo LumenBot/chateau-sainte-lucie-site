@@ -25,17 +25,10 @@ function esc(s) {
   return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-/** Construit le SVG d'un visuel de remplacement. */
-function placeholderSVG({ w, h, label, sub, glowX = 50, glowY = 32 }) {
-  const m = Math.round(Math.min(w, h) * 0.045); // marge du cadre
-  const titleSize = Math.max(20, Math.round(Math.min(w, h) * 0.07));
-  const subSize = Math.max(11, Math.round(Math.min(w, h) * 0.026));
-  const markSize = Math.max(10, Math.round(Math.min(w, h) * 0.022));
-  const cx = w / 2;
-  const cy = h / 2;
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
-  <defs>
+/** Fond atmosphérique commun (dégradé nuit + halo or + double filet). */
+function backdrop({ w, h, glowX, glowY }) {
+  const m = Math.round(Math.min(w, h) * 0.045);
+  return `<defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0c0c0b"/>
       <stop offset="0.55" stop-color="#15130f"/>
@@ -52,19 +45,53 @@ function placeholderSVG({ w, h, label, sub, glowX = 50, glowY = 32 }) {
   <rect x="${m}" y="${m}" width="${w - 2 * m}" height="${h - 2 * m}"
         fill="none" stroke="#c8a45c" stroke-opacity="0.34" stroke-width="1.25"/>
   <rect x="${m + 6}" y="${m + 6}" width="${w - 2 * m - 12}" height="${h - 2 * m - 12}"
-        fill="none" stroke="#c8a45c" stroke-opacity="0.14" stroke-width="1"/>
-  <g text-anchor="middle" font-family="${FONT}">
-    <text x="${cx}" y="${cy - titleSize * 0.95}" fill="#e7cd92"
-          font-size="${markSize}" letter-spacing="6" font-style="normal">✦</text>
-    <text x="${cx}" y="${cy + titleSize * 0.22}" fill="#ece4d4"
-          font-size="${titleSize}" font-style="italic">${esc(label)}</text>
-    <line x1="${cx - 34}" y1="${cy + titleSize * 0.7}" x2="${cx + 34}" y2="${cy + titleSize * 0.7}"
-          stroke="#c8a45c" stroke-opacity="0.5"/>
-    <text x="${cx}" y="${cy + titleSize * 1.35}" fill="#b0a68f"
-          font-size="${subSize}" letter-spacing="3">${esc(sub)}</text>
+        fill="none" stroke="#c8a45c" stroke-opacity="0.14" stroke-width="1"/>`;
+}
+
+/**
+ * Visuel de contenu : filigrane CENTRÉ et discret (✦ + sujet + « visuel à venir »).
+ * Volontairement sobre pour ne pas entrer en conflit avec les titres superposés
+ * (heroes). Le sujet attendu est aussi décrit dans l'`alt` (src/data/images.ts).
+ */
+function placeholderSVG({ w, h, label, sub, glowX = 50, glowY = 32 }) {
+  const cx = w / 2;
+  const cy = h / 2;
+  const subjSize = Math.max(13, Math.round(Math.min(w, h) * 0.036));
+  const tagSize = Math.max(9, Math.round(Math.min(w, h) * 0.02));
+  const star = Math.max(11, Math.round(Math.min(w, h) * 0.03));
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  ${backdrop({ w, h, glowX, glowY })}
+  <g text-anchor="middle" font-family="${FONT}" opacity="0.92">
+    <text x="${cx}" y="${cy - subjSize * 1.1}" fill="#e7cd92" font-size="${star}">✦</text>
+    <text x="${cx}" y="${cy + subjSize * 0.18}" fill="#d8cfbd" font-size="${subjSize}"
+          font-style="italic">${esc(label)}</text>
+    <line x1="${cx - 26}" y1="${cy + subjSize * 0.7}" x2="${cx + 26}" y2="${cy + subjSize * 0.7}"
+          stroke="#c8a45c" stroke-opacity="0.45"/>
+    <text x="${cx}" y="${cy + subjSize * 1.45}" fill="#897f68" font-size="${tagSize}"
+          letter-spacing="3">${esc(sub)} · VISUEL À VENIR</text>
   </g>
-  <text x="${cx}" y="${h - m - 14}" text-anchor="middle" font-family="${FONT}"
-        fill="#6f6757" font-size="${markSize}" letter-spacing="4">VISUEL À VENIR</text>
+</svg>`;
+}
+
+/** Visuel OG autonome (partage social) : traitement « marque » plein format. */
+function ogSVG({ w, h, label, sub }) {
+  const cx = w / 2;
+  const cy = h / 2;
+  const titleSize = Math.round(h * 0.13);
+  const subSize = Math.round(h * 0.034);
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  ${backdrop({ w, h, glowX: 50, glowY: 30 })}
+  <g text-anchor="middle" font-family="${FONT}">
+    <text x="${cx}" y="${cy - titleSize * 0.55}" fill="#e7cd92" font-size="${subSize}">✦</text>
+    <text x="${cx}" y="${cy + titleSize * 0.18}" fill="#ece4d4" font-size="${titleSize}"
+          font-style="italic">${esc(label)}</text>
+    <line x1="${cx - 38}" y1="${cy + titleSize * 0.62}" x2="${cx + 38}" y2="${cy + titleSize * 0.62}"
+          stroke="#c8a45c" stroke-opacity="0.5"/>
+    <text x="${cx}" y="${cy + titleSize}" fill="#b0a68f" font-size="${subSize}"
+          letter-spacing="3">${esc(sub)}</text>
+  </g>
 </svg>`;
 }
 
@@ -109,13 +136,19 @@ async function main() {
     i++;
   }
 
-  // Image OpenGraph (partage social) — 1200×630.
-  await render(
-    "og-default.jpg",
-    { w: 1200, h: 630, label: "Château de Sainte-Lucie", sub: "SÉMINAIRES · ÉVÉNEMENTS · TOURNAGES", glowX: 50, glowY: 30 },
-    PUBLIC_DIR,
-    86,
-  );
+  // Image OpenGraph (partage social) — 1200×630, traitement « marque » plein format.
+  {
+    const svg = ogSVG({
+      w: 1200,
+      h: 630,
+      label: "Château de Sainte-Lucie",
+      sub: "SÉMINAIRES · ÉVÉNEMENTS · TOURNAGES",
+    });
+    await sharp(Buffer.from(svg))
+      .jpeg({ quality: 86, mozjpeg: true })
+      .toFile(join(PUBLIC_DIR, "og-default.jpg"));
+    console.log("  ✓ og-default.jpg 1200×630");
+  }
 
   // Apple touch icon — monogramme sur fond nuit.
   const touch = `<?xml version="1.0" encoding="UTF-8"?>
