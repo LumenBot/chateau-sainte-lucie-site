@@ -1,16 +1,486 @@
 ---
-import "../styles/global.css";
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Icon from "../components/Icon.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+import {
+  homeSeo,
+  hero,
+  usages,
+  histoire,
+  galerie,
+  reassurance,
+  ctaFinal,
+} from "../data/home";
 ---
 
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Château de Sainte-Lucie</title>
-  </head>
-  <body>
-    <h1>Château de Sainte-Lucie</h1>
-    <p>Échafaudage en cours…</p>
-  </body>
-</html>
+<BaseLayout title={homeSeo.title} description={homeSeo.description}>
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="hero__bg">
+      <Image
+        src={hero.image.src}
+        alt={hero.image.alt}
+        widths={[640, 1024, 1600, 2400]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="hero__inner wrap">
+      <p class="place">{hero.place}</p>
+      <h1 class="display-xl">{hero.titleTop}<span class="lux">{hero.titleLux}</span></h1>
+      <p class="promise">{hero.promise}</p>
+      <div class="cta-row">
+        <Button href="/contact" variant="gold-light">Demander une proposition</Button>
+        <Button href="/le-chateau" variant="ghost-light">Découvrir le lieu</Button>
+      </div>
+      <p class="scrollcue">{hero.scrollcue}</p>
+    </div>
+  </header>
+
+  <!-- ===================== USAGES ===================== -->
+  <section class="sec usages" id="usages">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="ln"></span>{usages.eyebrow}</p>
+        <h2 class="display-l">{usages.title[0]}<em class="gold">{usages.title[1]}</em>{usages.title[2]}</h2>
+        <p class="lede">{usages.lede}</p>
+      </div>
+
+      <div class="usage-grid">
+        {
+          usages.cards.map((card) => (
+            <article class="ucard">
+              <div class="ucard__img">
+                <Image
+                  src={card.image.src}
+                  alt={card.image.alt}
+                  widths={[400, 700, 900]}
+                  sizes="(min-width:680px) 33vw, 100vw"
+                  loading="lazy"
+                />
+                <span class="tag">{card.tag}</span>
+              </div>
+              <div class="ucard__body">
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+                <a class="link-or" href={card.href}>
+                  {card.cta} <span class="arr">→</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HISTOIRE TEASER ===================== -->
+  <section class="sec histoire rev">
+    <div class="wrap">
+      <div class="grid">
+        <div class="figure">
+          <Image
+            src={histoire.image.src}
+            alt={histoire.image.alt}
+            widths={[600, 1000, 1280]}
+            sizes="(min-width:960px) 50vw, 100vw"
+            loading="lazy"
+          />
+        </div>
+        <div class="content">
+          <p class="eyebrow"><span class="ln"></span>{histoire.eyebrow}</p>
+          <h2 class="display-m" style="margin:18px 0 18px;">
+            {histoire.title[0]}<em class="gold">{histoire.title[1]}</em>
+          </h2>
+          <p>{histoire.text}</p>
+          <div class="stat-row">
+            {
+              histoire.stats.map((s) => (
+                <div class="stat">
+                  <div class="v">{s.v}</div>
+                  <div class="l">{s.l}</div>
+                </div>
+              ))
+            }
+          </div>
+          <a class="link-or" href={histoire.href}>{histoire.cta} <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GALERIE TEASER ===================== -->
+  <section class="galerie" id="galerie">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow on-dark"><span class="ln"></span>{galerie.eyebrow}</p>
+        <h2 class="display-l">{galerie.title[0]}<em class="gold light">{galerie.title[1]}</em></h2>
+      </div>
+      <div class="gal-strip">
+        {
+          galerie.strip.map((img) => (
+            <a href="/galerie" class={img.wide ? "wide" : undefined}>
+              <Image
+                src={img.src}
+                alt={img.alt}
+                widths={[300, 500, 800]}
+                sizes="(min-width:680px) 25vw, 50vw"
+                loading="lazy"
+              />
+            </a>
+          ))
+        }
+      </div>
+      <div class="gal-foot">
+        <Button href={galerie.href} variant="ghost-light">{galerie.cta}</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RÉASSURANCE ===================== -->
+  <section class="sec reassurance">
+    <div class="wrap">
+      <div class="rea-grid">
+        {
+          reassurance.map((r) => (
+            <div class="rea">
+              <span class="ic"><Icon name={r.icon} /></span>
+              <div>
+                <h3>{r.title}</h3>
+                <p>{r.text}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA FINAL ===================== -->
+  <CtaFinal
+    eyebrow={ctaFinal.eyebrow}
+    titleLead={ctaFinal.title[0]}
+    titleGold={ctaFinal.title[1]}
+    text={ctaFinal.text}
+    actions={ctaFinal.actions}
+  />
+</BaseLayout>
+
+<style>
+  /* ============ HERO ============ */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--creme);
+    overflow: hidden;
+    background: var(--noir);
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(70% 50% at 50% 30%, rgba(231, 205, 146, 0.14), transparent 62%),
+      linear-gradient(
+        180deg,
+        rgba(8, 7, 5, 0.58) 0%,
+        rgba(8, 7, 5, 0.22) 34%,
+        rgba(8, 7, 5, 0.5) 66%,
+        rgba(8, 7, 5, 0.92) 100%
+      );
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 2;
+    padding-bottom: clamp(54px, 8vw, 96px);
+    padding-top: 120px;
+  }
+  .hero .place {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.46em;
+    font-size: 11.5px;
+    color: var(--creme-dim);
+    margin: 0 0 24px;
+  }
+  .hero h1 {
+    color: var(--creme);
+    margin: 0 0 22px;
+  }
+  .hero h1 .lux {
+    display: block;
+    font-style: italic;
+    color: var(--or-clair);
+  }
+  .hero .promise {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(20px, 2.6vw, 28px);
+    color: var(--creme);
+    max-width: 20ch;
+    line-height: 1.3;
+    margin: 0 0 34px;
+  }
+  .hero .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .hero .scrollcue {
+    margin-top: 40px;
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10.5px;
+    color: var(--creme-faint);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero .scrollcue::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--or);
+    opacity: 0.6;
+  }
+
+  /* ============ USAGES ============ */
+  .usages {
+    background: var(--parch);
+  }
+  .usage-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 46px;
+  }
+  .ucard {
+    background: var(--parch-card);
+    border: 1px solid var(--rule-l-faint);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .ucard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(42, 38, 32, 0.12);
+  }
+  .ucard__img {
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+  }
+  .ucard__img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .ucard:hover .ucard__img :global(img) {
+    transform: scale(1.05);
+  }
+  .ucard__img .tag {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(12, 12, 11, 0.72);
+    color: var(--creme);
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 10px;
+    padding: 7px 13px;
+  }
+  .ucard__body {
+    padding: 30px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .ucard__body h3 {
+    font-size: 27px;
+    margin: 0 0 12px;
+  }
+  .ucard__body p {
+    font-size: 16px;
+    color: var(--encre-soft);
+    margin: 0 0 24px;
+  }
+  .ucard__body .link-or {
+    margin-top: auto;
+  }
+
+  /* ============ HISTOIRE TEASER ============ */
+  .histoire {
+    background: var(--parch-2);
+  }
+  .histoire .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .histoire .figure {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid var(--rule-l-faint);
+  }
+  .histoire .figure :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .histoire .stat-row {
+    display: flex;
+    gap: 34px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+  .histoire .stat .v {
+    font-family: var(--display);
+    font-size: 42px;
+    color: var(--or-prof);
+    line-height: 1;
+  }
+  .histoire .stat .l {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 11px;
+    color: var(--encre-faint);
+    margin-top: 8px;
+  }
+
+  /* ============ GALERIE TEASER (nuit) ============ */
+  .galerie {
+    background: var(--noir);
+    color: var(--creme);
+    padding: clamp(64px, 9vw, 110px) 0;
+  }
+  .galerie .sec-head h2 {
+    color: var(--creme);
+  }
+  .gal-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 42px;
+  }
+  .gal-strip a {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+  }
+  .gal-strip a :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .gal-strip a:hover :global(img) {
+    transform: scale(1.06);
+  }
+  .gal-strip a.wide {
+    grid-column: span 2;
+    aspect-ratio: 2/1;
+  }
+  .galerie .gal-foot {
+    margin-top: 34px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ============ RÉASSURANCE ============ */
+  .reassurance {
+    background: var(--parch);
+    border-top: 1px solid var(--rule-l-faint);
+  }
+  .rea-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .rea {
+    padding: 34px 0;
+    border-bottom: 1px solid var(--rule-l-faint);
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+  }
+  .rea:last-child {
+    border-bottom: none;
+  }
+  .rea .ic {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--rule-l);
+    display: grid;
+    place-items: center;
+    color: var(--or-prof);
+  }
+  .rea h3 {
+    font-size: 22px;
+    margin: 0 0 6px;
+  }
+  .rea p {
+    font-size: 15.5px;
+    color: var(--encre-soft);
+    margin: 0;
+  }
+
+  /* ============ desktop ============ */
+  @media (min-width: 680px) {
+    .usage-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .rea-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 38px;
+    }
+    .rea {
+      border-bottom: none;
+      border-left: 1px solid var(--rule-l-faint);
+      padding: 8px 0 8px 26px;
+      flex-direction: column;
+    }
+    .rea .ic {
+      margin-bottom: 18px;
+    }
+    .gal-strip {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .gal-strip a.wide {
+      grid-column: span 2;
+      aspect-ratio: auto;
+    }
+  }
+  @media (min-width: 960px) {
+    .histoire .grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 64px;
+    }
+    .histoire.rev .figure {
+      order: -1;
+    }
+  }
+</style>
