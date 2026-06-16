@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+---
+
+<BaseLayout
+  title="Page introuvable — Château de Sainte-Lucie"
+  description="La page demandée n'existe pas ou a été déplacée."
+  noindex
+  stickyCta={false}
+>
+  <section class="notfound night">
+    <div class="wrap halo">
+      <p class="eyebrow on-dark" style="justify-content:center;"><span class="ln"></span>Erreur 404</p>
+      <h1 class="display-l">Cette page s'est perdue <em class="gold light">dans le parc.</em></h1>
+      <p class="lede">La page que vous cherchez n'existe pas ou a été déplacée.</p>
+      <div class="row">
+        <Button href="/" variant="gold-light">Retour à l'accueil</Button>
+        <Button href="/contact" variant="ghost-light">Nous contacter</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    background: var(--noir);
+    color: var(--creme);
+    text-align: center;
+    min-height: 78vh;
+    display: flex;
+    align-items: center;
+    padding: 140px 0 90px;
+  }
+  .notfound h1 {
+    color: var(--creme);
+    margin: 16px auto 18px;
+    max-width: 18ch;
+  }
+  .notfound .lede {
+    margin: 0 auto 30px;
+    max-width: 44ch;
+  }
+  .notfound .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+</style>

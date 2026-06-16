@@ -40,9 +40,69 @@ Objectif : présenter le lieu et générer des demandes qualifiées — **sémin
 >
 > Travaille de façon **autonome jusqu'au bout** ; en cas de blocage, documente-le et poursuis les autres tâches plutôt que t'arrêter. Termine par un récapitulatif : ce qui est fait, ce qui reste, comment lancer en local et déployer sur Netlify.
 
+## Le site (Astro + Tailwind + TypeScript)
+
+Site statique généré avec **Astro 5**, **Tailwind CSS v4**, **TypeScript (strict)**.
+Contenu centralisé (prêt pour l'i18n) dans `src/data/` et la content collection
+`src/content/offres/` (pages d'offre pilotées par le contenu).
+
+### Lancer en local
+```bash
+npm install            # installe les dépendances
+npm run dev            # serveur de dev  → http://localhost:4321
+npm run build          # build de production → dist/
+npm run preview        # prévisualise le build
+npm run check          # vérification TypeScript / Astro
+npm run placeholders   # (re)génère les visuels de remplacement
+```
+
+### Arborescence du site
+```
+src/
+├── assets/images/     # visuels (optimisés via astro:assets)
+├── components/        # Header, Footer, Button, Icon, CtaFinal, offers/*
+├── content/offres/    # Séminaires, Événements privés, Tournages (MD + frontmatter)
+├── content.config.ts  # schéma Zod de la collection « offres »
+├── data/              # contenu centralisé (site, home, chateau, contact, gallery, images)
+├── layouts/           # BaseLayout, LegalLayout
+├── pages/             # index, le-chateau, [offre], galerie, contact, merci,
+│                      #   mentions-legales, confidentialite, 404, robots.txt
+└── styles/global.css  # système de design (tokens nuit/jour) + Tailwind
+```
+
+### Pages livrées (MVP)
+Accueil · Le Château · Séminaires · Événements privés · Tournages · Galerie
+(lightbox) · Contact (+ /merci) · Mentions légales · Confidentialité · 404.
+SEO : métas par page, OpenGraph/Twitter, `sitemap.xml`, `robots.txt`,
+JSON-LD `EventVenue`/`LocalBusiness`.
+
+### Déployer sur Netlify
+1. Connecter le dépôt GitHub à Netlify (build auto via `netlify.toml`).
+   Build : `npm run build` · Publish : `dist` · Node 22.
+2. Définir la variable d'environnement **`SITE_URL`** (URL canonique définitive).
+3. **Formulaire** : Netlify Forms est détecté automatiquement. L'e-mail de
+   notification se configure dans Netlify (Forms → Notifications), **hors dépôt**.
+   *Alternative hors Netlify* : renseigner `PUBLIC_WEB3FORMS_KEY` (voir `.env.example`).
+4. Brancher le nom de domaine. `maquettes/` et `livrables/` ne sont pas déployés.
+
+### ⚠️ À compléter avant mise en ligne (points ouverts / blocages)
+- **Photographies** : les visuels sont des **placeholders générés** (mention
+  « visuel à venir »). Déposer les vraies photos dans `src/assets/images/`
+  (mêmes noms) et relancer le build. Voir `src/data/images.ts`.
+- **Coordonnées** : e-mail, téléphone, domaine (placeholders dans `src/data/site.ts`).
+- **Mentions légales & confidentialité** : gabarits à compléter (champs `[…]`)
+  et à faire valider juridiquement.
+- **Tarifs séminaires** : fourchettes indicatives reprises des maquettes — à
+  arbitrer (cf. `docs/contenu-redactionnel.md`, « Notes éditoriales »).
+- **Plaquette PDF** : non fournie ; les CTA « Recevoir la plaquette » pointent
+  vers le formulaire (logique lead magnet).
+- **Lighthouse** : à mesurer sur l'URL de preview. Les libellés en or sur fond
+  parchemin (style de marque issu des maquettes) sont proches du seuil AA pour
+  le très petit texte — à arbitrer si un audit l'exige.
+
 ## Statut
 - [x] Cahier des charges
 - [x] Brief maquettes
 - [x] Maquettes validées (Claude Design)
-- [ ] Implémentation (Claude Code)
-- [ ] Mise en ligne
+- [x] Implémentation (Claude Code) — backlog T0 → T12
+- [ ] Mise en ligne (photos, coordonnées & légal à finaliser)
