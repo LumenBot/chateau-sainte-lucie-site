@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Icon from "../components/Icon.astro";
+import { merci } from "../data/contact";
+---
+
+<BaseLayout
+  title={merci.title}
+  description={merci.description}
+  solidHeader
+  noindex
+  stickyCta={false}
+>
+  <section class="sec merci">
+    <div class="wrap">
+      <div class="merci-card">
+        <span class="ic"><Icon name="confirm" size={40} stroke={1.1} /></span>
+        <p class="eyebrow" style="justify-content:center;">{merci.eyebrow}</p>
+        <h1 class="display-l">{merci.titleLead}<em class="gold">{merci.titleGold}</em></h1>
+        <p class="lede">{merci.text}</p>
+        <div class="row">
+          <Button href="/" variant="ghost">Retour à l'accueil</Button>
+          <Button href="/galerie" variant="ghost">Voir la galerie</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .merci {
+    padding-top: clamp(80px, 12vw, 140px);
+  }
+  .merci-card {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .merci-card .ic {
+    display: inline-grid;
+    place-items: center;
+    width: 76px;
+    height: 76px;
+    border: 1px solid var(--rule-l);
+    border-radius: 50%;
+    color: var(--or-prof);
+    margin-bottom: 26px;
+  }
+  .merci-card .eyebrow {
+    margin-bottom: 16px;
+  }
+  .merci-card h1 {
+    margin-bottom: 18px;
+  }
+  .merci-card .lede {
+    margin: 0 auto 30px;
+    max-width: 48ch;
+  }
+  .merci-card .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+</style>

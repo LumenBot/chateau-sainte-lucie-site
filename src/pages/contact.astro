@@ -1,0 +1,462 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { contactSeo, contactHeader, form, aside } from "../data/contact";
+
+// Service de formulaire : Netlify Forms par défaut ; Web3Forms si une clé
+// publique est fournie (déploiement hors Netlify). Aucun secret n'est commité.
+const web3key = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+const useWeb3 = typeof web3key === "string" && web3key.length > 0;
+const merciUrl = Astro.site ? new URL("/merci", Astro.site).href : "/merci";
+---
+
+<BaseLayout
+  title={contactSeo.title}
+  description={contactSeo.description}
+  stickyCta={false}
+>
+  <!-- HERO -->
+  <header class="phero">
+    <div class="wrap in">
+      <p class="place">{contactHeader.place}</p>
+      <h1 class="display-l">{contactHeader.titleLead}<em class="gold light">{contactHeader.titleGold}</em></h1>
+      <p>{contactHeader.text}</p>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <section class="sec contact-body">
+    <div class="wrap">
+      <div class="cgrid">
+        <!-- FORM -->
+        <div>
+          <form
+            class="contact-form"
+            name="contact"
+            method="POST"
+            action={useWeb3 ? "https://api.web3forms.com/submit" : "/merci"}
+            data-netlify={useWeb3 ? undefined : "true"}
+            netlify-honeypot={useWeb3 ? undefined : "bot-field"}
+          >
+            {!useWeb3 && <input type="hidden" name="form-name" value="contact" />}
+            {useWeb3 && <input type="hidden" name="access_key" value={web3key} />}
+            {useWeb3 && <input type="hidden" name="redirect" value={merciUrl} />}
+            {
+              useWeb3 && (
+                <input
+                  type="hidden"
+                  name="subject"
+                  value="Nouvelle demande — Château de Sainte-Lucie"
+                />
+              )
+            }
+
+            {/* honeypot anti-spam */}
+            {
+              !useWeb3 ? (
+                <p class="hp" aria-hidden="true">
+                  <label>
+                    Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off" />
+                  </label>
+                </p>
+              ) : (
+                <input
+                  type="checkbox"
+                  name="botcheck"
+                  class="hp"
+                  tabindex="-1"
+                  autocomplete="off"
+                  aria-hidden="true"
+                />
+              )
+            }
+
+            <fieldset class="field seg-field">
+              <legend>{form.typeLabel} <span class="req">*</span></legend>
+              <div class="seg">
+                {
+                  form.types.map((t) => (
+                    <Fragment>
+                      <input
+                        type="radio"
+                        id={`type-${t.id}`}
+                        name="type"
+                        value={t.id}
+                        checked={t.checked}
+                        required
+                      />
+                      <label for={`type-${t.id}`}>{t.label}</label>
+                    </Fragment>
+                  ))
+                }
+              </div>
+            </fieldset>
+
+            <div class="row2">
+              <div class="field">
+                <label for="nom">{form.fields.nom.label} <span class="req">*</span></label>
+                <input id="nom" name="nom" type="text" placeholder={form.fields.nom.placeholder} required />
+              </div>
+              <div class="field">
+                <label for="email">{form.fields.email.label} <span class="req">*</span></label>
+                <input id="email" name="email" type="email" placeholder={form.fields.email.placeholder} required />
+              </div>
+            </div>
+
+            <div class="row2">
+              <div class="field">
+                <label for="tel">{form.fields.tel.label}</label>
+                <input id="tel" name="telephone" type="tel" placeholder={form.fields.tel.placeholder} />
+              </div>
+              <div class="field">
+                <label for="dates">{form.fields.dates.label}</label>
+                <input id="dates" name="dates" type="text" placeholder={form.fields.dates.placeholder} />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="nb">
+                {form.fields.nombre.label} <span class="hint">{form.fields.nombre.hint}</span>
+              </label>
+              <input id="nb" name="nombre" type="text" placeholder={form.fields.nombre.placeholder} />
+            </div>
+
+            <div class="field">
+              <label for="msg">{form.fields.message.label}</label>
+              <textarea id="msg" name="message" placeholder={form.fields.message.placeholder}></textarea>
+            </div>
+
+            <div class="consent">
+              <input id="rgpd" name="consentement" type="checkbox" required />
+              <label for="rgpd">
+                {form.consentBefore}<a href={form.consentLink.href}>{form.consentLink.label}</a>{form.consentAfter}
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn" type="submit">{form.submit}</button>
+              <span class="form-note">{form.note}</span>
+            </div>
+          </form>
+        </div>
+
+        <!-- ASIDE -->
+        <aside>
+          <div class="aside-block">
+            <h2>{aside.write.title}</h2>
+            <a class="big" href={`mailto:${aside.write.email}`}>{aside.write.email}</a>
+            <a class="big" href={aside.write.phoneHref}>{aside.write.phoneDisplay}</a>
+            <p class="muted hours">{aside.write.hours}</p>
+          </div>
+
+          <div class="aside-block">
+            <h2>{aside.projects.title}</h2>
+            <div class="cta-list">
+              {
+                aside.projects.items.map((it) => (
+                  <a href={it.href}>{it.label} <span class="arr">→</span></a>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="aside-block">
+            <h2>{aside.where.title}</h2>
+            <p>{aside.where.text}</p>
+            <p class="muted">{aside.where.note}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .phero {
+    position: relative;
+    background: var(--noir);
+    color: var(--creme);
+    overflow: hidden;
+    padding: 140px 0 60px;
+  }
+  .phero::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -20%;
+    width: 90%;
+    height: 90%;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      55% 55% at 50% 30%,
+      rgba(231, 205, 146, 0.12),
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+  .phero .in {
+    position: relative;
+    z-index: 2;
+    max-width: 720px;
+  }
+  .phero .place {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.42em;
+    font-size: 11px;
+    color: var(--or);
+  }
+  .phero h1 {
+    color: var(--creme);
+    margin: 16px 0 16px;
+  }
+  .phero p {
+    color: var(--creme-dim);
+    font-size: 19px;
+    max-width: 52ch;
+    margin: 0;
+  }
+
+  .contact-body {
+    background: var(--parch);
+  }
+  .cgrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  @media (min-width: 920px) {
+    .cgrid {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 64px;
+    }
+  }
+
+  /* form */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .seg-field {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+  .field label,
+  .seg-field legend {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--encre-soft);
+    padding: 0;
+  }
+  .seg-field legend {
+    margin-bottom: 9px;
+  }
+  .field label .req,
+  .seg-field legend .req {
+    color: var(--or-prof);
+  }
+  .field label .hint {
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+    color: var(--encre-faint);
+  }
+  .field input,
+  .field textarea,
+  .field select {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--encre);
+    background: var(--parch-card);
+    border: 1px solid var(--rule-l);
+    padding: 14px 16px;
+    width: 100%;
+    border-radius: 0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 130px;
+  }
+  .field input:focus,
+  .field textarea:focus,
+  .field select:focus {
+    outline: none;
+    border-color: var(--or-prof);
+    box-shadow: 0 0 0 3px rgba(154, 123, 63, 0.16);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--encre-faint);
+  }
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 560px) {
+    .row2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* segmented type de demande */
+  .seg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 560px) {
+    .seg {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .seg label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    cursor: pointer;
+    font-family: var(--serif);
+    font-size: 14.5px;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    color: var(--encre-soft);
+    border: 1px solid var(--rule-l);
+    padding: 13px 10px;
+    transition: all 0.2s ease;
+    background: var(--parch-card);
+  }
+  .seg input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .seg label:hover {
+    border-color: var(--or-prof);
+  }
+  .seg input:checked + label {
+    background: var(--encre);
+    color: var(--parch);
+    border-color: var(--encre);
+  }
+  .seg input:focus-visible + label {
+    outline: 2px solid var(--or-prof);
+    outline-offset: 2px;
+  }
+
+  .consent {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .consent input {
+    margin-top: 5px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--or-prof);
+    flex: 0 0 auto;
+  }
+  .consent label {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--encre-soft);
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .consent label a {
+    color: var(--or-prof);
+    text-decoration: underline;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+  }
+  .form-note {
+    font-size: 13px;
+    color: var(--encre-faint);
+    font-style: italic;
+  }
+
+  /* aside */
+  .aside-block {
+    border: 1px solid var(--rule-l-faint);
+    background: var(--parch-card);
+    padding: 30px 28px;
+    margin-bottom: 22px;
+  }
+  .aside-block h2 {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--or-prof);
+    margin: 0 0 16px;
+  }
+  .aside-block a.big {
+    font-family: var(--display);
+    font-size: 23px;
+    color: var(--encre);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .aside-block a.big:hover {
+    color: var(--or-prof);
+  }
+  .aside-block p {
+    font-size: 15px;
+    color: var(--encre-soft);
+    margin: 0;
+  }
+  .aside-block .hours {
+    margin-top: 10px;
+  }
+  .cta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .cta-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 16px;
+    border: 1px solid var(--rule-l-faint);
+    font-family: var(--serif);
+    font-size: 15.5px;
+    color: var(--encre);
+    transition: all 0.2s ease;
+  }
+  .cta-list a:hover {
+    border-color: var(--or-prof);
+    background: var(--parch);
+  }
+  .cta-list a .arr {
+    color: var(--or-prof);
+  }
+</style>
