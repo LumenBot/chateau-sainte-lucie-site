@@ -99,3 +99,17 @@ export const images = {
 } satisfies Record<string, Visual>;
 
 export type ImageKey = keyof typeof images;
+
+/**
+ * Résout une image par sa clé (utilisé par les content collections où l'image
+ * est référencée par chaîne). Lève une erreur explicite si la clé est inconnue.
+ */
+export function resolveVisual(key: string): Visual {
+  const v = (images as Record<string, Visual>)[key];
+  if (!v) {
+    throw new Error(
+      `Image inconnue : « ${key} ». Clés valides : ${Object.keys(images).join(", ")}`,
+    );
+  }
+  return v;
+}
