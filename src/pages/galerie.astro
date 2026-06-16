@@ -1,0 +1,243 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { gallerySeo, galleryHeader, galleryItems } from "../data/gallery";
+
+const n = galleryItems.length;
+---
+
+<BaseLayout title={gallerySeo.title} description={gallerySeo.description}>
+  <section class="gal-page night">
+    <div class="wrap gal-head">
+      <p class="eyebrow on-dark"><span class="ln"></span>{galleryHeader.eyebrow}</p>
+      <h2 class="display-l">{galleryHeader.title[0]}<em class="gold light">{galleryHeader.title[1]}</em></h2>
+      <p class="lede">{galleryHeader.text}</p>
+    </div>
+
+    <div class="wrap">
+      <ul class="gal-grid" id="galerie-grid">
+        {
+          galleryItems.map((it, i) => (
+            <li class={it.wide ? "wide" : undefined}>
+              <a href={`#photo-${i}`} aria-label={`Agrandir : ${it.caption}`}>
+                <Image
+                  src={it.image.src}
+                  alt={it.image.alt}
+                  widths={[300, 500, 800]}
+                  sizes="(min-width:980px) 25vw, (min-width:680px) 33vw, 50vw"
+                  loading={i < 4 ? "eager" : "lazy"}
+                />
+                <span class="cap">{it.caption}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Lightbox plein écran (zéro JS de base, via :target) -->
+    {
+      galleryItems.map((it, i) => {
+        const prev = (i - 1 + n) % n;
+        const next = (i + 1) % n;
+        return (
+          <div
+            class="lb"
+            id={`photo-${i}`}
+            role="dialog"
+            aria-modal="true"
+            aria-label={it.caption}
+            tabindex="-1"
+          >
+            <a class="lb__backdrop" href="#galerie-grid" aria-hidden="true" tabindex="-1" />
+            <a class="lb__nav prev" href={`#photo-${prev}`} aria-label="Photo précédente">‹</a>
+            <a class="lb__nav next" href={`#photo-${next}`} aria-label="Photo suivante">›</a>
+            <figure class="lb__fig">
+              <a class="lb__close" href="#galerie-grid" aria-label="Fermer l'aperçu">×</a>
+              <Image
+                src={it.image.src}
+                alt={it.image.alt}
+                widths={[640, 1024, 1600]}
+                sizes="92vw"
+                loading="lazy"
+              />
+              <figcaption>{it.caption}</figcaption>
+            </figure>
+          </div>
+        );
+      })
+    }
+  </section>
+</BaseLayout>
+
+<script>
+  // Amélioration progressive : Échap ferme l'aperçu (la fermeture par lien
+  // fonctionne déjà sans JS).
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && location.hash.startsWith("#photo-")) {
+      location.hash = "galerie-grid";
+    }
+  });
+</script>
+
+<style>
+  .gal-page {
+    background: var(--noir);
+    color: var(--creme);
+    padding-top: 130px;
+    padding-bottom: clamp(64px, 9vw, 110px);
+  }
+  .gal-head {
+    max-width: 680px;
+    margin-bottom: 46px;
+  }
+  .gal-head h2 {
+    color: var(--creme);
+    margin: 18px 0 16px;
+  }
+
+  .gal-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .gal-grid li {
+    position: relative;
+  }
+  .gal-grid a {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 1/1;
+  }
+  .gal-grid li.wide {
+    grid-column: span 2;
+  }
+  .gal-grid li.wide a {
+    aspect-ratio: 2/1;
+  }
+  .gal-grid a :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .gal-grid a:hover :global(img),
+  .gal-grid a:focus-visible :global(img) {
+    transform: scale(1.06);
+  }
+  .gal-grid .cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 22px 14px 12px;
+    background: linear-gradient(180deg, transparent, rgba(8, 7, 5, 0.82));
+    color: var(--creme);
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+  .gal-grid a:hover .cap,
+  .gal-grid a:focus-visible .cap {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (min-width: 680px) {
+    .gal-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 980px) {
+    .gal-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---------- lightbox ---------- */
+  .lb {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    background: rgba(8, 7, 5, 0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 40px);
+  }
+  .lb:target {
+    display: flex;
+  }
+  .lb__backdrop {
+    position: absolute;
+    inset: 0;
+    cursor: zoom-out;
+  }
+  .lb__fig {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .lb__fig :global(img) {
+    max-width: 100%;
+    max-height: 78vh;
+    width: auto;
+    height: auto;
+    border: 1px solid rgba(231, 205, 146, 0.3);
+  }
+  .lb__fig figcaption {
+    margin-top: 16px;
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 11px;
+    color: var(--creme-dim);
+    text-align: center;
+  }
+  .lb__close {
+    position: absolute;
+    top: -38px;
+    right: 0;
+    color: var(--creme);
+    font-size: 30px;
+    line-height: 1;
+    padding: 4px 10px;
+  }
+  .lb__close:hover {
+    color: var(--or-clair);
+  }
+  .lb__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    color: var(--creme);
+    font-size: 44px;
+    line-height: 1;
+    padding: 10px 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  .lb__nav:hover {
+    opacity: 1;
+    color: var(--or-clair);
+  }
+  .lb__nav.prev {
+    left: clamp(6px, 2vw, 26px);
+  }
+  .lb__nav.next {
+    right: clamp(6px, 2vw, 26px);
+  }
+</style>
