@@ -1,0 +1,64 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site } from "../data/site";
+---
+
+<LegalLayout
+  title="Mentions légales"
+  seoTitle="Mentions légales — Château de Sainte-Lucie"
+  description="Mentions légales du site du Château de Sainte-Lucie : éditeur, hébergeur, propriété intellectuelle."
+  updated="16 juin 2026"
+>
+  <p>
+    Gabarit à compléter et à faire valider avant la mise en ligne. Les éléments
+    entre crochets <span class="todo">[…]</span> doivent être renseignés par
+    l'éditeur du site.
+  </p>
+
+  <h2>Éditeur du site</h2>
+  <ul>
+    <li>Dénomination : <span class="todo">[société d'exploitation à constituer]</span></li>
+    <li>Forme juridique : <span class="todo">[SAS, SARL, SCI…]</span></li>
+    <li>Capital social : <span class="todo">[montant]</span></li>
+    <li>RCS / SIREN : <span class="todo">[numéro]</span></li>
+    <li>Siège social : <span class="todo">[adresse du siège social de la société]</span></li>
+    <li>Directeur de la publication : <span class="todo">[nom du responsable]</span></li>
+    <li>Contact : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> · <span class="todo">[téléphone]</span></li>
+  </ul>
+  <p class="note">
+    Le Château de Sainte-Lucie est une demeure habitée : son adresse postale
+    précise n'est pas publiée. Elle est communiquée aux clients confirmés lors
+    de la prise de contact.
+  </p>
+
+  <h2>Hébergement</h2>
+  <p>
+    Le site est hébergé par <strong>Netlify, Inc.</strong> — 512 2nd Street,
+    Suite 200, San Francisco, CA 94107, États-Unis —
+    <a href="https://www.netlify.com" rel="noopener">netlify.com</a>.
+  </p>
+  <p class="note todo">
+    [À adapter si le site est déployé sur un autre hébergeur, ex. Cloudflare
+    Pages.]
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    L'ensemble des contenus de ce site (textes, photographies, identité
+    visuelle, mise en page) est protégé par le droit de la propriété
+    intellectuelle. Toute reproduction ou représentation, totale ou partielle,
+    sans autorisation écrite préalable de l'éditeur est interdite.
+  </p>
+
+  <h2>Crédits</h2>
+  <ul>
+    <li>Photographies : <span class="todo">[crédits photographe / mention « © Château de Sainte-Lucie »]</span></li>
+    <li>Conception & développement : <span class="todo">[à compléter]</span></li>
+  </ul>
+
+  <h2>Données personnelles</h2>
+  <p>
+    Les traitements de données réalisés via ce site (formulaire de contact) sont
+    décrits dans notre <a href="/confidentialite">politique de confidentialité</a>.
+  </p>
+</LegalLayout>

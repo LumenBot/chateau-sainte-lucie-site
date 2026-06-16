@@ -1,0 +1,91 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { site } from "../data/site";
+---
+
+<LegalLayout
+  title="Politique de confidentialité"
+  seoTitle="Politique de confidentialité — Château de Sainte-Lucie"
+  description="Politique de confidentialité et de gestion des cookies du site du Château de Sainte-Lucie (RGPD)."
+  updated="16 juin 2026"
+>
+  <p>
+    Gabarit RGPD à compléter et à faire valider. Les éléments entre crochets
+    <span class="todo">[…]</span> doivent être renseignés par le responsable de
+    traitement.
+  </p>
+
+  <h2>Responsable de traitement</h2>
+  <p>
+    <span class="todo">[société d'exploitation]</span>, éditeur du site (voir les
+    <a href="/mentions-legales">mentions légales</a>). Pour toute question
+    relative à vos données : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+  </p>
+
+  <h2>Données collectées</h2>
+  <p>
+    Le site ne collecte de données que lorsque vous remplissez le formulaire de
+    contact. Sont alors traités : type de demande, nom, adresse e-mail,
+    téléphone (facultatif), dates envisagées, nombre de personnes ou type de
+    production, et le message que vous rédigez.
+  </p>
+
+  <h2>Finalité & base légale</h2>
+  <ul>
+    <li>
+      <strong>Finalité :</strong> répondre à votre demande et, le cas échéant,
+      établir une proposition commerciale.
+    </li>
+    <li>
+      <strong>Base légale :</strong> votre consentement et l'exécution de
+      mesures précontractuelles prises à votre demande (article 6 du RGPD).
+    </li>
+  </ul>
+
+  <h2>Destinataires & sous-traitants</h2>
+  <p>
+    Vos données sont destinées au seul gestionnaire du Château de Sainte-Lucie.
+    Elles transitent par le service de gestion de formulaire utilisé pour ce
+    site (<strong>Netlify Forms</strong> par défaut, ou
+    <strong>Web3Forms</strong> selon la configuration), agissant en qualité de
+    sous-traitant. Aucune donnée n'est vendue ni cédée à des tiers à des fins
+    commerciales.
+  </p>
+
+  <h2>Hébergement & transferts hors UE</h2>
+  <p>
+    Le site et le service de formulaire sont hébergés par des prestataires
+    pouvant être situés hors de l'Union européenne (notamment aux États-Unis).
+    Ces transferts sont encadrés par des garanties appropriées (clauses
+    contractuelles types de la Commission européenne).
+  </p>
+
+  <h2>Durée de conservation</h2>
+  <p>
+    Vos données sont conservées le temps nécessaire au traitement de votre
+    demande, puis <span class="todo">[ex. 3 ans]</span> à compter de notre
+    dernier contact, à des fins de suivi commercial.
+  </p>
+
+  <h2>Cookies & mesure d'audience</h2>
+  <p>
+    Ce site n'utilise <strong>aucun cookie de suivi publicitaire</strong>. La
+    mesure d'audience, si elle est activée, repose sur une solution respectueuse
+    de la vie privée et sans cookie (<strong>Plausible</strong>). Aucun bandeau
+    de consentement n'est donc requis dans cette configuration.
+  </p>
+  <p class="note todo">
+    [Si une solution avec cookies est retenue (ex. Google Analytics), ajouter un
+    bandeau de consentement et compléter cette section.]
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Conformément au RGPD, vous disposez d'un droit d'accès, de rectification,
+    d'effacement, d'opposition, de limitation et de portabilité de vos données.
+    Vous pouvez les exercer en écrivant à
+    <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. Vous
+    pouvez également introduire une réclamation auprès de la CNIL
+    (<a href="https://www.cnil.fr" rel="noopener">cnil.fr</a>).
+  </p>
+</LegalLayout>
