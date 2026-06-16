@@ -1,6 +1,7 @@
 ---
 import LegalLayout from "../layouts/LegalLayout.astro";
 import { site } from "../data/site";
+import { withBase } from "../utils/url";
 ---
 
 <LegalLayout
@@ -18,7 +19,7 @@ import { site } from "../data/site";
   <h2>Responsable de traitement</h2>
   <p>
     <span class="todo">[société d'exploitation]</span>, éditeur du site (voir les
-    <a href="/mentions-legales">mentions légales</a>). Pour toute question
+    <a href={withBase("/mentions-legales")}>mentions légales</a>). Pour toute question
     relative à vos données : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
   </p>
 

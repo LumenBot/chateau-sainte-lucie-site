@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Icon from "../components/Icon.astro";
 import CtaFinal from "../components/CtaFinal.astro";
+import { withBase } from "../utils/url";
 import {
   homeSeo,
   hero,
@@ -66,7 +67,7 @@ import {
               <div class="ucard__body">
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
-                <a class="link-or" href={card.href}>
+                <a class="link-or" href={withBase(card.href)}>
                   {card.cta} <span class="arr">→</span>
                 </a>
               </div>
@@ -106,7 +107,7 @@ import {
               ))
             }
           </div>
-          <a class="link-or" href={histoire.href}>{histoire.cta} <span class="arr">→</span></a>
+          <a class="link-or" href={withBase(histoire.href)}>{histoire.cta} <span class="arr">→</span></a>
         </div>
       </div>
     </div>
@@ -122,7 +123,7 @@ import {
       <div class="gal-strip">
         {
           galerie.strip.map((img) => (
-            <a href="/galerie" class={img.wide ? "wide" : undefined}>
+            <a href={withBase("/galerie")} class={img.wide ? "wide" : undefined}>
               <Image
                 src={img.src}
                 alt={img.alt}

@@ -76,19 +76,42 @@ Accueil · Le Château · Séminaires · Événements privés · Tournages · Ga
 SEO : métas par page, OpenGraph/Twitter, `sitemap.xml`, `robots.txt`,
 JSON-LD `EventVenue`/`LocalBusiness`.
 
-### Déployer sur Netlify
-1. Connecter le dépôt GitHub à Netlify (build auto via `netlify.toml`).
-   Build : `npm run build` · Publish : `dist` · Node 22.
-2. Définir la variable d'environnement **`SITE_URL`** (URL canonique définitive).
-3. **Formulaire** : Netlify Forms est détecté automatiquement. L'e-mail de
-   notification se configure dans Netlify (Forms → Notifications), **hors dépôt**.
-   *Alternative hors Netlify* : renseigner `PUBLIC_WEB3FORMS_KEY` (voir `.env.example`).
-4. Brancher le nom de domaine. `maquettes/` et `livrables/` ne sont pas déployés.
+### Déploiement — chemin de base configurable
+Le site supporte deux cibles via deux variables d'environnement de build :
+
+| Variable | Pages (preview) | Netlify / domaine propre |
+|---|---|---|
+| `SITE_URL` | `https://lumenbot.github.io` | URL canonique définitive |
+| `BASE_PATH` | `/chateau-sainte-lucie-site` | `/` (racine) |
+
+Tous les liens internes passent par `withBase()` (`src/utils/url.ts`) : ils
+s'adaptent automatiquement au `base`.
+
+**GitHub Pages (preview en ligne)** → <https://lumenbot.github.io/chateau-sainte-lucie-site/>
+1. Le workflow `.github/workflows/deploy.yml` construit et publie le site à
+   chaque push sur `main` (build avec `BASE_PATH=/chateau-sainte-lucie-site`).
+2. Une fois : **Settings → Pages → Source = « GitHub Actions »** (le workflow
+   tente de l'activer automatiquement). L'ancien workflow « deploy from a
+   branch » est alors remplacé.
+
+**Netlify (production)** → build auto via `netlify.toml` (`npm run build`,
+publish `dist`, Node 22, `BASE_PATH` non défini → racine). Définir `SITE_URL`.
+**Formulaire** : Netlify Forms est détecté automatiquement ; e-mail de
+notification configuré dans Netlify (Forms → Notifications), **hors dépôt**.
+*Alternative* : `PUBLIC_WEB3FORMS_KEY` (voir `.env.example`).
+> ⚠️ Le formulaire de contact nécessite un backend (Netlify Forms / Web3Forms) :
+> sur GitHub Pages (statique pur) la soumission n'est pas traitée — la preview
+> Pages reste une vitrine, la production se fait sur Netlify.
+
+`maquettes/` et `livrables/` ne sont pas déployés.
 
 ### ⚠️ À compléter avant mise en ligne (points ouverts / blocages)
-- **Photographies** : les visuels sont des **placeholders générés** (mention
-  « visuel à venir »). Déposer les vraies photos dans `src/assets/images/`
-  (mêmes noms) et relancer le build. Voir `src/data/images.ts`.
+- **Photographies** : ✅ vraies photos intégrées. Volontairement **non
+  utilisées** car hors ton « vitrine » : `02_crypte*` (caveau familial) et
+  `03_pierre_tombale*` (pierre tombale d'enfant) — à réserver à une éventuelle
+  page « Histoire » au traitement sensible. Le mapping image→emplacement est
+  centralisé dans `src/data/images.ts` (clés = contenu réel, les noms de
+  fichiers d'origine étant parfois trompeurs).
 - **Coordonnées** : e-mail, téléphone, domaine (placeholders dans `src/data/site.ts`).
 - **Mentions légales & confidentialité** : gabarits à compléter (champs `[…]`)
   et à faire valider juridiquement.

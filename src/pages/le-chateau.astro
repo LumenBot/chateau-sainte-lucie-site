@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CtaFinal from "../components/CtaFinal.astro";
+import { withBase } from "../utils/url";
 import {
   chateauSeo,
   phero,
@@ -43,7 +44,7 @@ import {
         </div>
         <div>
           {intro.paragraphs.map((p) => <p>{p}</p>)}
-          <a class="link-or" href={intro.link.href}>{intro.link.label} <span class="arr">→</span></a>
+          <a class="link-or" href={withBase(intro.link.href)}>{intro.link.label} <span class="arr">→</span></a>
         </div>
       </div>
     </div>
