@@ -24,7 +24,10 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
+// Normalise le chemin pour une URL canonique propre (sans .html ni slash final).
+let path = Astro.url.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+if (path.length > 1) path = path.replace(/\/$/, "");
+const canonical = new URL(path === "" ? "/" : path, Astro.site).href;
 const ogImage = new URL(image, Astro.site).href;
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 

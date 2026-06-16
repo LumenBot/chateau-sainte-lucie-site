@@ -12,7 +12,6 @@ export default defineConfig({
   site: SITE_URL,
   // URLs propres en français, sans slash final.
   trailingSlash: "never",
-  build: { format: "file" },
   integrations: [
     mdx(),
     sitemap({
