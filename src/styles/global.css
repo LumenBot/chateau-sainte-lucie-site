@@ -27,7 +27,8 @@
   --noir-panel: #12110d;
   --creme: #ece4d4;
   --creme-dim: #b0a68f;
-  --creme-faint: #6f6757;
+  /* éclairci vs maquette pour atteindre WCAG AA sur fond nuit (texte) */
+  --creme-faint: #877c66;
   --or: #c8a45c;
   --or-clair: #e7cd92;
 
@@ -37,7 +38,8 @@
   --parch-card: #fbf7ee;
   --encre: #2a2620;
   --encre-soft: #5c5347;
-  --encre-faint: #8a7f6d;
+  /* assombri vs maquette pour atteindre WCAG AA sur fond parchemin (texte) */
+  --encre-faint: #756a58;
   --or-prof: #9a7b3f;
 
   /* ---- Filets ---- */
@@ -637,6 +639,11 @@ section {
     display: flex;
   }
   .nav-toggle {
+    display: none;
+  }
+  /* on retire la case et le panneau mobile du flux/tabulation sur desktop */
+  .nav-check,
+  .nav-mobile {
     display: none;
   }
   .foot-grid {

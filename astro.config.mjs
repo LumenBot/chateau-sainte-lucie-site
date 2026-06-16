@@ -20,6 +20,8 @@ export default defineConfig({
     }),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    // cast : les deux versions de Vite (Astro + standalone) ont des types
+    // de Plugin légèrement divergents ; sans effet à l'exécution.
+    plugins: [/** @type {any} */ (tailwindcss())],
   },
 });
