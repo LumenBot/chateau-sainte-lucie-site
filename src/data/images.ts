@@ -1,30 +1,36 @@
 /**
  * Manifeste des visuels — imports `astro:assets` centralisés.
  *
- * ⚠️ Ces fichiers sont des VISUELS DE REMPLACEMENT générés (voir
- * `scripts/generate-placeholders.mjs`). À remplacer par les photographies
- * définitives du château (mêmes chemins), puis relancer le build.
+ * ⚠️ Les noms de fichiers d'origine ne décrivent pas toujours le contenu réel
+ * (ex. « 13_facade_jour_piscine » est en fait l'arbre centenaire). Les clés et
+ * les `alt` ci-dessous reflètent le CONTENU réel, vérifié visuellement.
  *
- * `alt` par défaut décrit le sujet attendu ; il peut être surchargé au besoin.
+ * Non utilisés volontairement (ton funéraire, hors périmètre vitrine) :
+ *   02_crypte*, 03_pierre_tombale* (caveau familial, pierre tombale d'enfant),
+ *   06_maison_gardien_crop (doublon de la chapelle), cp_01_verriere (très basse
+ *   définition), 04_blason_perron (version recadrée préférée).
  */
 import type { ImageMetadata } from "astro";
 
-import facadeNuit from "../assets/images/01_facade_nuit.jpg";
-import piscineJourChateau from "../assets/images/02_piscine_jour_chateau.jpg";
-import facadeJourPiscine from "../assets/images/03_facade_jour_piscine.jpg";
-import perronNoel from "../assets/images/04_perron_noel.jpg";
-import blason from "../assets/images/05_blason.jpg";
-import vueAerienne from "../assets/images/06_vue_aerienne.jpg";
-import perronIllumine from "../assets/images/07_perron_illumine.jpg";
-import cheneCentenaire from "../assets/images/08_chene_centenaire.jpg";
-import piscineNuit from "../assets/images/09_piscine_nuit.jpg";
-import piscineSalon from "../assets/images/10_piscine_salon.jpg";
-import daims from "../assets/images/11_daims.jpg";
-import salonInterieur from "../assets/images/12_salon_interieur.jpg";
-import escalier from "../assets/images/13_escalier.jpg";
-import parcAllee from "../assets/images/14_parc_allee.jpg";
-import tableMaison from "../assets/images/15_table_maison.jpg";
-import facadeJour from "../assets/images/16_facade_jour.jpg";
+import facadeNuit from "../assets/images/01_facade_nuit.jpeg";
+import piscineChateauJour from "../assets/images/10_piscine_jour_chateau.jpeg";
+import chateauJardin from "../assets/images/12_chene_centenaire.jpeg";
+import cheneCentenaire from "../assets/images/13_facade_jour_piscine.jpeg";
+import vueAerienne from "../assets/images/09_vue_aerienne.jpeg";
+import blason from "../assets/images/04_blason_perron_crop.jpeg";
+import perronIllumine from "../assets/images/05_perron_illumine.jpeg";
+import perronNoel from "../assets/images/18_perron_noel.jpeg";
+import chiensPerron from "../assets/images/08_chiens_perron.jpeg";
+import dogueSieste from "../assets/images/17_dogue_sieste.jpeg";
+import piscineNuit from "../assets/images/07_piscine_nuit.jpeg";
+import piscineSalon from "../assets/images/11_piscine_salon.jpeg";
+import daims from "../assets/images/14_daims.jpeg";
+import sittelle from "../assets/images/15_sittelle.jpeg";
+import ecureuil from "../assets/images/19_ecureuil.jpeg";
+import chapelle from "../assets/images/06_chapelle_parc.jpeg";
+import histoireSepia from "../assets/images/cp_03_facade_sepia.jpg";
+import histoireGloriette from "../assets/images/cp_02_facade_arbres.jpg";
+import histoirePerron from "../assets/images/cp_04_perron_gloriette.jpg";
 
 export interface Visual {
   src: ImageMetadata;
@@ -34,67 +40,79 @@ export interface Visual {
 export const images = {
   facadeNuit: {
     src: facadeNuit,
-    alt: "Le Château de Sainte-Lucie, façade illuminée la nuit",
+    alt: "La façade du Château de Sainte-Lucie illuminée sous un ciel étoilé",
   },
-  piscineJourChateau: {
-    src: piscineJourChateau,
-    alt: "La façade du Château de Sainte-Lucie vue du parc",
+  piscineChateauJour: {
+    src: piscineChateauJour,
+    alt: "Le château et son parc vus depuis la piscine naturelle, en été",
   },
-  facadeJourPiscine: {
-    src: facadeJourPiscine,
-    alt: "Façade du château et parc, de jour",
+  chateauJardin: {
+    src: chateauJardin,
+    alt: "Le château de Sainte-Lucie et son parc arboré, de jour",
   },
-  perronNoel: {
-    src: perronNoel,
-    alt: "Le perron du château illuminé un soir de fête",
-  },
-  blason: {
-    src: blason,
-    alt: "Blason sculpté, décor patrimonial du château",
+  cheneCentenaire: {
+    src: cheneCentenaire,
+    alt: "Un arbre centenaire du parc du château, au printemps",
   },
   vueAerienne: {
     src: vueAerienne,
     alt: "Vue aérienne du château et de son parc boisé",
   },
+  blason: {
+    src: blason,
+    alt: "Blason sculpté « Vis Unita Fit Fortior » du château",
+  },
   perronIllumine: {
     src: perronIllumine,
-    alt: "Le perron illuminé la nuit",
+    alt: "Le perron du château orné de guirlandes lumineuses, la nuit",
   },
-  cheneCentenaire: {
-    src: cheneCentenaire,
-    alt: "Chênes centenaires du parc du château",
+  perronNoel: {
+    src: perronNoel,
+    alt: "Le perron illuminé un soir de fête, un chien assis devant la porte",
+  },
+  chiensPerron: {
+    src: chiensPerron,
+    alt: "Trois chiens de la maison assis sur le perron du château",
+  },
+  dogueSieste: {
+    src: dogueSieste,
+    alt: "Un dogue assoupi sur la balustrade de pierre, au soleil",
   },
   piscineNuit: {
     src: piscineNuit,
-    alt: "La piscine naturelle au crépuscule",
+    alt: "La piscine naturelle et son salon extérieur au crépuscule",
   },
   piscineSalon: {
     src: piscineSalon,
-    alt: "Salon extérieur près de la piscine naturelle",
+    alt: "Le salon extérieur au bord de la piscine naturelle, de jour",
   },
   daims: {
     src: daims,
-    alt: "Daims dans le parc du château",
+    alt: "Une harde de daims dans le parc du château",
   },
-  salonInterieur: {
-    src: salonInterieur,
-    alt: "Salon intérieur aux boiseries d'origine",
+  sittelle: {
+    src: sittelle,
+    alt: "Une sittelle sur une mangeoire, dans le sous-bois du parc",
   },
-  escalier: {
-    src: escalier,
-    alt: "Escalier monumental du château",
+  ecureuil: {
+    src: ecureuil,
+    alt: "Un écureuil roux dans un arbre du parc",
   },
-  parcAllee: {
-    src: parcAllee,
-    alt: "Allée bordée d'arbres dans le parc",
+  chapelle: {
+    src: chapelle,
+    alt: "Une dépendance d'époque du parc, éclairée à la nuit tombée",
   },
-  tableMaison: {
-    src: tableMaison,
-    alt: "Table dressée — la cuisine maison du château",
+  histoireSepia: {
+    src: histoireSepia,
+    alt: "Carte postale ancienne — le Château Sainte-Lucie à Rambervillers",
   },
-  facadeJour: {
-    src: facadeJour,
-    alt: "Façade en grès rose des Vosges, de jour",
+  histoireGloriette: {
+    src: histoireGloriette,
+    alt: "Carte postale ancienne — le château et sa gloriette, vue de trois quarts",
+  },
+  histoirePerron: {
+    src: histoirePerron,
+    alt: "Carte postale ancienne — le perron du château et la gloriette du parc",
   },
 } satisfies Record<string, Visual>;
 

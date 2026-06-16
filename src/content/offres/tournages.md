@@ -16,8 +16,8 @@ hero:
     Boiseries d'origine, blasons sculptés, escalier monumental, parc centenaire et
     piscine naturelle : un décor authentique et polyvalent pour le cinéma, la
     publicité, la mode et l'automobile.
-  image: blason
-  imageAlt: Blason sculpté du château, décor de tournage patrimonial
+  image: chapelle
+  imageAlt: Dépendance d'époque du parc éclairée la nuit, décor de tournage
   placeColor: or
   actions:
     - { label: Étudier un tournage, href: /contact, variant: gold-light }

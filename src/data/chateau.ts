@@ -12,7 +12,7 @@ export const chateauSeo = {
 export const phero = {
   place: "Le lieu",
   title: "Le Château",
-  image: images.piscineJourChateau as Visual,
+  image: images.piscineChateauJour as Visual,
 };
 
 export const intro = {
@@ -55,7 +55,7 @@ export const espaces = {
       rev: true,
     },
     {
-      image: images.piscineNuit,
+      image: images.piscineSalon,
       cap: "Art de vivre",
       title: "La piscine naturelle & le bien-être",
       text: "Un bassin naturel filtré par lagunage, un salon extérieur, un cadre propice à la détente entre deux sessions de travail. L'art de vivre du château, du matin au crépuscule.",

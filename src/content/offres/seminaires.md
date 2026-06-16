@@ -16,8 +16,8 @@ hero:
     Un château de caractère pour vos séminaires et journées d'entreprise — salles
     de réception, parc boisé, déjeuner maison et bien-être, à moins d'une heure
     d'Épinal et de Nancy.
-  image: piscineJourChateau
-  imageAlt: La façade du château et son parc, cadre d'un séminaire d'entreprise
+  image: chateauJardin
+  imageAlt: Le château et son parc, cadre d'un séminaire d'entreprise
   placeColor: or
   actions:
     - { label: Demander une proposition, href: /contact, variant: gold-light }
