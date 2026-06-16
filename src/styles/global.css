@@ -1,0 +1,740 @@
+/* =================================================================
+   Château de Sainte-Lucie — Système de design du site vitrine
+   Deux registres : NUIT (immersif) · JOUR (parchemin, lisible)
+   Transposé fidèlement depuis maquettes/site/site.css
+   Polices auto-hébergées (Fontsource) — pas d'appel Google Fonts (perf + RGPD)
+   ================================================================= */
+@import "tailwindcss";
+
+/* ---- Cormorant Garamond (titres / display) — sous-ensemble latin ---- */
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-400-italic.css";
+@import "@fontsource/cormorant-garamond/latin-500-italic.css";
+@import "@fontsource/cormorant-garamond/latin-600-italic.css";
+
+/* ---- EB Garamond (texte / UI) — sous-ensemble latin ---- */
+@import "@fontsource/eb-garamond/latin-400.css";
+@import "@fontsource/eb-garamond/latin-500.css";
+@import "@fontsource/eb-garamond/latin-600.css";
+@import "@fontsource/eb-garamond/latin-400-italic.css";
+
+:root {
+  /* ---- Nuit ---- */
+  --noir: #0c0c0b;
+  --noir-2: #15130f;
+  --noir-panel: #12110d;
+  --creme: #ece4d4;
+  --creme-dim: #b0a68f;
+  /* éclairci vs maquette pour atteindre WCAG AA sur fond nuit (texte) */
+  --creme-faint: #877c66;
+  --or: #c8a45c;
+  --or-clair: #e7cd92;
+
+  /* ---- Jour / parchemin ---- */
+  --parch: #f4eee2;
+  --parch-2: #ebe2d0;
+  --parch-card: #fbf7ee;
+  --encre: #2a2620;
+  --encre-soft: #5c5347;
+  /* assombri vs maquette pour atteindre WCAG AA sur fond parchemin (texte) */
+  --encre-faint: #756a58;
+  --or-prof: #9a7b3f;
+
+  /* ---- Filets ---- */
+  --rule-d: rgba(200, 164, 92, 0.3);
+  --rule-d-faint: rgba(176, 166, 143, 0.16);
+  --rule-l: rgba(154, 123, 63, 0.3);
+  --rule-l-faint: rgba(90, 80, 65, 0.16);
+
+  --serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --display: "Cormorant Garamond", Georgia, serif;
+
+  --maxw: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+}
+
+/* Exposition des tokens aux utilitaires Tailwind (source unique : :root) */
+@theme inline {
+  --color-noir: var(--noir);
+  --color-noir-2: var(--noir-2);
+  --color-creme: var(--creme);
+  --color-creme-dim: var(--creme-dim);
+  --color-or: var(--or);
+  --color-or-clair: var(--or-clair);
+  --color-parch: var(--parch);
+  --color-parch-2: var(--parch-2);
+  --color-parch-card: var(--parch-card);
+  --color-encre: var(--encre);
+  --color-encre-soft: var(--encre-soft);
+  --color-or-prof: var(--or-prof);
+
+  --font-display: var(--display);
+  --font-serif: var(--serif);
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--serif);
+  background: var(--parch);
+  color: var(--encre);
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.004em;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- accessibilité ---------- */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -120px;
+  z-index: 200;
+  background: var(--noir);
+  color: var(--creme);
+  border: 1px solid var(--or);
+  padding: 12px 18px;
+  font-family: var(--serif);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 13px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 16px;
+}
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+:focus-visible {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+.night :focus-visible,
+.site-header:not(.solid) :focus-visible {
+  outline-color: var(--or-clair);
+}
+
+/* ---------- type primitives ---------- */
+.eyebrow {
+  font-family: var(--serif);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--or-prof);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.eyebrow.on-dark {
+  color: var(--or);
+}
+.eyebrow .ln {
+  height: 1px;
+  width: 30px;
+  background: currentColor;
+  opacity: 0.55;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--display);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: 0.005em;
+}
+.display-xl {
+  font-size: clamp(44px, 8vw, 88px);
+  line-height: 0.98;
+}
+.display-l {
+  font-size: clamp(34px, 5.2vw, 58px);
+}
+.display-m {
+  font-size: clamp(27px, 3.6vw, 40px);
+}
+em.gold {
+  font-style: italic;
+  color: var(--or-prof);
+}
+.on-dark em.gold,
+em.gold.light {
+  color: var(--or-clair);
+}
+
+p {
+  margin: 0 0 1em;
+}
+.lede {
+  font-size: clamp(19px, 2.2vw, 23px);
+  line-height: 1.5;
+  color: var(--encre-soft);
+}
+.muted {
+  color: var(--encre-faint);
+}
+.note {
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--encre-faint);
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  --bg: var(--or-prof);
+  --fg: #fff;
+  --bd: var(--or-prof);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 15px 26px;
+  border: 1px solid var(--bd);
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease,
+    border-color 0.25s ease;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn--ghost {
+  --bg: transparent;
+  --fg: var(--encre);
+  --bd: var(--rule-l);
+}
+.btn--ghost:hover {
+  --bg: var(--encre);
+  --fg: var(--parch);
+}
+.btn--ghost-light {
+  --bg: transparent;
+  --fg: var(--creme);
+  --bd: rgba(231, 205, 146, 0.5);
+}
+.btn--ghost-light:hover {
+  --bg: var(--or);
+  --fg: var(--noir);
+  --bd: var(--or);
+}
+.btn--gold-light {
+  --bg: var(--or);
+  --fg: var(--noir);
+  --bd: var(--or);
+}
+.btn--gold-light:hover {
+  --bg: var(--or-clair);
+  --fg: var(--noir);
+  --bd: var(--or-clair);
+}
+.btn--sm {
+  padding: 11px 18px;
+  font-size: 12px;
+}
+
+.link-or {
+  font-family: var(--serif);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--or-prof);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+.link-or .arr {
+  transition: transform 0.25s ease;
+}
+.link-or:hover .arr {
+  transform: translateX(5px);
+}
+.on-dark .link-or,
+.link-or.light {
+  color: var(--or-clair);
+}
+
+/* =================================================================
+   HEADER / NAV
+   ================================================================= */
+.site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+.site-header .bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px var(--gutter);
+}
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 4px;
+}
+.brand .bn {
+  font-family: var(--display);
+  font-size: 23px;
+  color: var(--creme);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.brand .bs {
+  font-family: var(--serif);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  font-size: 9px;
+  color: var(--or);
+  white-space: nowrap;
+}
+.nav-desktop {
+  display: none;
+  align-items: center;
+  gap: 30px;
+}
+.nav-desktop a.navlink {
+  font-family: var(--serif);
+  font-size: 14.5px;
+  letter-spacing: 0.05em;
+  color: var(--creme);
+  opacity: 0.86;
+  position: relative;
+  padding-bottom: 3px;
+}
+.nav-desktop a.navlink[aria-current="page"] {
+  opacity: 1;
+}
+.nav-desktop a.navlink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background: var(--or);
+  transition: right 0.3s ease;
+}
+.nav-desktop a.navlink:hover {
+  opacity: 1;
+}
+.nav-desktop a.navlink:hover::after,
+.nav-desktop a.navlink[aria-current="page"]::after {
+  right: 0;
+}
+
+/* light header variant (on parchment pages) */
+.site-header.solid {
+  position: sticky;
+  background: rgba(244, 238, 226, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule-l-faint);
+}
+.site-header.solid .brand .bn {
+  color: var(--encre);
+}
+.site-header.solid .brand .bs {
+  color: var(--or-prof);
+}
+.site-header.solid .nav-desktop a.navlink {
+  color: var(--encre);
+}
+.site-header.solid .nav-toggle {
+  color: var(--encre);
+}
+
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--creme);
+}
+.nav-toggle span {
+  width: 26px;
+  height: 1.5px;
+  background: currentColor;
+  display: block;
+}
+
+/* mobile menu (checkbox hack, rendu accessible au clavier) */
+.nav-check {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+.nav-check:focus-visible + .site-header .nav-toggle {
+  outline: 2px solid var(--or);
+  outline-offset: 3px;
+}
+.nav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--noir);
+  display: flex;
+  flex-direction: column;
+  padding: 28px var(--gutter);
+  transform: translateY(-100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  visibility: hidden;
+  overflow-y: auto;
+}
+.nav-check:checked ~ .nav-mobile {
+  transform: none;
+  visibility: visible;
+}
+.nav-mobile .mtop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 46px;
+}
+.nav-mobile .mclose {
+  background: none;
+  border: 0;
+  color: var(--creme);
+  font-size: 30px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 10px;
+}
+.nav-mobile a {
+  font-family: var(--display);
+  font-size: 30px;
+  color: var(--creme);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-d-faint);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-mobile a .idx {
+  font-family: var(--serif);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--or);
+  opacity: 0.7;
+}
+.nav-mobile .mcta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 28px;
+}
+
+/* =================================================================
+   SECTION SCAFFOLD
+   ================================================================= */
+section {
+  position: relative;
+}
+.sec {
+  padding: clamp(64px, 9vw, 120px) 0;
+}
+.sec-head {
+  max-width: 680px;
+}
+.sec-head .eyebrow {
+  margin-bottom: 22px;
+}
+.sec-head h2 {
+  margin-bottom: 18px;
+}
+
+/* NIGHT register block */
+.night {
+  background: var(--noir);
+  color: var(--creme);
+}
+.night h1,
+.night h2,
+.night h3 {
+  color: var(--creme);
+}
+.night .lede {
+  color: var(--creme-dim);
+}
+.night .muted {
+  color: var(--creme-faint);
+}
+.halo {
+  position: relative;
+}
+.halo::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -10%;
+  width: 90%;
+  height: 70%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    60% 60% at 50% 30%,
+    rgba(231, 205, 146, 0.1),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* =================================================================
+   CTA FINAL (bandeau nuit récurrent en pied de page de contenu)
+   ================================================================= */
+.cta-final {
+  background: var(--noir);
+  color: var(--creme);
+  text-align: center;
+  padding: clamp(70px, 10vw, 120px) 0;
+}
+.cta-final h2 {
+  color: var(--creme);
+  margin: 0 auto 20px;
+  max-width: 18ch;
+}
+.cta-final p {
+  color: var(--creme-dim);
+  max-width: 52ch;
+  margin: 0 auto 34px;
+}
+.cta-final .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+.site-footer {
+  background: var(--noir);
+  color: var(--creme-dim);
+  padding: 72px 0 38px;
+  border-top: 1px solid var(--rule-d-faint);
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 42px;
+}
+.foot-brand .bn {
+  font-family: var(--display);
+  font-size: 30px;
+  color: var(--creme);
+}
+.foot-brand .bs {
+  font-family: var(--serif);
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 10px;
+  color: var(--or);
+  margin-top: 6px;
+}
+.foot-brand p {
+  margin-top: 18px;
+  max-width: 34ch;
+  font-size: 15.5px;
+  color: var(--creme-dim);
+}
+.foot-col h4 {
+  font-family: var(--serif);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 11px;
+  color: var(--or);
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.foot-col a,
+.foot-col p {
+  display: block;
+  font-size: 15.5px;
+  color: var(--creme-dim);
+  margin-bottom: 11px;
+}
+.foot-col a:hover {
+  color: var(--creme);
+}
+.foot-bottom {
+  margin-top: 54px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule-d-faint);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--creme-faint);
+}
+.foot-bottom .legal {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 760px) {
+  .foot-grid {
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 48px;
+  }
+  .foot-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+@media (min-width: 1000px) {
+  .nav-desktop {
+    display: flex;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  /* on retire la case et le panneau mobile du flux/tabulation sur desktop */
+  .nav-check,
+  .nav-mobile {
+    display: none;
+  }
+  .foot-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+  }
+}
+
+/* =================================================================
+   PROSE (pages éditoriales longues : mentions légales, confidentialité)
+   ================================================================= */
+.wrap.narrow {
+  max-width: 760px;
+}
+.prose {
+  font-size: 17px;
+  color: var(--encre-soft);
+}
+.prose h2 {
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 32px);
+  color: var(--encre);
+  margin: 44px 0 14px;
+}
+.prose h3 {
+  font-family: var(--display);
+  font-size: 21px;
+  color: var(--encre);
+  margin: 28px 0 8px;
+}
+.prose p,
+.prose li {
+  line-height: 1.7;
+}
+.prose a {
+  color: var(--or-prof);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose ul {
+  padding-left: 1.2em;
+  margin: 0 0 1em;
+}
+.prose li {
+  margin-bottom: 0.4em;
+}
+.prose .todo {
+  background: rgba(154, 123, 63, 0.08);
+  border-left: 2px solid var(--or-prof);
+  padding: 2px 6px;
+  font-style: italic;
+  color: var(--encre);
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--rule-l-faint);
+  margin: 40px 0;
+}
+
+/* =================================================================
+   STICKY MOBILE CTA (cahier §5 — CTA contact persistant en mobile)
+   ================================================================= */
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: rgba(12, 12, 11, 0.94);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--rule-d-faint);
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+}
+.sticky-cta .btn {
+  flex: 1;
+}
+@media (min-width: 680px) {
+  .sticky-cta {
+    display: none;
+  }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

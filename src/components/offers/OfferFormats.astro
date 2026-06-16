@@ -1,0 +1,146 @@
+---
+interface FormatItem {
+  ci: string;
+  title: string;
+  text: string;
+  price?: string;
+  priceUnit?: string;
+  feat?: boolean;
+}
+interface Chip {
+  b: string;
+  rest: string;
+}
+interface Props {
+  eyebrow: string;
+  titleLead: string;
+  titleGold: string;
+  titleTail?: string;
+  items: FormatItem[];
+  chips?: Chip[];
+  note?: string;
+}
+const {
+  eyebrow,
+  titleLead,
+  titleGold,
+  titleTail = "",
+  items,
+  chips = [],
+  note,
+} = Astro.props;
+---
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="ln"></span>{eyebrow}</p>
+      <h2 class="display-l">{titleLead}<em class="gold">{titleGold}</em>{titleTail}</h2>
+    </div>
+    <div class="formats">
+      {
+        items.map((f) => (
+          <div class={`fmt${f.feat ? " feat" : ""}`}>
+            <p class="ci">{f.ci}</p>
+            <h3>{f.title}</h3>
+            <p>{f.text}</p>
+            {f.price && (
+              <div class="price">
+                {f.price}
+                {f.priceUnit && <small>{f.priceUnit}</small>}
+              </div>
+            )}
+          </div>
+        ))
+      }
+    </div>
+    {
+      chips.length > 0 && (
+        <div class="access2">
+          {chips.map((c) => (
+            <span>
+              <b>{c.b}</b>
+              {c.rest}
+            </span>
+          ))}
+        </div>
+      )
+    }
+    {note && <p class="note formats-note">{note}</p>}
+  </div>
+</section>
+
+<style>
+  .formats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 42px;
+  }
+  .fmt {
+    border: 1px solid var(--rule-l-faint);
+    background: var(--parch-card);
+    padding: 34px 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  .fmt.feat {
+    border-color: var(--rule-l);
+    box-shadow: 0 18px 40px rgba(42, 38, 32, 0.08);
+  }
+  .fmt .ci {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    font-size: 11px;
+    color: var(--or-prof);
+    margin: 0 0 12px;
+  }
+  .fmt h3 {
+    font-size: 26px;
+    margin: 0 0 10px;
+  }
+  .fmt p {
+    color: var(--encre-soft);
+    font-size: 15.5px;
+    margin: 0 0 22px;
+  }
+  .fmt .price {
+    font-family: var(--display);
+    font-size: 34px;
+    color: var(--encre);
+    line-height: 1;
+    margin-top: auto;
+  }
+  .fmt .price small {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--encre-faint);
+    letter-spacing: 0.04em;
+  }
+  .access2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 26px;
+  }
+  .access2 span {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--encre-soft);
+    border: 1px solid var(--rule-l-faint);
+    padding: 9px 16px;
+  }
+  .access2 b {
+    color: var(--or-prof);
+    font-weight: 600;
+  }
+  .formats-note {
+    margin-top: 22px;
+  }
+  @media (min-width: 760px) {
+    .formats {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,115 @@
+---
+/**
+ * <head> commun : métas SEO, OpenGraph + Twitter cards, canonical, favicon,
+ * données structurées schema.org (EventVenue / LocalBusiness) et, en option,
+ * analytics Plausible (sans cookie).
+ */
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Image OG relative à la racine du site (défaut : /og-default.jpg). */
+  image?: string;
+  /** og:type (website par défaut, article pour les pages éditoriales). */
+  ogType?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = "/og-default.jpg",
+  ogType = "website",
+  noindex = false,
+} = Astro.props;
+
+// Normalise le chemin pour une URL canonique propre (sans .html ni slash final).
+let path = Astro.url.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+if (path.length > 1) path = path.replace(/\/$/, "");
+const canonical = new URL(path === "" ? "/" : path, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
+
+// Données structurées : lieu d'événement / commerce local.
+// ⚠️ Pas de streetAddress (résidence habitée) — localité/région uniquement.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["EventVenue", "LocalBusiness"],
+  name: site.name,
+  description: site.tagline,
+  url: Astro.site?.href,
+  image: ogImage,
+  email: site.contact.email,
+  telephone: site.contact.phoneHref.replace("tel:", ""),
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.location.locality,
+    addressRegion: site.location.region,
+    postalCode: site.location.postalCode,
+    addressCountry: site.location.country,
+  },
+  areaServed: [
+    site.location.region,
+    "Lorraine",
+    site.location.area,
+    "Épinal",
+    "Nancy",
+  ],
+  maximumAttendeeCapacity: site.capacityMax,
+  knowsLanguage: "fr-FR",
+  isAccessibleForFree: false,
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#0c0c0b" />
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<!-- Sitemap -->
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- OpenGraph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="fr_FR" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Données structurées -->
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(jsonLd)}
+/>
+
+<!-- Analytics sans cookie (activé seulement si PUBLIC_PLAUSIBLE_DOMAIN est défini) -->
+{
+  plausibleDomain && (
+    <script
+      defer
+      is:inline
+      data-domain={plausibleDomain}
+      src="https://plausible.io/js/script.js"
+    />
+  )
+}

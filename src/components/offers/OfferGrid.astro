@@ -1,0 +1,96 @@
+---
+import Icon from "../Icon.astro";
+
+interface GridItem {
+  icon?: string;
+  title: string;
+  text: string;
+}
+interface Props {
+  eyebrow: string;
+  titleLead: string;
+  titleGold: string;
+  titleTail?: string;
+  background?: "parch" | "parch-2";
+  items: GridItem[];
+}
+const {
+  eyebrow,
+  titleLead,
+  titleGold,
+  titleTail = "",
+  background = "parch",
+  items,
+} = Astro.props;
+
+const lgCols = items.length % 3 === 0 ? 3 : 2;
+const sectionBg =
+  background === "parch-2" ? "var(--parch-2)" : "var(--parch)";
+---
+
+<section class="sec incl" style={`background:${sectionBg};`}>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="ln"></span>{eyebrow}</p>
+      <h2 class="display-l">{titleLead}<em class="gold">{titleGold}</em>{titleTail}</h2>
+    </div>
+    <div class="incl-grid" style={`--cols-lg:${lgCols};`}>
+      {
+        items.map((it) => (
+          <div class="inc">
+            {it.icon && (
+              <span class="ic">
+                <Icon name={it.icon as any} size={21} />
+              </span>
+            )}
+            <h3>{it.title}</h3>
+            <p>{it.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .incl-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--rule-l-faint);
+    border: 1px solid var(--rule-l-faint);
+    margin-top: 42px;
+  }
+  .inc {
+    background: var(--parch-card);
+    padding: 30px 26px;
+  }
+  .inc .ic {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--rule-l);
+    display: grid;
+    place-items: center;
+    color: var(--or-prof);
+    margin-bottom: 18px;
+  }
+  .inc h3 {
+    font-size: 21px;
+    margin: 0 0 8px;
+  }
+  .inc p {
+    margin: 0;
+    color: var(--encre-soft);
+    font-size: 15px;
+  }
+  @media (min-width: 620px) {
+    .incl-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 980px) {
+    .incl-grid {
+      grid-template-columns: repeat(var(--cols-lg, 3), 1fr);
+    }
+  }
+</style>

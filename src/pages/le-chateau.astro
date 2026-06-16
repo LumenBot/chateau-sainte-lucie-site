@@ -1,0 +1,425 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+import {
+  chateauSeo,
+  phero,
+  intro,
+  espaces,
+  chiffres,
+  situation,
+  chateauCta,
+} from "../data/chateau";
+---
+
+<BaseLayout title={chateauSeo.title} description={chateauSeo.description}>
+  <!-- HERO -->
+  <header class="phero">
+    <div class="phero__bg">
+      <Image
+        src={phero.image.src}
+        alt={phero.image.alt}
+        widths={[768, 1280, 2000]}
+        sizes="100vw"
+        loading="eager"
+        fetchpriority="high"
+        style="object-position:center 60%;"
+      />
+    </div>
+    <div class="phero__in wrap">
+      <p class="place">{phero.place}</p>
+      <h1 class="display-xl">{phero.title}</h1>
+    </div>
+  </header>
+
+  <!-- INTRO STORYTELLING -->
+  <section class="sec intro">
+    <div class="wrap">
+      <div class="grid">
+        <div class="lead-col">
+          <p class="eyebrow"><span class="ln"></span>{intro.eyebrow}</p>
+          <p class="intro-quote">{intro.quote}</p>
+        </div>
+        <div>
+          {intro.paragraphs.map((p) => <p>{p}</p>)}
+          <a class="link-or" href={intro.link.href}>{intro.link.label} <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPACES (zigzag) -->
+  <section class="sec espaces">
+    <div class="wrap">
+      <div class="sec-head" style="margin-bottom:48px;">
+        <p class="eyebrow"><span class="ln"></span>{espaces.eyebrow}</p>
+        <h2 class="display-l">{espaces.title[0]}<em class="gold">{espaces.title[1]}</em></h2>
+      </div>
+
+      {
+        espaces.features.map((f) => (
+          <div class={`feature${f.rev ? " rev" : ""}`}>
+            <div class="feature__img">
+              <Image
+                src={f.image.src}
+                alt={f.image.alt}
+                widths={[500, 800, 1200]}
+                sizes="(min-width:880px) 50vw, 100vw"
+                loading="lazy"
+              />
+              <span class="cap">{f.cap}</span>
+            </div>
+            <div>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+              <div class="mini">
+                {f.mini.map((m) => (
+                  <span>{m}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- CHIFFRES CLÉS -->
+  <section class="sec keyfigs">
+    <div class="wrap">
+      <div class="sec-head"><p class="eyebrow on-dark"><span class="ln"></span>{chiffres.eyebrow}</p></div>
+      <div class="kf-grid">
+        {
+          chiffres.items.map((k) => (
+            <div class="kf">
+              <div class="v">{k.v}</div>
+              <div class="l">{k.l}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="note keyfigs-note">{chiffres.note}</p>
+    </div>
+  </section>
+
+  <!-- SITUATION -->
+  <section class="sec situation">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="eyebrow"><span class="ln"></span>{situation.eyebrow}</p>
+          <h2 class="display-m" style="margin:18px 0 14px;">
+            {situation.title[0]}<em class="gold">{situation.title[1]}</em>
+          </h2>
+          <p>{situation.text}</p>
+          <ul class="access">
+            {
+              situation.access.map((a) => (
+                <li>
+                  <span class="where">{a.where}</span>
+                  <span class="dur">{a.dur}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="locator" aria-hidden="true">
+          <div class="rings"></div>
+          <div class="pin">
+            <div class="dot"></div>
+            <div class="t">{situation.pin.title}</div>
+            <div class="s">{situation.pin.sub}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal
+    eyebrow={chateauCta.eyebrow}
+    titleLead={chateauCta.title[0]}
+    titleGold={chateauCta.title[1]}
+    text={chateauCta.text}
+    actions={chateauCta.actions}
+  />
+</BaseLayout>
+
+<style>
+  /* page hero (compact, immersive) */
+  .phero {
+    position: relative;
+    min-height: 62vh;
+    display: flex;
+    align-items: flex-end;
+    color: var(--creme);
+    background: var(--noir);
+    overflow: hidden;
+  }
+  .phero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .phero__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .phero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(8, 7, 5, 0.55),
+      rgba(8, 7, 5, 0.25) 40%,
+      rgba(8, 7, 5, 0.85)
+    );
+  }
+  .phero__in {
+    position: relative;
+    z-index: 2;
+    padding: 130px 0 56px;
+  }
+  .phero h1 {
+    color: var(--creme);
+    margin: 16px 0 0;
+  }
+  .phero .place {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.42em;
+    font-size: 11px;
+    color: var(--creme-dim);
+  }
+
+  /* intro storytelling */
+  .intro .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .intro .lead-col .intro-quote {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(24px, 3.2vw, 34px);
+    line-height: 1.3;
+    color: var(--encre);
+    margin-top: 22px;
+  }
+  .intro .lead-col p.intro-quote {
+    margin-bottom: 0;
+  }
+  @media (min-width: 880px) {
+    .intro .grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+    }
+  }
+
+  /* zigzag espaces */
+  .espaces {
+    background: var(--parch-2);
+  }
+  .feature {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+  .feature:last-child {
+    margin-bottom: 0;
+  }
+  .feature__img {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid var(--rule-l-faint);
+  }
+  .feature__img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .feature__img .cap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(12, 12, 11, 0.7);
+    color: var(--creme);
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 10px;
+    padding: 7px 12px;
+  }
+  .feature h3 {
+    font-size: 30px;
+    margin: 0 0 14px;
+  }
+  .feature p {
+    color: var(--encre-soft);
+    margin: 0 0 14px;
+  }
+  .feature .mini {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .feature .mini span {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    color: var(--or-prof);
+    border: 1px solid var(--rule-l);
+    padding: 5px 11px;
+  }
+  @media (min-width: 880px) {
+    .feature {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+    .feature.rev .feature__img {
+      order: 2;
+    }
+  }
+
+  /* chiffres clés */
+  .keyfigs {
+    background: var(--noir);
+    color: var(--creme);
+  }
+  .kf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule-d-faint);
+    border: 1px solid var(--rule-d-faint);
+    margin-top: 8px;
+  }
+  .kf {
+    background: var(--noir);
+    padding: 34px 22px;
+    text-align: center;
+  }
+  .kf .v {
+    font-family: var(--display);
+    font-size: clamp(34px, 5vw, 50px);
+    color: var(--or-clair);
+    line-height: 1;
+  }
+  .kf .l {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 11px;
+    color: var(--creme-dim);
+    margin-top: 12px;
+  }
+  .keyfigs-note {
+    color: var(--creme-faint);
+    margin-top: 22px;
+    text-align: center;
+  }
+  @media (min-width: 760px) {
+    .kf-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* situation */
+  .situation .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 34px;
+    align-items: center;
+  }
+  .access {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+  }
+  .access li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--rule-l-faint);
+  }
+  .access li:last-child {
+    border-bottom: none;
+  }
+  .access .where {
+    font-family: var(--display);
+    font-size: 21px;
+    color: var(--encre);
+  }
+  .access .dur {
+    font-family: var(--serif);
+    letter-spacing: 0.04em;
+    color: var(--or-prof);
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  .locator {
+    position: relative;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--rule-l);
+    background: radial-gradient(
+        circle at 50% 42%,
+        rgba(154, 123, 63, 0.12),
+        transparent 60%
+      ),
+      var(--parch-card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .locator .pin {
+    position: relative;
+    z-index: 2;
+  }
+  .locator .pin .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--or-prof);
+    margin: 0 auto 14px;
+    box-shadow: 0 0 0 8px rgba(154, 123, 63, 0.16),
+      0 0 0 18px rgba(154, 123, 63, 0.08);
+  }
+  .locator .pin .t {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--encre);
+  }
+  .locator .pin .s {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 10.5px;
+    color: var(--encre-faint);
+    margin-top: 8px;
+  }
+  .locator .rings {
+    position: absolute;
+    inset: 0;
+    background: repeating-radial-gradient(
+      circle at 50% 42%,
+      transparent 0 38px,
+      rgba(154, 123, 63, 0.08) 38px 39px
+    );
+  }
+  @media (min-width: 880px) {
+    .situation .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+  }
+</style>

@@ -1,0 +1,98 @@
+---
+/**
+ * En-tête + navigation (desktop & mobile).
+ * - `transparent` (défaut) : posé au-dessus d'un hero sombre (registre nuit).
+ * - `solid` : en-tête sticky clair, pour les pages sans hero sombre.
+ * Menu mobile : « checkbox hack » (zéro JS de base, case focusable au clavier),
+ * amélioré par un petit script (Échap pour fermer, fermeture au clic d'un lien).
+ */
+import { site, mainNav } from "../data/site";
+import { ctaLabels } from "../data/site";
+
+interface Props {
+  solid?: boolean;
+}
+const { solid = false } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(href + "/");
+const contactActive = isActive("/contact");
+---
+
+<input
+  id="navchk"
+  class="nav-check"
+  type="checkbox"
+  aria-label="Ouvrir le menu de navigation"
+/>
+
+<header class={`site-header${solid ? " solid" : ""}`}>
+  <div class="bar">
+    <a class="brand" href="/" aria-label={`${site.name} — accueil`}>
+      <span class="bn">{site.shortName}</span>
+      <span class="bs">{site.brandLine}</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Navigation principale">
+      {
+        mainNav.map((item) => (
+          <a
+            class="navlink"
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        class={`btn btn--sm ${contactActive ? "btn--gold-light" : "btn--ghost-light"}`}
+        href="/contact"
+        aria-current={contactActive ? "page" : undefined}
+      >
+        Contact
+      </a>
+    </nav>
+
+    <label class="nav-toggle" for="navchk" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
+  </div>
+</header>
+
+<div class="nav-mobile" id="menu-mobile">
+  <div class="mtop">
+    <span class="brand">
+      <span class="bn">{site.shortName}</span>
+      <span class="bs">{site.brandLine}</span>
+    </span>
+    <label class="mclose" for="navchk" aria-label="Fermer le menu">×</label>
+  </div>
+  {
+    mainNav.map((item) => (
+      <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+        {item.label}
+        <span class="idx">{item.idx}</span>
+      </a>
+    ))
+  }
+  <div class="mcta">
+    <a class="btn btn--gold-light" href="/contact">{ctaLabels.contact}</a>
+  </div>
+</div>
+
+<script>
+  // Amélioration progressive du menu mobile (le « checkbox hack » fonctionne
+  // déjà sans JS ; ce script ajoute Échap et la fermeture au clic d'un lien).
+  const cb = document.getElementById("navchk") as HTMLInputElement | null;
+  if (cb) {
+    const close = () => (cb.checked = false);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && cb.checked) close();
+    });
+    document
+      .querySelectorAll(".nav-mobile a")
+      .forEach((a) => a.addEventListener("click", close));
+  }
+</script>

@@ -1,0 +1,96 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import OfferHero from "../components/offers/OfferHero.astro";
+import OfferIntro from "../components/offers/OfferIntro.astro";
+import OfferTimeline from "../components/offers/OfferTimeline.astro";
+import OfferGrid from "../components/offers/OfferGrid.astro";
+import OfferHighlight from "../components/offers/OfferHighlight.astro";
+import OfferFormats from "../components/offers/OfferFormats.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("offres");
+  return entries.map((entry) => ({
+    params: { offre: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { hero, cta } = data;
+---
+
+<BaseLayout title={data.seo.title} description={data.seo.description} ogType="article">
+  <OfferHero
+    place={hero.place}
+    title={hero.title}
+    lead={hero.lead}
+    image={hero.image}
+    imageAlt={hero.imageAlt}
+    placeColor={hero.placeColor}
+    actions={hero.actions}
+  />
+
+  {
+    data.blocks.map((b) =>
+      b.type === "intro" ? (
+        <OfferIntro
+          eyebrow={b.eyebrow}
+          titleLead={b.titleLead}
+          titleGold={b.titleGold}
+          titleTail={b.titleTail}
+          text={b.text}
+        />
+      ) : b.type === "timeline" ? (
+        <OfferTimeline
+          eyebrow={b.eyebrow}
+          titleLead={b.titleLead}
+          titleGold={b.titleGold}
+          titleTail={b.titleTail}
+          items={b.items}
+        />
+      ) : b.type === "grid" ? (
+        <OfferGrid
+          eyebrow={b.eyebrow}
+          titleLead={b.titleLead}
+          titleGold={b.titleGold}
+          titleTail={b.titleTail}
+          background={b.background}
+          items={b.items}
+        />
+      ) : b.type === "highlight" ? (
+        <OfferHighlight
+          eyebrow={b.eyebrow}
+          titleLead={b.titleLead}
+          titleGold={b.titleGold}
+          titleTail={b.titleTail}
+          text={b.text}
+          image={b.image}
+          rev={b.rev}
+          mini={b.mini}
+        />
+      ) : b.type === "formats" ? (
+        <OfferFormats
+          eyebrow={b.eyebrow}
+          titleLead={b.titleLead}
+          titleGold={b.titleGold}
+          titleTail={b.titleTail}
+          items={b.items}
+          chips={b.chips}
+          note={b.note}
+        />
+      ) : null,
+    )
+  }
+
+  <CtaFinal
+    eyebrow={cta.eyebrow}
+    titleLead={cta.titleLead}
+    titleGold={cta.titleGold}
+    titleTail={cta.titleTail}
+    text={cta.text}
+    actions={cta.actions}
+  />
+</BaseLayout>

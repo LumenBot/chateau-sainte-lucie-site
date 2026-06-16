@@ -1,0 +1,68 @@
+---
+interface Props {
+  eyebrow: string;
+  titleLead: string;
+  titleGold: string;
+  titleTail?: string;
+  items: { time: string; title: string; text: string }[];
+}
+const { eyebrow, titleLead, titleGold, titleTail = "", items } = Astro.props;
+---
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="ln"></span>{eyebrow}</p>
+      <h2 class="display-l">{titleLead}<em class="gold">{titleGold}</em>{titleTail}</h2>
+    </div>
+    <div class="timeline">
+      {
+        items.map((it) => (
+          <div class="tl">
+            <div class="time">{it.time}</div>
+            <div>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    margin-top: 42px;
+    border-top: 1px solid var(--rule-l-faint);
+  }
+  .tl {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 22px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule-l-faint);
+  }
+  .tl .time {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--or-prof);
+    line-height: 1;
+  }
+  .tl h3 {
+    font-size: 22px;
+    margin: 0 0 6px;
+  }
+  .tl p {
+    margin: 0;
+    color: var(--encre-soft);
+    font-size: 16px;
+  }
+  @media (min-width: 760px) {
+    .tl {
+      grid-template-columns: 140px 1fr;
+      gap: 36px;
+    }
+  }
+</style>

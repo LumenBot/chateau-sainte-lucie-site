@@ -1,0 +1,113 @@
+---
+import { Image } from "astro:assets";
+import { resolveVisual } from "../../data/images";
+
+interface Props {
+  eyebrow: string;
+  titleLead: string;
+  titleGold: string;
+  titleTail?: string;
+  text: string;
+  image: string;
+  rev?: boolean;
+  mini?: string[];
+}
+const {
+  eyebrow,
+  titleLead,
+  titleGold,
+  titleTail = "",
+  text,
+  image,
+  rev = false,
+  mini = [],
+} = Astro.props;
+const visual = resolveVisual(image);
+---
+
+<section class={`sec tb${rev ? " rev" : ""}`}>
+  <div class="wrap">
+    <div class="grid">
+      <div class="tb-content">
+        <p class="eyebrow on-dark"><span class="ln"></span>{eyebrow}</p>
+        <h2 class="display-m">{titleLead}<em class="gold light">{titleGold}</em>{titleTail}</h2>
+        <p>{text}</p>
+        {
+          mini.length > 0 && (
+            <div class="mini">
+              {mini.map((m) => (
+                <span>{m}</span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+      <div class="tb__img">
+        <Image
+          src={visual.src}
+          alt={visual.alt}
+          widths={[500, 800, 1000]}
+          sizes="(min-width:880px) 50vw, 100vw"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tb {
+    background: var(--noir);
+    color: var(--creme);
+    position: relative;
+    overflow: hidden;
+  }
+  .tb .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .tb__img {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid var(--rule-d-faint);
+  }
+  .tb__img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .tb h2 {
+    color: var(--creme);
+    margin: 16px 0 16px;
+  }
+  .tb p {
+    color: var(--creme-dim);
+  }
+  .tb .mini {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+  }
+  .tb .mini span {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    color: var(--or-clair);
+    border: 1px solid rgba(231, 205, 146, 0.4);
+    padding: 6px 12px;
+  }
+  @media (min-width: 880px) {
+    .tb .grid {
+      grid-template-columns: 1.05fr 1fr;
+      gap: 60px;
+    }
+    .tb.rev .tb__img {
+      order: -1;
+    }
+  }
+</style>

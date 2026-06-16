@@ -1,0 +1,71 @@
+---
+/**
+ * Jeu d'icônes au trait (24×24, stroke currentColor) repris des maquettes.
+ * Décoratives par défaut (aria-hidden). Le contenu sémantique est porté par
+ * le texte adjacent.
+ */
+type IconName =
+  | "shield"
+  | "lock"
+  | "pin"
+  | "window"
+  | "dish"
+  | "tree"
+  | "waves"
+  | "check"
+  | "clock"
+  | "confirm"
+  | "bolt"
+  | "car"
+  | "doc"
+  | "camera"
+  | "sun"
+  | "mail"
+  | "phone";
+
+interface Props {
+  name: IconName;
+  size?: number;
+  stroke?: number;
+  class?: string;
+}
+
+const paths: Record<IconName, string> = {
+  shield: '<path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z"/>',
+  lock: '<path d="M5 11V8a7 7 0 0114 0v3"/><rect x="4" y="11" width="16" height="9" rx="1.5"/>',
+  pin: '<path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/>',
+  window: '<rect x="3" y="5" width="18" height="13" rx="1.5"/><path d="M3 9h18"/>',
+  dish: '<path d="M5 21V8M5 8c0-2 7-2 7 0M12 8c0-2 7-2 7 0v13"/><path d="M5 13h14"/>',
+  tree: '<path d="M12 3v18M4 8l8-5 8 5"/><path d="M4 8v8l8 5 8-5V8"/>',
+  waves: '<path d="M3 16c3-3 5-3 9 0s6 3 9 0"/><path d="M3 11c3-3 5-3 9 0s6 3 9 0"/>',
+  check: '<path d="M5 12l5 5L20 7"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  confirm: '<circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/>',
+  bolt: '<path d="M13 2L5 14h6l-1 8 9-12h-6l1-8z"/>',
+  car: '<path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13"/><path d="M3 13h18v5H3z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/>',
+  doc: '<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 13h6M9 16.5h6"/>',
+  camera:
+    '<rect x="3" y="7" width="18" height="13" rx="1.5"/><circle cx="12" cy="13.5" r="3.4"/><path d="M8.5 7l1.3-2.6h4.4L15.5 7"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2.1 2.1M16.9 16.9L19 19M5 19l2.1-2.1M16.9 7.1L19 5"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M4 7l8 6 8-6"/>',
+  phone:
+    '<path d="M6 3h3l1.5 5-2 1.5a12 12 0 005 5l1.5-2 5 1.5v3a2 2 0 01-2 2A16 16 0 014 6a2 2 0 012-3z"/>',
+};
+
+const { name, size = 22, stroke = 1.3, class: className } = Astro.props;
+const content = paths[name];
+---
+
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={stroke}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+  set:html={content}></svg>

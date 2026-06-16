@@ -1,0 +1,27 @@
+---
+interface Props {
+  eyebrow: string;
+  titleLead: string;
+  titleGold: string;
+  titleTail?: string;
+  text: string;
+}
+const { eyebrow, titleLead, titleGold, titleTail = "", text } = Astro.props;
+---
+
+<section class="sec offer-intro">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="ln"></span>{eyebrow}</p>
+      <h2 class="display-l">{titleLead}<em class="gold">{titleGold}</em>{titleTail}</h2>
+    </div>
+    <p class="lede intro-text">{text}</p>
+  </div>
+</section>
+
+<style>
+  .intro-text {
+    max-width: 60ch;
+    margin-top: 4px;
+  }
+</style>
