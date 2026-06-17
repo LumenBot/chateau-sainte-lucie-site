@@ -10,6 +10,7 @@ interface Props {
   text: string;
   image: string;
   rev?: boolean;
+  contain?: boolean;
   mini?: string[];
 }
 const {
@@ -20,6 +21,7 @@ const {
   text,
   image,
   rev = false,
+  contain = false,
   mini = [],
 } = Astro.props;
 const visual = resolveVisual(image);
@@ -42,7 +44,7 @@ const visual = resolveVisual(image);
           )
         }
       </div>
-      <div class="tb__img">
+      <div class={`tb__img${contain ? " tb__img--contain" : ""}`}>
         <Image
           src={visual.src}
           alt={visual.alt}
@@ -78,6 +80,14 @@ const visual = resolveVisual(image);
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  /* Variante « portrait » : montre l'image entière (ex. l'arbre centenaire) */
+  .tb__img--contain {
+    aspect-ratio: 4 / 5;
+  }
+  .tb__img--contain :global(img) {
+    object-fit: contain;
+    background: var(--noir-2);
   }
   .tb h2 {
     color: var(--creme);

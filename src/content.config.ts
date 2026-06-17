@@ -54,6 +54,7 @@ const highlightBlock = z.object({
   text: z.string(),
   image: z.string(),
   rev: z.boolean().default(false),
+  contain: z.boolean().default(false), // afficher l'image entière (object-fit: contain)
   mini: z.array(z.string()).default([]),
 });
 
@@ -97,6 +98,7 @@ const offres = defineCollection({
       lead: z.string(),
       image: z.string(),
       imageAlt: z.string().optional(),
+      imagePosition: z.string().optional(), // object-position (cadrage du hero)
       placeColor: z.enum(["or", "dim"]).default("or"),
       actions: z.array(action).default([]),
     }),

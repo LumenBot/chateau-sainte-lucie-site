@@ -67,7 +67,7 @@ import {
       {
         espaces.features.map((f) => (
           <div class={`feature${f.rev ? " rev" : ""}`}>
-            <div class="feature__img">
+            <div class={`feature__img${f.contain ? " feature__img--contain" : ""}`}>
               <Image
                 src={f.image.src}
                 alt={f.image.alt}
@@ -256,6 +256,14 @@ import {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  /* Variante « portrait » : montre l'image entière (ex. l'arbre centenaire) */
+  .feature__img--contain {
+    aspect-ratio: 4 / 5;
+  }
+  .feature__img--contain :global(img) {
+    object-fit: contain;
+    background: var(--parch-2);
   }
   .feature__img .cap {
     position: absolute;

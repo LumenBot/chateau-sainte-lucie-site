@@ -36,6 +36,8 @@ export interface Feature {
   text: string;
   mini: string[];
   rev?: boolean;
+  /** Affiche l'image entière (portrait) sans la recadrer. */
+  contain?: boolean;
 }
 
 export const espaces = {
@@ -56,6 +58,7 @@ export const espaces = {
       text: "Plusieurs hectares de parc boisé, des chênes et tilleuls plantés à la construction, des perspectives dégagées sur les prairies vosgiennes. Un écrin pour les pauses, les activités de plein air et les prises de vue.",
       mini: ["Plusieurs hectares", "Arbres centenaires", "Sous-bois"],
       rev: true,
+      contain: true,
     },
     {
       image: images.piscineSalon,
