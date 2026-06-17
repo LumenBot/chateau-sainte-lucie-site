@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Histoire — Maquettes desktop & mobile</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;background:#201f1c;color:#cfc7b6;font-family:'EB Garamond',Georgia,serif;
+    background-image:radial-gradient(rgba(255,255,255,.022) 1px,transparent 1px);background-size:22px 22px;}
+  a{color:inherit;}
+  .topnav{position:sticky;top:0;z-index:100;background:rgba(20,19,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,164,92,.2);display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px clamp(16px,4vw,48px);}
+  .topnav .logo{font-family:'Cormorant Garamond';font-size:20px;color:#f1ead9;margin-right:18px;}
+  .topnav a{font-family:'EB Garamond';font-size:13px;letter-spacing:.08em;color:#b3aa97;padding:7px 13px;border:1px solid transparent;}
+  .topnav a:hover{color:#f1ead9;border-color:rgba(200,164,92,.3);}
+  .page-head{padding:40px clamp(20px,5vw,60px) 4px;}
+  .page-head .eb{text-transform:uppercase;letter-spacing:.4em;font-size:11px;color:#c8a45c;font-weight:600;}
+  .page-head h1{font-family:'Cormorant Garamond';font-weight:500;font-size:clamp(30px,4vw,46px);color:#f1ead9;margin:12px 0 6px;}
+  .page-head p{margin:0;max-width:76ch;color:#9a917f;font-size:15px;}
+  .stagewrap{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start;justify-content:center;padding:34px clamp(16px,4vw,54px) 90px;}
+  .device{display:flex;flex-direction:column;gap:14px;}
+  .device .lab{display:flex;align-items:baseline;gap:12px;}
+  .device .lab .t{font-family:'Cormorant Garamond';font-size:23px;color:#f1ead9;}
+  .device .lab .d{text-transform:uppercase;letter-spacing:.28em;font-size:10px;color:#8a8170;}
+  .device .lab .hint{font-size:11.5px;color:#8a8170;font-style:italic;}
+  .desk{flex:1 1 700px;max-width:1040px;}
+  .browser{border:1px solid rgba(200,164,92,.28);border-radius:10px;overflow:hidden;background:#0c0c0b;box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  .browser .topbar{display:flex;align-items:center;gap:8px;padding:11px 14px;background:#17150f;border-bottom:1px solid rgba(200,164,92,.18);}
+  .browser .dot{width:11px;height:11px;border-radius:50%;}
+  .browser .url{margin-left:14px;flex:1;background:#0c0c0b;border:1px solid rgba(176,166,143,.18);border-radius:6px;padding:5px 12px;font-size:12px;color:#9a917f;}
+  .scaler{position:relative;overflow:hidden;}
+  .scaler iframe{border:0;display:block;background:#0c0c0b;}
+  .mob{flex:0 0 auto;}
+  .phone{width:410px;border:10px solid #1c1a15;border-radius:46px;overflow:hidden;background:#0c0c0b;box-shadow:0 30px 70px rgba(0,0,0,.5);position:relative;}
+  .phone .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:26px;background:#1c1a15;border-radius:0 0 16px 16px;z-index:5;}
+  .legend{padding:0 clamp(20px,5vw,60px) 80px;max-width:900px;}
+  .legend h2{font-family:'Cormorant Garamond';font-weight:500;color:#f1ead9;font-size:24px;margin:0 0 14px;}
+  .legend ul{margin:0;padding:0;list-style:none;display:grid;gap:10px;}
+  .legend li{padding-left:22px;position:relative;font-size:14.5px;color:#b3aa97;line-height:1.5;}
+  .legend li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border:1px solid #c8a45c;transform:rotate(45deg);}
+  .legend b{color:#e7cd92;font-weight:600;}
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <span class="logo">Sainte-Lucie — Histoire</span>
+  <a href="Maquettes_Site.html">↩ Tous les écrans</a>
+  <a href="Composants.html">Composants</a>
+  <a href="site/histoire.html" target="_blank">Ouvrir la page ↗</a>
+</div>
+
+<div class="page-head">
+  <div class="eb">Château de Sainte-Lucie · Page /histoire</div>
+  <h1>Histoire — desktop &amp; mobile</h1>
+  <p>Récit long-form en registre nuit : hero d'ouverture, neuf chapitres en alternance texte / grande image, une citation en exergue (Grande Guerre) et une frise chronologique verticale (De main en main). Barre de progression de lecture. Faites défiler à l'intérieur de chaque cadre.</p>
+</div>
+
+<div class="stagewrap">
+  <div class="device desk">
+    <div class="lab"><span class="t">Desktop</span><span class="d">1440 px</span><span class="hint">↕ défile dans le cadre</span></div>
+    <div class="browser">
+      <div class="topbar"><span class="dot" style="background:#e0654f"></span><span class="dot" style="background:#e4b53e"></span><span class="dot" style="background:#54a85a"></span><span class="url">chateau-saintelucie.fr/histoire</span></div>
+      <div class="scaler" data-w="1440" data-h="900" data-frame="desk"><iframe src="site/histoire.html"></iframe></div>
+    </div>
+  </div>
+  <div class="device mob">
+    <div class="lab"><span class="t">Mobile</span><span class="d">390 px</span><span class="hint">↕ défilable</span></div>
+    <div class="phone"><div class="notch"></div><div class="scaler" data-w="390" data-h="844" data-frame="mob"><iframe src="site/histoire.html"></iframe></div></div>
+  </div>
+</div>
+
+<div class="legend">
+  <h2>Notes de lecture</h2>
+  <ul>
+    <li><b>Hero :</b> façade de nuit plein écran, titre serif or clair, signature « lumière », barre de progression de lecture.</li>
+    <li><b>Neuf chapitres :</b> numérotés en chiffres romains, alternance texte / grande image (4:5), filets lumineux de séparation.</li>
+    <li><b>Citation en exergue :</b> section Grande Guerre — fond photo assombri, guillemet doré, citation Cormorant italique pleine largeur.</li>
+    <li><b>Énigme anglaise :</b> un blason réel (perron) face à un panneau typographique pour la devise de la cheminée — aucune photo factice.</li>
+    <li><b>Frise « De main en main » :</b> axe vertical lumineux, sept repères alternés (colonne unique en mobile), jalons clés en surbrillance.</li>
+    <li><b>Confidentialité :</b> aucun nom de propriétaire actuel, descendant anonyme, aucune adresse précise.</li>
+  </ul>
+</div>
+
+<script>
+  function fit(scaler){
+    var w=parseInt(scaler.dataset.w,10), h=parseInt(scaler.dataset.h,10);
+    var iframe=scaler.querySelector('iframe');
+    iframe.style.width=w+'px'; iframe.style.height=h+'px';
+    var avail=scaler.parentElement.clientWidth;
+    if(scaler.dataset.frame==='mob') avail=Math.min(avail,w);
+    var scale=Math.min(1, avail/w);
+    iframe.style.transformOrigin='top left';
+    iframe.style.transform='scale('+scale+')';
+    scaler.style.height=(h*scale)+'px';
+    scaler.style.width=(w*scale)+'px';
+  }
+  function fitAll(){document.querySelectorAll('.scaler').forEach(fit);}
+  window.addEventListener('load',fitAll);
+  window.addEventListener('resize',fitAll);
+  setTimeout(fitAll,400);
+</script>
+
+</body>
+</html>

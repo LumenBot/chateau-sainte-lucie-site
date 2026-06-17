@@ -62,10 +62,11 @@ export interface NavItem {
 /** Navigation principale (header + footer « Le lieu »). */
 export const mainNav: NavItem[] = [
   { label: "Le Château", href: "/le-chateau", idx: "01" },
-  { label: "Séminaires", href: "/seminaires", idx: "02" },
-  { label: "Événements privés", href: "/evenements-prives", idx: "03" },
-  { label: "Tournages", href: "/tournages", idx: "04" },
-  { label: "Galerie", href: "/galerie", idx: "05" },
+  { label: "Histoire", href: "/histoire", idx: "02" },
+  { label: "Séminaires", href: "/seminaires", idx: "03" },
+  { label: "Événements privés", href: "/evenements-prives", idx: "04" },
+  { label: "Tournages", href: "/tournages", idx: "05" },
+  { label: "Galerie", href: "/galerie", idx: "06" },
 ];
 
 /** Liens « bas de page ». */

@@ -109,4 +109,110 @@ const offres = defineCollection({
   }),
 });
 
-export const collections = { offres };
+/* =====================================================================
+   Collection « histoire » — page-récit long-form (registre nuit)
+   Une seule entrée ; structure pilotée par le frontmatter, rendue par
+   src/pages/histoire.astro (fidèle à maquettes/site/histoire.html).
+   ===================================================================== */
+
+const chapterSection = z.object({
+  type: z.literal("chapter"),
+  no: z.string(), // chiffre romain
+  ...titleParts,
+  lead: z.string().optional(),
+  paragraphs: z.array(z.string()),
+  image: z.string(),
+  imageAlt: z.string().optional(),
+  caption: z.string(),
+  rev: z.boolean().default(false),
+  contain: z.boolean().default(false), // object-fit: contain (pierre, crypte)
+  sepia: z.boolean().default(false),
+  objectPosition: z.string().optional(),
+  actions: z.array(action).default([]),
+});
+
+const duoFigure = z.object({
+  image: z.string(),
+  alt: z.string().optional(),
+  caption: z.string(),
+  sepia: z.boolean().default(false),
+  objectPosition: z.string().optional(),
+});
+
+const duoSection = z.object({
+  type: z.literal("duo"),
+  no: z.string(),
+  ...titleParts,
+  paragraphs: z.array(z.string()),
+  left: duoFigure,
+  right: duoFigure,
+  rev: z.boolean().default(false),
+});
+
+const exergueSection = z.object({
+  type: z.literal("exergue"),
+  image: z.string(),
+  quote: z.string(),
+  cite: z.string(),
+});
+
+const enigmeSection = z.object({
+  type: z.literal("enigme"),
+  no: z.string(),
+  ...titleParts,
+  intro: z.string(),
+  blason: z.object({
+    image: z.string(),
+    alt: z.string().optional(),
+    where: z.string(),
+    motto: z.string(),
+    trad: z.string(),
+  }),
+  motto: z.object({
+    where: z.string(),
+    motto: z.string(),
+    trad: z.string(),
+  }),
+});
+
+const timelineSection = z.object({
+  type: z.literal("timeline"),
+  no: z.string(),
+  ...titleParts,
+  lede: z.string(),
+  items: z.array(
+    z.object({
+      year: z.string(),
+      event: z.string(),
+      lit: z.boolean().default(false),
+    }),
+  ),
+});
+
+const histoireSection = z.discriminatedUnion("type", [
+  chapterSection,
+  duoSection,
+  exergueSection,
+  enigmeSection,
+  timelineSection,
+]);
+
+const histoire = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/histoire" }),
+  schema: z.object({
+    seo: z.object({ title: z.string(), description: z.string() }),
+    hero: z.object({
+      sur: z.string(),
+      titleLead: z.string(),
+      titleGold: z.string(),
+      titleTail: z.string().optional(),
+      accroche: z.string(),
+      scrollcue: z.string(),
+      image: z.string(),
+      imageAlt: z.string().optional(),
+    }),
+    sections: z.array(histoireSection).default([]),
+  }),
+});
+
+export const collections = { offres, histoire };

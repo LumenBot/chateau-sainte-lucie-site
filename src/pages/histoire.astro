@@ -1,0 +1,761 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { resolveVisual } from "../data/images";
+
+const [entry] = await getCollection("histoire");
+const { hero, sections, seo } = entry.data;
+
+/** Compose un style inline pour une image (contain / sépia / cadrage). */
+function imgStyle(o: { contain?: boolean; sepia?: boolean; objectPosition?: string }) {
+  const s = [
+    o.contain ? "object-fit:contain;background:#0e0d0a;" : "",
+    o.sepia ? "filter:sepia(.18) contrast(.96);" : "",
+    o.objectPosition ? `object-position:${o.objectPosition};` : "",
+  ].join("");
+  return s || undefined;
+}
+
+const heroVisual = resolveVisual(hero.image);
+
+// Données structurées : page « à propos » consacrée à l'histoire du lieu.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: seo.title,
+  description: seo.description,
+  url: new URL(Astro.url.pathname, Astro.site).href,
+  about: {
+    "@type": "LandmarksOrHistoricalBuildings",
+    name: "Château de Sainte-Lucie",
+    foundingDate: "1876",
+    location: { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Rambervillers", addressRegion: "Vosges", addressCountry: "FR" } },
+  },
+};
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  ogType="article"
+  stickyCta={false}
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+  <div class="hist">
+    <div class="readbar" id="readbar" aria-hidden="true"></div>
+
+    <!-- HERO -->
+    <header class="hhero">
+      <div class="hhero__bg">
+        <Image
+          src={heroVisual.src}
+          alt={hero.imageAlt ?? heroVisual.alt}
+          widths={[640, 1024, 1600, 2400]}
+          sizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hhero__in wrap">
+        <p class="sur">{hero.sur}</p>
+        <h1>{hero.titleLead}<em>{hero.titleGold}</em>{hero.titleTail}</h1>
+        <p class="accroche">{hero.accroche}</p>
+        <p class="scrollcue">{hero.scrollcue}</p>
+      </div>
+    </header>
+
+    {
+      sections.map((s, i) => {
+        const divider =
+          i > 0 && s.type !== "exergue" && sections[i - 1].type !== "exergue";
+        return (
+          <Fragment>
+            {divider && <hr class="divider" />}
+
+            {s.type === "chapter" && (
+              <section class={`chapter${s.rev ? " rev" : ""}`}>
+                <div class="wrap">
+                  <div class="grid">
+                    <div class="content">
+                      <p class="chapno">{s.no}</p>
+                      <p class="eyebrow on-dark"><span class="ln" />{s.eyebrow}</p>
+                      <h2 class="display-l chap-title">
+                        {s.titleLead}<em class="gold light">{s.titleGold}</em>{s.titleTail}
+                      </h2>
+                      {s.lead && <p class="lead">{s.lead}</p>}
+                      {s.paragraphs.map((p) => (
+                        <p>{p}</p>
+                      ))}
+                      {s.actions.length > 0 && (
+                        <div class="chap-actions">
+                          {s.actions.map((a) => (
+                            <Button href={a.href} variant={a.variant ?? "gold-light"}>
+                              {a.label}
+                            </Button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <div class="chapter__media">
+                      <Image
+                        src={resolveVisual(s.image).src}
+                        alt={s.imageAlt ?? resolveVisual(s.image).alt}
+                        widths={[500, 800, 1000]}
+                        sizes="(min-width:900px) 50vw, 100vw"
+                        loading="lazy"
+                        style={imgStyle(s)}
+                      />
+                      <span class="cap">{s.caption}</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {s.type === "duo" && (
+              <section class={`chapter${s.rev ? " rev" : ""}`}>
+                <div class="wrap">
+                  <div class="grid">
+                    <div class="content">
+                      <p class="chapno">{s.no}</p>
+                      <p class="eyebrow on-dark"><span class="ln" />{s.eyebrow}</p>
+                      <h2 class="display-l chap-title">
+                        {s.titleLead}<em class="gold light">{s.titleGold}</em>{s.titleTail}
+                      </h2>
+                      {s.paragraphs.map((p) => (
+                        <p>{p}</p>
+                      ))}
+                    </div>
+                    <div>
+                      <div class="duo">
+                        <figure>
+                          <Image
+                            src={resolveVisual(s.left.image).src}
+                            alt={s.left.alt ?? resolveVisual(s.left.image).alt}
+                            widths={[400, 700]}
+                            sizes="(min-width:900px) 25vw, (min-width:560px) 33vw, 50vw"
+                            loading="lazy"
+                            style={imgStyle(s.left)}
+                          />
+                          <figcaption>{s.left.caption}</figcaption>
+                        </figure>
+                        <figure>
+                          <Image
+                            src={resolveVisual(s.right.image).src}
+                            alt={s.right.alt ?? resolveVisual(s.right.image).alt}
+                            widths={[400, 700]}
+                            sizes="(min-width:900px) 25vw, (min-width:560px) 33vw, 50vw"
+                            loading="lazy"
+                            style={imgStyle(s.right)}
+                          />
+                          <figcaption>{s.right.caption}</figcaption>
+                        </figure>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {s.type === "exergue" && (
+              <section class="exergue">
+                <div class="exergue__bg">
+                  <Image
+                    src={resolveVisual(s.image).src}
+                    alt=""
+                    widths={[768, 1280, 1920]}
+                    sizes="100vw"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="in wrap">
+                  <div class="mark" aria-hidden="true">“</div>
+                  <blockquote>{s.quote}</blockquote>
+                  <cite>{s.cite}</cite>
+                </div>
+              </section>
+            )}
+
+            {s.type === "enigme" && (
+              <section class="chapter enigme">
+                <div class="wrap">
+                  <div class="sec-head enigme-head">
+                    <p class="chapno">{s.no}</p>
+                    <p class="eyebrow on-dark"><span class="ln" />{s.eyebrow}</p>
+                    <h2 class="display-l enigme-title">
+                      {s.titleLead}<em class="gold light">{s.titleGold}</em>{s.titleTail}
+                    </h2>
+                    <p class="enigme-intro">{s.intro}</p>
+                  </div>
+                  <div class="blasons">
+                    <div class="blason">
+                      <div class="blason__img">
+                        <Image
+                          src={resolveVisual(s.blason.image).src}
+                          alt={s.blason.alt ?? resolveVisual(s.blason.image).alt}
+                          widths={[400, 700]}
+                          sizes="(min-width:680px) 50vw, 100vw"
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="blason__body">
+                        <p class="where">{s.blason.where}</p>
+                        <p class="motto">{s.blason.motto}</p>
+                        <p class="trad">{s.blason.trad}</p>
+                      </div>
+                    </div>
+                    <div class="blason blason--motto">
+                      <div class="blason__body">
+                        <span class="crest" aria-hidden="true">⚔</span>
+                        <p class="where">{s.motto.where}</p>
+                        <p class="motto">{s.motto.motto}</p>
+                        <p class="trad">{s.motto.trad}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {s.type === "timeline" && (
+              <section class="timeline-sec">
+                <div class="wrap">
+                  <div class="sec-head">
+                    <p class="chapno">{s.no}</p>
+                    <p class="eyebrow on-dark"><span class="ln" />{s.eyebrow}</p>
+                    <h2 class="display-l tl-title">
+                      {s.titleLead}<em class="gold light">{s.titleGold}</em>{s.titleTail}
+                    </h2>
+                    <p class="lede">{s.lede}</p>
+                  </div>
+                  <ol class="tlwrap">
+                    {s.items.map((it, j) => (
+                      <li class={`tline ${j % 2 === 0 ? "l" : "r"}${it.lit ? " lit" : ""}`}>
+                        <p class="yr">{it.year}</p>
+                        <p class="ev">{it.event}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </section>
+            )}
+          </Fragment>
+        );
+      })
+    }
+  </div>
+</BaseLayout>
+
+<script>
+  // Barre de progression de lecture (amélioration progressive, sans dépendance).
+  const rb = document.getElementById("readbar");
+  if (rb) {
+    const upd = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight || 1;
+      const sc = h.scrollTop || document.body.scrollTop;
+      rb.style.width = (sc / max) * 100 + "%";
+    };
+    document.addEventListener("scroll", upd, { passive: true });
+    window.addEventListener("resize", upd, { passive: true });
+    upd();
+  }
+</script>
+
+<style>
+  /* La page Histoire vit en registre NUIT du début à la fin */
+  .hist {
+    background: var(--noir);
+    color: var(--creme);
+  }
+
+  /* progress bar de lecture */
+  .readbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: linear-gradient(90deg, var(--or), var(--or-clair));
+    z-index: 70;
+    transition: width 0.1s linear;
+  }
+
+  /* ============ HERO ============ */
+  .hhero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: var(--creme);
+    overflow: hidden;
+    background: var(--noir);
+  }
+  .hhero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hhero__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hhero__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(66% 50% at 50% 32%, rgba(231, 205, 146, 0.16), transparent 64%),
+      linear-gradient(
+        180deg,
+        rgba(8, 7, 5, 0.55) 0%,
+        rgba(8, 7, 5, 0.2) 32%,
+        rgba(8, 7, 5, 0.55) 66%,
+        rgba(8, 7, 5, 0.95) 100%
+      );
+  }
+  .hhero__in {
+    position: relative;
+    z-index: 2;
+    padding-bottom: clamp(56px, 8vw, 104px);
+    padding-top: 128px;
+    max-width: 900px;
+  }
+  .hhero .sur {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.46em;
+    font-size: 12px;
+    color: var(--or);
+    margin: 0 0 26px;
+  }
+  .hhero h1 {
+    color: var(--creme);
+    margin: 0 0 28px;
+    font-size: clamp(40px, 6.6vw, 82px);
+    line-height: 1;
+  }
+  .hhero h1 em {
+    font-style: italic;
+    color: var(--or-clair);
+  }
+  .hhero .accroche {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.1vw, 21px);
+    line-height: 1.6;
+    color: var(--creme-dim);
+    max-width: 60ch;
+    margin: 0;
+  }
+  .hhero .scrollcue {
+    margin-top: 38px;
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 10.5px;
+    color: var(--creme-faint);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hhero .scrollcue::before {
+    content: "";
+    width: 34px;
+    height: 1px;
+    background: var(--or);
+    opacity: 0.6;
+  }
+
+  /* ============ CHAPITRE ============ */
+  .chapter {
+    padding: clamp(64px, 9vw, 120px) 0;
+    position: relative;
+  }
+  .chapter .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    align-items: center;
+  }
+  .chapter__media {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--rule-d-faint);
+  }
+  .chapter__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .chapter__media .cap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(8, 7, 5, 0.74);
+    color: var(--creme-dim);
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    padding: 8px 13px;
+    backdrop-filter: blur(4px);
+  }
+  .chapter .chapno {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--or);
+    line-height: 1;
+    margin: 0 0 14px;
+  }
+  .chapter h2 {
+    color: var(--creme);
+    margin: 0 0 22px;
+  }
+  .chap-title {
+    margin-top: 18px;
+  }
+  .chapter p {
+    color: var(--creme-dim);
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.72;
+  }
+  .chapter .lead {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(21px, 2.4vw, 27px);
+    line-height: 1.4;
+    color: var(--creme);
+    margin: 0 0 22px;
+  }
+  .chap-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+  }
+  @media (min-width: 900px) {
+    .chapter .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+    .chapter.rev .chapter__media {
+      order: -1;
+    }
+    .chapter__media {
+      aspect-ratio: 4/5;
+      height: 100%;
+    }
+  }
+
+  /* divider lumineux */
+  .divider {
+    height: 1px;
+    border: 0;
+    margin: 0 auto;
+    max-width: var(--maxw);
+    background: linear-gradient(90deg, transparent, var(--rule-d), transparent);
+  }
+
+  /* ============ CITATION EN EXERGUE ============ */
+  .exergue {
+    position: relative;
+    padding: clamp(70px, 10vw, 128px) 0;
+    overflow: hidden;
+    background: var(--noir);
+  }
+  .exergue__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .exergue__bg :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.34;
+  }
+  .exergue__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      60% 70% at 50% 40%,
+      rgba(8, 7, 5, 0.55),
+      rgba(8, 7, 5, 0.86) 78%
+    );
+  }
+  .exergue .in {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .exergue .mark {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 90px;
+    line-height: 0.6;
+    color: var(--or);
+    opacity: 0.5;
+  }
+  .exergue blockquote {
+    margin: 0;
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(26px, 4vw, 46px);
+    line-height: 1.26;
+    color: var(--creme);
+    letter-spacing: 0.005em;
+  }
+  .exergue cite {
+    display: block;
+    margin-top: 30px;
+    font-family: var(--serif);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.26em;
+    font-size: 12px;
+    color: var(--or-clair);
+  }
+
+  /* ============ DUO D'IMAGES ============ */
+  .duo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .duo figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--rule-d-faint);
+  }
+  .duo figure :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .duo figcaption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(8, 7, 5, 0.74);
+    color: var(--creme-dim);
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    padding: 8px 13px;
+    backdrop-filter: blur(4px);
+  }
+  @media (min-width: 560px) {
+    .duo {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ============ BLASONS (énigme) ============ */
+  .enigme-head {
+    max-width: 760px;
+  }
+  .enigme-title {
+    margin: 18px 0 22px;
+  }
+  .enigme-intro {
+    color: var(--creme-dim);
+    font-size: clamp(16px, 1.5vw, 18px);
+    line-height: 1.72;
+  }
+  .blasons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 46px;
+  }
+  .blason {
+    position: relative;
+    border: 1px solid var(--rule-d-faint);
+    background: var(--noir-2);
+    overflow: hidden;
+  }
+  .blason__img {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .blason__img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .blason__body {
+    padding: 24px 26px 28px;
+  }
+  .blason .where {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    font-size: 10.5px;
+    color: var(--or);
+    margin: 0 0 10px;
+  }
+  .blason .motto {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--creme);
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  .blason .trad {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--creme-faint);
+    margin: 0;
+  }
+  .blason--motto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(
+        70% 80% at 50% 30%,
+        rgba(200, 164, 92, 0.07),
+        transparent 70%
+      ),
+      var(--noir-2);
+    min-height: 240px;
+  }
+  .blason--motto .blason__body {
+    padding: 40px 30px;
+  }
+  .blason--motto .crest {
+    display: block;
+    font-size: 30px;
+    color: var(--or);
+    opacity: 0.7;
+    margin-bottom: 18px;
+  }
+  .blason--motto .trad {
+    max-width: 34ch;
+    margin: 0 auto;
+  }
+  @media (min-width: 680px) {
+    .blasons {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* ============ FRISE CHRONOLOGIQUE ============ */
+  .timeline-sec {
+    padding: clamp(64px, 9vw, 116px) 0;
+    background: var(--noir-2);
+  }
+  .timeline-sec h2 {
+    color: var(--creme);
+  }
+  .tl-title {
+    margin: 18px 0 14px;
+  }
+  .tlwrap {
+    position: relative;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tlwrap::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      var(--rule-d) 8%,
+      var(--rule-d) 92%,
+      transparent
+    );
+  }
+  .tline {
+    position: relative;
+    padding: 0 0 38px 42px;
+  }
+  .tline:last-child {
+    padding-bottom: 0;
+  }
+  .tline::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--noir-2);
+    border: 1px solid var(--or);
+    box-shadow: 0 0 0 4px rgba(200, 164, 92, 0.1);
+  }
+  .tline.lit::before {
+    background: var(--or-clair);
+    box-shadow: 0 0 14px rgba(231, 205, 146, 0.6), 0 0 0 4px rgba(200, 164, 92, 0.14);
+  }
+  .tline .yr {
+    font-family: var(--display);
+    font-size: 28px;
+    color: var(--or-clair);
+    line-height: 1;
+    margin: 0 0 7px;
+  }
+  .tline .ev {
+    font-family: var(--serif);
+    font-size: 16.5px;
+    line-height: 1.55;
+    color: var(--creme-dim);
+    margin: 0;
+    max-width: 62ch;
+  }
+  @media (min-width: 760px) {
+    .tlwrap::before {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .tline {
+      width: 50%;
+      padding: 0 0 56px 0;
+    }
+    .tline.l {
+      left: 0;
+      padding-right: 46px;
+      text-align: right;
+    }
+    .tline.r {
+      left: 50%;
+      padding-left: 46px;
+    }
+    .tline.l::before {
+      left: auto;
+      right: -7.5px;
+    }
+    .tline.r::before {
+      left: -7.5px;
+    }
+    .tline .ev {
+      margin-left: auto;
+    }
+    .tline.r .ev {
+      margin-left: 0;
+    }
+  }
+</style>

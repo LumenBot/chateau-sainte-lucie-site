@@ -62,19 +62,23 @@ src/
 ├── assets/images/     # visuels (optimisés via astro:assets)
 ├── components/        # Header, Footer, Button, Icon, CtaFinal, offers/*
 ├── content/offres/    # Séminaires, Événements privés, Tournages (MD + frontmatter)
-├── content.config.ts  # schéma Zod de la collection « offres »
+├── content/histoire/  # page-récit /histoire (MD + frontmatter structuré)
+├── content.config.ts  # schémas Zod des collections « offres » et « histoire »
 ├── data/              # contenu centralisé (site, home, chateau, contact, gallery, images)
 ├── layouts/           # BaseLayout, LegalLayout
-├── pages/             # index, le-chateau, [offre], galerie, contact, merci,
-│                      #   mentions-legales, confidentialite, 404, robots.txt
+├── pages/             # index, le-chateau, histoire, [offre], galerie, contact,
+│                      #   merci, mentions-legales, confidentialite, 404, robots.txt
+├── utils/url.ts       # withBase() — liens internes adaptés au chemin de base
 └── styles/global.css  # système de design (tokens nuit/jour) + Tailwind
 ```
 
-### Pages livrées (MVP)
-Accueil · Le Château · Séminaires · Événements privés · Tournages · Galerie
-(lightbox) · Contact (+ /merci) · Mentions légales · Confidentialité · 404.
+### Pages livrées
+Accueil · Le Château · **Histoire** (récit long-form : barre de progression,
+citation en exergue, frise chronologique) · Séminaires · Événements privés ·
+Tournages · Galerie (lightbox) · Contact (+ /merci) · Mentions légales ·
+Confidentialité · 404.
 SEO : métas par page, OpenGraph/Twitter, `sitemap.xml`, `robots.txt`,
-JSON-LD `EventVenue`/`LocalBusiness`.
+JSON-LD `EventVenue`/`LocalBusiness` (+ `AboutPage` sur /histoire).
 
 ### Déploiement — chemin de base configurable
 Le site supporte deux cibles via deux variables d'environnement de build :
@@ -106,12 +110,12 @@ notification configuré dans Netlify (Forms → Notifications), **hors dépôt**
 `maquettes/` et `livrables/` ne sont pas déployés.
 
 ### ⚠️ À compléter avant mise en ligne (points ouverts / blocages)
-- **Photographies** : ✅ vraies photos intégrées. Volontairement **non
-  utilisées** car hors ton « vitrine » : `02_crypte*` (caveau familial) et
-  `03_pierre_tombale*` (pierre tombale d'enfant) — à réserver à une éventuelle
-  page « Histoire » au traitement sensible. Le mapping image→emplacement est
-  centralisé dans `src/data/images.ts` (clés = contenu réel, les noms de
-  fichiers d'origine étant parfois trompeurs).
+- **Photographies** : ✅ vraies photos intégrées. Les visuels plus intimes
+  (caveau familial, pierre tombale de l'enfant) sont désormais utilisés **avec
+  retenue sur la page `/histoire`** (registre sensible), et écartés des pages
+  « vitrine ». Le mapping image→emplacement est centralisé dans
+  `src/data/images.ts` (clés = contenu réel, les noms de fichiers d'origine
+  étant parfois trompeurs).
 - **Coordonnées** : e-mail, téléphone, domaine (placeholders dans `src/data/site.ts`).
 - **Mentions légales & confidentialité** : gabarits à compléter (champs `[…]`)
   et à faire valider juridiquement.

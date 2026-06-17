@@ -5,10 +5,10 @@
  * (ex. « 13_facade_jour_piscine » est en fait l'arbre centenaire). Les clés et
  * les `alt` ci-dessous reflètent le CONTENU réel, vérifié visuellement.
  *
- * Non utilisés volontairement (ton funéraire, hors périmètre vitrine) :
- *   02_crypte*, 03_pierre_tombale* (caveau familial, pierre tombale d'enfant),
- *   06_maison_gardien_crop (doublon de la chapelle), cp_01_verriere (très basse
- *   définition), 04_blason_perron (version recadrée préférée).
+ * Non utilisés volontairement (hors périmètre vitrine, réservés à /histoire ou
+ * écartés) : 06_chapelle vs 06_maison_gardien (deux cadrages de la même
+ * dépendance), cp_01_verriere (très basse définition), 04_blason_perron
+ * (version recadrée préférée).
  */
 import type { ImageMetadata } from "astro";
 
@@ -28,6 +28,9 @@ import daims from "../assets/images/14_daims.jpeg";
 import sittelle from "../assets/images/15_sittelle.jpeg";
 import ecureuil from "../assets/images/19_ecureuil.jpeg";
 import chapelle from "../assets/images/06_chapelle_parc.jpeg";
+import maisonGardien from "../assets/images/06_maison_gardien_crop.jpeg";
+import pierreTombale from "../assets/images/03_pierre_tombale_crop.jpeg";
+import crypte from "../assets/images/02_crypte_crop.jpeg";
 import histoireSepia from "../assets/images/cp_03_facade_sepia.jpg";
 import histoireGloriette from "../assets/images/cp_02_facade_arbres.jpg";
 import histoirePerron from "../assets/images/cp_04_perron_gloriette.jpg";
@@ -101,6 +104,18 @@ export const images = {
   chapelle: {
     src: chapelle,
     alt: "Une dépendance d'époque du parc, éclairée à la nuit tombée",
+  },
+  maisonGardien: {
+    src: maisonGardien,
+    alt: "Une dépendance du parc illuminée à la nuit tombée",
+  },
+  pierreTombale: {
+    src: pierreTombale,
+    alt: "La pierre tombale de l'enfant, sculptée de feuilles de lierre, conservée au château",
+  },
+  crypte: {
+    src: crypte,
+    alt: "La crypte familiale « Élie Velin et de Bollemont », au cimetière de Rambervillers",
   },
   histoireSepia: {
     src: histoireSepia,

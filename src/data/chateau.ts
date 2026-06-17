@@ -23,7 +23,10 @@ export const intro = {
     "De la Belle Époque à la Grande Guerre — où il servit de lieu de repos aux combattants — jusqu'à ses gardiens d'aujourd'hui, Sainte-Lucie a traversé le temps sans perdre son âme. Son nom est un hommage à la lumière : celui de l'épouse Lucy, de la sainte de Syracuse, et d'une grand-tante de la famille.",
     "C'est cette histoire que l'on accueille, autant que les murs : un lieu habité, vivant, transmis — et désormais ouvert, quelques jours par mois, à ceux qui cherchent un cadre à sa hauteur.",
   ],
-  link: { label: "Parcourir la galerie", href: "/galerie" },
+  links: [
+    { label: "Lire l'histoire complète", href: "/histoire" },
+    { label: "Parcourir la galerie", href: "/galerie" },
+  ],
 };
 
 export interface Feature {
