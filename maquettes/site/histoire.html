@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'histoire du Château de Sainte-Lucie — 1876, Rambervillers (Vosges)</title>
+<meta name="description" content="Né en 1876 d'un geste d'amour, le Château de Sainte-Lucie a traversé la Belle Époque, la Grande Guerre et cinq générations — jusqu'à ses mystères héraldiques. Découvrez son histoire.">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* La page Histoire vit en registre NUIT du début à la fin */
+  body{background:var(--noir);color:var(--creme);}
+
+  /* progress bar de lecture */
+  .readbar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--or),var(--or-clair));z-index:70;transition:width .1s linear;}
+
+  /* ============ HERO ============ */
+  .hhero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;
+    color:var(--creme);overflow:hidden;background:var(--noir);}
+  .hhero__bg{position:absolute;inset:0;z-index:0;}
+  .hhero__bg img{width:100%;height:100%;object-fit:cover;}
+  .hhero__bg::after{content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(66% 50% at 50% 32%,rgba(231,205,146,.16),transparent 64%),
+      linear-gradient(180deg,rgba(8,7,5,.55) 0%,rgba(8,7,5,.2) 32%,rgba(8,7,5,.55) 66%,rgba(8,7,5,.95) 100%);}
+  .hhero__in{position:relative;z-index:2;padding-bottom:clamp(56px,8vw,104px);padding-top:128px;max-width:900px;}
+  .hhero .sur{font-family:var(--serif);text-transform:uppercase;letter-spacing:.46em;font-size:12px;color:var(--or);margin:0 0 26px;}
+  .hhero h1{color:var(--creme);margin:0 0 28px;font-size:clamp(40px,6.6vw,82px);line-height:1.0;}
+  .hhero h1 em{font-style:italic;color:var(--or-clair);}
+  .hhero .accroche{font-family:var(--serif);font-size:clamp(17px,2.1vw,21px);line-height:1.6;color:var(--creme-dim);max-width:60ch;margin:0;}
+  .hhero .scrollcue{margin-top:38px;font-family:var(--serif);text-transform:uppercase;letter-spacing:.3em;font-size:10.5px;color:var(--creme-faint);display:flex;align-items:center;gap:12px;}
+  .hhero .scrollcue::before{content:"";width:34px;height:1px;background:var(--or);opacity:.6;}
+
+  /* ============ CHAPITRE (texte / image en alternance) ============ */
+  .chapter{padding:clamp(64px,9vw,120px) 0;position:relative;}
+  .chapter .grid{display:grid;grid-template-columns:1fr;gap:36px;align-items:center;}
+  .chapter__media{position:relative;overflow:hidden;border:1px solid var(--rule-d-faint);}
+  .chapter__media img{width:100%;height:100%;object-fit:cover;display:block;}
+  .chapter__media .cap{position:absolute;left:0;bottom:0;background:rgba(8,7,5,.74);color:var(--creme-dim);
+    font-family:var(--serif);text-transform:uppercase;letter-spacing:.22em;font-size:10px;padding:8px 13px;backdrop-filter:blur(4px);}
+  .chapter .chapno{font-family:var(--display);font-style:italic;font-size:22px;color:var(--or);line-height:1;margin:0 0 14px;}
+  .chapter h2{color:var(--creme);margin:0 0 22px;}
+  .chapter p{color:var(--creme-dim);font-size:clamp(16px,1.5vw,18px);line-height:1.72;}
+  .chapter p + p{margin-top:0;}
+  .chapter .lead{font-family:var(--display);font-style:italic;font-size:clamp(21px,2.4vw,27px);line-height:1.4;color:var(--creme);margin:0 0 22px;}
+  @media(min-width:900px){
+    .chapter .grid{grid-template-columns:1fr 1fr;gap:64px;}
+    .chapter.rev .chapter__media{order:-1;}
+    .chapter__media{aspect-ratio:4/5;height:100%;}
+  }
+
+  /* divider lumineux */
+  .divider{height:1px;border:0;margin:0 auto;max-width:var(--maxw);
+    background:linear-gradient(90deg,transparent,var(--rule-d),transparent);}
+
+  /* ============ CITATION EN EXERGUE ============ */
+  .exergue{position:relative;padding:clamp(70px,10vw,128px) 0;overflow:hidden;background:var(--noir);}
+  .exergue__bg{position:absolute;inset:0;z-index:0;}
+  .exergue__bg img{width:100%;height:100%;object-fit:cover;opacity:.34;}
+  .exergue__bg::after{content:"";position:absolute;inset:0;
+    background:radial-gradient(60% 70% at 50% 40%,rgba(8,7,5,.55),rgba(8,7,5,.86) 78%);}
+  .exergue .in{position:relative;z-index:2;max-width:1000px;margin:0 auto;text-align:center;}
+  .exergue .mark{font-family:var(--display);font-style:italic;font-size:90px;line-height:.6;color:var(--or);opacity:.5;}
+  .exergue blockquote{margin:0;font-family:var(--display);font-style:italic;font-weight:500;
+    font-size:clamp(26px,4vw,46px);line-height:1.26;color:var(--creme);letter-spacing:.005em;}
+  .exergue cite{display:block;margin-top:30px;font-family:var(--serif);font-style:normal;text-transform:uppercase;
+    letter-spacing:.26em;font-size:12px;color:var(--or-clair);}
+
+  /* ============ DUO D'IMAGES (carte postale + vue actuelle) ============ */
+  .duo{display:grid;grid-template-columns:1fr;gap:14px;}
+  .duo figure{margin:0;position:relative;overflow:hidden;border:1px solid var(--rule-d-faint);}
+  .duo figure img{width:100%;height:100%;object-fit:cover;display:block;}
+  .duo figcaption{position:absolute;left:0;bottom:0;background:rgba(8,7,5,.74);color:var(--creme-dim);
+    font-family:var(--serif);text-transform:uppercase;letter-spacing:.22em;font-size:10px;padding:8px 13px;backdrop-filter:blur(4px);}
+  @media(min-width:560px){.duo{grid-template-columns:1fr 1fr;}}
+
+  /* ============ BLASONS (énigme) ============ */
+  .blasons{display:grid;grid-template-columns:1fr;gap:24px;margin-top:46px;}
+  .blason{position:relative;border:1px solid var(--rule-d-faint);background:var(--noir-2);overflow:hidden;}
+  .blason__img{position:relative;aspect-ratio:4/3;overflow:hidden;}
+  .blason__img img{width:100%;height:100%;object-fit:cover;}
+  .blason__body{padding:24px 26px 28px;}
+  .blason .where{font-family:var(--serif);text-transform:uppercase;letter-spacing:.24em;font-size:10.5px;color:var(--or);margin:0 0 10px;}
+  .blason .motto{font-family:var(--display);font-style:italic;font-size:24px;color:var(--creme);margin:0 0 6px;line-height:1.2;}
+  .blason .trad{font-family:var(--serif);font-size:14px;color:var(--creme-faint);margin:0;}
+  .blason--motto{display:flex;align-items:center;justify-content:center;text-align:center;
+    background:radial-gradient(70% 80% at 50% 30%,rgba(200,164,92,.07),transparent 70%),var(--noir-2);min-height:240px;}
+  .blason--motto .blason__body{padding:40px 30px;}
+  .blason--motto .crest{display:block;font-size:30px;color:var(--or);opacity:.7;margin-bottom:18px;}
+  .blason--motto .trad{max-width:34ch;margin:0 auto;}
+  @media(min-width:680px){.blasons{grid-template-columns:1fr 1fr;}}
+
+  /* note italique en registre nuit */
+  .note-dark{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--creme-faint);}
+
+  /* CTA final */
+  .cta-final{background:var(--noir-2);color:var(--creme);text-align:center;padding:clamp(70px,10vw,120px) 0;border-top:1px solid var(--rule-d-faint);}
+  .cta-final h2{color:var(--creme);margin:0 auto 18px;max-width:18ch;}
+  .cta-final p{color:var(--creme-dim);max-width:52ch;margin:0 auto 32px;}
+  .cta-final .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+  /* ============ FRISE CHRONOLOGIQUE ============ */
+  .timeline-sec{padding:clamp(64px,9vw,116px) 0;background:var(--noir-2);}
+  .tlwrap{position:relative;margin-top:48px;}
+  .tlwrap::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:1px;
+    background:linear-gradient(180deg,transparent,var(--rule-d) 8%,var(--rule-d) 92%,transparent);}
+  .tline{position:relative;padding:0 0 38px 42px;}
+  .tline:last-child{padding-bottom:0;}
+  .tline::before{content:"";position:absolute;left:0;top:6px;width:15px;height:15px;border-radius:50%;
+    background:var(--noir-2);border:1px solid var(--or);box-shadow:0 0 0 4px rgba(200,164,92,.1);}
+  .tline.lit::before{background:var(--or-clair);box-shadow:0 0 14px rgba(231,205,146,.6),0 0 0 4px rgba(200,164,92,.14);}
+  .tline .yr{font-family:var(--display);font-size:28px;color:var(--or-clair);line-height:1;margin:0 0 7px;}
+  .tline .ev{font-family:var(--serif);font-size:16.5px;line-height:1.55;color:var(--creme-dim);margin:0;max-width:62ch;}
+  @media(min-width:760px){
+    .tlwrap::before{left:50%;transform:translateX(-50%);}
+    .tline{width:50%;padding:0 0 56px 0;}
+    .tline.l{left:0;padding-right:46px;text-align:right;}
+    .tline.r{left:50%;padding-left:46px;}
+    .tline.l::before{left:auto;right:-7.5px;}
+    .tline.r::before{left:-7.5px;}
+    .tline .ev{margin-left:auto;}
+    .tline.r .ev{margin-left:0;}
+  }
+
+  /* annotation cartouche (validation only) */
+  .stub{background:var(--noir-2);color:var(--creme-faint);text-align:center;padding:60px 20px;border-top:1px solid var(--rule-d-faint);}
+  .stub p{font-family:var(--serif);font-style:italic;font-size:16px;margin:0;}
+</style>
+</head>
+<body>
+<div class="readbar" id="readbar"></div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="bar">
+    <a class="brand" href="home.html"><span class="bn">Sainte-Lucie</span><span class="bs">Château · Vosges</span></a>
+    <nav class="nav-desktop">
+      <a class="navlink" href="le-chateau.html">Le Château</a>
+      <a class="navlink" href="histoire.html" style="opacity:1;">Histoire</a>
+      <a class="navlink" href="seminaires.html">Séminaires</a>
+      <a class="navlink" href="#">Tournages</a>
+      <a class="navlink" href="home.html#galerie">Galerie</a>
+      <a class="btn btn--ghost-light btn--sm" href="contact.html">Contact</a>
+    </nav>
+    <label class="nav-toggle" for="navchk" aria-label="Ouvrir le menu"><span></span><span></span><span></span></label>
+  </div>
+</header>
+<input type="checkbox" id="navchk" class="nav-check">
+<div class="nav-mobile">
+  <div class="mtop"><span class="brand"><span class="bn">Sainte-Lucie</span><span class="bs">Château · Vosges</span></span><label class="mclose" for="navchk">×</label></div>
+  <a href="le-chateau.html">Le Château <span class="idx">01</span></a>
+  <a href="histoire.html">Histoire <span class="idx">02</span></a>
+  <a href="seminaires.html">Séminaires <span class="idx">03</span></a>
+  <a href="#">Tournages <span class="idx">04</span></a>
+  <a href="home.html#galerie">Galerie <span class="idx">05</span></a>
+  <div class="mcta"><a class="btn btn--gold-light" href="contact.html">Nous contacter</a></div>
+</div>
+
+<!-- HERO -->
+<header class="hhero">
+  <div class="hhero__bg"><img src="../img/01_facade_nuit.jpeg" alt="La façade du Château de Sainte-Lucie illuminée sous un ciel de nuit"></div>
+  <div class="hhero__in wrap">
+    <p class="sur">Depuis 1876</p>
+    <h1>Une histoire de lumière, d'amour <em>et de transmission.</em></h1>
+    <p class="accroche">Derrière les murs de grès rose se cache un siècle et demi d'histoire — une demande en mariage, un deuil, une guerre, une énigme jamais résolue. Voici celle du Château de Sainte-Lucie.</p>
+    <p class="scrollcue">Le récit commence</p>
+  </div>
+</header>
+
+<!-- 1 · LE NOM -->
+<section class="chapter" id="le-nom">
+  <div class="wrap">
+    <div class="grid">
+      <div class="content">
+        <p class="chapno">I</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>Le nom</p>
+        <h2 class="display-l" style="margin-top:18px;">Un triple hommage <em class="gold light">à la lumière.</em></h2>
+        <p class="lead">« Lucia » — celle qui porte la lumière. Le château la porte dans son nom depuis le premier jour.</p>
+        <p>En 1876, l'avocat messin Charles Alfred Chonet de Bollemont fait construire un château pour celle qu'il a épousée deux ans plus tôt : Marie Lucy Velin, jeune femme de Rambervillers. Il le baptise <em style="color:var(--creme)">Sainte-Lucie</em> — un hommage à triple sens.</p>
+        <p>À son épouse, Lucy, dont le prénom signifie « lumière ». À sainte Lucie de Syracuse, patronne de la lumière et de ceux qui en sont privés. Et à une grande-tante chère, Félicité Lucie, disparue peu avant. Trois femmes, une même clarté.</p>
+      </div>
+      <div class="chapter__media">
+        <img src="../img/05_perron_illumine.jpeg" alt="Le perron du château illuminé à la tombée de la nuit">
+        <span class="cap">Le perron illuminé · la lumière au seuil</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 2 · LES FONDATEURS -->
+<section class="chapter rev" id="fondateurs">
+  <div class="wrap">
+    <div class="grid">
+      <div class="chapter__media">
+        <img src="../img/cp_04_perron_gloriette.jpg" alt="Carte postale ancienne du château à la Belle Époque" style="filter:sepia(.16) contrast(.98);">
+        <span class="cap">Le château à la Belle Époque · carte postale</span>
+      </div>
+      <div class="content">
+        <p class="chapno">II</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>Les fondateurs · 1874–1876</p>
+        <h2 class="display-l" style="margin-top:18px;">Un présent gravé <em class="gold light">dans la pierre.</em></h2>
+        <p>Charles Alfred appartient à une vieille famille lorraine — son aïeul, Alexandre, fut général sous Napoléon. Marie Lucy, elle, est orpheline de père et de mère dès l'adolescence.</p>
+        <p>Leur mariage, célébré à Rambervillers en juin 1874, scelle une histoire d'amour ; deux ans plus tard, le château s'élève au nord-ouest de la ville, comme un présent gravé dans la pierre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 3 · LE CHÂTEAU -->
+<section class="chapter" id="le-chateau">
+  <div class="wrap">
+    <div class="grid">
+      <div class="content">
+        <p class="chapno">III</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>Le château · 1876</p>
+        <h2 class="display-l" style="margin-top:18px;">Le grès rose <em class="gold light">et l'ardoise.</em></h2>
+        <p>Trois étages de grès vosgien rose, un haut toit d'ardoise, deux tours carrées, un escalier monumental et un balcon de pierre : Sainte-Lucie est un bel exemple du style éclectique de la III<sup>e</sup> République.</p>
+        <p>À l'intérieur, des salons aux boiseries de chêne sculpté, une cheminée de marbre, des plafonds peints, un poêle de faïence de Lunéville. Autour, un parc planté de chênes et de tilleuls déjà centenaires aujourd'hui — un écrin resté presque intact depuis cent cinquante ans.</p>
+      </div>
+      <div>
+        <div class="duo">
+          <figure><img src="../img/cp_03_facade_sepia.jpg" alt="Carte postale du château vers 1909" style="filter:sepia(.2) contrast(.95);"><figcaption>Vers 1909</figcaption></figure>
+          <figure><img src="../img/10_piscine_jour_chateau.jpeg" alt="La façade du château aujourd'hui, de jour" style="object-position:center 60%;"><figcaption>Aujourd'hui</figcaption></figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 4 · L'ENFANT DU CHÂTEAU -->
+<section class="chapter rev" id="l-enfant">
+  <div class="wrap">
+    <div class="grid">
+      <div class="chapter__media">
+        <img src="../img/03_pierre_tombale_crop.jpeg" alt="La pierre tombale de l'enfant, sculptée de feuilles de lierre, conservée au château" style="object-fit:contain;background:#0e0d0a;">
+        <span class="cap">La pierre de l'enfant · conservée au château</span>
+      </div>
+      <div class="content">
+        <p class="chapno">IV</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>L'enfant du château · 1876–1877</p>
+        <h2 class="display-l" style="margin-top:18px;">La lumière a connu <em class="gold light">l'ombre.</em></h2>
+        <p>Le fils unique du couple, Maurice Charles Jean, né en 1876, s'éteint à dix-sept mois, en août 1877. Sa petite pierre tombale, sculptée de feuilles de lierre, est aujourd'hui conservée au château.</p>
+        <p>Avec lui s'éteint la lignée directe des Chonet de Bollemont : il n'y aura pas d'autre enfant.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 5 · LA TRANSMISSION -->
+<section class="chapter" id="transmission">
+  <div class="wrap">
+    <div class="grid">
+      <div class="content">
+        <p class="chapno">V</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>La transmission · 1904–1962</p>
+        <h2 class="display-l" style="margin-top:18px;">Fidèle à une <em class="gold light">même famille.</em></h2>
+        <p>Marie Lucy puis Charles Alfred disparaissent à quelques mois d'intervalle, en 1904 et 1905. Sans héritier direct, le château passe au frère de Marie Lucy, puis à sa nièce Lucie, qui épouse André Boucher, industriel papetier décoré de la Légion d'honneur.</p>
+        <p>La demeure traverse ainsi le siècle, fidèle à une même famille. Aujourd'hui encore, un de ses descendants vit à Rambervillers.</p>
+      </div>
+      <div class="chapter__media">
+        <img src="../img/02_crypte_crop.jpeg" alt="La crypte familiale Élie Velin et de Bollemont, au cimetière de Rambervillers" style="object-fit:contain;background:#0e0d0a;">
+        <span class="cap">Crypte « Familles Élie Velin &amp; de Bollemont »</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 6 · LA GRANDE GUERRE -->
+<section class="chapter rev" id="grande-guerre">
+  <div class="wrap">
+    <div class="grid">
+      <div class="chapter__media">
+        <img src="../img/06_maison_gardien_crop.jpeg" alt="Une dépendance du parc illuminée à la nuit tombée">
+        <span class="cap">Une dépendance du parc, à la nuit tombée</span>
+      </div>
+      <div class="content">
+        <p class="chapno">VI</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>La Grande Guerre · 1914</p>
+        <h2 class="display-l" style="margin-top:18px;">Un refuge <em class="gold light">entre deux feux.</em></h2>
+        <p>À l'été 1914, Rambervillers se trouve au cœur de la bataille de la trouée de Charmes. Entre deux montées en première ligne, les soldats du 13<sup>e</sup> Corps d'armée trouvent au château un lieu de repos ; certains creusent des tranchées dans le parc.</p>
+        <p>Le journal de guerre du soldat Louis Chevalier en garde la trace — et son petit-fils, venu sur les lieux en 2023, a reconnu le château décrit par son grand-père. Une génération plus tard, la Seconde Guerre mondiale marquera de nouveau Rambervillers, qui recevra la Croix de Guerre 1939-1945.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- exergue Grande Guerre -->
+<section class="exergue">
+  <div class="exergue__bg"><img src="../img/18_perron_noel.jpeg" alt=""></div>
+  <div class="in wrap">
+    <div class="mark">“</div>
+    <blockquote>Les troupes trouvent l'occasion de se faire des popottes réparatrices au château Sainte-Lucie.</blockquote>
+    <cite>Journal de Louis Chevalier · 92<sup>e</sup> R.I. · 1914</cite>
+  </div>
+</section>
+
+<!-- 7 · L'ÉNIGME ANGLAISE -->
+<section class="chapter" id="enigme">
+  <div class="wrap">
+    <div class="sec-head" style="max-width:760px;">
+      <p class="chapno">VII</p>
+      <p class="eyebrow on-dark"><span class="ln"></span>L'énigme anglaise</p>
+      <h2 class="display-l" style="margin:18px 0 22px;">Le mystère <em class="gold light">jamais résolu.</em></h2>
+      <p style="color:var(--creme-dim);font-size:clamp(16px,1.5vw,18px);line-height:1.72;">Sur la cheminée principale, un blason sculpté porte la devise de l'ordre de la Jarretière et les armes royales d'Angleterre. Sur le perron, un second blason et une autre devise. À l'intérieur, des éléments de salle de bains de fabrication anglaise. Tout indique qu'une famille britannique de haute distinction a séjourné ici, sans doute dans l'entre-deux-guerres — son identité reste, à ce jour, à découvrir.</p>
+    </div>
+    <div class="blasons">
+      <div class="blason">
+        <div class="blason__img"><img src="../img/04_blason_perron_crop.jpeg" alt="Blason sculpté du perron, portant la devise Vis Unita Fit Fortior"></div>
+        <div class="blason__body">
+          <p class="where">Le perron</p>
+          <p class="motto">« Vis Unita Fit Fortior »</p>
+          <p class="trad">La force unie devient plus forte.</p>
+        </div>
+      </div>
+      <div class="blason blason--motto">
+        <div class="blason__body">
+          <span class="crest">&#9876;</span>
+          <p class="where">La cheminée principale</p>
+          <p class="motto">« Honi soit qui mal y pense »</p>
+          <p class="trad">La devise de l'ordre de la Jarretière, accompagnée des armes royales d'Angleterre.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 8 · DE MAIN EN MAIN — FRISE (présentée pour validation) -->
+<section class="timeline-sec" id="de-main-en-main">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="chapno" style="font-family:var(--display);font-style:italic;font-size:22px;color:var(--or);margin:0 0 14px;">VIII</p>
+      <p class="eyebrow on-dark"><span class="ln"></span>De main en main</p>
+      <h2 class="display-l" style="color:var(--creme);margin:18px 0 14px;">Cent cinquante ans, <em class="gold light">sept repères.</em></h2>
+      <p class="lede">Après le couple Chonet de Bollemont et Velin, le château connaît plusieurs propriétaires — jusqu'à retrouver, en 2022, des mains décidées à le faire revivre.</p>
+    </div>
+
+    <div class="tlwrap">
+      <div class="tline l lit"><p class="yr">1876</p><p class="ev">Construction du château, à Rambervillers.</p></div>
+      <div class="tline r"><p class="yr">1877</p><p class="ev">Décès de l'enfant, Maurice Charles Jean, à dix-sept mois.</p></div>
+      <div class="tline l"><p class="yr">1904–1905</p><p class="ev">Mort des fondateurs ; transmission aux familles Velin puis Boucher.</p></div>
+      <div class="tline r"><p class="yr">1914</p><p class="ev">Le château, lieu de repos des soldats de la trouée de Charmes.</p></div>
+      <div class="tline l"><p class="yr">Années 1920–1930</p><p class="ev">Présence présumée d'une famille britannique — l'énigme héraldique.</p></div>
+      <div class="tline r"><p class="yr">1980–2000</p><p class="ev">Une famille de scieurs locaux veille sur la demeure.</p></div>
+      <div class="tline l lit"><p class="yr">Depuis 2022</p><p class="ev">Les propriétaires actuels font revivre le lieu.</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 9 · UNE DEMEURE VIVANTE -->
+<section class="chapter" id="demeure-vivante">
+  <div class="wrap">
+    <div class="grid">
+      <div class="content">
+        <p class="chapno">IX</p>
+        <p class="eyebrow on-dark"><span class="ln"></span>Aujourd'hui</p>
+        <h2 class="display-l" style="margin-top:18px;">Une demeure <em class="gold light">toujours vivante.</em></h2>
+        <p>Cent cinquante ans après sa première pierre, le Château de Sainte-Lucie est toujours habité, toujours vivant. Ses chênes ont grandi, son parc abrite daims et écureuils, sa piscine naturelle reflète encore la lumière de l'été.</p>
+        <p>Quelques jours par mois, il s'ouvre à ceux qui veulent y travailler, y célébrer ou y filmer — pour que son histoire continue de s'écrire.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;">
+          <a class="btn btn--gold-light" href="le-chateau.html">Découvrir le lieu</a>
+          <a class="btn btn--ghost-light" href="contact.html">Nous contacter</a>
+        </div>
+      </div>
+      <div class="chapter__media">
+        <img src="../img/07_piscine_nuit.jpeg" alt="La piscine naturelle du château reflétant la lumière, au crépuscule">
+        <span class="cap">La piscine naturelle · le reflet de la lumière</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="bn">Château de Sainte-Lucie</div>
+        <div class="bs">Rambervillers · Vosges · Lorraine</div>
+        <p>Un lieu de réception à taille humaine, aux portes des Vosges — pour des séminaires, des moments de famille et des tournages d'exception.</p>
+      </div>
+      <div class="foot-col"><h4>Le lieu</h4>
+        <a href="le-chateau.html">Le Château</a><a href="histoire.html">Histoire</a><a href="seminaires.html">Séminaires</a>
+        <a href="#">Événements privés</a><a href="#">Tournages</a><a href="home.html#galerie">Galerie</a></div>
+      <div class="foot-col"><h4>Contact</h4>
+        <a href="contact.html">Demander une proposition</a>
+        <a href="/cdn-cgi/l/email-protection#3c5f5352485d5f487c5f545d48595d49114f5d5552485950495f5559125a4e"><span class="__cf_email__" data-cfemail="6c0f0302180d0f182c0f040d18090d19411f0d0502180900190f0509420a1e">[email&#160;protected]</span></a>
+        <a href="tel:+33000000000">+33 (0)X XX XX XX XX</a>
+        <p class="muted">Localisation exacte communiquée aux clients confirmés.</p></div>
+      <div class="foot-col"><h4>La plaquette</h4>
+        <p>Découvrez le lieu et ses usages en quelques pages.</p>
+        <a class="btn btn--ghost-light btn--sm" href="#" style="margin-top:6px;">Télécharger le PDF</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Château de Sainte-Lucie — Tous droits réservés.</span>
+      <span class="legal"><a href="#">Mentions légales</a><a href="#">Confidentialité</a><a href="#">Cookies</a></span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // barre de progression de lecture
+  var rb=document.getElementById('readbar');
+  function upd(){var h=document.documentElement;var sc=h.scrollTop||document.body.scrollTop;
+    var max=(h.scrollHeight-h.clientHeight)||1;rb.style.width=(sc/max*100)+'%';}
+  document.addEventListener('scroll',upd,{passive:true});upd();
+</script>
+</body>
+</html>

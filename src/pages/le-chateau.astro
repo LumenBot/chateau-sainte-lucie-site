@@ -44,7 +44,13 @@ import {
         </div>
         <div>
           {intro.paragraphs.map((p) => <p>{p}</p>)}
-          <a class="link-or" href={withBase(intro.link.href)}>{intro.link.label} <span class="arr">→</span></a>
+          <div class="intro-links">
+            {
+              intro.links.map((l) => (
+                <a class="link-or" href={withBase(l.href)}>{l.label} <span class="arr">→</span></a>
+              ))
+            }
+          </div>
         </div>
       </div>
     </div>
@@ -211,6 +217,13 @@ import {
   }
   .intro .lead-col p.intro-quote {
     margin-bottom: 0;
+  }
+  .intro-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    align-items: center;
+    margin-top: 8px;
   }
   @media (min-width: 880px) {
     .intro .grid {
