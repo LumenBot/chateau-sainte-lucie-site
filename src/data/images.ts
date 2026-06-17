@@ -34,6 +34,10 @@ import crypte from "../assets/images/02_crypte_crop.jpeg";
 import histoireSepia from "../assets/images/cp_03_facade_sepia.jpg";
 import histoireGloriette from "../assets/images/cp_02_facade_arbres.jpg";
 import histoirePerron from "../assets/images/cp_04_perron_gloriette.jpg";
+import peintureBelleEpoque from "../assets/images/20_fete_belle_epoque.jpg";
+import hallEntree from "../assets/images/21_hall_entree.jpg";
+import salleAManger from "../assets/images/22_salle_a_manger.jpg";
+import salonCheminee from "../assets/images/23_salon_cheminee.jpg";
 
 export interface Visual {
   src: ImageMetadata;
@@ -128,6 +132,22 @@ export const images = {
   histoirePerron: {
     src: histoirePerron,
     alt: "Carte postale ancienne — le perron du château et la gloriette du parc",
+  },
+  peintureBelleEpoque: {
+    src: peintureBelleEpoque,
+    alt: "« Fête au château à la Belle Époque » — tableau de P. Baulay représentant une réception en costumes d'époque devant le château",
+  },
+  hallEntree: {
+    src: hallEntree,
+    alt: "Le hall d'entrée du château : poutres, sol en mosaïque et boiseries d'époque",
+  },
+  salleAManger: {
+    src: salleAManger,
+    alt: "Une salle de réception aux boiseries d'origine, table dressée et cheminée de marbre",
+  },
+  salonCheminee: {
+    src: salonCheminee,
+    alt: "Un salon de caractère : cheminée de marbre, parquet et boiseries, aménagé pour une journée de travail",
   },
 } satisfies Record<string, Visual>;
 

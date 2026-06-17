@@ -43,7 +43,7 @@ export const espaces = {
   title: ["Deux grandes salles, ", "un parc entier."],
   features: [
     {
-      image: images.blason,
+      image: images.salleAManger,
       cap: "Patrimoine",
       title: "Les salles de réception",
       text: "Boiseries de chêne sculpté, cheminées de marbre, blasons d'époque et parquets en point de Hongrie : deux grandes salles de caractère, baignées de lumière, pour les réunions, les repas et les réceptions.",

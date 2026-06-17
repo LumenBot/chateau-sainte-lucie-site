@@ -45,7 +45,7 @@ sections:
     titleLead: "Un présent gravé "
     titleGold: "dans la pierre."
     rev: true
-    sepia: true
+    contain: true
     paragraphs:
       - >-
         Charles Alfred appartient à une vieille famille lorraine — son aïeul,
@@ -55,9 +55,9 @@ sections:
         Leur mariage, célébré à Rambervillers en juin 1874, scelle une histoire
         d'amour ; deux ans plus tard, le château s'élève au nord-ouest de la
         ville, comme un présent gravé dans la pierre.
-    image: histoirePerron
-    imageAlt: "Carte postale ancienne du château à la Belle Époque"
-    caption: "Le château à la Belle Époque · carte postale"
+    image: peintureBelleEpoque
+    imageAlt: "« Fête au château à la Belle Époque », tableau de P. Baulay"
+    caption: "Fête au château à la Belle Époque · P. Baulay"
 
   - type: duo
     no: "III"
