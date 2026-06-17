@@ -18,6 +18,7 @@ hero:
     publicité, la mode et l'automobile.
   image: hallEntree
   imageAlt: Le hall d'entrée d'époque du château, décor de tournage authentique
+  imagePosition: "center 42%"
   placeColor: or
   actions:
     - { label: Étudier un tournage, href: /contact, variant: gold-light }

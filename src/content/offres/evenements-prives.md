@@ -20,6 +20,7 @@ hero:
     beauté d'un château, l'intimité d'une maison.
   image: perronNoel
   imageAlt: Le perron du château illuminé un soir de fête de famille
+  imagePosition: "center 40%"
   placeColor: or
   actions:
     - { label: Demander une visite, href: /contact, variant: gold-light }

@@ -11,6 +11,7 @@ interface Props {
   lead: string;
   image: string;
   imageAlt?: string;
+  imagePosition?: string;
   placeColor?: "or" | "dim";
   actions?: { label: string; href: string; variant?: Variant }[];
 }
@@ -21,6 +22,7 @@ const {
   lead,
   image,
   imageAlt,
+  imagePosition = "center",
   placeColor = "or",
   actions = [],
 } = Astro.props;
@@ -38,6 +40,7 @@ const placeStyle =
       sizes="100vw"
       loading="eager"
       fetchpriority="high"
+      style={`object-position:${imagePosition};`}
     />
   </div>
   <div class="phero__in wrap">
@@ -70,7 +73,8 @@ const placeStyle =
 <style>
   .phero {
     position: relative;
-    min-height: 64vh;
+    /* hero plus haut : révèle davantage de la photo (moins de recadrage) */
+    min-height: clamp(560px, 86vh, 900px);
     display: flex;
     align-items: flex-end;
     color: var(--creme);

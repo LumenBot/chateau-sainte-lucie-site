@@ -18,6 +18,7 @@ hero:
     d'Épinal et de Nancy.
   image: salonCheminee
   imageAlt: Un salon de caractère aménagé pour une journée de travail au château
+  imagePosition: "center 38%"
   placeColor: or
   actions:
     - { label: Demander une proposition, href: /contact, variant: gold-light }
@@ -83,6 +84,7 @@ blocks:
     titleLead: "L'esprit d'équipe, "
     titleGold: au cœur du sous-bois.
     rev: true
+    contain: true
     image: cheneCentenaire
     text: >-
       Pour aller plus loin, la journée s'augmente d'un team-building dans le parc :
