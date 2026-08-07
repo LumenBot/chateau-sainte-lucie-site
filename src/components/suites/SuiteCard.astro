@@ -1,0 +1,107 @@
+---
+import { Image } from "astro:assets";
+import { resolveVisual } from "../../data/images";
+import { withBase } from "../../utils/url";
+
+interface Props {
+  href: string;
+  image: string;
+  imagePosition?: string;
+  name: string;
+  title: string;
+  tagline: string;
+  ambiance?: string[];
+}
+
+const { href, image, imagePosition, name, title, tagline, ambiance = [] } =
+  Astro.props;
+const visual = resolveVisual(image);
+---
+
+<article class="suite-card">
+  <a class="suite-card__media" href={withBase(href)} tabindex="-1" aria-hidden="true">
+    <Image
+      src={visual.src}
+      alt={visual.alt}
+      widths={[500, 800, 1100]}
+      sizes="(min-width:820px) 50vw, 100vw"
+      loading="lazy"
+      style={imagePosition ? `object-position:${imagePosition};` : undefined}
+    />
+  </a>
+  <div class="suite-card__body">
+    <p class="eyebrow"><span class="ln"></span>{name}</p>
+    <h3 class="display-m">{title}</h3>
+    <p class="suite-card__tag">{tagline}</p>
+    {
+      ambiance.length > 0 && (
+        <ul class="suite-card__chips">
+          {ambiance.map((a) => (
+            <li>{a}</li>
+          ))}
+        </ul>
+      )
+    }
+    <a class="link-or" href={withBase(href)}>Découvrir la suite <span class="arr">→</span></a>
+  </div>
+</article>
+
+<style>
+  .suite-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--parch-card);
+    border: 1px solid var(--rule-l-faint);
+    overflow: hidden;
+  }
+  .suite-card__media {
+    display: block;
+    aspect-ratio: 3/2;
+    overflow: hidden;
+  }
+  .suite-card__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .suite-card:hover .suite-card__media :global(img) {
+    transform: scale(1.04);
+  }
+  .suite-card__body {
+    padding: 30px 30px 34px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+  }
+  .suite-card__body h3 {
+    margin: 4px 0 0;
+    color: var(--encre);
+  }
+  .suite-card__tag {
+    color: var(--encre-soft);
+    font-size: 16px;
+    margin: 0;
+  }
+  .suite-card__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .suite-card__chips li {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    color: var(--or-prof);
+    border: 1px solid var(--rule-l);
+    padding: 5px 11px;
+  }
+  .suite-card__body .link-or {
+    margin-top: auto;
+  }
+</style>
