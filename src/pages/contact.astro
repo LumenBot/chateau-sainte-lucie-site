@@ -73,20 +73,20 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
             }
 
             <fieldset class="field seg-field">
-              <legend>{form.typeLabel} <span class="req">*</span></legend>
+              <legend>{form.objetLabel} <span class="req">*</span></legend>
               <div class="seg">
                 {
-                  form.types.map((t) => (
+                  form.objets.map((t) => (
                     <Fragment>
                       <input
                         type="radio"
-                        id={`type-${t.id}`}
-                        name="type"
+                        id={`objet-${t.id}`}
+                        name="objet"
                         value={t.id}
                         checked={t.checked}
                         required
                       />
-                      <label for={`type-${t.id}`}>{t.label}</label>
+                      <label for={`objet-${t.id}`}>{t.label}</label>
                     </Fragment>
                   ))
                 }
@@ -95,31 +95,24 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
 
             <div class="row2">
               <div class="field">
-                <label for="nom">{form.fields.nom.label} <span class="req">*</span></label>
-                <input id="nom" name="nom" type="text" placeholder={form.fields.nom.placeholder} required />
+                <label for="prenom">{form.fields.prenom.label} <span class="req">*</span></label>
+                <input id="prenom" name="prenom" type="text" placeholder={form.fields.prenom.placeholder} autocomplete="given-name" required />
               </div>
               <div class="field">
-                <label for="email">{form.fields.email.label} <span class="req">*</span></label>
-                <input id="email" name="email" type="email" placeholder={form.fields.email.placeholder} required />
+                <label for="nom">{form.fields.nom.label} <span class="req">*</span></label>
+                <input id="nom" name="nom" type="text" placeholder={form.fields.nom.placeholder} autocomplete="family-name" required />
               </div>
             </div>
 
             <div class="row2">
               <div class="field">
-                <label for="tel">{form.fields.tel.label}</label>
-                <input id="tel" name="telephone" type="tel" placeholder={form.fields.tel.placeholder} />
+                <label for="email">{form.fields.email.label} <span class="req">*</span></label>
+                <input id="email" name="email" type="email" placeholder={form.fields.email.placeholder} autocomplete="email" required />
               </div>
               <div class="field">
-                <label for="dates">{form.fields.dates.label}</label>
-                <input id="dates" name="dates" type="text" placeholder={form.fields.dates.placeholder} />
+                <label for="tel">{form.fields.tel.label}</label>
+                <input id="tel" name="telephone" type="tel" placeholder={form.fields.tel.placeholder} autocomplete="tel" />
               </div>
-            </div>
-
-            <div class="field">
-              <label for="nb">
-                {form.fields.nombre.label} <span class="hint">{form.fields.nombre.hint}</span>
-              </label>
-              <input id="nb" name="nombre" type="text" placeholder={form.fields.nombre.placeholder} />
             </div>
 
             <div class="field">
@@ -146,19 +139,11 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
           <div class="aside-block">
             <h2>{aside.write.title}</h2>
             <a class="big" href={`mailto:${aside.write.email}`}>{aside.write.email}</a>
-            <a class="big" href={aside.write.phoneHref}>{aside.write.phoneDisplay}</a>
-            <p class="muted hours">{aside.write.hours}</p>
           </div>
 
           <div class="aside-block">
-            <h2>{aside.projects.title}</h2>
-            <div class="cta-list">
-              {
-                aside.projects.items.map((it) => (
-                  <a href={withBase(it.href)}>{it.label} <span class="arr">→</span></a>
-                ))
-              }
-            </div>
+            <h2>{aside.opening.title}</h2>
+            <p>{aside.opening.text}</p>
           </div>
 
           <div class="aside-block">

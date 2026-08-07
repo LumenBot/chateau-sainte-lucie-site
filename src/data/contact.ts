@@ -1,79 +1,69 @@
 /**
- * Contenu de la page Contact (libellés de formulaire, coordonnées, aside).
+ * Contenu de la page Contact de pré-ouverture (formulaire d'information).
+ * Aucun téléphone du domaine affiché (non confirmé). Champ téléphone visiteur
+ * facultatif.
  */
-import { site, ctaLabels } from "./site";
+import { site } from "./site";
 
 export const contactSeo = {
-  title: "Contact — Château de Sainte-Lucie",
+  title: "Contact | Les Nuits au Château",
   description:
-    "Demande de proposition, de visite ou d'étude de tournage au Château de Sainte-Lucie. Formulaire qualifiant, réponse personnalisée.",
+    "Les Suites de Sainte-Lucie ouvrent en avril 2027. Laissez-nous vos coordonnées pour être informé de l'ouverture des réservations ou nous poser une question.",
 };
 
 export const contactHeader = {
-  place: "Contact",
-  titleLead: "Parlons de votre ",
-  titleGold: "projet.",
-  text: "Dites-nous qui vous êtes et ce que vous cherchez. Nous revenons vers vous rapidement, avec une proposition à la hauteur du lieu.",
+  place: "Contact · Pré-ouverture",
+  titleLead: "Soyez parmi les premiers ",
+  titleGold: "à en franchir le seuil.",
+  text: "Les Suites de Sainte-Lucie ouvriront en avril 2027. Laissez-nous vos coordonnées pour être informé de l'ouverture des réservations, ou pour nous poser une question.",
 };
 
 export const form = {
-  typeLabel: "Type de demande",
-  types: [
-    { id: "seminaire", label: "Séminaire", checked: true },
-    { id: "evenement", label: "Événement privé" },
-    { id: "tournage", label: "Tournage" },
-    { id: "autre", label: "Autre" },
+  objetLabel: "Objet",
+  objets: [
+    { id: "ouverture", label: "Ouverture", checked: true },
+    { id: "sejour", label: "Séjour", checked: false },
+    { id: "autre", label: "Autre", checked: false },
   ],
   fields: {
+    prenom: { label: "Prénom", placeholder: "Votre prénom" },
     nom: { label: "Nom", placeholder: "Votre nom" },
     email: { label: "E-mail", placeholder: "vous@exemple.fr" },
-    tel: { label: "Téléphone", placeholder: "Optionnel" },
-    dates: { label: "Date(s) envisagée(s)", placeholder: "ex. mars 2026, ou flexible" },
-    nombre: {
-      label: "Nombre de personnes",
-      hint: "— ou type de production",
-      placeholder: "ex. 40 personnes · ou tournage pub automobile",
-    },
+    tel: { label: "Téléphone", placeholder: "Facultatif" },
     message: {
-      label: "Votre projet",
-      placeholder: "Décrivez votre projet, vos besoins, vos envies…",
+      label: "Votre message",
+      placeholder: "Une question, une intention de séjour, une date envisagée…",
     },
   },
-  consentBefore: "J'accepte que mes informations soient utilisées pour traiter ma demande, conformément à la ",
+  consentBefore:
+    "J'accepte que mes informations soient utilisées pour répondre à ma demande, conformément à la ",
   consentLink: { label: "politique de confidentialité", href: "/confidentialite" },
   consentAfter: ".",
-  submit: "Envoyer ma demande",
-  note: "Réponse sous 48 h ouvrées.",
+  submit: "Envoyer",
+  note: "Nous reviendrons vers vous, et vous préviendrons dès l'ouverture des réservations.",
 };
 
 export const aside = {
   write: {
     title: "Nous écrire",
     email: site.contact.email,
-    phoneDisplay: site.contact.phoneDisplay,
-    phoneHref: site.contact.phoneHref,
-    hours: site.contact.hours,
-  },
-  projects: {
-    title: "Selon votre projet",
-    items: [
-      { label: ctaLabels.proposition, href: "/seminaires" },
-      { label: ctaLabels.visite, href: "/evenements-prives" },
-      { label: ctaLabels.tournage, href: "/tournages" },
-    ],
   },
   where: {
     title: "Où nous sommes",
-    text: "Aux portes de Rambervillers, au cœur des Vosges — à ≈35 min d'Épinal et ≈50 min de Nancy.",
+    text: "Aux portes de Rambervillers, au cœur des Vosges.",
     note: "Demeure habitée : l'adresse exacte est communiquée aux clients confirmés.",
+  },
+  opening: {
+    title: "Ouverture",
+    text: "Les deux suites ouvriront en avril 2027 ; les réservations, au printemps 2027.",
   },
 };
 
 export const merci = {
-  title: "Merci — Château de Sainte-Lucie",
-  description: "Votre demande a bien été envoyée au Château de Sainte-Lucie.",
-  eyebrow: "Demande envoyée",
-  titleLead: "Merci, votre demande ",
-  titleGold: "nous est parvenue.",
-  text: "Nous vous répondrons sous peu, avec une proposition adaptée à votre projet. Le château se visite sur rendez-vous.",
+  title: "Merci | Les Nuits au Château",
+  description: "Votre message a bien été envoyé aux Nuits au Château.",
+  eyebrow: "Message envoyé",
+  titleLead: "Merci, votre message ",
+  titleGold: "nous est parvenu.",
+  text: "Nous reviendrons vers vous, et vous préviendrons dès l'ouverture des réservations des Suites de Sainte-Lucie.",
 };
