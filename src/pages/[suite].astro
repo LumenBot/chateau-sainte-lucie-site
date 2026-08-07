@@ -1,0 +1,162 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+import Icon from "../components/Icon.astro";
+import { withBase } from "../utils/url";
+
+export async function getStaticPaths() {
+  const suites = await getCollection("suites");
+  return suites.map((entry) => ({ params: { suite: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { hero } = data;
+---
+
+<BaseLayout title={data.seo.title} description={data.seo.description} ogType="article">
+  <PageHero
+    place={hero.eyebrow}
+    title={[hero.title]}
+    lead={hero.lead}
+    image={hero.image}
+    imageAlt={hero.imageAlt}
+    imagePosition={hero.imagePosition}
+    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+  />
+
+  <section class="sec suite-body">
+    <div class="wrap">
+      <div class="suite-grid">
+        <div class="suite-lead">
+          <p class="eyebrow"><span class="ln"></span>La suite</p>
+          <p class="lede">{data.intro}</p>
+          <p class="suite-palette">{data.palette}</p>
+          <ul class="suite-ambiance">
+            {data.ambiance.map((a) => <li>{a}</li>)}
+          </ul>
+        </div>
+        <div class="suite-compo">
+          <h2 class="display-m">La composition</h2>
+          <ul class="compo-list">
+            {
+              data.composition.map((c) => (
+                <li>
+                  <span class="ic"><Icon name="check" size={18} /></span>
+                  <span>{c}</span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="note suite-confirm">{data.aConfirmer}</p>
+        </div>
+      </div>
+
+      <p class="note suite-photo-note">
+        Photographies d'ambiance du domaine. Les visuels définitifs des suites
+        seront réalisés après les travaux, en mars 2027.
+      </p>
+
+      <p class="suite-nav">
+        <a class="link-or" href={withBase("/les-suites")}>
+          <span class="arr">←</span> Revenir aux deux suites
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <CtaFinal
+    eyebrow="Pré-ouverture · avril 2027"
+    titleLead="Réservez votre "
+    titleGold="première nuit."
+    text="Les réservations ouvriront au printemps 2027. Soyez informé dès l'ouverture."
+    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+  />
+</BaseLayout>
+
+<style>
+  .suite-body {
+    background: var(--parch);
+  }
+  .suite-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+  @media (min-width: 880px) {
+    .suite-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+    }
+  }
+  .suite-lead .lede {
+    margin-top: 22px;
+  }
+  .suite-palette {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(19px, 2.2vw, 24px);
+    color: var(--or-prof);
+    margin: 6px 0 18px;
+  }
+  .suite-ambiance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .suite-ambiance li {
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 10.5px;
+    color: var(--or-prof);
+    border: 1px solid var(--rule-l);
+    padding: 5px 11px;
+  }
+  .suite-compo h2 {
+    margin: 0 0 22px;
+  }
+  .compo-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .compo-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 17px;
+    color: var(--encre-soft);
+    line-height: 1.5;
+  }
+  .compo-list .ic {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--rule-l);
+    display: grid;
+    place-items: center;
+    color: var(--or-prof);
+  }
+  .suite-confirm {
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule-l-faint);
+  }
+  .suite-photo-note {
+    text-align: center;
+    margin-top: 48px;
+  }
+  .suite-nav {
+    margin-top: 22px;
+    text-align: center;
+  }
+</style>
