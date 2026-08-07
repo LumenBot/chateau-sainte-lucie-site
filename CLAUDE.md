@@ -1,62 +1,52 @@
-# CLAUDE.md — Manuel de l'agent (site vitrine Château de Sainte-Lucie)
+# CLAUDE.md — Refonte « Les Nuits au Château »
 
-Tu es l'agent d'implémentation de ce dépôt. Mission : construire le **site vitrine** du Château de Sainte-Lucie, conforme à `docs/cahier-des-charges.md` et aux **maquettes validées** (Claude Design).
+Tu reprends le site Astro existant du Château de Sainte-Lucie. Le site actuellement publié présente une ancienne offre de séminaires, événements privés et tournages. Cette orientation est abandonnée pour cette refonte.
 
-## Stack imposée
-- **Astro** (site statique, zéro JS par défaut) + **TypeScript** (strict)
-- **Tailwind CSS** (tokens ci-dessous)
-- Contenu éditorial via **content collections** Astro (Markdown / MDX)
-- **Pas de base de données.** Formulaire via service statique (voir §Formulaire)
-- Déploiement cible : **Netlify** (alternative : Cloudflare Pages)
+## Mission
 
-## Démarrage
-0. **Git & premiers commits, c'est ton rôle.** Le dépôt distant est créé sur GitHub et tu y as accès. Vérifie l'état (`git status`) ; n'écrase pas un historique existant. Commence par **committer les éléments de cadrage présents** (`README.md`, `CLAUDE.md`, `docs/`, `maquettes/`, `livrables/`), puis avance par commits successifs.
-1. `npm create astro@latest .` — template minimal, TypeScript strict
-2. `npx astro add tailwind`
-3. Mettre en place les tokens (§Design) et l'arborescence (cahier §4)
-4. **Contenu rédactionnel définitif** dans `docs/contenu-redactionnel.md` (titres, textes, libellés de formulaire, métas SEO) → à placer dans les content collections / pages Astro.
-5. **Référence visuelle : les maquettes validées sont dans `maquettes/`.** La planche `Maquettes_Site.html` et `Composants.html` donnent la vue d'ensemble ; **les fichiers `maquettes/site/*.html` et `maquettes/site/site.css` sont la référence d'implémentation principale** — transpose-les fidèlement en Astro + Tailwind (structure, tokens, composants). Les dossiers `maquettes/` et `livrables/` sont des **références, à NE PAS déployer**.
-6. Dérouler **l'intégralité de `docs/backlog.md` (T0 → T12) en une session**, **un commit par tâche**. En cas de blocage, le documenter et continuer plutôt que t'arrêter.
+Transformer le site en vitrine de pré-ouverture de la maison d'hôtes haut de gamme :
 
-## Design tokens — identité « Château de Sainte-Lucie »
-Deux registres complémentaires (cf. cahier §6) :
+- marque principale : **Les Nuits au Château** ;
+- signature : **Les Suites de Sainte-Lucie** ;
+- deux suites seulement : **Lumière** et **Feuillage** ;
+- ouverture prévisionnelle : **avril 2027** ;
+- maison habitée par trois foyers d'une même famille ;
+- château de 1876, environ 750 m², parc clos d'environ un hectare, piscine naturelle filtrée par lagunage.
 
-**Registre nuit** (immersif — hero, galerie, ambiance)
-`bg #0c0c0b · texte #ece4d4 · or #c8a45c · or clair #e7cd92`
+Lis dans cet ordre :
 
-**Registre jour** (lecture — contenu, offres, formulaire)
-`bg #f4eee2 · texte #2a2620 · or profond #9a7b3f · filet #d8cdb8`
+1. `PROMPT_REPRISE_CLAUDE_CODE.md` ;
+2. `docs/00-decisions-projet-v2.md` ;
+3. `docs/01-audit-site-v1.md` ;
+4. `docs/02-contenu-site-v2.md` ;
+5. `docs/03-architecture-cible-v2.md` ;
+6. `docs/04-backlog-refonte-v2.md` ;
+7. `docs/05-inventaire-medias-v2.md` ;
+8. `docs/06-points-a-confirmer.md`.
 
-**Typographie**
-- Titres : *Cormorant Garamond* (souvent italique) — display
-- Texte : *EB Garamond*
-- Libellés / UI : capitales espacées (~0.3em) ; une sans-serif neutre tolérée pour les très petits libellés de formulaire
+## Règles non négociables
 
-**Signature** : la *lumière* (Sainte-Lucie = lumière) — lueur chaude émergeant du noir, à doser.
-→ **Les maquettes Claude Design font foi pour le rendu final** ; ces tokens en sont la base.
+- Préserver Astro, TypeScript strict, Tailwind, le lockfile et l'historique Git.
+- Travailler sur `refonte/nuits-au-chateau`, jamais directement sur `main`.
+- Réutiliser les composants, l'optimisation d'images, `withBase()`, les métadonnées et le système responsive existants quand ils restent pertinents.
+- Ne publier **aucun rendu photoréaliste de projection**. Ils sont réservés à la décision interne. Utiliser uniquement les photographies réelles déjà présentes dans `src/assets/images/`.
+- Ne publier aucune personne reconnaissable, marque ou logo tiers.
+- Ne jamais afficher l'adresse postale exacte : écrire « Rambervillers, Vosges » ou « aux portes de Rambervillers ».
+- Ne pas promettre le bain nordique, le sauna, une capacité non confirmée, des horaires, des conditions d'annulation ou des produits précis au petit-déjeuner.
+- Ne pas afficher le faux numéro de téléphone actuellement présent dans les données.
+- Ne pas présenter les tarifs indicatifs comme définitifs.
+- Accessibilité WCAG AA, mobile-first, `prefers-reduced-motion`, navigation clavier et performance restent obligatoires.
+- Ne pas installer de CMS, base de données ou moteur de réservation sans décision explicite de Blaise.
 
-## Exigences non négociables
-- **Responsive mobile-first**, testé jusqu'à 320–380px
-- **Accessibilité WCAG AA** : contraste, focus clavier visible, `alt` sur images, structure sémantique, navigation clavier, `prefers-reduced-motion` respecté
-- **Performance** : Lighthouse ≥ 95 (perf / SEO / best-practices / a11y) ; images via `astro:assets` (formats modernes, lazy-loading, dimensions adaptées)
-- **SEO** : `title`/`description` par page, OpenGraph + Twitter cards, `sitemap.xml`, `robots.txt`, données structurées schema.org (`EventVenue` / `LocalBusiness`), URLs propres en français
-- **i18n** : FR par défaut ; **ne pas coder les chaînes en dur**, centraliser le contenu pour préparer l'EN (phase 2)
+## Identité visuelle validée
 
-## Formulaire de contact
-- Sans backend : **Netlify Forms** (si déploiement Netlify) ou **Web3Forms** (clé via variable d'environnement)
-- Champs : voir cahier §9 ; anti-spam (honeypot + service)
-- ⚠️ **Aucun secret dans le dépôt.** Clés via `.env` (jamais commité ; fournir un `.env.example`). L'e-mail de destination se configure hors dépôt.
+- Logo maître : `src/assets/brand/blason-definitif-encre.svg`.
+- Variante or : `src/assets/brand/blason-definitif-or.svg`.
+- Référence de composition : `references/flyer/flyer-reference-validee.jpeg`.
+- Encre `#141F26`, or patiné `#C8A45B`, blanc `#FFFFFF`, ivoire éditorial `#F2EBDD`.
+- Cormorant Garamond pour les titres, EB Garamond pour le texte.
+- Conserver l'alternance immersive nuit / lecture ivoire de la v1, avec une présence plus forte du blason et une hiérarchie plus éditoriale.
 
-## Vie privée du lieu — IMPORTANT
-- Le château est une **résidence habitée**. **Ne pas afficher l'adresse postale précise** (rue + numéro) sur les pages publiques. Localisation publique : « aux portes de Rambervillers, Vosges ». L'adresse exacte n'est communiquée qu'aux clients confirmés.
-- **Pas de calendrier de réservation public** ; logique « sur demande / privatisation ».
+## Fin de mission attendue
 
-## Conventions de code
-- Composants Astro réutilisables (`src/components`), layouts (`src/layouts`), contenu (`src/content`)
-- Commits clairs en français, un par tâche du backlog
-- Tenir le `README.md` à jour si la structure évolue
-
-## Hors périmètre v1 — ne pas faire
-- Pas de paiement en ligne, d'espace client, de CMS lourd, ni de réservation en ligne
-- Ne pas publier de contenu non validé : le texte définitif vient du cahier / des livrables fournis
-- Ne pas trancher le nom commercial ni le niveau d'ambition (décisions en cours côté famille) : utiliser « Château de Sainte-Lucie »
+Terminer par `npm run check` et `npm run build`, documenter les points restant à confirmer et fournir une synthèse des routes, redirections, contenus et médias modifiés. Ne pousser ni ne fusionner sans instruction explicite.
