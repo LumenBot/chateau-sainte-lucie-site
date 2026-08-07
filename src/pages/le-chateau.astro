@@ -120,16 +120,6 @@ import {
             {situation.title[0]}<em class="gold">{situation.title[1]}</em>
           </h2>
           <p>{situation.text}</p>
-          <ul class="access">
-            {
-              situation.access.map((a) => (
-                <li>
-                  <span class="where">{a.where}</span>
-                  <span class="dur">{a.dur}</span>
-                </li>
-              ))
-            }
-          </ul>
         </div>
         <div class="locator" aria-hidden="true">
           <div class="rings"></div>

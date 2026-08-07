@@ -1,12 +1,13 @@
 /**
- * Contenu éditorial de la page « Le Château ».
+ * Contenu de la page « Le Château » (v2 — récit patrimonial, maison habitée).
+ * Fil conducteur : la lumière (Lucy, Lucia, lux). Aucune capacité ERP.
  */
 import { images, type Visual } from "./images";
 
 export const chateauSeo = {
-  title: "Le Château — Château de Sainte-Lucie",
+  title: "Le Château | Les Nuits au Château",
   description:
-    "Une demeure de caractère de 1876, ≈750 m², au cœur d'un parc boisé aux portes des Vosges. L'histoire, les espaces et la situation du Château de Sainte-Lucie.",
+    "Un château de 1876 en grès rose des Vosges, offert à Marie Lucy Velin : boiseries, cheminées, vitraux et mobilier d'origine — un ensemble habité, aux portes de Rambervillers.",
 };
 
 export const phero = {
@@ -16,12 +17,12 @@ export const phero = {
 };
 
 export const intro = {
-  eyebrow: "L'âme du lieu",
+  eyebrow: "Une maison qui a une âme",
   quote:
-    "« Bâti en 1876 comme cadeau de noces, le château porte en ses murs cent cinquante ans d'amour, de deuils et de transmissions. »",
+    "« Lucy, Lucia, lux » — le prénom de Marie Lucy Velin donne au lieu son nom et son fil conducteur : la lumière.",
   paragraphs: [
-    "De la Belle Époque à la Grande Guerre — où il servit de lieu de repos aux combattants — jusqu'à ses gardiens d'aujourd'hui, Sainte-Lucie a traversé le temps sans perdre son âme. Son nom est un hommage à la lumière : celui de l'épouse Lucy, de la sainte de Syracuse, et d'une grand-tante de la famille.",
-    "C'est cette histoire que l'on accueille, autant que les murs : un lieu habité, vivant, transmis — et désormais ouvert, quelques jours par mois, à ceux qui cherchent un cadre à sa hauteur.",
+    "Construit en 1876 en grès vosgien rose, le château est offert à Marie Lucy Velin, dont le prénom donne au lieu son nom et son fil conducteur : Lucy, Lucia, lux — la lumière.",
+    "Boiseries, cheminées, parquets, plafonds à caissons, vitraux et mobilier monumental composent encore aujourd'hui un ensemble habité plutôt qu'un décor reconstitué. En 1914, le château sert de lieu de repos à des soldats engagés dans la bataille de Lorraine. Depuis 2022, les propriétaires actuels poursuivent les recherches historiques et remettent progressivement la maison en état.",
   ],
   links: [
     { label: "Lire l'histoire complète", href: "/histoire" },
@@ -36,27 +37,26 @@ export interface Feature {
   text: string;
   mini: string[];
   rev?: boolean;
-  /** Affiche l'image entière (portrait) sans la recadrer. */
   contain?: boolean;
 }
 
 export const espaces = {
   eyebrow: "Les espaces",
-  title: ["Deux grandes salles, ", "un parc entier."],
+  title: ["Des pièces de caractère, ", "un parc entier."],
   features: [
     {
       image: images.salleAManger,
       cap: "Patrimoine",
-      title: "Les salles de réception",
-      text: "Boiseries de chêne sculpté, cheminées de marbre, blasons d'époque et parquets en point de Hongrie : deux grandes salles de caractère, baignées de lumière, pour les réunions, les repas et les réceptions.",
+      title: "Les pièces de réception",
+      text: "Boiseries de chêne sculpté, cheminées de marbre, parquets et plafonds à caissons : des pièces de caractère, baignées de lumière, où se dresse le soir la table d'hôtes.",
       mini: ["Boiseries d'origine", "Cheminées de marbre", "Lumière naturelle"],
     },
     {
       image: images.cheneCentenaire,
       cap: "Le parc",
       title: "Le parc & les chênes centenaires",
-      text: "Plusieurs hectares de parc boisé, des chênes et tilleuls plantés à la construction, des perspectives dégagées sur les prairies vosgiennes. Un écrin pour les pauses, les activités de plein air et les prises de vue.",
-      mini: ["Plusieurs hectares", "Arbres centenaires", "Sous-bois"],
+      text: "Un hectare de parc clos, des chênes, tilleuls et hêtres plantés il y a plus d'un siècle, des lisières et une prairie vosgienne. Un écrin pour la marche, la lecture et le silence.",
+      mini: ["Un hectare clos", "Arbres centenaires", "Lisières & prairie"],
       rev: true,
       contain: true,
     },
@@ -64,42 +64,36 @@ export const espaces = {
       image: images.piscineSalon,
       cap: "Art de vivre",
       title: "La piscine naturelle & le bien-être",
-      text: "Un bassin naturel filtré par lagunage, un salon extérieur, un cadre propice à la détente entre deux sessions de travail. L'art de vivre du château, du matin au crépuscule.",
-      mini: ["Baignade naturelle", "Salon extérieur", "Espace bien-être"],
+      text: "Un bassin naturel filtré par lagunage planté, un salon extérieur et un espace bien-être avec hammam. L'art de vivre du château, au fil des saisons et des conditions.",
+      mini: ["Baignade naturelle", "Salon extérieur", "Hammam"],
     },
   ] satisfies Feature[],
 };
 
 export const chiffres = {
-  eyebrow: "En quelques chiffres",
+  eyebrow: "En quelques repères",
   items: [
-    { v: "≈750 m²", l: "de demeure" },
-    { v: "50–70", l: "personnes max" },
-    { v: "≈20", l: "places de parking" },
     { v: "1876", l: "année de naissance" },
+    { v: "≈750 m²", l: "de demeure" },
+    { v: "1 ha", l: "de parc clos" },
+    { v: "2", l: "suites à venir" },
   ],
-  note: "La capacité, fixée par la jauge ERP, reste indicative et à confirmer par le bureau de contrôle.",
+  note: "Repères indicatifs, susceptibles d'être précisés avant l'ouverture.",
 };
 
 export const situation = {
   eyebrow: "La situation",
   title: ["Aux portes de ", "Rambervillers."],
-  text: "Le château se trouve à la sortie de Rambervillers, au cœur des Vosges, à moins d'une heure des principales villes de Lorraine. Demeure habitée, sa localisation exacte est communiquée aux clients confirmés.",
-  access: [
-    { where: "Épinal", dur: "≈ 35 min" },
-    { where: "Nancy", dur: "≈ 50 min" },
-    { where: "Gare TGV Lorraine", dur: "≈ 1 h" },
-    { where: "Aéroport Metz-Nancy", dur: "≈ 1 h 10" },
-  ],
-  pin: { title: "Aux portes des Vosges", sub: "Rambervillers · 88" },
+  text: "Le château se trouve aux portes de Rambervillers, au cœur des Vosges. Demeure habitée, sa localisation exacte est communiquée aux clients confirmés lors de la réservation.",
+  pin: { title: "Rambervillers", sub: "Vosges · 88" },
 };
 
 export const chateauCta = {
-  eyebrow: "Venez le découvrir",
-  title: ["Une visite vaut ", "mille images."],
-  text: "Dites-nous votre projet — séminaire, événement de famille ou tournage — et nous organisons une découverte du lieu.",
+  eyebrow: "Pré-ouverture · avril 2027",
+  title: ["Bientôt, ", "les portes s'ouvrent."],
+  text: "Deux suites ouvriront dans la maison en avril 2027. Soyez informé de l'ouverture des réservations.",
   actions: [
-    { label: "Demander une proposition", href: "/contact", variant: "gold-light" as const },
-    { label: "Demander une visite", href: "/contact", variant: "ghost-light" as const },
+    { label: "Découvrir les suites", href: "/les-suites", variant: "gold-light" as const },
+    { label: "Être informé de l'ouverture", href: "/contact", variant: "ghost-light" as const },
   ],
 };

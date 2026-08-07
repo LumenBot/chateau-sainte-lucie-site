@@ -5,15 +5,15 @@
 import { images, type Visual } from "./images";
 
 export const gallerySeo = {
-  title: "Galerie — Château de Sainte-Lucie",
+  title: "Galerie | Les Nuits au Château",
   description:
-    "Le lieu, ses salles, son parc et ses détails — au fil des saisons. La galerie du Château de Sainte-Lucie, aux portes des Vosges.",
+    "Le château, son parc, sa piscine naturelle, ses espaces communs et ses détails patrimoniaux — au fil des lumières. Photographies réelles du domaine de Sainte-Lucie.",
 };
 
 export const galleryHeader = {
   eyebrow: "Galerie",
-  title: ["Le château ", "en lumière."],
-  text: "Le lieu, son parc, sa piscine naturelle et ses hôtes — au fil des saisons.",
+  title: ["Sainte-Lucie, ", "au fil des lumières."],
+  text: "Le château, son parc, sa piscine naturelle, ses espaces communs et ses détails patrimoniaux. Les photographies des suites seront ajoutées après les travaux, en mars 2027.",
 };
 
 export interface GalleryItem {
