@@ -21,32 +21,42 @@
 @import "@fontsource/eb-garamond/latin-400-italic.css";
 
 :root {
-  /* ---- Nuit ---- */
-  --noir: #0c0c0b;
-  --noir-2: #15130f;
-  --noir-panel: #12110d;
-  --creme: #ece4d4;
-  --creme-dim: #b0a68f;
-  /* éclairci vs maquette pour atteindre WCAG AA sur fond nuit (texte) */
-  --creme-faint: #877c66;
-  --or: #c8a45c;
-  --or-clair: #e7cd92;
+  /* =====================================================================
+     Palette « Les Nuits au Château » (identité validée)
+     Encre #141F26 · Or patiné #C8A45B · Blanc #FFFFFF · Ivoire #F2EBDD
+     Registre NUIT (encre bleutée immersive) / JOUR (ivoire éditorial).
+     Noms de variables conservés depuis la v1 pour compatibilité composants.
+     ===================================================================== */
 
-  /* ---- Jour / parchemin ---- */
-  --parch: #f4eee2;
-  --parch-2: #ebe2d0;
-  --parch-card: #fbf7ee;
-  --encre: #2a2620;
-  --encre-soft: #5c5347;
-  /* assombri vs maquette pour atteindre WCAG AA sur fond parchemin (texte) */
-  --encre-faint: #756a58;
-  --or-prof: #9a7b3f;
+  /* ---- Nuit (encre) ---- */
+  --noir: #141f26;
+  --noir-2: #1b2a33;
+  --noir-panel: #16232c;
+  --creme: #f2ebdd;
+  --creme-dim: #c6c2b4;
+  /* AA sur fond encre (texte secondaire) */
+  --creme-faint: #9aa0a0;
+  --or: #c8a45b;
+  --or-clair: #e3c98c;
+
+  /* ---- Jour (ivoire) ---- */
+  --parch: #f2ebdd;
+  --parch-2: #e8dfcb;
+  --parch-card: #f8f2e6;
+  --encre: #141f26;
+  --encre-soft: #3f4a52;
+  /* AA sur fond ivoire (texte secondaire) */
+  --encre-faint: #5e666c;
+  /* or foncé lisible (AA) pour petits textes sur ivoire */
+  --or-prof: #7c6230;
+
+  --blanc: #ffffff;
 
   /* ---- Filets ---- */
-  --rule-d: rgba(200, 164, 92, 0.3);
-  --rule-d-faint: rgba(176, 166, 143, 0.16);
-  --rule-l: rgba(154, 123, 63, 0.3);
-  --rule-l-faint: rgba(90, 80, 65, 0.16);
+  --rule-d: rgba(200, 164, 91, 0.32);
+  --rule-d-faint: rgba(242, 235, 221, 0.16);
+  --rule-l: rgba(124, 98, 48, 0.32);
+  --rule-l-faint: rgba(20, 31, 38, 0.14);
 
   --serif: "EB Garamond", Georgia, "Times New Roman", serif;
   --display: "Cormorant Garamond", Georgia, serif;
@@ -313,13 +323,24 @@ p {
 }
 .brand {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
   line-height: 1;
-  gap: 4px;
+}
+.brand .crest {
+  flex: 0 0 auto;
+  height: 46px;
+  width: auto;
+}
+.brand .brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 .brand .bn {
   font-family: var(--display);
-  font-size: 23px;
+  font-size: 22px;
   color: var(--creme);
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -327,7 +348,7 @@ p {
 .brand .bs {
   font-family: var(--serif);
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.26em;
   font-size: 9px;
   color: var(--or);
   white-space: nowrap;
