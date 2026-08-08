@@ -6,7 +6,8 @@ Château de Sainte-Lucie — Rambervillers, Vosges. **Ouverture prévue en avril
 
 > Refonte v2 du dépôt : l'ancienne vitrine « réception » (séminaires, événements,
 > tournages) est remplacée par le projet de maison d'hôtes à deux suites.
-> Documentation de reprise : `docs/00-…` à `docs/06-…` et `CLAUDE.md`.
+> Documentation de reprise et d'exploitation : `docs/00-…` à `docs/08-…` et
+> `CLAUDE.md`.
 
 ## Stack
 
@@ -57,23 +58,31 @@ liens internes passent par `withBase()` (`src/utils/url.ts`). Le formulaire
 nécessite un backend (Netlify Forms / Web3Forms) : sur Pages (statique) la
 soumission n'est pas traitée.
 
-## ⚠️ À confirmer avant publication (cf. `docs/06-points-a-confirmer.md`)
-- **Photographies des suites** : réalisées après travaux (mars 2027) ; les
-  visuels actuels sont des photographies réelles du domaine, en attendant.
-  Aucun rendu de projection n'est publié.
-- **Tarifs** : fourchette de travail 200–420 € (doc 02). **Non affichée** : la
-  copie emploie « communiqués à l'ouverture des réservations ». Décision
-  d'affichage à trancher.
+## Référentiel opérationnel
+
+- `docs/07-referentiel-offre-et-regles-v3.md` centralise les tarifs, horaires,
+  conditions de séjour, restauration et règles du spa.
+- `docs/08-cahier-des-charges-fonctionnel-si-v1.md` définit le futur système de
+  réservation, le portail client et l'applicatif gestionnaire.
+- `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
+  ou paramètres réellement ouverts.
+
+## ⚠️ À confirmer avant l'ouverture (cf. `docs/06-points-a-confirmer.md`)
+
+- **Photographies des suites** : remplacement des projections sélectionnées par
+  les photographies réalisées après travaux, en mars 2027.
 - **Coordonnées** : e-mail (`contact@chateau-saintelucie.fr`), téléphone
   (aucun affiché), nom de domaine et URL canonique.
-- **Suites** : surfaces, couchages, équipements, capacité exacte.
-- **Table d'hôtes** : menus, régimes, tarifs. **Petit-déjeuner** : composition.
-- **Piscine naturelle / hammam** : conditions d'accès.
+- **Suites** : surfaces, couchages et équipements définitifs.
+- **Table d'hôtes** : boissons comprises et validation du régime applicable.
+- **Société d'exploitation** : identité, fiscalité et paramètres comptables.
+- **Prestataires** : PMS, channel manager, paiement et futur hébergement.
 - **Légal** : mentions légales, responsable de publication, confidentialité
   (gabarits à compléter), hébergeur de production et traitement du formulaire.
-- **Redirections** : destination définitive des anciennes URLs (ici : accueil).
 
 ## Statut
 - [x] Cadrage & docs de reprise (v2)
 - [x] Refonte « Les Nuits au Château » (backlog T0 → T12)
-- [ ] Validation Blaise & mise en ligne (points à confirmer ci-dessus)
+- [x] Validation et publication du site vitrine sur GitHub Pages
+- [x] Référentiel d'offre et cahier des charges fonctionnel du SI
+- [ ] Sélection des solutions et conception détaillée du MVP

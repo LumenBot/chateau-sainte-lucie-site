@@ -26,9 +26,17 @@ Priorités recommandées pour la v2 :
 6. `04_blason_perron_crop.jpeg` — patrimoine ;
 7. faune réelle avec parcimonie.
 
-## Visuels interdits de publication
+## Visuels de projection
 
-Les 17 rendus photoréalistes des futurs aménagements et leurs variantes sont des outils internes. Ils ne doivent pas être copiés dans `src/assets`, `public`, les métadonnées sociales ou la galerie.
+Les rendus photoréalistes sélectionnés des futurs aménagements peuvent être
+utilisés sur le site vitrine de pré-ouverture. Chaque visuel doit porter ou être
+accompagné d'une mention explicite du type « Projection de l'expérience après
+travaux ». Ils ne doivent jamais être présentés comme des photographies de
+l'état actuel.
+
+Les variantes non retenues restent des outils internes. Avant l'ouverture, les
+projections auront vocation à être remplacées par les photographies
+commerciales réalisées après travaux.
 
 Voir `references/interne/rendus-projection/README.md`.
 

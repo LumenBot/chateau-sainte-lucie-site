@@ -1,5 +1,9 @@
 # 02 — Contenu éditorial du site v2
 
+> Document historique de conception éditoriale. En cas de divergence sur les
+> prix, services ou règles de séjour, le référentiel
+> `docs/07-referentiel-offre-et-regles-v3.md` prévaut.
+
 Ce document fournit une base directement intégrable. Les mentions marquées **À CONFIRMER** ne doivent pas être publiées comme des engagements définitifs.
 
 ## Architecture éditoriale

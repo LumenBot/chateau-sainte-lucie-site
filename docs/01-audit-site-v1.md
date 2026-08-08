@@ -1,5 +1,10 @@
 # 01 — Audit de la maquette et du site v1
 
+> Document historique conservé pour la traçabilité de la refonte. Ses réserves
+> sur les tarifs et les visuels ont été remplacées par les décisions actuelles de
+> `docs/00-decisions-projet-v2.md` et
+> `docs/07-referentiel-offre-et-regles-v3.md`.
+
 ## Synthèse
 
 La v1 est techniquement saine et visuellement cohérente, mais commercialement obsolète. Elle doit être refondue, non reconstruite depuis zéro.

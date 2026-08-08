@@ -8,16 +8,21 @@
 - Lieu : Château de Sainte-Lucie, Rambervillers, Vosges.
 - Ouverture prévisionnelle : **avril 2027**.
 - Travaux : septembre 2026 à mars 2027.
-- Positionnement tarifaire indicatif : **200 à 420 € la nuit**, à confirmer avant publication définitive.
+- Tarif public validé : **250 € par suite et par nuit**, pour une ou deux
+  personnes, petit-déjeuner compris.
 
 ## Offre
 
 - Deux suites seulement : Lumière et Feuillage.
 - Chaque suite comprend deux pièces, une salle de bain et une terrasse privative.
-- Petit-déjeuner inclus dans l'intention d'offre.
-- Table d'hôtes sur réservation, modalités à confirmer.
-- Accès selon conditions et formules aux espaces communs, au parc, à la piscine naturelle, à la salle de sport et au hammam.
-- Le bain nordique est une hypothèse d'extension et ne doit pas être promis.
+- Petit-déjeuner inclus dans chaque nuitée.
+- Capacité maximale de quatre personnes par suite, avec supplément pour les
+  troisième et quatrième occupants.
+- Dîner privatif sur réservation, à partir de 50 € par adulte.
+- Spa sur réservation : hammam, piscine naturelle, bain nordique et sauna
+  finlandais, au tarif de 50 € par suite et par jour.
+- Accueil personnalisable : humain, autonome ou hybride, en français ou en
+  anglais.
 
 ## Réalité du lieu
 
@@ -37,6 +42,15 @@ Le fil narratif est la lumière : Sainte-Lucie, Lucy, Lucia, *lux*. Le château 
 - Le blason détaillé fourni dans `src/assets/brand/` est le logo définitif.
 - Le flyer dans `references/flyer/` est la référence de composition prioritaire.
 - La maquette v1 reste une référence de langage visuel, pas de contenu.
-- Les visuels générés des futurs aménagements sont internes et interdits de publication sur le site ou les plateformes.
+- Les visuels de projection des futurs aménagements peuvent être publiés sur le
+  site vitrine lorsqu'ils sont identifiés sans ambiguïté comme des projections
+  après travaux. Leur utilisation sur les plateformes de réservation sera
+  réévaluée avant l'ouverture.
 - Les photographies commerciales définitives seront réalisées après travaux, en mars 2027.
 - Adresse publique : « Rambervillers, Vosges ». L'adresse exacte est réservée aux clients confirmés.
+
+## Sources de vérité opérationnelles
+
+- `docs/07-referentiel-offre-et-regles-v3.md` : offre, prix et règles de séjour.
+- `docs/08-cahier-des-charges-fonctionnel-si-v1.md` : parcours, modules,
+  intégrations et critères de recette du système d'information.
