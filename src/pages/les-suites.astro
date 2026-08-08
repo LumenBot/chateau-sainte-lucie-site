@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/sections/PageHero.astro";
 import SuiteCard from "../components/suites/SuiteCard.astro";
 import CtaFinal from "../components/CtaFinal.astro";
+import { tarifs } from "../data/tarifs";
 
 const suites = (await getCollection("suites")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -49,6 +50,32 @@ const suites = (await getCollection("suites")).sort(
     </div>
   </section>
 
+  <section class="sec tarifs">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="ln"></span>{tarifs.eyebrow}</p>
+        <h2 class="display-l">{tarifs.title[0]}<em class="gold">{tarifs.title[1]}</em></h2>
+        <p class="lede">{tarifs.intro}</p>
+      </div>
+      <ul class="tarifs-list">
+        {
+          tarifs.items.map((it) => (
+            <li class="tarif">
+              <div class="tarif__label">
+                <span class="tarif__name">{it.label}</span>
+                <span class="tarif__note">{it.note}</span>
+              </div>
+              <div class="tarif__price">
+                {it.value}<span class="tarif__unit">{it.unit}</span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="note tarifs-note">{tarifs.note}</p>
+    </div>
+  </section>
+
   <CtaFinal
     eyebrow="Pré-ouverture · avril 2027"
     titleLead="Une nuit vous attend "
@@ -75,5 +102,58 @@ const suites = (await getCollection("suites")).sort(
   .suites-note {
     margin-top: 30px;
     text-align: center;
+  }
+
+  /* Tarifs indicatifs */
+  .tarifs {
+    background: var(--parch-2);
+  }
+  .tarifs-list {
+    list-style: none;
+    margin: 44px 0 0;
+    padding: 0;
+    max-width: 720px;
+    border-top: 1px solid var(--rule-l-faint);
+  }
+  .tarif {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule-l-faint);
+  }
+  .tarif__label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .tarif__name {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.4vw, 26px);
+    color: var(--encre);
+    line-height: 1.1;
+  }
+  .tarif__note {
+    font-size: 14px;
+    color: var(--encre-faint);
+  }
+  .tarif__price {
+    font-family: var(--display);
+    font-size: clamp(22px, 2.6vw, 30px);
+    color: var(--or-prof);
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .tarif__unit {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--encre-faint);
+    letter-spacing: 0.02em;
+    margin-left: 6px;
+  }
+  .tarifs-note {
+    margin-top: 22px;
+    max-width: 720px;
   }
 </style>
