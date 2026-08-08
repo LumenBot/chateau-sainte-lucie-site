@@ -1,0 +1,149 @@
+---
+import DemoLayout from "../../layouts/DemoLayout.astro";
+import { withBase } from "../../utils/url";
+---
+
+<DemoLayout
+  title="Architecture d’intégration simulée — Les Nuits au Château"
+  description="Cartographie des briques internes et externes du futur système d’information."
+  section="integrations"
+>
+  <div class="demo-shell">
+    <header class="demo-page-head">
+      <div>
+        <p class="demo-kicker">Architecture fonctionnelle cible</p>
+        <h1>Simuler aujourd’hui.<br />Brancher demain.</h1>
+        <p class="lede">L’expérience est conçue indépendamment des fournisseurs. Chaque brique externe a un rôle, un contrat d’échange et une stratégie de remplacement.</p>
+      </div>
+      <div class="demo-page-meta">
+        <span class="demo-status simulated">0 intégration réelle</span>
+        <p>État partagé localement dans ce navigateur</p>
+      </div>
+    </header>
+
+    <section class="demo-section" style="margin-top: 38px;">
+      <div class="demo-section-head">
+        <div><p class="demo-kicker">Principe directeur</p><h2>Une expérience propriétaire, des services remplaçables.</h2></div>
+        <p>Le PMS reste la source de vérité du stock. Le portail orchestre l’expérience. Les prestataires spécialisés exécutent paiement, messages, accès et comptabilité.</p>
+      </div>
+      <div class="demo-integration-map">
+        <article class="demo-integration-card">
+          <span class="demo-status simulated">Externe · simulé</span>
+          <h3>Canaux de vente</h3>
+          <p>Airbnb, Booking, plateformes de chambres d’hôtes et réservation directe.</p>
+          <ul><li>Disponibilités</li><li>Tarifs & restrictions</li><li>Réservations & annulations</li></ul>
+        </article>
+        <article class="demo-integration-card core">
+          <span class="demo-status simulated">Socle pressenti</span>
+          <h3>PMS / Channel manager</h3>
+          <p>eviivo est l’hypothèse de travail. Il doit rester la source unique du stock et des dossiers de réservation.</p>
+          <ul><li>Identifiant séjour maître</li><li>Synchronisation bidirectionnelle</li><li>Webhooks ou interrogation planifiée</li></ul>
+        </article>
+        <article class="demo-integration-card">
+          <span class="demo-status simulated">Externe · simulé</span>
+          <h3>Paiement & garantie</h3>
+          <p>Paiement de l’hébergement, options sur place, remboursement et empreinte de 500 €.</p>
+          <ul><li>Jetons, jamais de carte stockée</li><li>Authentification forte</li><li>Rapprochement par référence</li></ul>
+        </article>
+        <article class="demo-integration-card core">
+          <span class="demo-status ok">Produit propre</span>
+          <h3>Couche d’expérience</h3>
+          <p>Réservation directe, onboarding, compagnon de séjour, services, histoire et check-out.</p>
+          <ul><li>Règles métier du domaine</li><li>Personnalisation FR / EN</li><li>Consentements & préférences</li></ul>
+        </article>
+        <article class="demo-integration-card core">
+          <span class="demo-status ok">Produit propre</span>
+          <h3>Cockpit gestionnaire</h3>
+          <p>Vue unifiée pour les hôtes, opérations, direction et comptabilité.</p>
+          <ul><li>Planning & tâches</li><li>Services & production</li><li>Indicateurs & piste d’audit</li></ul>
+        </article>
+        <article class="demo-integration-card">
+          <span class="demo-status simulated">Externe · simulé</span>
+          <h3>Communication</h3>
+          <p>E-mail transactionnel, SMS de service et messagerie centralisée.</p>
+          <ul><li>Modèles FR / EN</li><li>Préférences de canal</li><li>Traçabilité de remise</li></ul>
+        </article>
+        <article class="demo-integration-card">
+          <span class="demo-status simulated">Externe · simulé</span>
+          <h3>Contrôle d’accès</h3>
+          <p>Serrures ou boîtes à clés connectées, codes temporaires et journal d’activation.</p>
+          <ul><li>Activation autour du séjour</li><li>Révocation au départ</li><li>Procédure hors ligne</li></ul>
+        </article>
+        <article class="demo-integration-card">
+          <span class="demo-status simulated">Externe · simulé</span>
+          <h3>Comptabilité</h3>
+          <p>Exports vers le logiciel de la société d’exploitation et rapprochement bancaire.</p>
+          <ul><li>Hébergement / services séparés</li><li>Taxes paramétrables</li><li>Pièces et piste d’audit</li></ul>
+        </article>
+        <article class="demo-integration-card">
+          <span class="demo-status simulated">Externe · simulé</span>
+          <h3>Mesure & qualité</h3>
+          <p>Analytics respectueux de la vie privée, avis, satisfaction et suivi des incidents.</p>
+          <ul><li>Conversion directe</li><li>NPS / satisfaction</li><li>Temps de résolution</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head">
+        <div><p class="demo-kicker">Contrats d’échange</p><h2>Les événements qui relient les briques.</h2></div>
+        <p>Le vocabulaire est stable même si le prestataire change. Les adaptateurs traduiront ensuite les formats propres à chaque fournisseur.</p>
+      </div>
+      <article class="demo-panel">
+        <div class="demo-table-wrap">
+          <table class="demo-table">
+            <thead><tr><th>Événement canonique</th><th>Émetteur</th><th>Consommateurs</th><th>Données minimales</th><th>Simulation actuelle</th></tr></thead>
+            <tbody>
+              <tr><td><code>booking.confirmed</code></td><td>PMS / réservation directe</td><td>Portail, paiement, opérations</td><td>Référence, dates, suite, voyageurs, source</td><td><span class="demo-status ok">Oui</span></td></tr>
+              <tr><td><code>payment.succeeded</code></td><td>Prestataire de paiement</td><td>PMS, portail, comptabilité</td><td>Référence, montant, nature, identifiant transaction</td><td><span class="demo-status ok">Oui</span></td></tr>
+              <tr><td><code>onboarding.updated</code></td><td>Portail client</td><td>Cockpit, opérations</td><td>Accueil, heure, langue, préférences utiles</td><td><span class="demo-status ok">Oui</span></td></tr>
+              <tr><td><code>service.booked</code></td><td>Portail client</td><td>Planning spa, opérations, facturation</td><td>Équipement, date, heure, durée, exclusivité</td><td><span class="demo-status ok">Oui</span></td></tr>
+              <tr><td><code>stay.checked_in</code></td><td>Hôte / automatisation</td><td>Accès, portail, PMS</td><td>Heure réelle, mode d’accueil, accès activé</td><td><span class="demo-status ok">Oui</span></td></tr>
+              <tr><td><code>stay.checked_out</code></td><td>Portail / hôte</td><td>PMS, accès, paiement, qualité</td><td>Heure, solde, accès révoqué, incident</td><td><span class="demo-status ok">Oui</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head"><div><p class="demo-kicker">Résilience</p><h2>Tester les pannes avant de choisir les outils.</h2></div><p>Un service haut de gamme doit rester accueillant même si un fournisseur est indisponible.</p></div>
+      <div class="demo-grid">
+        <article class="demo-card">
+          <span class="demo-status simulated" data-health="pms">PMS simulé</span>
+          <h3>Stock indisponible</h3>
+          <p>Le tunnel passe en demande de réservation ; aucune confirmation instantanée n’est promise.</p>
+          <button class="demo-button secondary" type="button" data-failure="pms">Simuler la panne</button>
+        </article>
+        <article class="demo-card">
+          <span class="demo-status simulated" data-health="payment">Paiement simulé</span>
+          <h3>Paiement indisponible</h3>
+          <p>Le dossier reste en attente, sans bloquer le stock indéfiniment ni créer de double débit.</p>
+          <button class="demo-button secondary" type="button" data-failure="payment">Simuler la panne</button>
+        </article>
+        <article class="demo-card">
+          <span class="demo-status simulated" data-health="access">Accès simulé</span>
+          <h3>Serrure hors ligne</h3>
+          <p>L’hôte reçoit une alerte et le client obtient la procédure de secours appropriée.</p>
+          <button class="demo-button secondary" type="button" data-failure="access">Simuler la panne</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head"><div><p class="demo-kicker">Bascule opérationnelle</p><h2>Quatre paliers, sans réécrire l’expérience.</h2></div></div>
+      <div class="demo-timeline">
+        <div class="demo-timeline-step active"><small>Palier 0 · maintenant</small><strong>Prototype local et retours associés</strong></div>
+        <div class="demo-timeline-step"><small>Palier 1</small><strong>PMS réel, calendrier et réservation directe</strong></div>
+        <div class="demo-timeline-step"><small>Palier 2</small><strong>Paiement, messages et portail sécurisé</strong></div>
+        <div class="demo-timeline-step"><small>Palier 3</small><strong>Services, accès et opérations intégrés</strong></div>
+        <div class="demo-timeline-step"><small>Palier 4</small><strong>Comptabilité, qualité et optimisation</strong></div>
+      </div>
+      <div class="demo-actions">
+        <a class="demo-button" href={withBase("/demo/reservation")}>Rejouer le parcours client</a>
+        <a class="demo-button secondary" href={withBase("/demo/gestion#events")}>Voir la piste d’audit</a>
+      </div>
+    </section>
+  </div>
+  <script is:inline defer src={withBase("/demo/integrations.js")}></script>
+</DemoLayout>

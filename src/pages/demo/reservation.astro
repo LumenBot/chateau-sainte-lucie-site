@@ -1,0 +1,153 @@
+---
+import { Image } from "astro:assets";
+import DemoLayout from "../../layouts/DemoLayout.astro";
+import { withBase } from "../../utils/url";
+import lumiere from "../../assets/images/projection/lumiere-chambre.jpg";
+import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
+---
+
+<DemoLayout
+  title="Simulation de réservation — Les Nuits au Château"
+  description="Tunnel de réservation fictif des Suites de Sainte-Lucie."
+  section="reservation"
+>
+  <div class="demo-shell">
+    <header class="demo-page-head">
+      <div>
+        <p class="demo-kicker">Parcours voyageur · étape 1 sur 4</p>
+        <h1>Composer son séjour.</h1>
+        <p class="lede">Une réservation directe, lisible et personnelle. Le paiement affiché est une pure simulation.</p>
+      </div>
+      <div class="demo-page-meta">
+        <span class="demo-status simulated">Disponibilités simulées</span>
+        <p>Ouverture des séjours à partir d’avril 2027</p>
+      </div>
+    </header>
+
+    <div class="demo-timeline" aria-label="Étapes de réservation">
+      <div class="demo-timeline-step active"><small>01</small><strong>Votre séjour</strong></div>
+      <div class="demo-timeline-step"><small>02</small><strong>Votre suite</strong></div>
+      <div class="demo-timeline-step"><small>03</small><strong>Vos envies</strong></div>
+      <div class="demo-timeline-step"><small>04</small><strong>Confirmation</strong></div>
+      <div class="demo-timeline-step"><small>Après</small><strong>Espace client</strong></div>
+    </div>
+
+    <form id="demo-booking-form" class="demo-app-grid" novalidate>
+      <aside class="demo-summary" aria-live="polite">
+        <p class="demo-kicker">Votre séjour</p>
+        <h2 data-summary-suite>Suite Lumière</h2>
+        <p><span data-summary-nights>3 nuits</span> · <span data-summary-guests>3 personnes</span></p>
+        <div class="demo-price-row"><span>Hébergement</span><strong data-price-accommodation>900 €</strong></div>
+        <div class="demo-price-row"><span>Accès spa</span><strong data-price-spa>150 €</strong></div>
+        <div class="demo-price-row"><span>Dîner</span><strong data-price-dinner>125 €</strong></div>
+        <div class="demo-price-row total"><span>Total du séjour</span><strong data-price-total>1 175 €</strong></div>
+        <p class="note" style="color: var(--demo-muted); margin-top: 17px;">
+          À payer maintenant : <strong data-price-now>900 €</strong>.<br />
+          Options payables sur place : <strong data-price-later>275 €</strong>.
+        </p>
+        <button class="demo-button" type="submit" style="width: 100%; margin-top: 20px;">Simuler le paiement</button>
+        <p class="note" style="color: var(--demo-muted); margin-top: 12px;">
+          Aucune carte bancaire n’est demandée ni enregistrée.
+        </p>
+      </aside>
+
+      <div>
+        <section class="demo-panel">
+          <div class="demo-panel-head">
+            <div><p class="demo-kicker">01 · Dates & voyageurs</p><h2>Quand venez-vous ?</h2></div>
+            <span class="demo-status ok">Disponible</span>
+          </div>
+          <div class="demo-form-grid three" style="margin-top: 22px;">
+            <div class="demo-field">
+              <label for="arrival">Arrivée</label>
+              <input id="arrival" name="arrival" type="date" min="2027-04-01" value="2027-05-14" required />
+            </div>
+            <div class="demo-field">
+              <label for="departure">Départ</label>
+              <input id="departure" name="departure" type="date" min="2027-04-02" value="2027-05-17" required />
+            </div>
+            <div class="demo-field">
+              <label for="adults">Adultes</label>
+              <select id="adults" name="adults"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select>
+            </div>
+            <div class="demo-field">
+              <label for="children">Enfants</label>
+              <select id="children" name="children"><option value="0">0</option><option value="1" selected>1</option><option value="2">2</option></select>
+            </div>
+            <div class="demo-field">
+              <label for="childrenUnderSix">Dont moins de 6 ans</label>
+              <select id="childrenUnderSix" name="childrenUnderSix"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option></select>
+            </div>
+            <div class="demo-field">
+              <label for="childrenUnderThree">Dont moins de 3 ans</label>
+              <select id="childrenUnderThree" name="childrenUnderThree"><option value="0" selected>0</option><option value="1">1</option><option value="2">2</option></select>
+            </div>
+            <div class="demo-field">
+              <span class="label">Horaires</span>
+              <p style="margin: 0;">Arrivée 15h · départ avant 12h</p>
+            </div>
+          </div>
+          <p class="note" style="color: var(--demo-muted); margin-top: 17px;">
+            Maximum quatre personnes par suite. Supplément à partir du 3e occupant : 50 € par nuit, petit-déjeuner inclus ; 25 € pour les moins de 6 ans.
+          </p>
+        </section>
+
+        <section class="demo-panel">
+          <div class="demo-panel-head"><div><p class="demo-kicker">02 · La suite</p><h2>Choisissez votre atmosphère.</h2></div></div>
+          <div class="demo-choice-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 22px;">
+            <div class="demo-choice">
+              <input id="suite-lumiere" type="radio" name="suite" value="Suite Lumière" checked />
+              <label for="suite-lumiere" style="padding: 0; overflow: hidden;">
+                <Image src={lumiere} alt="Projection de la chambre de la Suite Lumière" widths={[460, 720]} sizes="(max-width: 620px) 100vw, 36vw" />
+                <span style="padding: 17px;"><strong>Suite Lumière</strong><span>Est · douceur minérale · petite terrasse</span></span>
+              </label>
+            </div>
+            <div class="demo-choice">
+              <input id="suite-feuillage" type="radio" name="suite" value="Suite Feuillage" />
+              <label for="suite-feuillage" style="padding: 0; overflow: hidden;">
+                <Image src={feuillage} alt="Projection de la chambre de la Suite Feuillage" widths={[460, 720]} sizes="(max-width: 620px) 100vw, 36vw" />
+                <span style="padding: 17px;"><strong>Suite Feuillage</strong><span>Parc · tons profonds · grande terrasse</span></span>
+              </label>
+            </div>
+          </div>
+          <p class="note" style="color: var(--demo-muted); margin-top: 14px;">Projections d’ambiance après travaux · images non contractuelles.</p>
+        </section>
+
+        <section class="demo-panel">
+          <div class="demo-panel-head"><div><p class="demo-kicker">03 · Les envies</p><h2>Préparer sans tout figer.</h2></div></div>
+          <div class="demo-choice-grid" style="margin-top: 22px;">
+            <div class="demo-choice">
+              <input id="spaPass" type="checkbox" name="spaPass" checked />
+              <label for="spaPass"><strong>Accès spa</strong><span>50 € par suite et par jour · créneaux à choisir après réservation</span></label>
+            </div>
+            <div class="demo-choice">
+              <input id="dinner" type="checkbox" name="dinner" checked />
+              <label for="dinner"><strong>Dîner privatif</strong><span>50 € par adulte · 25 € par enfant · menu personnalisé</span></label>
+            </div>
+            <div class="demo-choice">
+              <input id="welcome" type="checkbox" name="welcome" checked />
+              <label for="welcome"><strong>Accueil personnalisé</strong><span>Humain, autonome ou hybride · à préciser dans l’espace client</span></label>
+            </div>
+          </div>
+          <p class="note" style="color: var(--demo-muted); margin-top: 16px;">
+            Les options sont réglées sur place. Une option confirmée est considérée comme achetée et reste due en cas de non-présentation.
+          </p>
+        </section>
+
+        <section class="demo-panel">
+          <div class="demo-panel-head"><div><p class="demo-kicker">04 · Coordonnées</p><h2>À qui ouvrons-nous les portes ?</h2></div></div>
+          <div class="demo-form-grid" style="margin-top: 22px;">
+            <div class="demo-field"><label for="firstName">Prénom</label><input id="firstName" name="firstName" value="Camille" required /></div>
+            <div class="demo-field"><label for="lastName">Nom</label><input id="lastName" name="lastName" value="Martin" required /></div>
+            <div class="demo-field full"><label for="email">E-mail</label><input id="email" name="email" type="email" value="camille.martin@exemple.fr" required /></div>
+          </div>
+          <label style="display: flex; gap: 10px; align-items: start; margin-top: 18px; color: var(--demo-muted);">
+            <input type="checkbox" required checked />
+            <span>J’ai lu les conditions simulées : règlement de l’hébergement à la réservation, animaux des clients non admis, présence de trois chiens résidents dans le domaine.</span>
+          </label>
+        </section>
+      </div>
+    </form>
+  </div>
+  <script is:inline defer src={withBase("/demo/reservation.js")}></script>
+</DemoLayout>

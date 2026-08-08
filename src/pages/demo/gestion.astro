@@ -1,0 +1,181 @@
+---
+import DemoLayout from "../../layouts/DemoLayout.astro";
+import { withBase } from "../../utils/url";
+---
+
+<DemoLayout
+  title="Cockpit gestionnaire simulé — Les Nuits au Château"
+  description="Prototype de pilotage opérationnel et financier des Suites de Sainte-Lucie."
+  section="gestion"
+>
+  <div class="demo-shell">
+    <header class="demo-page-head">
+      <div>
+        <p class="demo-kicker">Cockpit des hôtes · vendredi 14 mai 2027</p>
+        <h1>La maison, en un regard.</h1>
+        <p class="lede">Planning, préparation, services et gestion financière utilisent le même séjour fictif que l’espace client.</p>
+      </div>
+      <div class="demo-page-meta">
+        <span class="demo-status simulated">Mode bac à sable</span>
+        <p>Dernière synchronisation simulée : à l’instant</p>
+      </div>
+    </header>
+
+    <div class="demo-app-grid">
+      <aside class="demo-sidebar">
+        <div class="demo-sidebar-title">
+          <strong>Exploitation</strong>
+          <span>2 suites · 1 domaine</span>
+        </div>
+        <nav class="demo-tabs" aria-label="Rubriques du cockpit">
+          <button class="demo-tab active" type="button" data-manager-target="dashboard">Tableau de bord</button>
+          <button class="demo-tab" type="button" data-manager-target="calendar">Planning</button>
+          <button class="demo-tab" type="button" data-manager-target="arrivals">Séjours</button>
+          <button class="demo-tab" type="button" data-manager-target="services">Services</button>
+          <button class="demo-tab" type="button" data-manager-target="operations">Opérations</button>
+          <button class="demo-tab" type="button" data-manager-target="finance">Finances</button>
+          <button class="demo-tab" type="button" data-manager-target="events">Journal SI</button>
+        </nav>
+      </aside>
+
+      <div>
+        <section class="demo-view" data-manager-view="dashboard">
+          <div class="demo-kpis">
+            <div class="demo-kpi"><span>Occupation · mai</span><strong>71 %</strong><small>simulation · +6 pts vs objectif</small></div>
+            <div class="demo-kpi"><span>CA hébergement</span><strong>10 750 €</strong><small>14 séjours fictifs</small></div>
+            <div class="demo-kpi"><span>CA services</span><strong>2 840 €</strong><small>26 % du CA hébergement</small></div>
+            <div class="demo-kpi"><span>À préparer aujourd’hui</span><strong>2</strong><small>1 arrivée · 1 dîner</small></div>
+          </div>
+          <div class="demo-grid two">
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Priorités</p><h2>Aujourd’hui au château.</h2></div><span class="demo-status warn">3 actions</span></div>
+              <ul class="demo-checklist">
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon" data-room-icon>1</span><span><strong>Préparer la Suite Lumière</strong><br><small>Arrivée Camille Martin · 15h30</small></span></span><button class="demo-button quiet" type="button" data-room-ready>Marquer prête</button></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span><strong>Brief petit-déjeuner</strong><br><small>8h30 · sucré & salé · sans fruits à coque</small></span></span><span class="demo-status ok">Transmis</span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span><strong>Dîner privatif</strong><br><small>3 couverts · contraintes transmises</small></span></span><span class="demo-status ok">Confirmé</span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon">4</span><span><strong>Garantie de séjour</strong><br><small data-manager-guarantee>Empreinte fictive à autoriser</small></span></span><span class="demo-status warn" data-manager-guarantee-status>À suivre</span></li>
+              </ul>
+            </article>
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">État du séjour</p><h2 data-manager-guest>Camille Martin</h2></div><span class="demo-status ok">Confirmé</span></div>
+              <div class="demo-price-row"><span>Suite</span><strong data-manager-suite>Suite Lumière</strong></div>
+              <div class="demo-price-row"><span>Séjour</span><strong data-manager-dates>14–17 mai · 3 nuits</strong></div>
+              <div class="demo-price-row"><span>Voyageurs</span><strong data-manager-guests>3</strong></div>
+              <div class="demo-price-row"><span>Accueil</span><strong data-manager-welcome>Hybride · 15h30</strong></div>
+              <div class="demo-price-row"><span>Hébergement</span><strong data-manager-accommodation>900 € · payé</strong></div>
+              <button class="demo-button secondary" type="button" data-manager-go="arrivals" style="margin-top: 18px;">Ouvrir le dossier séjour</button>
+            </article>
+          </div>
+          <article class="demo-panel" style="margin-top: 18px;">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Santé du système</p><h2>Tout est simulé — rien n’est encore branché.</h2></div><a class="demo-button quiet" href={withBase("/demo/integrations")}>Voir l’architecture</a></div>
+            <div class="demo-grid" style="margin-top: 20px;">
+              <div><span class="demo-status simulated">PMS simulé</span><p>Réservations et disponibilités locales.</p></div>
+              <div><span class="demo-status simulated">Paiement simulé</span><p>Aucune transaction ni carte réelle.</p></div>
+              <div><span class="demo-status simulated">Accès simulé</span><p>Aucune serrure ni code piloté.</p></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="demo-view" data-manager-view="calendar" hidden>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Planning consolidé</p><h2>Deux suites, toutes les sources.</h2></div><div><span class="demo-status ok">Direct</span> <span class="demo-status simulated">Airbnb fictif</span> <span class="demo-status simulated">Booking fictif</span></div></div>
+            <div class="demo-table-wrap" style="margin-top: 20px;">
+              <table class="demo-table demo-calendar">
+                <thead><tr><th>Suite</th><th>Ven. 14</th><th>Sam. 15</th><th>Dim. 16</th><th>Lun. 17</th><th>Mar. 18</th><th>Mer. 19</th><th>Jeu. 20</th></tr></thead>
+                <tbody>
+                  <tr><th>Lumière</th><td colspan="3" style="background: rgba(200,164,91,.16); color: var(--demo-gold);">Camille M. · direct</td><td>Départ 12h</td><td colspan="2"></td><td style="background: rgba(116,185,154,.12);">Arrivée · Airbnb</td></tr>
+                  <tr><th>Feuillage</th><td style="background: rgba(116,185,154,.12);">Louis B. · Booking</td><td>Départ 12h</td><td colspan="2"></td><td colspan="3" style="background: rgba(200,164,91,.1);">Famille Meyer · direct</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="demo-callout" style="margin-top: 20px;"><p>En exploitation, eviivo ou le PMS retenu restera la source de vérité des disponibilités. Cette interface consommera son API ou ses exports et ne créera jamais un second stock concurrent.</p></div>
+          </article>
+        </section>
+
+        <section class="demo-view" data-manager-view="arrivals" hidden>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Dossier séjour</p><h2><span data-manager-guest>Camille Martin</span> · <span data-manager-suite>Suite Lumière</span></h2></div><span class="demo-status warn" data-arrival-completion>Préparation à 67 %</span></div>
+            <div class="demo-grid two" style="margin-top: 22px;">
+              <div>
+                <h3>Accueil</h3>
+                <div class="demo-price-row"><span>Mode</span><strong data-manager-welcome-mode>Hybride</strong></div>
+                <div class="demo-price-row"><span>Heure estimée</span><strong data-manager-arrival-time>15:30</strong></div>
+                <div class="demo-price-row"><span>Langue</span><strong data-manager-language>FR</strong></div>
+                <div class="demo-price-row"><span>Accès</span><strong data-manager-key-status>Non activé</strong></div>
+              </div>
+              <div>
+                <h3>Préférences utiles</h3>
+                <div class="demo-price-row"><span>Petit-déjeuner</span><strong data-manager-breakfast>8h30 · sucré & salé</strong></div>
+                <div class="demo-price-row"><span>Alimentation</span><strong data-manager-dietary>Sans fruits à coque</strong></div>
+                <div class="demo-price-row"><span>Chiens résidents</span><strong data-manager-dogs>Information acceptée</strong></div>
+              </div>
+            </div>
+            <div class="demo-actions">
+              <button class="demo-button" type="button" data-manager-checkin>Simuler l’arrivée</button>
+              <button class="demo-button secondary" type="button" data-manager-message>Envoyer une consigne</button>
+            </div>
+          </article>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Données minimales</p><h2>Chaque information a une finalité.</h2></div></div>
+            <p style="margin-top: 18px;">La future application devra masquer les données sensibles aux rôles qui n’en ont pas besoin, limiter leur conservation et journaliser les consultations. Ce prototype n’utilise que des identités fictives.</p>
+          </article>
+        </section>
+
+        <section class="demo-view" data-manager-view="services" hidden>
+          <div class="demo-grid two">
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Planning spa · Suite Lumière</p><h2>Créneaux du séjour.</h2></div><span class="demo-status ok" data-manager-spa-count>3 réservations</span></div>
+              <div class="demo-list" data-manager-spa-list></div>
+            </article>
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Capacité & conflits</p><h2>Règles contrôlées.</h2></div></div>
+              <ul class="demo-checklist">
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Maximum 2 h par équipement, suite et jour</span></span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Maximum 8 h de spa par suite et jour</span></span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Exclusivité hammam, sauna et bain nordique</span></span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Partage piscine notifié aux deux suites</span></span></li>
+              </ul>
+            </article>
+          </div>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Production culinaire</p><h2>Demain matin & dîner.</h2></div></div>
+            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Service</th><th>Suite</th><th>Horaire</th><th>Couverts</th><th>Préférences</th><th>Statut</th></tr></thead><tbody><tr><td>Petit-déjeuner</td><td>Lumière</td><td data-service-breakfast-time>08:30</td><td>3</td><td data-service-dietary>Sans fruits à coque</td><td><span class="demo-status ok">Brief prêt</span></td></tr><tr><td>Dîner privatif</td><td>Lumière</td><td>19:30</td><td>3</td><td>Cuisine végétale bienvenue</td><td><span class="demo-status ok">Confirmé</span></td></tr></tbody></table></div>
+          </article>
+        </section>
+
+        <section class="demo-view" data-manager-view="operations" hidden>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Plan de journée</p><h2>Tâches, responsables et preuves.</h2></div><button class="demo-button quiet" type="button" data-add-task>Ajouter une tâche</button></div>
+            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Heure</th><th>Tâche</th><th>Responsable</th><th>Preuve attendue</th><th>État</th></tr></thead><tbody><tr><td>10:00</td><td>Contrôle Suite Lumière</td><td>Hôte</td><td>Checklist + photo</td><td data-room-state><span class="demo-status warn">À faire</span></td></tr><tr><td>14:45</td><td>Activer l’accès client</td><td>Système</td><td>Événement horodaté</td><td><span class="demo-status simulated">Automatisé</span></td></tr><tr><td>17:45</td><td>Préparer bain nordique</td><td>Opérations</td><td>Température + contrôle visuel</td><td><span class="demo-status warn">Planifié</span></td></tr><tr><td>18:45</td><td>Remise en état bain</td><td>Opérations</td><td>Checklist sanitaire</td><td><span class="demo-status warn">Planifié</span></td></tr></tbody></table></div>
+          </article>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Incidents & maintenance</p><h2>Tracer avant que cela ne devienne un problème.</h2></div><span class="demo-status ok">Aucun incident ouvert</span></div>
+            <button class="demo-button secondary" type="button" data-report-incident>Simuler un signalement</button>
+          </article>
+        </section>
+
+        <section class="demo-view" data-manager-view="finance" hidden>
+          <div class="demo-kpis">
+            <div class="demo-kpi"><span>Hébergement du séjour</span><strong data-finance-accommodation>900 €</strong><small>encaissé fictivement</small></div>
+            <div class="demo-kpi"><span>Options du séjour</span><strong data-finance-options>275 €</strong><small data-finance-options-status>à encaisser</small></div>
+            <div class="demo-kpi"><span>Panier total</span><strong data-finance-total>1 175 €</strong><small>390 € / nuit environ</small></div>
+            <div class="demo-kpi"><span>Garantie</span><strong>500 €</strong><small data-finance-guarantee>non autorisée</small></div>
+          </div>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Rapprochement</p><h2>De la réservation à la comptabilité.</h2></div><span class="demo-status simulated">Export fictif</span></div>
+            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Écriture</th><th>Source</th><th>Nature</th><th>Montant</th><th>État</th></tr></thead><tbody><tr><td>CSL-270514-LUM-01</td><td>Direct</td><td>Hébergement</td><td data-finance-accommodation>900 €</td><td><span class="demo-status ok">Rapproché</span></td></tr><tr><td>CSL-270514-LUM-02</td><td>Portail client</td><td>Spa</td><td data-finance-spa>150 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr><tr><td>CSL-270514-LUM-03</td><td>Portail client</td><td>Table d’hôtes</td><td data-finance-dinner>125 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr></tbody></table></div>
+            <div class="demo-actions"><button class="demo-button secondary" type="button" data-export-accounting>Simuler l’export comptable</button><button class="demo-button secondary" type="button" data-export-kpi>Exporter les indicateurs</button></div>
+          </article>
+        </section>
+
+        <section class="demo-view" data-manager-view="events" hidden>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Piste d’audit</p><h2>Ce qui s’est passé, dans quel ordre.</h2></div><button class="demo-button quiet" type="button" data-refresh-events>Actualiser</button></div>
+            <div class="demo-event-list" data-manager-events></div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script is:inline defer src={withBase("/demo/gestion.js")}></script>
+</DemoLayout>

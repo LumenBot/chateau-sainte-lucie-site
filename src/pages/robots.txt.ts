@@ -8,6 +8,7 @@ import { withBase } from "../utils/url";
 const body = (sitemapURL: URL) => `User-agent: *
 Allow: /
 Disallow: ${withBase("/merci")}
+Disallow: ${withBase("/demo")}
 
 Sitemap: ${sitemapURL.href}
 `;

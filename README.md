@@ -33,6 +33,11 @@ Le Château (`/le-chateau`) · Histoire (`/histoire`) · Galerie (`/galerie`) ·
 Contact de pré-ouverture (`/contact`, + `/merci`) · Mentions légales ·
 Confidentialité · 404.
 
+**Démonstrateur interne non indexé** : vue d’ensemble (`/demo`), réservation
+fictive (`/demo/reservation`), compagnon client (`/demo/client`), cockpit
+gestionnaire (`/demo/gestion`) et architecture (`/demo/integrations`). Les pages
+partagent un scénario local dans le navigateur et ne contiennent aucune donnée réelle.
+
 **Redirections** (base-aware) des anciennes routes v1 → accueil :
 `/seminaires`, `/evenements-prives`, `/tournages`.
 
@@ -68,6 +73,9 @@ soumission n'est pas traitée.
   shortlist ainsi qu'un protocole de démonstration.
 - `docs/10-brief-consultation-fournisseurs-v1.md` est le brief prêt à transmettre
   aux fournisseurs pour obtenir des réponses et devis comparables.
+- `docs/11-demonstrateur-experience-et-exploitation-v1.md` décrit la maquette
+  fonctionnelle, les rôles, les événements d’intégration, les scénarios de repli
+  et le protocole de revue par les associés.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 
@@ -90,5 +98,7 @@ soumission n'est pas traitée.
 - [x] Validation et publication du site vitrine sur GitHub Pages
 - [x] Référentiel d'offre et cahier des charges fonctionnel du SI
 - [x] Présélection documentée du socle PMS, channel manager et paiement
+- [x] Démonstrateur fonctionnel réservation / client / gestion / intégrations
 - [ ] Démonstrations fournisseurs, devis et décision contractuelle
-- [ ] Conception détaillée et réalisation du MVP
+- [ ] Revue du démonstrateur par les associés et arbitrage de la v2
+- [ ] Intégration du PMS et réalisation du MVP opérationnel

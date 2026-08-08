@@ -24,7 +24,7 @@ export default defineConfig({
     sitemap({
       // On exclut du sitemap les confirmations et les redirections.
       filter: (page) =>
-        !/\/(merci|seminaires|evenements-prives|tournages)(\/|$)/.test(page),
+        !/\/(merci|demo|seminaires|evenements-prives|tournages)(\/|$)/.test(page),
     }),
   ],
   vite: {

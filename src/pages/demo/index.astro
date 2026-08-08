@@ -1,0 +1,137 @@
+---
+import { Image } from "astro:assets";
+import DemoLayout from "../../layouts/DemoLayout.astro";
+import { withBase } from "../../utils/url";
+import perron from "../../assets/images/projection/perron-arrivee-soir.jpg";
+---
+
+<DemoLayout
+  title="Démonstrateur de l’expérience — Les Nuits au Château"
+  description="Prototype fonctionnel des parcours de réservation, séjour et gestion des Suites de Sainte-Lucie."
+  section="accueil"
+>
+  <div class="demo-shell">
+    <section class="demo-hero">
+      <div>
+        <p class="demo-kicker">Simulation d’exploitation · avril 2027</p>
+        <h1>Vivre le séjour.<br /><em class="gold light">Piloter la maison.</em></h1>
+        <p class="lede">
+          Ce prototype relie l’expérience du voyageur et le quotidien des hôtes.
+          Il permet de tester le parcours complet, depuis le choix d’une suite jusqu’au
+          départ, avec les mêmes informations visibles au bon moment par chaque partie prenante.
+        </p>
+        <div class="demo-actions">
+          <a class="demo-button" href={withBase("/demo/reservation")}>Commencer comme voyageur</a>
+          <a class="demo-button secondary" href={withBase("/demo/gestion")}>Ouvrir le cockpit gestionnaire</a>
+        </div>
+        <div class="demo-callout" style="margin-top: 28px;">
+          <p>
+            Scénario préchargé : Camille Martin, Suite Lumière, trois nuits en mai 2027.
+            Toutes les actions sont locales à ce navigateur et peuvent être réinitialisées.
+          </p>
+        </div>
+      </div>
+      <div class="demo-hero-visual">
+        <Image
+          src={perron}
+          alt="Projection de l’arrivée au perron du Château de Sainte-Lucie à la tombée du jour"
+          widths={[520, 820, 1100]}
+          sizes="(max-width: 850px) 100vw, 42vw"
+          loading="eager"
+        />
+        <div class="demo-hero-caption">
+          <strong>Une porte d’entrée avant même l’arrivée.</strong>
+          <span>Projection d’ambiance après travaux · image non contractuelle</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head">
+        <div>
+          <p class="demo-kicker">Quatre espaces complémentaires</p>
+          <h2>Un même séjour, plusieurs regards.</h2>
+        </div>
+        <p>
+          Le démonstrateur partage un état commun : chaque choix du client devient une
+          information exploitable pour les hôtes, sans ressaisie.
+        </p>
+      </div>
+      <div class="demo-grid">
+        <article class="demo-card">
+          <span class="number">01 · AVANT LA VENTE</span>
+          <h2>Réserver</h2>
+          <p>Choix de la suite, composition du séjour, prix explicite, options et paiement simulé.</p>
+          <a class="demo-button secondary" href={withBase("/demo/reservation")}>Tester le tunnel</a>
+        </article>
+        <article class="demo-card">
+          <span class="number">02 · AVANT & PENDANT LE SÉJOUR</span>
+          <h2>Espace client</h2>
+          <p>Accueil, préférences, spa, table d’hôtes, accès, guide vivant et départ.</p>
+          <a class="demo-button secondary" href={withBase("/demo/client")}>Entrer dans le séjour</a>
+        </article>
+        <article class="demo-card">
+          <span class="number">03 · EXPLOITATION</span>
+          <h2>Gérer</h2>
+          <p>Planning consolidé, préparation, services, encaissements et indicateurs.</p>
+          <a class="demo-button secondary" href={withBase("/demo/gestion")}>Voir le cockpit</a>
+        </article>
+      </div>
+      <div class="demo-grid two" style="margin-top: 18px;">
+        <article class="demo-card">
+          <span class="number">04 · SOCLE LOGICIEL</span>
+          <h2>Brancher demain</h2>
+          <p>PMS, channel manager, paiement, messagerie, contrôle d’accès et comptabilité sont modélisés sans être connectés.</p>
+          <a class="demo-button secondary" href={withBase("/demo/integrations")}>Explorer l’architecture</a>
+        </article>
+        <article class="demo-card">
+          <span class="number">05 · ATELIER FAMILIAL</span>
+          <h2>Donner un retour</h2>
+          <p>Parcourez les rôles, notez les incompréhensions et arbitrez ensemble les règles avant tout développement réel.</p>
+          <a class="demo-button secondary" href={withBase("/demo/client#assistance")}>Voir les points de contact</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head">
+        <div>
+          <p class="demo-kicker">Parties prenantes</p>
+          <h2>Ce que chacun doit pouvoir faire.</h2>
+        </div>
+      </div>
+      <div class="demo-grid">
+        <article class="demo-panel">
+          <span class="demo-badge">Voyageur principal</span>
+          <h3>Décider et orchestrer</h3>
+          <p>Réserver, payer le séjour, renseigner le groupe, choisir les services et suivre le solde.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Accompagnant</span>
+          <h3>Comprendre et profiter</h3>
+          <p>Consulter le programme, les règles, les accès et les contenus patrimoniaux sans gérer le paiement.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Hôte & opérations</span>
+          <h3>Préparer sans friction</h3>
+          <p>Voir les préférences utiles, les tâches, les créneaux et les alertes dans une seule vue.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Direction & associés</span>
+          <h3>Piloter le projet</h3>
+          <p>Mesurer remplissage, revenu, services et qualité, puis arbitrer l’offre et les investissements.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Comptabilité</span>
+          <h3>Rapprocher et justifier</h3>
+          <p>Exporter ventes, options, encaissements, taxes et écarts avec une piste d’audit.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Prestataires futurs</span>
+          <h3>S’intégrer proprement</h3>
+          <p>Échanger des événements normalisés sans rendre l’expérience dépendante d’un seul fournisseur.</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</DemoLayout>

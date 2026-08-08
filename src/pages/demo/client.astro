@@ -1,0 +1,240 @@
+---
+import { Image } from "astro:assets";
+import DemoLayout from "../../layouts/DemoLayout.astro";
+import { withBase } from "../../utils/url";
+import bainNordique from "../../assets/images/projection/bain-nordique.jpg";
+import petitDejeuner from "../../assets/images/projection/petit-dejeuner-terrasse.jpg";
+import histoire from "../../assets/images/cp_03_facade_sepia.jpg";
+---
+
+<DemoLayout
+  title="Espace client simulé — Les Nuits au Château"
+  description="Prototype du compagnon de séjour des Suites de Sainte-Lucie."
+  section="client"
+>
+  <div class="demo-shell">
+    <header class="demo-page-head">
+      <div>
+        <p class="demo-kicker">Compagnon de séjour</p>
+        <h1>Bonjour <span data-guest-firstname>Camille</span>.</h1>
+        <p class="lede"><span data-booking-suite>Suite Lumière</span> · <span data-booking-dates>du 14 au 17 mai 2027</span></p>
+      </div>
+      <div class="demo-page-meta">
+        <span class="demo-status ok" data-stay-status>Réservation confirmée</span>
+        <p>Référence <strong data-booking-reference>CSL-270514-LUM</strong></p>
+      </div>
+    </header>
+
+    <div class="demo-app-grid">
+      <aside class="demo-sidebar">
+        <div class="demo-sidebar-title">
+          <strong>Votre séjour</strong>
+          <span data-sidebar-step>Préparer votre arrivée</span>
+          <div class="demo-progress"><span data-onboarding-progress style="width: 67%;"></span></div>
+          <span><span data-onboarding-percent>67</span>% du parcours préparé</span>
+        </div>
+        <nav class="demo-tabs" aria-label="Rubriques de l’espace client">
+          <button class="demo-tab active" type="button" data-view-target="overview">Aujourd’hui</button>
+          <button class="demo-tab" type="button" data-view-target="prepare">Préparer l’arrivée</button>
+          <button class="demo-tab" type="button" data-view-target="services">Spa & table</button>
+          <button class="demo-tab" type="button" data-view-target="guide">Le château</button>
+          <button class="demo-tab" type="button" data-view-target="checkout">Départ & paiement</button>
+          <button class="demo-tab" type="button" data-view-target="assistance">Votre hôte</button>
+        </nav>
+      </aside>
+
+      <div>
+        <section class="demo-view" data-view="overview">
+          <div class="demo-kpis">
+            <div class="demo-kpi"><span>Arrivée</span><strong data-arrival-date>14 mai</strong><small>à partir de 15h</small></div>
+            <div class="demo-kpi"><span>Durée</span><strong data-nights>3 nuits</strong><small data-guests>3 voyageurs</small></div>
+            <div class="demo-kpi"><span>Prochain rendez-vous</span><strong data-next-service>18:00</strong><small data-next-service-label>Bain nordique</small></div>
+            <div class="demo-kpi"><span>Options à régler</span><strong data-options-total>275 €</strong><small>paiement sur place</small></div>
+          </div>
+
+          <div class="demo-grid two">
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">À faire</p><h2>Avant de venir</h2></div><span class="demo-status warn">1 étape utile</span></div>
+              <ul class="demo-checklist" data-client-checklist></ul>
+              <button class="demo-button secondary" type="button" data-go-view="prepare" style="margin-top: 18px;">Finaliser l’accueil</button>
+            </article>
+            <article class="demo-panel" style="padding: 0; overflow: hidden;">
+              <Image src={bainNordique} alt="Projection du bain nordique intégré au parc" widths={[520, 820]} sizes="(max-width: 850px) 100vw, 42vw" />
+              <div style="padding: 26px;">
+                <p class="demo-kicker">Votre prochaine parenthèse</p>
+                <h2 style="margin-top: 10px;">Bain nordique au crépuscule</h2>
+                <p>Vendredi 14 mai · 18h–19h · usage privatif</p>
+                <button class="demo-button secondary" type="button" data-go-view="services">Gérer mes créneaux</button>
+              </div>
+            </article>
+          </div>
+
+          <article class="demo-panel" style="margin-top: 18px;">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Le fil de votre séjour</p><h2>Tout ce qui compte, au bon moment.</h2></div></div>
+            <div class="demo-timeline">
+              <div class="demo-timeline-step done"><small>Réservé</small><strong>Hébergement réglé</strong></div>
+              <div class="demo-timeline-step active"><small>Maintenant</small><strong>Préférences & garantie</strong></div>
+              <div class="demo-timeline-step"><small>Jour J</small><strong>Accueil & accès</strong></div>
+              <div class="demo-timeline-step"><small>Séjour</small><strong>Services & découverte</strong></div>
+              <div class="demo-timeline-step"><small>Départ</small><strong>Solde & souvenir</strong></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="demo-view" data-view="prepare" hidden>
+          <form id="client-preferences-form">
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Accueil sur mesure</p><h2>Comment souhaitez-vous arriver ?</h2></div><span class="demo-status simulated">Choix modifiable</span></div>
+              <div class="demo-choice-grid" style="margin-top: 22px;">
+                <div class="demo-choice"><input id="welcome-human" type="radio" name="welcomeMode" value="Humain" /><label for="welcome-human"><strong>Accueil humain</strong><span>Nous vous attendons au perron et prenons le temps de vous installer.</span></label></div>
+                <div class="demo-choice"><input id="welcome-hybrid" type="radio" name="welcomeMode" value="Hybride" checked /><label for="welcome-hybrid"><strong>Accueil hybride</strong><span>Accès autonome disponible, puis rencontre à l’heure qui vous convient.</span></label></div>
+                <div class="demo-choice"><input id="welcome-auto" type="radio" name="welcomeMode" value="Autonome" /><label for="welcome-auto"><strong>Accueil autonome</strong><span>Instructions et accès numérique, avec un hôte joignable à tout moment.</span></label></div>
+              </div>
+              <div class="demo-form-grid" style="margin-top: 22px;">
+                <div class="demo-field"><label for="arrivalTime">Heure d’arrivée estimée</label><select id="arrivalTime" name="arrivalTime"><option>14:00 · sur demande</option><option>15:00</option><option selected>15:30</option><option>16:00</option><option>17:00</option><option>Après 18:00</option></select></div>
+                <div class="demo-field"><label for="language">Langue d’accueil</label><select id="language" name="language"><option selected>FR</option><option>EN</option></select></div>
+              </div>
+            </article>
+
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Petit-déjeuner</p><h2>Votre premier matin.</h2></div></div>
+              <div class="demo-grid two" style="margin-top: 22px; align-items: center;">
+                <div class="demo-form-grid">
+                  <div class="demo-field"><label for="breakfastTime">Horaire préféré</label><select id="breakfastTime" name="breakfastTime"><option>07:30 · sur demande</option><option>08:00</option><option selected>08:30</option><option>09:00</option><option>09:30</option><option>10:00</option></select></div>
+                  <div class="demo-field"><label for="breakfastStyle">Envie principale</label><select id="breakfastStyle" name="breakfastStyle"><option>Plutôt sucré</option><option>Plutôt salé</option><option selected>Sucré & salé</option></select></div>
+                  <div class="demo-field full"><label for="dietary">Allergies, intolérances ou préférences</label><textarea id="dietary" name="dietary">Sans fruits à coque</textarea></div>
+                </div>
+                <Image src={petitDejeuner} alt="Projection d’un petit-déjeuner servi en terrasse" widths={[520, 820]} sizes="(max-width: 850px) 100vw, 38vw" />
+              </div>
+            </article>
+
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Règles essentielles</p><h2>Pour que chacun se sente chez lui.</h2></div></div>
+              <label style="display: flex; gap: 12px; align-items: start; margin-top: 22px;">
+                <input id="dogNoticeAccepted" name="dogNoticeAccepted" type="checkbox" checked />
+                <span>Je sais que trois chiens vivent sur le domaine. Ils n’accèdent ni aux suites, ni au spa, ni aux espaces de préparation et de service, mais peuvent être présents dans le parc.</span>
+              </label>
+              <p class="note" style="color: var(--demo-muted); margin-top: 14px;">Les animaux des clients ne sont pas admis. Les espaces partagés sont non-fumeurs.</p>
+              <div class="demo-actions"><button class="demo-button" type="submit">Enregistrer mes préférences</button></div>
+            </article>
+          </form>
+
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Garantie de séjour</p><h2>Empreinte bancaire de 500 €</h2></div><span class="demo-status warn" data-guarantee-status>À autoriser</span></div>
+            <p style="margin-top: 18px;">Aucun débit n’est effectué. Dans cette maquette, l’autorisation est simplement simulée et aucune donnée bancaire n’est collectée.</p>
+            <button class="demo-button secondary" type="button" data-authorize-guarantee>Simuler l’autorisation</button>
+          </article>
+        </section>
+
+        <section class="demo-view" data-view="services" hidden>
+          <div class="demo-kpis">
+            <div class="demo-kpi"><span>Accès spa</span><strong data-spa-pass>Activé</strong><small>50 € / suite / jour</small></div>
+            <div class="demo-kpi"><span>Plage d’accès</span><strong>8h–00h</strong><small>sur réservation</small></div>
+            <div class="demo-kpi"><span>Plafond quotidien</span><strong>8 h</strong><small>2 × 1h / équipement</small></div>
+            <div class="demo-kpi"><span>Piscine</span><strong>Partageable</strong><small>privatisation sur demande</small></div>
+          </div>
+          <div class="demo-grid two">
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Nouveau créneau</p><h2>Réserver une parenthèse.</h2></div></div>
+              <form id="spa-booking-form" class="demo-form-grid" style="margin-top: 22px;">
+                <div class="demo-field"><label for="spaDate">Date</label><select id="spaDate" name="date"></select></div>
+                <div class="demo-field"><label for="equipment">Équipement</label><select id="equipment" name="equipment"><option>Hammam</option><option>Piscine naturelle</option><option>Bain nordique</option><option>Sauna finlandais</option></select></div>
+                <div class="demo-field"><label for="spaTime">Heure</label><select id="spaTime" name="time"><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option><option>23:00</option></select></div>
+                <div class="demo-field"><span class="label">Disponibilité</span><span class="demo-status ok" style="align-self: start;">Simulée disponible</span></div>
+                <label class="demo-field full" style="display: flex; grid-template-columns: auto 1fr; align-items: start;">
+                  <input id="privatePool" name="privatePool" type="checkbox" />
+                  <span>Privatiser la piscine naturelle pendant deux heures consécutives (+50 €, utilise les deux créneaux piscine du jour).</span>
+                </label>
+                <div class="demo-field full"><button class="demo-button" type="submit">Ajouter au programme</button></div>
+              </form>
+              <div class="demo-callout" style="margin-top: 20px;"><p>Hammam, sauna et bain nordique sont privatifs par suite. La piscine peut accueillir les deux suites simultanément ; les deux clients en sont alors informés.</p></div>
+            </article>
+
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Votre programme</p><h2>Créneaux confirmés.</h2></div><span class="demo-status ok" data-spa-count>3 créneaux</span></div>
+              <div class="demo-list" data-spa-bookings></div>
+            </article>
+          </div>
+
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Table d’hôtes</p><h2>Un dîner composé pour vous.</h2></div><span class="demo-status ok">Demandé</span></div>
+            <div class="demo-form-grid" style="margin-top: 22px;">
+              <div><p>Menu unique, produits du territoire, de saison, bio et locaux selon les possibilités. Réservation avant 18h la veille.</p><p class="note" style="color: var(--demo-muted);">50 € par adulte · 25 € de 3 à 11 ans · boissons alcoolisées non incluses.</p></div>
+              <div class="demo-field"><label for="dinnerPreferences">Ce qui vous ferait plaisir — ou ce qu’il faut éviter</label><textarea id="dinnerPreferences">Cuisine végétale bienvenue ; aucune noix ni noisette.</textarea><button class="demo-button secondary" type="button" data-save-dinner>Transmettre à la table</button></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="demo-view" data-view="guide" hidden>
+          <article class="demo-panel" style="padding: 0; overflow: hidden;">
+            <div class="demo-grid two" style="gap: 0; align-items: stretch;">
+              <Image src={histoire} alt="Vue ancienne de la façade du Château de Sainte-Lucie" widths={[620, 940]} sizes="(max-width: 850px) 100vw, 42vw" style="width: 100%; height: 100%; object-fit: cover;" />
+              <div style="padding: clamp(28px, 5vw, 60px); align-self: center;">
+                <p class="demo-kicker">Parcours patrimonial · chapitre 1</p>
+                <h2 style="font-size: clamp(36px, 5vw, 58px);">1876. Une demeure prend racine.</h2>
+                <p class="lede">Le compagnon numérique prolonge les panneaux installés dans les espaces partagés. Chaque pièce révèle un fragment de l’histoire, sans transformer le séjour en musée.</p>
+                <button class="demo-button secondary" type="button" data-story-next>Écouter le récit · simulation</button>
+              </div>
+            </div>
+          </article>
+          <div class="demo-grid" style="margin-top: 18px;">
+            <article class="demo-card"><span class="number">CHAPITRE 02</span><h3>Le blason du perron</h3><p>Lire les symboles, la devise et l’identité héraldique retrouvée.</p><button class="demo-button quiet" type="button" data-story-card>Ouvrir</button></article>
+            <article class="demo-card"><span class="number">CHAPITRE 03</span><h3>La crypte et la chapelle</h3><p>Découvrir les traces plus anciennes conservées dans le domaine.</p><button class="demo-button quiet" type="button" data-story-card>Ouvrir</button></article>
+            <article class="demo-card"><span class="number">CHAPITRE 04</span><h3>Une maison vivante</h3><p>Comprendre comment trois foyers font vivre le château aujourd’hui.</p><button class="demo-button quiet" type="button" data-story-card>Ouvrir</button></article>
+          </div>
+        </section>
+
+        <section class="demo-view" data-view="checkout" hidden>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Votre solde</p><h2>Clore le séjour sans interrompre l’expérience.</h2></div><span class="demo-status warn" data-invoice-status>À régler sur place</span></div>
+            <div class="demo-table-wrap" style="margin-top: 20px;">
+              <table class="demo-table">
+                <thead><tr><th>Prestation</th><th>Statut</th><th>Montant</th></tr></thead>
+                <tbody>
+                  <tr><td>Hébergement · <span data-checkout-nights>3 nuits</span></td><td><span class="demo-status ok">Réglé à la réservation</span></td><td data-checkout-accommodation>900 €</td></tr>
+                  <tr><td>Accès spa</td><td><span class="demo-status warn">À régler</span></td><td data-checkout-spa>150 €</td></tr>
+                  <tr><td>Dîner privatif</td><td><span class="demo-status warn">À régler</span></td><td data-checkout-dinner>125 €</td></tr>
+                  <tr><td>Privatisation piscine</td><td><span class="demo-status simulated">Selon programme</span></td><td data-checkout-pool>0 €</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="demo-price-row total"><span>Solde des options</span><strong data-checkout-options>275 €</strong></div>
+            <div class="demo-actions">
+              <button class="demo-button" type="button" data-pay-options>Simuler le règlement</button>
+              <button class="demo-button secondary" type="button" data-download-invoice>Télécharger la facture fictive</button>
+            </div>
+          </article>
+          <article class="demo-panel">
+            <div class="demo-panel-head"><div><p class="demo-kicker">Départ avant midi</p><h2>Prêt à refermer la porte ?</h2></div><span class="demo-status warn" data-checkout-status>Non finalisé</span></div>
+            <ul class="demo-checklist">
+              <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Consommations et options vérifiées</span></span></li>
+              <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon">2</span><span>Clés et accès à restituer</span></span></li>
+              <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon">3</span><span>Signaler un incident ou un oubli</span></span></li>
+            </ul>
+            <button class="demo-button secondary" type="button" data-complete-checkout>Simuler le check-out</button>
+          </article>
+        </section>
+
+        <section id="assistance" class="demo-view" data-view="assistance" hidden>
+          <div class="demo-grid two">
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Votre hôte</p><h2>Un contact, trois façons d’être accompagné.</h2></div><span class="demo-status ok">Disponible</span></div>
+              <p style="margin-top: 18px;">La messagerie, l’appel et la demande de rencontre sont simulés. En exploitation, les échanges seront historisés au niveau du séjour.</p>
+              <div class="demo-actions"><button class="demo-button" type="button" data-contact-host>Écrire un message</button><button class="demo-button secondary" type="button" data-contact-host>Demander à être rappelé</button></div>
+            </article>
+            <article class="demo-panel">
+              <div class="demo-panel-head"><div><p class="demo-kicker">Aide immédiate</p><h2>Les réponses essentielles.</h2></div></div>
+              <div class="demo-list">
+                <div class="demo-list-row"><span>Comment modifier un créneau spa ?</span><button class="demo-button quiet" type="button" data-help>Voir</button></div>
+                <div class="demo-list-row"><span>Où puis-je croiser les chiens ?</span><button class="demo-button quiet" type="button" data-help>Voir</button></div>
+                <div class="demo-list-row"><span>Comment fonctionne l’accueil autonome ?</span><button class="demo-button quiet" type="button" data-help>Voir</button></div>
+                <div class="demo-list-row"><span>Urgence ou incident dans le domaine</span><button class="demo-button quiet" type="button" data-help>Voir</button></div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script is:inline defer src={withBase("/demo/client.js")}></script>
+</DemoLayout>
