@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import { resolveVisual } from "../../data/images";
 import { withBase } from "../../utils/url";
+import ProjectionBadge from "../ProjectionBadge.astro";
 
 interface Props {
   href: string;
@@ -28,6 +29,7 @@ const visual = resolveVisual(image);
       loading="lazy"
       style={imagePosition ? `object-position:${imagePosition};` : undefined}
     />
+    {visual.projection && <ProjectionBadge />}
   </a>
   <div class="suite-card__body">
     <p class="eyebrow"><span class="ln"></span>{name}</p>
@@ -55,6 +57,7 @@ const visual = resolveVisual(image);
     overflow: hidden;
   }
   .suite-card__media {
+    position: relative;
     display: block;
     aspect-ratio: 3/2;
     overflow: hidden;

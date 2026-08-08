@@ -42,15 +42,15 @@ export const sections: ExpSection[] = [
     ],
   },
   {
-    image: images.salleAManger,
+    image: images.projTableHotes,
     cap: "Le soir",
     title: "La table d'hôtes",
     rev: true,
     paragraphs: [
-      "Le soir, la table se dresse dans les boiseries. Une cuisine de maison, servie dans un lieu spectaculaire sans cérémonial excessif.",
+      "Le soir, la table se dresse dans les boiseries : huit couverts, linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine de maison, servie dans un lieu spectaculaire sans cérémonial excessif.",
       "Proposition sur réservation.",
     ],
-    note: "Menus, régimes pris en charge et tarifs de la table seront précisés avant l'ouverture.",
+    note: "Menus et régimes pris en charge précisés avant l'ouverture. Dîner à la table d'hôtes : 50 € par personne (voir tarifs).",
   },
   {
     image: images.daims,
@@ -70,6 +70,17 @@ export const sections: ExpSection[] = [
       "La piscine naturelle existante associe bassin de nage et lagunage planté, au cœur du jardin. Le hammam s'intègre à l'espace bien-être.",
     ],
     note: "L'accès à la piscine naturelle dépend de la saison, des conditions et des règles de sécurité.",
+  },
+  {
+    image: images.projSpaTerrasse,
+    cap: "Le bien-être",
+    title: "Le spa & les extensions",
+    rev: true,
+    paragraphs: [
+      "Un espace bien-être avec hammam prolonge les espaces communs vers le parc. Une terrasse de détente accompagne les fins de journée.",
+      "Un bain nordique chauffé au bois, dans une clairière, est envisagé comme extension de l'expérience.",
+    ],
+    note: "Le bain nordique reste une projection (implantation, sécurité et calendrier à valider). Accès spa en supplément : 50 € / nuit (voir tarifs).",
   },
   {
     image: images.vueAerienne,

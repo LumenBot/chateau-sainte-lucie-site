@@ -727,6 +727,41 @@ section {
 }
 
 /* =================================================================
+   RENDUS DE PROJECTION — mention obligatoire « non contractuel »
+   ================================================================= */
+.proj-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  font-family: var(--serif);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 9.5px;
+  color: var(--creme);
+  background: rgba(20, 31, 38, 0.72);
+  border: 1px solid var(--rule-d);
+  padding: 5px 9px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+.proj-badge--br {
+  top: auto;
+  left: auto;
+  bottom: 16px;
+  right: 16px;
+}
+.proj-note {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--encre-faint);
+}
+.night .proj-note,
+.proj-note.on-dark {
+  color: var(--creme-faint);
+}
+
+/* =================================================================
    STICKY MOBILE CTA (cahier §5 — CTA contact persistant en mobile)
    ================================================================= */
 .sticky-cta {

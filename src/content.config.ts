@@ -50,6 +50,10 @@ const suites = defineCollection({
     tagline: z.string(),
     cardImage: z.string(),
     cardPosition: z.string().optional(),
+    /** Rendus de projection (non contractuels) présentés en galerie. */
+    renders: z
+      .array(z.object({ image: z.string(), caption: z.string() }))
+      .default([]),
   }),
 });
 

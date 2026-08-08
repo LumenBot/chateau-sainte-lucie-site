@@ -14,8 +14,8 @@ hero:
   lead: >-
     La plus enveloppante. Verts profonds, bois sombre et laiton ; la pénombre y
     devient une qualité — lecture, bain chaud, lumière basse et vue sur les arbres.
-  image: chateauJardin
-  imageAlt: Le château et son parc arboré, frondaisons profondes
+  image: projFeuillageChambre
+  imageAlt: Suite Feuillage — chambre principale (visuel de projection)
   imagePosition: "center 55%"
 palette: Verts profonds, bois sombre et laiton.
 ambiance:
@@ -36,5 +36,10 @@ aConfirmer: >-
   Surface, couchages, équipements détaillés, modalités d'accès et tarif précis
   seront communiqués à l'ouverture des réservations.
 tagline: La plus enveloppante — verts profonds, bois sombre, ouverte sur les frondaisons.
-cardImage: piscineNuit
+cardImage: projFeuillageChambre
+cardPosition: "center 50%"
+renders:
+  - { image: projFeuillageChambre2, caption: "La seconde chambre" }
+  - { image: projFeuillageBain, caption: "La salle de bain minérale" }
+  - { image: projFeuillageTerrasse, caption: "La grande terrasse à balustrade" }
 ---

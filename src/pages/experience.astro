@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/sections/PageHero.astro";
 import CtaFinal from "../components/CtaFinal.astro";
+import ProjectionBadge from "../components/ProjectionBadge.astro";
 import { experienceSeo, phero, sections, experienceCta } from "../data/experience";
 ---
 
@@ -31,6 +32,7 @@ import { experienceSeo, phero, sections, experienceCta } from "../data/experienc
                 loading="lazy"
                 style={s.imagePosition ? `object-position:${s.imagePosition};` : undefined}
               />
+              {s.image.projection && <ProjectionBadge />}
               <span class="cap">{s.cap}</span>
             </div>
             <div class="xfeature__body">
