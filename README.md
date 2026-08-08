@@ -64,6 +64,10 @@ soumission n'est pas traitée.
   conditions de séjour, restauration et règles du spa.
 - `docs/08-cahier-des-charges-fonctionnel-si-v1.md` définit le futur système de
   réservation, le portail client et l'applicatif gestionnaire.
+- `docs/09-selection-socle-technique-v1.md` compare les PMS et recommande une
+  shortlist ainsi qu'un protocole de démonstration.
+- `docs/10-brief-consultation-fournisseurs-v1.md` est le brief prêt à transmettre
+  aux fournisseurs pour obtenir des réponses et devis comparables.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 
@@ -85,4 +89,6 @@ soumission n'est pas traitée.
 - [x] Refonte « Les Nuits au Château » (backlog T0 → T12)
 - [x] Validation et publication du site vitrine sur GitHub Pages
 - [x] Référentiel d'offre et cahier des charges fonctionnel du SI
-- [ ] Sélection des solutions et conception détaillée du MVP
+- [x] Présélection documentée du socle PMS, channel manager et paiement
+- [ ] Démonstrations fournisseurs, devis et décision contractuelle
+- [ ] Conception détaillée et réalisation du MVP
