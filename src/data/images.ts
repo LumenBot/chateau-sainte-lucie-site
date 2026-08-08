@@ -39,9 +39,30 @@ import hallEntree from "../assets/images/21_hall_entree.jpg";
 import salleAManger from "../assets/images/22_salle_a_manger.jpg";
 import salonCheminee from "../assets/images/23_salon_cheminee.jpg";
 
+// --- Rendus de projection (homestaging / extensions), NON CONTRACTUELS ---
+// Générés à partir des photos, vidéos et plans du lieu. Toujours affichés avec
+// une mention « Visuel de projection ». À remplacer par les photos réelles
+// après travaux (mars 2027).
+import projLumiereChambre from "../assets/images/projection/lumiere-chambre.jpg";
+import projLumiereRosace from "../assets/images/projection/lumiere-rosace.jpg";
+import projLumiereNuit from "../assets/images/projection/lumiere-nuit.jpg";
+import projLumiereSalon from "../assets/images/projection/lumiere-salon.jpg";
+import projLumiereBain from "../assets/images/projection/lumiere-bain.jpg";
+import projLumiereTerrasse from "../assets/images/projection/lumiere-terrasse.jpg";
+import projFeuillageChambre from "../assets/images/projection/feuillage-chambre.jpg";
+import projFeuillageChambre2 from "../assets/images/projection/feuillage-chambre2.jpg";
+import projFeuillageBain from "../assets/images/projection/feuillage-bain.jpg";
+import projFeuillageTerrasse from "../assets/images/projection/feuillage-terrasse.jpg";
+import projTableHotes from "../assets/images/projection/table-hotes.jpg";
+import projBainNordique from "../assets/images/projection/bain-nordique.jpg";
+import projHammam from "../assets/images/projection/hammam.jpg";
+import projSpaTerrasse from "../assets/images/projection/spa-terrasse.jpg";
+
 export interface Visual {
   src: ImageMetadata;
   alt: string;
+  /** Rendu de projection non contractuel (affiché avec mention). */
+  projection?: boolean;
 }
 
 export const images = {
@@ -149,6 +170,22 @@ export const images = {
     src: salonCheminee,
     alt: "Un salon de caractère : cheminée de marbre, parquet et boiseries, aménagé pour une journée de travail",
   },
+
+  // --- Rendus de projection (non contractuels) ---
+  projLumiereChambre: { src: projLumiereChambre, alt: "Suite Lumière — chambre principale (visuel de projection non contractuel)", projection: true },
+  projLumiereRosace: { src: projLumiereRosace, alt: "Suite Lumière — rosace sculptée du plafond (visuel de projection non contractuel)", projection: true },
+  projLumiereNuit: { src: projLumiereNuit, alt: "Suite Lumière — chambre à la nuit tombée (visuel de projection non contractuel)", projection: true },
+  projLumiereSalon: { src: projLumiereSalon, alt: "Suite Lumière — salon privé (visuel de projection non contractuel)", projection: true },
+  projLumiereBain: { src: projLumiereBain, alt: "Suite Lumière — salle de bain (visuel de projection non contractuel)", projection: true },
+  projLumiereTerrasse: { src: projLumiereTerrasse, alt: "Suite Lumière — terrasse tournée vers le parc (visuel de projection non contractuel)", projection: true },
+  projFeuillageChambre: { src: projFeuillageChambre, alt: "Suite Feuillage — chambre principale (visuel de projection non contractuel)", projection: true },
+  projFeuillageChambre2: { src: projFeuillageChambre2, alt: "Suite Feuillage — seconde chambre (visuel de projection non contractuel)", projection: true },
+  projFeuillageBain: { src: projFeuillageBain, alt: "Suite Feuillage — salle de bain minérale (visuel de projection non contractuel)", projection: true },
+  projFeuillageTerrasse: { src: projFeuillageTerrasse, alt: "Suite Feuillage — grande terrasse à balustrade (visuel de projection non contractuel)", projection: true },
+  projTableHotes: { src: projTableHotes, alt: "La table d'hôtes dressée dans les boiseries (visuel de projection non contractuel)", projection: true },
+  projBainNordique: { src: projBainNordique, alt: "Bain nordique dans une clairière — extension envisagée (visuel de projection non contractuel)", projection: true },
+  projHammam: { src: projHammam, alt: "Espace bien-être et hammam (visuel de projection non contractuel)", projection: true },
+  projSpaTerrasse: { src: projSpaTerrasse, alt: "Terrasse de détente au crépuscule (visuel de projection non contractuel)", projection: true },
 } satisfies Record<string, Visual>;
 
 export type ImageKey = keyof typeof images;

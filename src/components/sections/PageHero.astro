@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Button from "../Button.astro";
+import ProjectionBadge from "../ProjectionBadge.astro";
 import { resolveVisual } from "../../data/images";
 
 type Variant = "solid" | "gold-light" | "ghost" | "ghost-light";
@@ -42,6 +43,7 @@ const placeStyle =
       fetchpriority="high"
       style={`object-position:${imagePosition};`}
     />
+    {visual.projection && <ProjectionBadge class="proj-badge--br" />}
   </div>
   <div class="phero__in wrap">
     <p class="place" style={placeStyle}>{place}</p>

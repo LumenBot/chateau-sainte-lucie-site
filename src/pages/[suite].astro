@@ -1,9 +1,12 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/sections/PageHero.astro";
 import CtaFinal from "../components/CtaFinal.astro";
 import Icon from "../components/Icon.astro";
+import ProjectionBadge from "../components/ProjectionBadge.astro";
+import { resolveVisual } from "../data/images";
 import { withBase } from "../utils/url";
 
 export async function getStaticPaths() {
@@ -54,11 +57,6 @@ const { hero } = data;
         </div>
       </div>
 
-      <p class="note suite-photo-note">
-        Photographies d'ambiance du domaine. Les visuels définitifs des suites
-        seront réalisés après les travaux, en mars 2027.
-      </p>
-
       <p class="suite-nav">
         <a class="link-or" href={withBase("/les-suites")}>
           <span class="arr">←</span> Revenir aux deux suites
@@ -66,6 +64,45 @@ const { hero } = data;
       </p>
     </div>
   </section>
+
+  {
+    data.renders.length > 0 && (
+      <section class="sec suite-renders">
+        <div class="wrap">
+          <div class="sec-head">
+            <p class="eyebrow"><span class="ln" />Visite en images</p>
+            <h2 class="display-l">La suite {data.nav}, <em class="gold">en projection.</em></h2>
+            <p class="proj-note">
+              Visuels de projection non contractuels, réalisés à partir des
+              photographies, vidéos et plans du lieu. L'aménagement final pourra
+              différer ; les photographies définitives seront réalisées après les
+              travaux, en mars 2027.
+            </p>
+          </div>
+          <div class="renders-grid">
+            {data.renders.map((r) => {
+              const v = resolveVisual(r.image);
+              return (
+                <figure class="render-item">
+                  <div class="render-media">
+                    <Image
+                      src={v.src}
+                      alt={v.alt}
+                      widths={[400, 700, 1000]}
+                      sizes="(min-width:820px) 33vw, 100vw"
+                      loading="lazy"
+                    />
+                    <ProjectionBadge />
+                  </div>
+                  <figcaption>{r.caption}</figcaption>
+                </figure>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <CtaFinal
     eyebrow="Pré-ouverture · avril 2027"
@@ -158,5 +195,52 @@ const { hero } = data;
   .suite-nav {
     margin-top: 22px;
     text-align: center;
+  }
+
+  /* galerie de rendus de projection */
+  .suite-renders {
+    background: var(--parch-2);
+  }
+  .suite-renders .sec-head {
+    max-width: 720px;
+  }
+  .suite-renders h2 {
+    margin: 16px 0 14px;
+  }
+  .renders-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-top: 40px;
+  }
+  .render-item {
+    margin: 0;
+  }
+  .render-media {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid var(--rule-l-faint);
+  }
+  .render-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .render-item figcaption {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--encre-soft);
+    margin-top: 10px;
+  }
+  @media (min-width: 620px) {
+    .renders-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (min-width: 900px) {
+    .renders-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 </style>

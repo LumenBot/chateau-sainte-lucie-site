@@ -1,0 +1,13 @@
+---
+/**
+ * Pastille « Visuel de projection » à superposer aux rendus non contractuels.
+ * Doit être placée dans un conteneur `position: relative`.
+ */
+interface Props {
+  label?: string;
+  class?: string;
+}
+const { label = "Visuel de projection", class: className } = Astro.props;
+---
+
+<span class={`proj-badge${className ? " " + className : ""}`}>{label}</span>
