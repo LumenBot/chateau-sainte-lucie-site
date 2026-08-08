@@ -4,13 +4,13 @@ import { images, type Visual } from "./images";
 export const experienceSeo = {
   title: "L'Expérience | Les Nuits au Château",
   description:
-    "Deux suites, dîner privatif, piscine naturelle et spa au jardin : une expérience rare dans un château familial de 1876 au cœur des Vosges.",
+    "Deux suites seulement, dîner privatif et spa aux quatre expériences : un séjour intime et haut de gamme dans un château familial de 1876.",
 };
 
 export const phero = {
   place: "L'Expérience",
   title: ["Du perron", "au petit matin."],
-  lead: "Une maison de famille qui n'ouvre que deux suites et prend le temps de recevoir : arrivée au perron, espaces historiques, dîner privatif, eaux du jardin et matin dans le parc.",
+  lead: "Deux suites seulement dans 750 m² d'histoire : arrivée au perron, grands salons, dîner dressé pour votre tablée, temps réservé au spa et matin dans un parc d'un hectare.",
   image: images.hallEntree as Visual,
   imagePosition: "center 42%",
 };
@@ -33,8 +33,8 @@ export const sections: ExpSection[] = [
     cap: "L'arrivée",
     title: "Franchir le seuil",
     paragraphs: [
-      "L'expérience commence avant la chambre. À la tombée du jour, le perron éclairé ouvre sur le hall, ses boiseries et son sol en mosaïque. Le château se révèle par touches, sans mise en scène tapageuse.",
-      "Avec deux suites seulement, l'accueil reste personnel et le rythme volontairement lent.",
+      "L'expérience commence avant la suite. À la tombée du jour, le perron éclairé ouvre sur le hall, ses boiseries et son sol en mosaïque. Le château se révèle par touches, dans un jeu de lumière pensé comme un premier rituel.",
+      "Avec deux suites seulement dans toute la demeure, l'accueil reste personnel, les circulations paisibles et chaque arrivée singulière.",
     ],
   },
   {
@@ -43,8 +43,8 @@ export const sections: ExpSection[] = [
     cap: "Les communs",
     title: "Les espaces partagés",
     paragraphs: [
-      "Hall au sol en mosaïque, grand salon boisé, salle à manger, bibliothèque monumentale, cuisine d'été, salle de sport et hammam composent les espaces accessibles selon les temps et la formule du séjour.",
-      "Les espaces privés des trois foyers de la famille restent distincts : on partage la maison sans jamais la déranger.",
+      "Hall au sol en mosaïque, grand salon boisé, salle à manger, bibliothèque monumentale, cuisine d'été, salle de sport et hammam composent les espaces accessibles selon les temps du séjour.",
+      "La rareté vient des proportions et du faible nombre d'hôtes : on profite des volumes d'un château sans l'agitation d'un hôtel. Les espaces privés des trois foyers restent clairement distincts.",
     ],
   },
   {
@@ -53,10 +53,10 @@ export const sections: ExpSection[] = [
     title: "La table d'hôtes",
     rev: true,
     paragraphs: [
-      "Le soir, la table se dresse pour vous dans les boiseries : linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine de maison, servie dans un lieu spectaculaire sans cérémonial excessif.",
-      "Ce dîner privatif se réserve en amont afin d'accorder le menu à vos goûts et à vos contraintes alimentaires.",
+      "Le soir, la table se dresse pour votre seule tablée dans les boiseries : linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine du territoire servie avec précision, sans cérémonial figé.",
+      "Le menu unique se prépare en amont selon vos goûts et vos contraintes. Un accord mets et vins peut prolonger le dîner, bouteille après bouteille, au rythme du repas.",
     ],
-    note: "Dîner privatif à la table d'hôtes : + 50 € par personne, sur réservation.",
+    note: "Dîner privatif : + 50 € par personne. Accord mets & vins : + 30 € par adulte, sous réserve des validations réglementaires prévues avant l'ouverture.",
   },
   {
     image: images.projPetitDejeunerTerrasse,
@@ -81,10 +81,10 @@ export const sections: ExpSection[] = [
     cap: "Le bien-être",
     title: "Le spa au jardin",
     paragraphs: [
-      "Le parcours bien-être réunira le hammam du château, un bain nordique et un sauna finlandais habillés de bois, dessinés pour se fondre dans la lisière plutôt que pour s'imposer à elle.",
-      "Des pas japonais, soulignés par une lumière basse, relieront le château à la piscine naturelle et aux équipements du spa. La nuit, ce chemin deviendra un rituel à part entière.",
+      "Le parcours bien-être réunit quatre expériences complémentaires : la vapeur du hammam, la chaleur sèche du sauna finlandais, l'immersion du bain nordique et l'eau vivante de la piscine naturelle.",
+      "Les équipements secs et chauds se réservent par suite. Des pas japonais, soulignés par une lumière basse, relieront le château aux eaux du jardin ; la traversée nocturne deviendra un rituel à part entière.",
     ],
-    note: "Accès spa en supplément : + 50 €, sur réservation. Les visuels présentent l'intention d'aménagement après travaux.",
+    note: "Accès spa : + 50 € par jour pour deux personnes, puis + 25 € par personne supplémentaire. Sur réservation ; visuels de projection après travaux.",
   },
   {
     image: images.projAccueilSpa,
@@ -92,8 +92,8 @@ export const sections: ExpSection[] = [
     title: "Un temps réservé",
     rev: true,
     paragraphs: [
-      "Lumière douce et créneau choisi en amont : l'espace bien-être est pensé comme une parenthèse, à l'écart du rythme ordinaire.",
-      "Les modalités précises d'accès à chaque équipement seront communiquées au moment de la réservation.",
+      "Lumière douce et créneau choisi en amont : les équipements sont pensés comme une parenthèse réservée à votre suite, à l'écart du rythme ordinaire.",
+      "La piscine naturelle peut être partagée par les deux suites ou privatisée. Hammam, sauna et bain nordique accueillent une seule suite à la fois.",
     ],
   },
   {
@@ -108,11 +108,11 @@ export const sections: ExpSection[] = [
 ];
 
 export const experienceCta = {
-  eyebrow: "Pré-ouverture · avril 2027",
-  title: ["Vivez le lieu, ", "du soir au matin."],
-  text: "Soyez informé de l'ouverture des réservations et venez éprouver le calme de Sainte-Lucie.",
+  eyebrow: "Votre expérience · avril 2027",
+  title: ["Le château, ", "à votre rythme."],
+  text: "Composez un séjour où la suite, le spa et la table s'accordent à vos envies.",
   actions: [
-    { label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" as const },
+    { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" as const },
     { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" as const },
   ],
 };

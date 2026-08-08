@@ -37,13 +37,14 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
         <p class="demo-kicker">Votre séjour</p>
         <h2 data-summary-suite>Suite Lumière</h2>
         <p><span data-summary-nights>3 nuits</span> · <span data-summary-guests>3 personnes</span></p>
-        <div class="demo-price-row"><span>Hébergement</span><strong data-price-accommodation>900 €</strong></div>
-        <div class="demo-price-row"><span>Accès spa</span><strong data-price-spa>150 €</strong></div>
+        <div class="demo-price-row"><span>Hébergement</span><strong data-price-accommodation>750 €</strong></div>
+        <div class="demo-price-row"><span>Accès spa</span><strong data-price-spa>225 €</strong></div>
         <div class="demo-price-row"><span>Dîner</span><strong data-price-dinner>125 €</strong></div>
-        <div class="demo-price-row total"><span>Total du séjour</span><strong data-price-total>1 175 €</strong></div>
+        <div class="demo-price-row"><span>Accord mets & vins</span><strong data-price-wine>60 €</strong></div>
+        <div class="demo-price-row total"><span>Total du séjour</span><strong data-price-total>1 160 €</strong></div>
         <p class="note" style="color: var(--demo-muted); margin-top: 17px;">
-          À payer maintenant : <strong data-price-now>900 €</strong>.<br />
-          Options payables sur place : <strong data-price-later>275 €</strong>.
+          À payer maintenant : <strong data-price-now>750 €</strong>.<br />
+          Options payables sur place : <strong data-price-later>410 €</strong>.
         </p>
         <button class="demo-button" type="submit" style="width: 100%; margin-top: 20px;">Simuler le paiement</button>
         <p class="note" style="color: var(--demo-muted); margin-top: 12px;">
@@ -118,7 +119,7 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
           <div class="demo-choice-grid" style="margin-top: 22px;">
             <div class="demo-choice">
               <input id="spaPass" type="checkbox" name="spaPass" checked />
-              <label for="spaPass"><strong>Accès spa</strong><span>50 € par suite et par jour · créneaux à choisir après réservation</span></label>
+              <label for="spaPass"><strong>Accès spa</strong><span>50 € par jour pour deux · +25 € par personne supplémentaire</span></label>
             </div>
             <div class="demo-choice">
               <input id="dinner" type="checkbox" name="dinner" checked />
@@ -127,6 +128,10 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
             <div class="demo-choice">
               <input id="welcome" type="checkbox" name="welcome" checked />
               <label for="welcome"><strong>Accueil personnalisé</strong><span>Humain, autonome ou hybride · à préciser dans l’espace client</span></label>
+            </div>
+            <div class="demo-choice">
+              <input id="winePairing" type="checkbox" name="winePairing" checked />
+              <label for="winePairing"><strong>Accord mets & vins</strong><span>30 € par adulte · sélection servie au rythme du dîner</span></label>
             </div>
           </div>
           <p class="note" style="color: var(--demo-muted); margin-top: 16px;">

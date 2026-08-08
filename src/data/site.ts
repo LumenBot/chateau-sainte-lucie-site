@@ -19,7 +19,7 @@ export const site = {
   house: "Château de Sainte-Lucie",
   baseline: "Château de Sainte-Lucie · Rambervillers · Vosges",
   tagline:
-    "Deux suites dans un château familial de 1876 — parc boisé, piscine naturelle et table d'hôtes, aux portes de Rambervillers.",
+    "Deux suites seulement dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et table d'hôtes dans les Vosges.",
 
   /** Ouverture prévisionnelle. */
   opening: {
@@ -49,7 +49,7 @@ export type CtaKind = "suites" | "informer" | "contact";
 /** Libellés de CTA de pré-ouverture. */
 export const ctaLabels: Record<CtaKind, string> = {
   suites: "Découvrir les suites",
-  informer: "Être informé de l'ouverture",
+  informer: "Faire ma réservation",
   contact: "Nous contacter",
 };
 

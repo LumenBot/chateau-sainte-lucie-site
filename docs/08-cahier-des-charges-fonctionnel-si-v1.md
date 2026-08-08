@@ -223,7 +223,7 @@ dossiers incomplets.
 
 ### F02 — Prix et moteur de réservation
 
-- F02.01 : calculer 250 € par nuit jusqu'à deux personnes.
+- F02.01 : calculer 200 € par nuit jusqu'à deux personnes.
 - F02.02 : appliquer 25 € par nuit à chaque troisième ou quatrième occupant de
   0 à 5 ans.
 - F02.03 : appliquer 50 € par nuit à chaque troisième ou quatrième occupant à
@@ -290,10 +290,15 @@ dossiers incomplets.
 - F07.07 : générer une tâche de préparation et une synthèse de service.
 - F07.08 : gérer annulation par l'établissement, remplacement accepté ou geste
   commercial avec traçabilité.
+- F07.09 : proposer l'accord mets et vins à 30 € par adulte comme option
+  distincte, uniquement lorsque le dîner est réservé.
+- F07.10 : limiter l'accord aux adultes et permettre son retrait jusqu'à
+  l'échéance opérationnelle configurée.
 
 ### F08 — Forfait et planning spa
 
-- F08.01 : vendre un forfait de 50 € par suite et par jour.
+- F08.01 : vendre un forfait de 50 € par suite et par jour pour un ou deux
+  occupants, puis 25 € par troisième ou quatrième occupant et par jour.
 - F08.02 : n'autoriser les créneaux que pour une journée couverte par un forfait.
 - F08.03 : limiter à deux créneaux par équipement et huit au total par suite et
   par jour.

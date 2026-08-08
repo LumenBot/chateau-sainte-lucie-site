@@ -26,7 +26,7 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 ### 2.1 Tarif de base
 
-- 250 € par suite et par nuit pour une ou deux personnes.
+- 200 € par suite et par nuit pour une ou deux personnes.
 - Petit-déjeuner, linge, ménage de fin de séjour et services inclus dans la
   nuitée selon la fiche tarifaire publiée.
 - Le prix final, les prestations comprises et les suppléments sont affichés
@@ -190,7 +190,9 @@ Seules les informations nécessaires au séjour sont collectées.
 
 - Une eau plate ou gazeuse et une boisson maison sans alcool sont intégrées à la
   formule recommandée.
-- Les boissons alcoolisées et références premium restent hors forfait, sous
+- Un accord mets et vins peut être proposé au tarif de 30 € par adulte, en
+  complément du dîner. Il est enregistré comme une option distincte.
+- Les autres boissons alcoolisées et références premium restent hors forfait, sous
   réserve de validation du régime de table d'hôtes, des licences, formations et
   affichages applicables.
 - Le statut exact de « table d'hôtes » et le contenu des boissons comprises
@@ -210,7 +212,8 @@ Seules les informations nécessaires au séjour sont collectées.
 
 ### 7.1 Forfait journalier
 
-- 50 € par suite et par jour.
+- 50 € par suite et par jour pour un ou deux occupants.
+- 25 € supplémentaires par troisième ou quatrième occupant et par jour.
 - Le forfait ouvre l'accès sur réservation au hammam, à la piscine naturelle, au
   bain nordique et au sauna finlandais.
 - Horaires de réservation : 8 h à minuit.

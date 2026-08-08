@@ -34,7 +34,7 @@ composition:
   - Une grande terrasse privative à balustrade
 aConfirmer: >-
   Les équipements détaillés et les modalités d'accès seront communiqués à
-  l'ouverture des réservations. Tarif : 250 € la nuit pour deux personnes,
+  l'ouverture des réservations. Tarif : 200 € la nuit pour deux personnes,
   petit-déjeuner inclus.
 tagline: La plus enveloppante — verts profonds, bois sombre, ouverte sur les frondaisons.
 cardImage: projFeuillageChambre

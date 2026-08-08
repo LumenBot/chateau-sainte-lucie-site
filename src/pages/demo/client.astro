@@ -49,7 +49,7 @@ import histoire from "../../assets/images/cp_03_facade_sepia.jpg";
             <div class="demo-kpi"><span>Arrivée</span><strong data-arrival-date>14 mai</strong><small>à partir de 15h</small></div>
             <div class="demo-kpi"><span>Durée</span><strong data-nights>3 nuits</strong><small data-guests>3 voyageurs</small></div>
             <div class="demo-kpi"><span>Prochain rendez-vous</span><strong data-next-service>18:00</strong><small data-next-service-label>Bain nordique</small></div>
-            <div class="demo-kpi"><span>Options à régler</span><strong data-options-total>275 €</strong><small>paiement sur place</small></div>
+            <div class="demo-kpi"><span>Options à régler</span><strong data-options-total>410 €</strong><small>paiement sur place</small></div>
           </div>
 
           <div class="demo-grid two">
@@ -128,7 +128,7 @@ import histoire from "../../assets/images/cp_03_facade_sepia.jpg";
 
         <section class="demo-view" data-view="services" hidden>
           <div class="demo-kpis">
-            <div class="demo-kpi"><span>Accès spa</span><strong data-spa-pass>Activé</strong><small>50 € / suite / jour</small></div>
+            <div class="demo-kpi"><span>Accès spa</span><strong data-spa-pass>Activé</strong><small>50 € / jour pour deux · +25 € / pers.</small></div>
             <div class="demo-kpi"><span>Plage d’accès</span><strong>8h–00h</strong><small>sur réservation</small></div>
             <div class="demo-kpi"><span>Plafond quotidien</span><strong>8 h</strong><small>2 × 1h / équipement</small></div>
             <div class="demo-kpi"><span>Piscine</span><strong>Partageable</strong><small>privatisation sur demande</small></div>
@@ -159,8 +159,16 @@ import histoire from "../../assets/images/cp_03_facade_sepia.jpg";
           <article class="demo-panel">
             <div class="demo-panel-head"><div><p class="demo-kicker">Table d’hôtes</p><h2>Un dîner composé pour vous.</h2></div><span class="demo-status ok">Demandé</span></div>
             <div class="demo-form-grid" style="margin-top: 22px;">
-              <div><p>Menu unique, produits du territoire, de saison, bio et locaux selon les possibilités. Réservation avant 18h la veille.</p><p class="note" style="color: var(--demo-muted);">50 € par adulte · 25 € de 3 à 11 ans · boissons alcoolisées non incluses.</p></div>
-              <div class="demo-field"><label for="dinnerPreferences">Ce qui vous ferait plaisir — ou ce qu’il faut éviter</label><textarea id="dinnerPreferences">Cuisine végétale bienvenue ; aucune noix ni noisette.</textarea><button class="demo-button secondary" type="button" data-save-dinner>Transmettre à la table</button></div>
+              <div><p>Menu unique, produits du territoire, de saison, bio et locaux selon les possibilités. Réservation avant 18h la veille.</p><p class="note" style="color: var(--demo-muted);">50 € par adulte · 25 € de 3 à 11 ans · accord mets & vins 30 € par adulte.</p></div>
+              <div class="demo-field">
+                <label for="dinnerPreferences">Ce qui vous ferait plaisir — ou ce qu’il faut éviter</label>
+                <textarea id="dinnerPreferences">Cuisine végétale bienvenue ; aucune noix ni noisette.</textarea>
+                <label style="display: flex; gap: 10px; align-items: start; text-transform: none; letter-spacing: 0;">
+                  <input id="winePairingClient" type="checkbox" checked />
+                  <span>Ajouter l’accord mets & vins pour les adultes (+30 € par personne).</span>
+                </label>
+                <button class="demo-button secondary" type="button" data-save-dinner>Transmettre à la table</button>
+              </div>
             </div>
           </article>
         </section>
@@ -191,14 +199,15 @@ import histoire from "../../assets/images/cp_03_facade_sepia.jpg";
               <table class="demo-table">
                 <thead><tr><th>Prestation</th><th>Statut</th><th>Montant</th></tr></thead>
                 <tbody>
-                  <tr><td>Hébergement · <span data-checkout-nights>3 nuits</span></td><td><span class="demo-status ok">Réglé à la réservation</span></td><td data-checkout-accommodation>900 €</td></tr>
-                  <tr><td>Accès spa</td><td><span class="demo-status warn">À régler</span></td><td data-checkout-spa>150 €</td></tr>
+                  <tr><td>Hébergement · <span data-checkout-nights>3 nuits</span></td><td><span class="demo-status ok">Réglé à la réservation</span></td><td data-checkout-accommodation>750 €</td></tr>
+                  <tr><td>Accès spa</td><td><span class="demo-status warn">À régler</span></td><td data-checkout-spa>225 €</td></tr>
                   <tr><td>Dîner privatif</td><td><span class="demo-status warn">À régler</span></td><td data-checkout-dinner>125 €</td></tr>
+                  <tr><td>Accord mets & vins</td><td><span class="demo-status warn" data-wine-payment-status>À régler</span></td><td data-checkout-wine>60 €</td></tr>
                   <tr><td>Privatisation piscine</td><td><span class="demo-status simulated">Selon programme</span></td><td data-checkout-pool>0 €</td></tr>
                 </tbody>
               </table>
             </div>
-            <div class="demo-price-row total"><span>Solde des options</span><strong data-checkout-options>275 €</strong></div>
+            <div class="demo-price-row total"><span>Solde des options</span><strong data-checkout-options>410 €</strong></div>
             <div class="demo-actions">
               <button class="demo-button" type="button" data-pay-options>Simuler le règlement</button>
               <button class="demo-button secondary" type="button" data-download-invoice>Télécharger la facture fictive</button>

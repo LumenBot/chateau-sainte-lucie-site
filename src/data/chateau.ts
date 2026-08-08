@@ -89,11 +89,11 @@ export const situation = {
 };
 
 export const chateauCta = {
-  eyebrow: "Pré-ouverture · avril 2027",
+  eyebrow: "Votre séjour · avril 2027",
   title: ["Bientôt, ", "les portes s'ouvrent."],
-  text: "Deux suites ouvriront dans la maison en avril 2027. Soyez informé de l'ouverture des réservations.",
+  text: "Deux suites seulement ouvriront dans la maison. Découvrez comment votre séjour pourra se composer, du perron jusqu'au dernier matin.",
   actions: [
-    { label: "Découvrir les suites", href: "/les-suites", variant: "gold-light" as const },
-    { label: "Être informé de l'ouverture", href: "/contact", variant: "ghost-light" as const },
+    { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" as const },
+    { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" as const },
   ],
 };

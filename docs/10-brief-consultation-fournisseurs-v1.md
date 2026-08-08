@@ -21,7 +21,7 @@ spécifiques seront développés au moyen des API et webhooks du socle retenu.
 - Deux suites : Lumière et Feuillage.
 - Chaque suite est une unité indivisible.
 - Capacité : une à quatre personnes par suite.
-- Tarif de base : 250 € la nuit pour une ou deux personnes.
+- Tarif de base : 200 € la nuit pour une ou deux personnes.
 - Troisième et quatrième occupants : 25 € de 0 à 5 ans, 50 € à partir de 6 ans,
   par personne et par nuit.
 - Petit-déjeuner compris.
@@ -39,8 +39,10 @@ spécifiques seront développés au moyen des API et webhooks du socle retenu.
 
 ## Services complémentaires
 
-- Forfait spa : 50 € par suite et par jour.
+- Forfait spa : 50 € par suite et par jour pour un ou deux occupants, puis 25 €
+  par personne supplémentaire et par jour.
 - Dîner : 50 € par adulte, 25 € par enfant de 3 à 11 ans.
+- Accord mets et vins : 30 € par adulte, comme option du dîner.
 - Privatisation de piscine : 50 € pour deux heures.
 - Autres boissons et services ajoutés au dossier de séjour.
 - Les options doivent être visibles sur la facture et dans les exports.

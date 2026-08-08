@@ -1,13 +1,13 @@
 /** Tarifs de pré-ouverture validés (décision Blaise, août 2026). */
 export const tarifs = {
   eyebrow: "L'expérience à la carte",
-  title: ["La nuit au château, ", "250 €."],
+  title: ["La nuit au château, ", "200 €."],
   intro:
-    "Une suite pour deux personnes, le petit-déjeuner et le temps de profiter du domaine. Le spa et le dîner privatif se choisissent selon l'envie.",
+    "Une suite entière pour deux personnes, le petit-déjeuner et le temps d'habiter le domaine. Le spa, le dîner privatif et l'accord des vins composent ensuite votre expérience.",
   items: [
     {
       label: "La suite",
-      value: "250 €",
+      value: "200 €",
       unit: "/ nuit",
       note: "pour deux personnes · petit-déjeuner inclus",
     },
@@ -15,7 +15,7 @@ export const tarifs = {
       label: "Accès spa",
       value: "+ 50 €",
       unit: "",
-      note: "sur réservation · selon le créneau choisi",
+      note: "pour deux, par jour · + 25 € par personne supplémentaire",
     },
     {
       label: "Dîner privatif — table d'hôtes",
@@ -23,6 +23,12 @@ export const tarifs = {
       unit: "/ personne",
       note: "le soir, sur réservation",
     },
+    {
+      label: "Accord mets & vins",
+      value: "+ 30 €",
+      unit: "/ personne",
+      note: "sélection servie avec le dîner · pour les adultes",
+    },
   ],
-  note: "Les modalités de réservation, d'arrivée, d'annulation et d'accès aux équipements seront précisées à l'ouverture des réservations.",
+  note: "La réservation présentée actuellement est une démonstration sans paiement réel. Les conditions définitives et la vente de boissons alcoolisées restent soumises aux validations opérationnelles et réglementaires prévues avant l'ouverture.",
 };

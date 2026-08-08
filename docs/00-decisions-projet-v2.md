@@ -8,7 +8,7 @@
 - Lieu : Château de Sainte-Lucie, Rambervillers, Vosges.
 - Ouverture prévisionnelle : **avril 2027**.
 - Travaux : septembre 2026 à mars 2027.
-- Tarif public validé : **250 € par suite et par nuit**, pour une ou deux
+- Tarif public validé : **200 € par suite et par nuit**, pour une ou deux
   personnes, petit-déjeuner compris.
 
 ## Offre
@@ -18,9 +18,12 @@
 - Petit-déjeuner inclus dans chaque nuitée.
 - Capacité maximale de quatre personnes par suite, avec supplément pour les
   troisième et quatrième occupants.
-- Dîner privatif sur réservation, à partir de 50 € par adulte.
+- Dîner privatif sur réservation : 50 € par adulte, 25 € de 3 à 11 ans.
+- Accord mets et vins : 30 € par adulte, sous réserve des validations
+  réglementaires nécessaires.
 - Spa sur réservation : hammam, piscine naturelle, bain nordique et sauna
-  finlandais, au tarif de 50 € par suite et par jour.
+  finlandais, au tarif de 50 € par jour pour les deux premiers occupants, puis
+  25 € par personne supplémentaire et par jour.
 - Accueil personnalisable : humain, autonome ou hybride, en français ou en
   anglais.
 
@@ -35,7 +38,12 @@
 
 ## Récit
 
-Le fil narratif est la lumière : Sainte-Lucie, Lucy, Lucia, *lux*. Le château a été construit en 1876 pour Marie Lucy Velin. La promesse n'est pas celle d'un hôtel spectaculaire, mais d'une maison de famille qui ouvre peu de portes et les ouvre pleinement.
+Le fil narratif est la lumière : Sainte-Lucie, Lucy, Lucia, *lux*. Le château a
+été construit en 1876 pour Marie Lucy Velin. La promesse est celle d'une demeure
+de caractère qui ouvre très peu de portes : deux suites seulement, une attention
+personnelle, une table dressée pour la tablée et des temps de spa réservés. Le
+terme « privatif » s'applique aux suites, au dîner et aux équipements réservés,
+jamais à l'ensemble du château qui demeure habité.
 
 ## Décisions de communication
 

@@ -8,25 +8,25 @@ export const homeSeo = {
   title:
     "Les Nuits au Château | Les Suites de Sainte-Lucie dans les Vosges",
   description:
-    "Deux suites dans un château familial de 1876 à Rambervillers : parc boisé, piscine naturelle et table d'hôtes. Ouverture prévue en avril 2027.",
+    "Deux suites seulement dans un château familial de 1876 à Rambervillers : spa réservé, parc d'un hectare, piscine naturelle et dîner privatif.",
 };
 
 export const hero = {
   eyebrow: "Château de Sainte-Lucie · Vosges",
   title: "Les Nuits au Château",
   signature: "Les Suites de Sainte-Lucie",
-  accroche: "Une nuit dans une maison de famille, entre grès rose et lisière.",
-  descriptor: "Maison d'hôtes & table d'hôtes · Domaine de 1876",
+  accroche: "Deux suites seulement. Le château, dans sa plus rare intimité.",
+  descriptor: "Suites de caractère · spa réservé · table d'hôtes · domaine de 1876",
   image: images.projFacadeEclairageNuit as Visual,
 };
 
 export const maison = {
   eyebrow: "Une maison, pas un décor",
-  title: ["Un château habité, ", "pas un hôtel."],
+  title: ["Un château habité, ", "presque rien que pour vous."],
   paragraphs: [
-    "Sainte-Lucie n'est pas un hôtel installé dans un château vide. C'est un château habité, partagé par trois foyers d'une même famille, qui ouvre deux suites à quelques hôtes seulement.",
-    "On y vient pour ralentir : franchir le perron au soir, dîner dans les boiseries, lire près d'une cheminée, marcher sous les chênes, entrer dans une eau filtrée par les plantes, puis retrouver le silence d'une chambre haute.",
-    "Le luxe recherché n'est pas spectaculaire. Il tient dans l'espace, la matière, la lumière chaude et l'attention portée aux détails.",
+    "Sainte-Lucie n'est pas un hôtel installé dans un château vide. C'est une demeure de 1876 toujours habitée, qui n'ouvre que deux suites et reçoit volontairement très peu d'hôtes à la fois.",
+    "On y vient pour habiter le lieu : franchir le perron au soir, retrouver les boiseries et les cheminées, dîner à sa propre table, marcher sous les chênes puis gagner, à l'heure choisie, les eaux et la chaleur du spa.",
+    "Le luxe tient ici à ce qui ne se multiplie pas : l'espace, le silence, la lumière, un parc d'un hectare et le temps personnel que la famille peut consacrer à chaque séjour.",
   ],
   image: images.salleAManger as Visual,
 };
@@ -34,7 +34,7 @@ export const maison = {
 export const suitesTeaser = {
   eyebrow: "Deux suites seulement",
   title: ["Deux suites, ", "deux lumières."],
-  text: "Chacune composée de deux pièces, d'une salle de bain et d'une terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière.",
+  text: "Chacune réunit deux pièces, une salle de bain et une terrasse privative. Deux véritables appartements d'hôtes, deux atmosphères, et jamais plus de deux suites ouvertes dans toute la demeure.",
   cta: "Découvrir les suites",
   href: "/les-suites",
 };
@@ -85,22 +85,22 @@ export const experienceTeaser = {
     {
       icon: "window",
       title: "Les espaces partagés",
-      text: "Hall au sol en mosaïque, grand salon boisé, salle à manger et bibliothèque monumentale.",
+      text: "Hall en mosaïque, grand salon boisé, salle à manger et bibliothèque : les volumes d'une demeure, pas ceux d'une chambre.",
     },
     {
       icon: "dish",
       title: "La table d'hôtes",
-      text: "Le soir, une cuisine de maison servie dans les boiseries, sur réservation.",
+      text: "Le soir, une table dressée pour votre tablée et un menu composé selon vos goûts.",
     },
     {
       icon: "waves",
-      title: "La piscine naturelle",
-      text: "Un bassin de nage filtré par lagunage planté, accessible selon la saison et les conditions.",
+      title: "Le spa réservé",
+      text: "Hammam, bain nordique, sauna finlandais et piscine naturelle, à découvrir sur des temps choisis.",
     },
     {
       icon: "tree",
       title: "Le parc vivant",
-      text: "Un hectare clos de prairies, de vieux arbres et de lisières.",
+      text: "Un hectare clos de prairies, de vieux arbres et de lisières, accessible directement depuis la maison.",
     },
   ] satisfies ExpItem[],
   cta: "Découvrir l'expérience",
@@ -124,12 +124,12 @@ export const galerie = {
 export const signatureExperience = {
   eyebrow: "L'expérience signature",
   title: ["Du premier pas ", "au dernier matin."],
-  text: "Sainte-Lucie se découvre comme un récit : une arrivée à la lueur des lanternes, une suite préparée pour vous, les eaux au cœur du parc, un dîner dans les boiseries et le petit-déjeuner face aux arbres.",
+  text: "Avec deux suites seulement, Sainte-Lucie offre l'intimité rare d'une grande demeure : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, dîner privatif et petit-déjeuner face aux arbres.",
   items: [
     { image: images.projPerronArriveeSoir, moment: "À la nuit tombée", title: "L'arrivée au perron", text: "La maison éclairée, les clés remises et le temps qui change de rythme.", wide: true },
-    { image: images.projTableHotes, moment: "Le soir", title: "Le dîner privatif", text: "Une table dressée pour vous dans les boiseries, sur réservation." },
+    { image: images.projTableHotes, moment: "Le soir", title: "Le dîner privatif", text: "Une table dressée pour votre tablée, un menu unique et l'accord des vins si vous le souhaitez." },
     { image: images.projPiscineHeureBleue, moment: "Entre chien et loup", title: "La piscine naturelle", text: "Le bassin et son lagunage dans la lumière bleue du jardin." },
-    { image: images.projBainNordique, moment: "Sous les arbres", title: "Le spa au jardin", text: "Hammam, bain nordique et futur sauna finlandais dans un écrin de bois." },
+    { image: images.projBainNordique, moment: "Sous les arbres", title: "Le spa aux quatre visages", text: "Hammam, bain nordique, sauna finlandais et piscine naturelle, sur des temps réservés." },
     { image: images.projPetitDejeunerTerrasse, moment: "Au réveil", title: "Le petit-déjeuner", text: "Un plateau simple et généreux, servi face au parc lorsque le temps le permet." },
   ],
 };
@@ -143,11 +143,11 @@ export const histoireTeaser = {
 };
 
 export const ctaFinal = {
-  eyebrow: "Pré-ouverture · avril 2027",
-  title: ["Soyez parmi les premiers ", "à en franchir le seuil."],
-  text: "Les Suites de Sainte-Lucie ouvriront en avril 2027. Laissez-nous vos coordonnées pour être informé de l'ouverture des réservations.",
+  eyebrow: "Votre séjour · avril 2027",
+  title: ["Le château n'attend ", "que quelques hôtes."],
+  text: "Composez dès maintenant votre séjour dans notre parcours de réservation en démonstration, ou laissez-nous vos coordonnées avant l'ouverture.",
   actions: [
-    { label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" as const },
-    { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" as const },
+    { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" as const },
+    { label: "Nous contacter", href: "/contact", variant: "ghost-light" as const },
   ],
 };

@@ -76,6 +76,8 @@ soumission n'est pas traitée.
 - `docs/11-demonstrateur-experience-et-exploitation-v1.md` décrit la maquette
   fonctionnelle, les rôles, les événements d’intégration, les scénarios de repli
   et le protocole de revue par les associés.
+- `docs/12-positionnement-tarifaire-et-valeur-v1.md` formalise la grille à 200 €,
+  le benchmark local et les preuves nécessaires pour défendre le positionnement.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 

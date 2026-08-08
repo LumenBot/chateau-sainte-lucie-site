@@ -21,7 +21,7 @@ const isActive = (href: string) => {
     ? path === target
     : path === target || path.startsWith(target + "/");
 };
-const contactActive = isActive("/contact");
+const bookingActive = isActive("/demo/reservation");
 ---
 
 <input
@@ -53,13 +53,12 @@ const contactActive = isActive("/contact");
           </a>
         ))
       }
+      <a class="navlink" href={withBase("/contact")}>Contact</a>
       <a
-        class={`btn btn--sm ${contactActive ? "btn--gold-light" : "btn--ghost-light"}`}
-        href={withBase("/contact")}
-        aria-current={contactActive ? "page" : undefined}
-      >
-        Contact
-      </a>
+        class={`btn btn--sm ${bookingActive ? "btn--gold-light" : "btn--ghost-light"}`}
+        href={withBase("/demo/reservation")}
+        aria-current={bookingActive ? "page" : undefined}
+      >Faire ma réservation</a>
     </nav>
 
     <label class="nav-toggle" for="navchk" aria-hidden="true">
@@ -88,7 +87,8 @@ const contactActive = isActive("/contact");
     ))
   }
   <div class="mcta">
-    <a class="btn btn--gold-light" href={withBase("/contact")}>{ctaLabels.informer}</a>
+    <a class="btn btn--gold-light" href={withBase("/demo/reservation")}>{ctaLabels.informer}</a>
+    <a class="btn btn--ghost-light" href={withBase("/contact")}>Nous contacter</a>
   </div>
 </div>
 

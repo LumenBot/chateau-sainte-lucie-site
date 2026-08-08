@@ -34,7 +34,7 @@ composition:
   - Une terrasse privative tournée vers le parc
 aConfirmer: >-
   Les équipements détaillés et les modalités d'accès seront communiqués à
-  l'ouverture des réservations. Tarif : 250 € la nuit pour deux personnes,
+  l'ouverture des réservations. Tarif : 200 € la nuit pour deux personnes,
   petit-déjeuner inclus.
 tagline: La plus claire — gris bleutés, chêne huilé et laiton, ouverte sur le parc.
 cardImage: projLumiereChambre

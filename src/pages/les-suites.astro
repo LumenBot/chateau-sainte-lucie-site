@@ -23,7 +23,10 @@ const suites = (await getCollection("suites")).sort(
     image="projLumiereSalon"
     imageAlt="Le salon privé de la Suite Lumière, projeté après travaux"
     imagePosition="center 52%"
-    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+    actions={[
+      { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" },
+      { label: "Nous contacter", href: "/contact", variant: "ghost-light" },
+    ]}
   />
 
   <section class="sec suites-page">
@@ -51,7 +54,7 @@ const suites = (await getCollection("suites")).sort(
         <span><strong>2</strong> suites seulement</span>
         <span><strong>2</strong> pièces par suite</span>
         <span><strong>1</strong> terrasse privative</span>
-        <span><strong>250 €</strong> la nuit pour deux</span>
+        <span><strong>200 €</strong> la suite pour deux</span>
       </div>
     </div>
   </section>
@@ -83,11 +86,14 @@ const suites = (await getCollection("suites")).sort(
   </section>
 
   <CtaFinal
-    eyebrow="Pré-ouverture · avril 2027"
-    titleLead="Une nuit vous attend "
+    eyebrow="Deux suites seulement · avril 2027"
+    titleLead="Votre suite vous attend "
     titleGold="au château."
-    text="Laissez-nous vos coordonnées pour être informé de l'ouverture des réservations."
-    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+    text="Composez votre séjour dans le parcours de démonstration et découvrez dès maintenant l'expérience proposée."
+    actions={[
+      { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" },
+      { label: "Nous contacter", href: "/contact", variant: "ghost-light" },
+    ]}
   />
 </BaseLayout>
 

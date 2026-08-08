@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const qsa = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
   const setText = (selector, value) => { const node = qs(selector); if (node) node.textContent = value; };
 
+  function calculateOptionsTotal() {
+    return Number(state.services.spaTotal || 0) + Number(state.services.dinnerTotal || 0) + Number(state.services.wineTotal || 0) + Number(state.services.poolPrivateTotal || 0);
+  }
+
   function dateOptions() {
     const select = qs("#spaDate");
     if (!select) return;
@@ -65,16 +69,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function renderFinancials() {
     const pool = Number(state.services.poolPrivateTotal || 0);
-    const options = Number(state.services.spaTotal || 0) + Number(state.services.dinnerTotal || 0) + pool;
+    const options = calculateOptionsTotal();
     state.payment.optionsTotal = options;
     setText("[data-options-total]", demo.money(state.payment.optionsPaid ? 0 : options));
     setText("[data-checkout-accommodation]", demo.money(state.booking.accommodationTotal));
     setText("[data-checkout-spa]", demo.money(state.services.spaTotal));
     setText("[data-checkout-dinner]", demo.money(state.services.dinnerTotal));
+    setText("[data-checkout-wine]", demo.money(state.services.wineTotal));
     setText("[data-checkout-pool]", demo.money(pool));
     setText("[data-checkout-options]", demo.money(state.payment.optionsPaid ? 0 : options));
     setText("[data-checkout-nights]", state.booking.nights + " nuit" + (state.booking.nights > 1 ? "s" : ""));
     const invoice = qs("[data-invoice-status]");
+    const wineStatus = qs("[data-wine-payment-status]");
+    if (wineStatus) {
+      wineStatus.textContent = state.services.winePairing ? (state.payment.optionsPaid ? "Réglé" : "À régler") : "Non choisi";
+      wineStatus.className = "demo-status " + (state.services.winePairing ? (state.payment.optionsPaid ? "ok" : "warn") : "simulated");
+    }
     if (state.payment.optionsPaid) {
       invoice.textContent = "Réglé · facture disponible";
       invoice.className = "demo-status ok";
@@ -102,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     qs("#breakfastStyle").value = state.guest.breakfastStyle;
     qs("#dietary").value = state.guest.dietary;
     qs("#dogNoticeAccepted").checked = state.guest.dogNoticeAccepted;
+    qs("#winePairingClient").checked = Boolean(state.services.winePairing);
     progress();
     renderChecklist();
     renderSpa();
@@ -144,6 +155,16 @@ document.addEventListener("DOMContentLoaded", function () {
     render();
   });
 
+  qs("[data-save-dinner]").addEventListener("click", function () {
+    state.services.winePairing = qs("#winePairingClient").checked;
+    state.services.wineGuests = state.booking.adults;
+    state.services.wineTotal = state.services.winePairing ? state.booking.adults * 30 : 0;
+    state.payment.optionsTotal = calculateOptionsTotal();
+    demo.save(state, "dinner.updated", "Préférences du dîner et accord des vins mis à jour");
+    demo.toast("Vos préférences fictives ont été transmises à la table.");
+    renderFinancials();
+  });
+
   qs("#spa-booking-form").addEventListener("submit", function (event) {
     event.preventDefault();
     const form = event.currentTarget;
@@ -168,6 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
       duration: privatePool ? 120 : 60,
       status: privatePool ? "Privatisé" : equipment === "Piscine naturelle" ? "Partagé possible" : "Confirmé",
     });
+    state.payment.optionsTotal = calculateOptionsTotal();
     demo.save(state, "service.booked", equipment + " réservé en simulation");
     demo.toast(privatePool ? "Piscine privatisée pour deux heures (+50 €)." : "Créneau ajouté au programme.");
     form.reset();
@@ -180,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const booking = state.services.bookings.find((item) => item.id === button.dataset.removeSpa);
     if (booking && booking.status === "Privatisé") state.services.poolPrivateTotal = Math.max(0, state.services.poolPrivateTotal - 50);
     state.services.bookings = state.services.bookings.filter((item) => item.id !== button.dataset.removeSpa);
+    state.payment.optionsTotal = calculateOptionsTotal();
     demo.save(state, "service.cancelled", "Créneau de service annulé dans la simulation");
     demo.toast("Créneau retiré du programme fictif.");
     render();
@@ -209,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
     demo.toast("Départ fictif finalisé. Merci pour ce séjour.");
   });
 
-  qsa("[data-save-dinner], [data-contact-host], [data-help], [data-story-next], [data-story-card], [data-download-invoice]").forEach((button) => {
+  qsa("[data-contact-host], [data-help], [data-story-next], [data-story-card], [data-download-invoice]").forEach((button) => {
     button.addEventListener("click", () => demo.toast("Interaction simulée : le flux réel sera connecté lors de l’intégration."));
   });
 

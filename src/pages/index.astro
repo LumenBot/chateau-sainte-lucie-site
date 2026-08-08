@@ -56,8 +56,15 @@ const suites = (await getCollection("suites")).sort(
       <div class="fhero__ornament" aria-hidden="true">✦</div>
       <p class="fhero__opening">{site.opening.label}</p>
       <div class="fhero__cta">
-        <Button href="/les-suites" variant="gold-light">Découvrir les suites</Button>
-        <Button href="/contact" variant="ghost-light">Être informé de l'ouverture</Button>
+        <Button href="/demo/reservation" variant="gold-light">Faire ma réservation</Button>
+        <Button href="/les-suites" variant="ghost-light">Découvrir les suites</Button>
+      </div>
+      <p class="fhero__demo-note">Parcours de démonstration · aucune réservation ni aucun paiement réel</p>
+      <div class="fhero__proofs" aria-label="Les signatures de l'expérience">
+        <span><strong>2</strong> suites seulement</span>
+        <span><strong>4</strong> expériences de spa</span>
+        <span><strong>1 ha</strong> de parc clos</span>
+        <span><strong>1</strong> table privative</span>
       </div>
     </div>
     <p class="fhero__projection">Projection de l'expérience après travaux</p>
@@ -109,8 +116,8 @@ const suites = (await getCollection("suites")).sort(
         }
       </div>
       <div class="suite-promise">
-        <span class="suite-promise__price">250 €</span>
-        <span class="suite-promise__copy">la suite pour deux · petit-déjeuner inclus</span>
+        <span class="suite-promise__price">200 €</span>
+        <span class="suite-promise__copy">la suite entière pour deux · petit-déjeuner inclus</span>
         <a class="link-or" href={withBase("/les-suites")}>Voir les suites <span class="arr">→</span></a>
       </div>
     </div>
@@ -240,7 +247,7 @@ const suites = (await getCollection("suites")).sort(
           </article>
         ))}
       </div>
-      <div class="home-rates__cta"><Button href="/les-suites" variant="ghost">Choisir sa suite</Button></div>
+      <div class="home-rates__cta"><Button href="/demo/reservation" variant="solid">Faire ma réservation</Button></div>
     </div>
   </section>
 
@@ -394,6 +401,38 @@ const suites = (await getCollection("suites")).sort(
     flex-wrap: wrap;
     gap: 14px;
     justify-content: center;
+  }
+  .fhero__demo-note {
+    margin: 12px 0 0;
+    color: rgba(242, 235, 221, 0.7);
+    font-size: 11px;
+    font-style: italic;
+  }
+  .fhero__proofs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 650px);
+    margin-top: 30px;
+    border-top: 1px solid rgba(200, 164, 91, 0.28);
+    border-bottom: 1px solid rgba(200, 164, 91, 0.28);
+  }
+  .fhero__proofs span {
+    padding: 13px 10px;
+    color: var(--creme-dim);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .fhero__proofs strong {
+    display: block;
+    font-family: var(--display);
+    color: var(--or-clair);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  @media (min-width: 680px) {
+    .fhero__proofs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   }
 
   /* ============ MAISON ============ */
@@ -697,7 +736,7 @@ const suites = (await getCollection("suites")).sort(
   }
   @media (min-width: 760px) {
     .home-rates__grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
   @media (min-width: 680px) {

@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setAll("[data-finance-total]", demo.money(state.booking.accommodationTotal + options));
     setAll("[data-finance-spa]", demo.money(state.services.spaTotal));
     setAll("[data-finance-dinner]", demo.money(state.services.dinnerTotal));
+    setAll("[data-finance-wine]", demo.money(state.services.wineTotal));
     setAll("[data-finance-options-status]", state.payment.optionsPaid ? "encaissé fictivement" : "à encaisser");
     setAll("[data-finance-guarantee]", state.onboarding.guarantee ? "autorisée fictivement" : "non autorisée");
     setAll("[data-manager-guarantee]", state.onboarding.guarantee ? "Empreinte fictive autorisée" : "Empreinte fictive à autoriser");

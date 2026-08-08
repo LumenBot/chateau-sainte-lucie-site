@@ -2,7 +2,7 @@
   const STORAGE_KEY = "csl-demo-experience-v1";
 
   const defaultState = {
-    version: 1,
+    version: 2,
     booking: {
       reference: "CSL-270514-LUM",
       suite: "Suite Lumière",
@@ -13,7 +13,7 @@
       childrenUnderSix: 0,
       childrenUnderThree: 0,
       nights: 3,
-      accommodationTotal: 900,
+      accommodationTotal: 750,
       accommodationPaid: true,
       source: "Réservation directe",
       status: "Confirmée",
@@ -41,10 +41,13 @@
     },
     services: {
       spaPass: true,
-      spaTotal: 150,
+      spaTotal: 225,
       dinner: true,
       dinnerGuests: 3,
       dinnerTotal: 125,
+      winePairing: true,
+      wineGuests: 2,
+      wineTotal: 60,
       poolPrivate: false,
       poolPrivateTotal: 0,
       bookings: [
@@ -56,7 +59,7 @@
     payment: {
       guaranteeAmount: 500,
       guaranteeStatus: "À autoriser",
-      optionsTotal: 275,
+      optionsTotal: 410,
       optionsPaid: false,
       invoiceStatus: "Brouillon",
     },
@@ -150,10 +153,12 @@
       ...Array(underSix).fill(25),
     ].sort((a, b) => b - a);
     const additionalPerNight = occupantSupplements.slice(2).reduce((sum, amount) => sum + amount, 0);
-    const accommodation = nights * (250 + additionalPerNight);
-    const spa = values.spaPass ? nights * 50 : 0;
+    const accommodation = nights * (200 + additionalPerNight);
+    const guests = adults + children;
+    const spa = values.spaPass ? nights * (50 + Math.max(0, guests - 2) * 25) : 0;
     const dinner = values.dinner ? adults * 50 + Math.max(0, children - underThree) * 25 : 0;
-    return { nights, accommodation, spa, dinner, total: accommodation + spa + dinner };
+    const wine = values.dinner && values.winePairing ? adults * 30 : 0;
+    return { nights, accommodation, spa, dinner, wine, total: accommodation + spa + dinner + wine };
   }
 
   function toast(message) {
