@@ -1,135 +1,79 @@
-# Château de Sainte-Lucie — Site vitrine
+# Les Nuits au Château — Les Suites de Sainte-Lucie
 
-Site vitrine du lieu de réception **Château de Sainte-Lucie** (Rambervillers, Vosges).
-Objectif : présenter le lieu et générer des demandes qualifiées — **séminaires d'entreprise**, **événements privés**, **tournages & prises de vues**.
+Site vitrine de **pré-ouverture** de la maison d'hôtes haut de gamme
+**« Les Nuits au Château »** (signature *Les Suites de Sainte-Lucie*), au
+Château de Sainte-Lucie — Rambervillers, Vosges. **Ouverture prévue en avril 2027.**
 
-## Organisation du projet — trois rôles
-- **Stratégie & orchestration** — cadrage, cahier des charges, caractérisation des tâches.
-- **Claude Design** — maquettes visuelles → `docs/brief-claude-design.md`.
-- **Claude Code** — implémentation → `CLAUDE.md` + `docs/backlog.md`.
+> Refonte v2 du dépôt : l'ancienne vitrine « réception » (séminaires, événements,
+> tournages) est remplacée par le projet de maison d'hôtes à deux suites.
+> Documentation de reprise : `docs/00-…` à `docs/06-…` et `CLAUDE.md`.
 
-## Structure du dépôt
-```
-.
-├── CLAUDE.md                    # Manuel de l'agent Claude Code (à lire en premier)
-├── docs/                        # Cadrage stratégique & contenu
-│   ├── cahier-des-charges.md    # Spécification détaillée du site
-│   ├── brief-claude-design.md   # Brief des maquettes (pour mémoire)
-│   ├── contenu-redactionnel.md  # Copie finale des pages (textes + métas SEO)
-│   └── backlog.md               # Tâches priorisées + critères d'acceptation
-├── maquettes/                   # Références visuelles validées (NE PAS déployer)
-│   ├── Maquettes_Site.html      # Planche maître : 4 écrans desktop + mobile
-│   ├── Composants.html          # Planche des composants
-│   └── site/                    # Pages réelles + site.css = référence d'implémentation
-└── livrables/                   # Documents annexes (NE PAS déployer)
-    └── plaquette-associes.pdf   # Plaquette de présentation aux associés
-```
-(Le site Astro + Tailwind est échafaudé par Claude Code à la racine.)
+## Stack
 
-## Démarrage rapide
-1. Cahier des charges, contenu et **maquettes validés** — tout est dans le dépôt.
-2. Le dépôt GitHub est créé par le propriétaire ; on lance **une seule session Claude Code** avec accès au dépôt.
-3. **Claude Code gère git, les commits, et déroule l'intégralité du backlog en un run.**
+**Astro 5** (statique) · **Tailwind v4** · **TypeScript strict** · contenu en
+**content collections** (`suites`, `histoire`) + données centralisées (`src/data/`)
+· images via **astro:assets** · polices auto-hébergées (Fontsource).
 
-### Prompt de lancement Claude Code — run complet (à coller en début de session)
-> Tu travailles dans ce dépôt (Château de Sainte-Lucie — site vitrine). Lis d'abord `CLAUDE.md`, puis `docs/cahier-des-charges.md`, `docs/contenu-redactionnel.md` et `docs/backlog.md`, et inspecte `maquettes/` — la planche `Maquettes_Site.html`, `Composants.html`, et **surtout les pages `maquettes/site/*.html` + `maquettes/site/site.css`**, qui sont la référence d'implémentation principale.
->
-> Réalise le site **en un seul run** : commits du cadrage (T0), échafaudage **Astro + Tailwind + TypeScript**, puis déroule **tout le backlog (T0 → T12)**, un commit par tâche. **Transpose fidèlement les maquettes** (registres nuit/jour, tokens, composants) et intègre le contenu depuis `docs/contenu-redactionnel.md`.
->
-> Exigences non négociables : responsive mobile-first, accessibilité AA, Lighthouse ≥ 95 (4 axes), SEO (métas par page, OpenGraph, `sitemap.xml`, `robots.txt`, schema.org `EventVenue`/`LocalBusiness`), **aucun secret committé**, et **ne jamais publier l'adresse précise** du château (résidence habitée). Les dossiers `maquettes/` et `livrables/` sont des **références, à ne pas déployer**.
->
-> Travaille de façon **autonome jusqu'au bout** ; en cas de blocage, documente-le et poursuis les autres tâches plutôt que t'arrêter. Termine par un récapitulatif : ce qui est fait, ce qui reste, comment lancer en local et déployer sur Netlify.
-
-## Le site (Astro + Tailwind + TypeScript)
-
-Site statique généré avec **Astro 5**, **Tailwind CSS v4**, **TypeScript (strict)**.
-Contenu centralisé (prêt pour l'i18n) dans `src/data/` et la content collection
-`src/content/offres/` (pages d'offre pilotées par le contenu).
-
-### Lancer en local
+## Lancer en local
 ```bash
-npm install            # installe les dépendances
-npm run dev            # serveur de dev  → http://localhost:4321
+npm ci                 # installe avec le lockfile
+npm run dev            # http://localhost:4321
 npm run build          # build de production → dist/
 npm run preview        # prévisualise le build
 npm run check          # vérification TypeScript / Astro
-npm run placeholders   # (re)génère les visuels de remplacement
+npm run brand          # (re)génère les rasters du blason + favicons
+npm run og             # (re)génère l'image OpenGraph
 ```
 
-### Arborescence du site
-```
-src/
-├── assets/images/     # visuels (optimisés via astro:assets)
-├── components/        # Header, Footer, Button, Icon, CtaFinal, offers/*
-├── content/offres/    # Séminaires, Événements privés, Tournages (MD + frontmatter)
-├── content/histoire/  # page-récit /histoire (MD + frontmatter structuré)
-├── content.config.ts  # schémas Zod des collections « offres » et « histoire »
-├── data/              # contenu centralisé (site, home, chateau, contact, gallery, images)
-├── layouts/           # BaseLayout, LegalLayout
-├── pages/             # index, le-chateau, histoire, [offre], galerie, contact,
-│                      #   merci, mentions-legales, confidentialite, 404, robots.txt
-├── utils/url.ts       # withBase() — liens internes adaptés au chemin de base
-└── styles/global.css  # système de design (tokens nuit/jour) + Tailwind
-```
-
-### Pages livrées
-Accueil · Le Château · **Histoire** (récit long-form : barre de progression,
-citation en exergue, frise chronologique) · Séminaires · Événements privés ·
-Tournages · Galerie (lightbox) · Contact (+ /merci) · Mentions légales ·
+## Pages livrées
+Accueil (`/`) · Les Suites (`/les-suites`) · Suite Lumière (`/suite-lumiere`) ·
+Suite Feuillage (`/suite-feuillage`) · L'Expérience (`/experience`) ·
+Le Château (`/le-chateau`) · Histoire (`/histoire`) · Galerie (`/galerie`) ·
+Contact de pré-ouverture (`/contact`, + `/merci`) · Mentions légales ·
 Confidentialité · 404.
-SEO : métas par page, OpenGraph/Twitter, `sitemap.xml`, `robots.txt`,
-JSON-LD `EventVenue`/`LocalBusiness` (+ `AboutPage` sur /histoire).
 
-### Déploiement — chemin de base configurable
-Le site supporte deux cibles via deux variables d'environnement de build :
+**Redirections** (base-aware) des anciennes routes v1 → accueil :
+`/seminaires`, `/evenements-prives`, `/tournages`.
 
-| Variable | Pages (preview) | Netlify / domaine propre |
+**SEO** : métas + OpenGraph/Twitter par page, `sitemap.xml`, `robots.txt`,
+JSON-LD **`BedAndBreakfast` / `LodgingBusiness`** (sans adresse précise ni
+téléphone). Favicon et image sociale = identité définitive (blason).
+
+## Identité
+- Logo maître : `src/assets/brand/blason-definitif-encre.svg` (et `-or.svg`).
+- Rasters web : `blason-or.png` / `blason-encre.png` (via `npm run brand`).
+- Référence de composition : `references/flyer/flyer-reference-validee.jpeg`.
+- Encre `#141F26` · Or `#C8A45B` · Blanc `#FFFFFF` · Ivoire `#F2EBDD` ·
+  Cormorant Garamond + EB Garamond.
+
+## Déploiement (base configurable)
+| Variable | GitHub Pages (preview) | Netlify / domaine propre |
 |---|---|---|
 | `SITE_URL` | `https://lumenbot.github.io` | URL canonique définitive |
 | `BASE_PATH` | `/chateau-sainte-lucie-site` | `/` (racine) |
 
-Tous les liens internes passent par `withBase()` (`src/utils/url.ts`) : ils
-s'adaptent automatiquement au `base`.
+Preview Pages via `.github/workflows/deploy.yml` (build sur `main`). Tous les
+liens internes passent par `withBase()` (`src/utils/url.ts`). Le formulaire
+nécessite un backend (Netlify Forms / Web3Forms) : sur Pages (statique) la
+soumission n'est pas traitée.
 
-**GitHub Pages (preview en ligne)** → <https://lumenbot.github.io/chateau-sainte-lucie-site/>
-1. Le workflow `.github/workflows/deploy.yml` construit et publie le site à
-   chaque push sur `main` (build avec `BASE_PATH=/chateau-sainte-lucie-site`).
-2. Une fois : **Settings → Pages → Source = « GitHub Actions »** (le workflow
-   tente de l'activer automatiquement). L'ancien workflow « deploy from a
-   branch » est alors remplacé.
-
-**Netlify (production)** → build auto via `netlify.toml` (`npm run build`,
-publish `dist`, Node 22, `BASE_PATH` non défini → racine). Définir `SITE_URL`.
-**Formulaire** : Netlify Forms est détecté automatiquement ; e-mail de
-notification configuré dans Netlify (Forms → Notifications), **hors dépôt**.
-*Alternative* : `PUBLIC_WEB3FORMS_KEY` (voir `.env.example`).
-> ⚠️ Le formulaire de contact nécessite un backend (Netlify Forms / Web3Forms) :
-> sur GitHub Pages (statique pur) la soumission n'est pas traitée — la preview
-> Pages reste une vitrine, la production se fait sur Netlify.
-
-`maquettes/` et `livrables/` ne sont pas déployés.
-
-### ⚠️ À compléter avant mise en ligne (points ouverts / blocages)
-- **Photographies** : ✅ vraies photos intégrées. Les visuels plus intimes
-  (caveau familial, pierre tombale de l'enfant) sont désormais utilisés **avec
-  retenue sur la page `/histoire`** (registre sensible), et écartés des pages
-  « vitrine ». Le mapping image→emplacement est centralisé dans
-  `src/data/images.ts` (clés = contenu réel, les noms de fichiers d'origine
-  étant parfois trompeurs).
-- **Coordonnées** : e-mail, téléphone, domaine (placeholders dans `src/data/site.ts`).
-- **Mentions légales & confidentialité** : gabarits à compléter (champs `[…]`)
-  et à faire valider juridiquement.
-- **Tarifs séminaires** : fourchettes indicatives reprises des maquettes — à
-  arbitrer (cf. `docs/contenu-redactionnel.md`, « Notes éditoriales »).
-- **Plaquette PDF** : non fournie ; les CTA « Recevoir la plaquette » pointent
-  vers le formulaire (logique lead magnet).
-- **Lighthouse** : à mesurer sur l'URL de preview. Les libellés en or sur fond
-  parchemin (style de marque issu des maquettes) sont proches du seuil AA pour
-  le très petit texte — à arbitrer si un audit l'exige.
+## ⚠️ À confirmer avant publication (cf. `docs/06-points-a-confirmer.md`)
+- **Photographies des suites** : réalisées après travaux (mars 2027) ; les
+  visuels actuels sont des photographies réelles du domaine, en attendant.
+  Aucun rendu de projection n'est publié.
+- **Tarifs** : fourchette de travail 200–420 € (doc 02). **Non affichée** : la
+  copie emploie « communiqués à l'ouverture des réservations ». Décision
+  d'affichage à trancher.
+- **Coordonnées** : e-mail (`contact@chateau-saintelucie.fr`), téléphone
+  (aucun affiché), nom de domaine et URL canonique.
+- **Suites** : surfaces, couchages, équipements, capacité exacte.
+- **Table d'hôtes** : menus, régimes, tarifs. **Petit-déjeuner** : composition.
+- **Piscine naturelle / hammam** : conditions d'accès.
+- **Légal** : mentions légales, responsable de publication, confidentialité
+  (gabarits à compléter), hébergeur de production et traitement du formulaire.
+- **Redirections** : destination définitive des anciennes URLs (ici : accueil).
 
 ## Statut
-- [x] Cahier des charges
-- [x] Brief maquettes
-- [x] Maquettes validées (Claude Design)
-- [x] Implémentation (Claude Code) — backlog T0 → T12
-- [ ] Mise en ligne (photos, coordonnées & légal à finaliser)
+- [x] Cadrage & docs de reprise (v2)
+- [x] Refonte « Les Nuits au Château » (backlog T0 → T12)
+- [ ] Validation Blaise & mise en ligne (points à confirmer ci-dessus)

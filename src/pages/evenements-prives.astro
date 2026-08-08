@@ -1,0 +1,23 @@
+---
+// Ancienne route « réception » v1 → redirection base-aware vers l'accueil.
+import { withBase } from "../utils/url";
+const to = withBase("/");
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirection — Les Nuits au Château</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <link rel="canonical" href={to} />
+  </head>
+  <body>
+    <p>
+      Cette page a évolué. <a href={to}>Accéder au site des Nuits au Château</a>.
+    </p>
+    <script is:inline set:html={`location.replace(${JSON.stringify(to)});`}></script>
+  </body>
+</html>

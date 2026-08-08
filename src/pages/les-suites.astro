@@ -1,0 +1,79 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import SuiteCard from "../components/suites/SuiteCard.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+
+const suites = (await getCollection("suites")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout
+  title="Les Suites | Les Nuits au Château"
+  description="Deux suites seulement — Lumière et Feuillage — dans un château familial de 1876 à Rambervillers. Deux pièces, une salle de bain et une terrasse privative chacune. Ouverture avril 2027."
+  ogType="article"
+>
+  <PageHero
+    place="Les Suites de Sainte-Lucie"
+    title={["Deux manières", "d'habiter la nuit."]}
+    lead="Deux suites seulement, chacune composée de deux pièces, d'une salle de bain et d'une terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière."
+    image="salonCheminee"
+    imageAlt="Un salon de caractère aux boiseries d'origine"
+    imagePosition="center 40%"
+    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+  />
+
+  <section class="sec suites-page">
+    <div class="wrap">
+      <div class="suites-grid">
+        {
+          suites.map((s) => (
+            <SuiteCard
+              href={`/${s.id}`}
+              image={s.data.cardImage}
+              imagePosition={s.data.cardPosition}
+              name={s.data.name}
+              title={s.data.nav}
+              tagline={s.data.tagline}
+              ambiance={s.data.ambiance}
+            />
+          ))
+        }
+      </div>
+      <p class="note suites-note">
+        La configuration exacte de chaque suite — surfaces, couchages et
+        équipements — sera précisée à l'ouverture des réservations.
+      </p>
+    </div>
+  </section>
+
+  <CtaFinal
+    eyebrow="Pré-ouverture · avril 2027"
+    titleLead="Une nuit vous attend "
+    titleGold="au château."
+    text="Laissez-nous vos coordonnées pour être informé de l'ouverture des réservations."
+    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+  />
+</BaseLayout>
+
+<style>
+  .suites-page {
+    background: var(--parch);
+  }
+  .suites-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  @media (min-width: 820px) {
+    .suites-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .suites-note {
+    margin-top: 30px;
+    text-align: center;
+  }
+</style>

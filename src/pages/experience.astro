@@ -1,0 +1,114 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/sections/PageHero.astro";
+import CtaFinal from "../components/CtaFinal.astro";
+import { experienceSeo, phero, sections, experienceCta } from "../data/experience";
+---
+
+<BaseLayout title={experienceSeo.title} description={experienceSeo.description} ogType="article">
+  <PageHero
+    place={phero.place}
+    title={phero.title}
+    lead={phero.lead}
+    image="hallEntree"
+    imageAlt={phero.image.alt}
+    imagePosition={phero.imagePosition}
+    actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
+  />
+
+  <section class="sec exp">
+    <div class="wrap">
+      {
+        sections.map((s) => (
+          <div class={`xfeature${s.rev ? " rev" : ""}`}>
+            <div class="xfeature__img">
+              <Image
+                src={s.image.src}
+                alt={s.image.alt}
+                widths={[500, 800, 1200]}
+                sizes="(min-width:880px) 50vw, 100vw"
+                loading="lazy"
+                style={s.imagePosition ? `object-position:${s.imagePosition};` : undefined}
+              />
+              <span class="cap">{s.cap}</span>
+            </div>
+            <div class="xfeature__body">
+              <h2 class="display-m">{s.title}</h2>
+              {s.paragraphs.map((p) => <p>{p}</p>)}
+              {s.note && <p class="note">{s.note}</p>}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <CtaFinal
+    eyebrow={experienceCta.eyebrow}
+    titleLead={experienceCta.title[0]}
+    titleGold={experienceCta.title[1]}
+    text={experienceCta.text}
+    actions={experienceCta.actions}
+  />
+</BaseLayout>
+
+<style>
+  .exp {
+    background: var(--parch);
+  }
+  .xfeature {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 68px;
+  }
+  .xfeature:last-child {
+    margin-bottom: 0;
+  }
+  .xfeature__img {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border: 1px solid var(--rule-l-faint);
+  }
+  .xfeature__img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .xfeature__img .cap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: rgba(20, 31, 38, 0.74);
+    color: var(--creme);
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 10px;
+    padding: 8px 13px;
+  }
+  .xfeature__body h2 {
+    margin: 0 0 18px;
+    color: var(--encre);
+  }
+  .xfeature__body p {
+    color: var(--encre-soft);
+    margin: 0 0 14px;
+    line-height: 1.7;
+  }
+  .xfeature__body .note {
+    margin-top: 6px;
+  }
+  @media (min-width: 880px) {
+    .xfeature {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+    .xfeature.rev .xfeature__img {
+      order: 2;
+    }
+  }
+</style>

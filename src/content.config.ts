@@ -1,13 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-/**
- * Collection « offres » — pages d'offre pilotées par le contenu (MD).
- * Le corps Markdown reste optionnel : la structure (sections) est décrite en
- * frontmatter et rendue par un composant de page réutilisable
- * (`src/pages/[offre].astro`). Préparé pour l'i18n (phase 2).
- */
-
 const action = z.object({
   label: z.string(),
   href: z.string(),
@@ -21,105 +14,52 @@ const titleParts = {
   titleTail: z.string().optional(),
 };
 
-const introBlock = z.object({
-  type: z.literal("intro"),
-  ...titleParts,
-  text: z.string(),
-});
-
-const timelineBlock = z.object({
-  type: z.literal("timeline"),
-  ...titleParts,
-  items: z.array(
-    z.object({ time: z.string(), title: z.string(), text: z.string() }),
-  ),
-});
-
-const gridBlock = z.object({
-  type: z.literal("grid"),
-  ...titleParts,
-  background: z.enum(["parch", "parch-2"]).optional(),
-  items: z.array(
-    z.object({
-      icon: z.string().optional(),
-      title: z.string(),
-      text: z.string(),
-    }),
-  ),
-});
-
-const highlightBlock = z.object({
-  type: z.literal("highlight"),
-  ...titleParts,
-  text: z.string(),
-  image: z.string(),
-  rev: z.boolean().default(false),
-  contain: z.boolean().default(false), // afficher l'image entière (object-fit: contain)
-  mini: z.array(z.string()).default([]),
-});
-
-const formatsBlock = z.object({
-  type: z.literal("formats"),
-  ...titleParts,
-  items: z.array(
-    z.object({
-      ci: z.string(),
-      title: z.string(),
-      text: z.string(),
-      price: z.string().optional(),
-      priceUnit: z.string().optional(),
-      feat: z.boolean().default(false),
-    }),
-  ),
-  chips: z
-    .array(z.object({ b: z.string(), rest: z.string() }))
-    .default([]),
-  note: z.string().optional(),
-});
-
-const block = z.discriminatedUnion("type", [
-  introBlock,
-  timelineBlock,
-  gridBlock,
-  highlightBlock,
-  formatsBlock,
-]);
-
-const offres = defineCollection({
-  loader: glob({ pattern: "*.md", base: "./src/content/offres" }),
+/* =====================================================================
+   Collection « suites » — les deux suites Lumière et Feuillage.
+   Une entrée par suite (MD + frontmatter). Ne jamais inventer surfaces,
+   couchages, équipements ou tarifs : champ `aConfirmer` prévu à cet effet.
+   Emplacements d'images pensés pour un remplacement simple après la séance
+   photographique de mars 2027.
+   ===================================================================== */
+const suites = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./src/content/suites" }),
   schema: z.object({
     order: z.number().default(0),
-    nav: z.string(),
+    nav: z.string(), // « Lumière »
+    name: z.string(), // « Suite Lumière »
     seo: z.object({ title: z.string(), description: z.string() }),
     hero: z.object({
-      place: z.string(),
-      /** Lignes du titre (jointes par <br>). */
-      title: z.array(z.string()),
+      eyebrow: z.string(),
+      title: z.string(),
       lead: z.string(),
       image: z.string(),
       imageAlt: z.string().optional(),
-      imagePosition: z.string().optional(), // object-position (cadrage du hero)
-      placeColor: z.enum(["or", "dim"]).default("or"),
-      actions: z.array(action).default([]),
+      imagePosition: z.string().optional(),
     }),
-    blocks: z.array(block).default([]),
-    cta: z.object({
-      ...titleParts,
-      text: z.string(),
-      actions: z.array(action),
-    }),
+    /** Ligne de palette chromatique (validée). */
+    palette: z.string(),
+    /** Puces d'ambiance (matières / couleurs). */
+    ambiance: z.array(z.string()).default([]),
+    /** Paragraphe d'introduction (validé). */
+    intro: z.string(),
+    /** Composition validée (deux pièces, salle de bain, terrasse…). */
+    composition: z.array(z.string()).default([]),
+    /** Mention prudente sur les éléments non confirmés. */
+    aConfirmer: z.string(),
+    /** Résumé court + image pour la page /les-suites. */
+    tagline: z.string(),
+    cardImage: z.string(),
+    cardPosition: z.string().optional(),
   }),
 });
 
 /* =====================================================================
    Collection « histoire » — page-récit long-form (registre nuit)
-   Une seule entrée ; structure pilotée par le frontmatter, rendue par
-   src/pages/histoire.astro (fidèle à maquettes/site/histoire.html).
    ===================================================================== */
 
 const chapterSection = z.object({
   type: z.literal("chapter"),
-  no: z.string(), // chiffre romain
+  no: z.string(),
   ...titleParts,
   lead: z.string().optional(),
   paragraphs: z.array(z.string()),
@@ -127,7 +67,7 @@ const chapterSection = z.object({
   imageAlt: z.string().optional(),
   caption: z.string(),
   rev: z.boolean().default(false),
-  contain: z.boolean().default(false), // object-fit: contain (pierre, crypte)
+  contain: z.boolean().default(false),
   sepia: z.boolean().default(false),
   objectPosition: z.string().optional(),
   actions: z.array(action).default([]),
@@ -217,4 +157,4 @@ const histoire = defineCollection({
   }),
 });
 
-export const collections = { offres, histoire };
+export const collections = { suites, histoire };

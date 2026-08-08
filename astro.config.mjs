@@ -17,11 +17,14 @@ export default defineConfig({
   base: BASE_PATH,
   // URLs propres en français, sans slash final.
   trailingSlash: "never",
+  // Redirections des anciennes routes v1 : pages explicites (base-aware) dans
+  // src/pages/{seminaires,evenements-prives,tournages}.astro.
   integrations: [
     mdx(),
     sitemap({
-      // On exclut du sitemap les pages de confirmation et utilitaires.
-      filter: (page) => !page.includes("/merci"),
+      // On exclut du sitemap les confirmations et les redirections.
+      filter: (page) =>
+        !/\/(merci|seminaires|evenements-prives|tournages)(\/|$)/.test(page),
     }),
   ],
   vite: {

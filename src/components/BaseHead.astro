@@ -1,7 +1,7 @@
 ---
 /**
  * <head> commun : métas SEO, OpenGraph + Twitter cards, canonical, favicon,
- * données structurées schema.org (EventVenue / LocalBusiness) et, en option,
+ * données structurées schema.org (BedAndBreakfast / LodgingBusiness) et, option,
  * analytics Plausible (sans cookie).
  */
 import { site } from "../data/site";
@@ -32,34 +32,34 @@ const canonical = new URL(path === "" ? "/" : path, Astro.site).href;
 const ogImage = new URL(withBase(image), Astro.site).href;
 const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 
-// Données structurées : lieu d'événement / commerce local.
-// ⚠️ Pas de streetAddress (résidence habitée) — localité/région uniquement.
+// Données structurées : maison d'hôtes (LodgingBusiness / BedAndBreakfast).
+// ⚠️ Ni streetAddress ni code postal (résidence habitée) — localité/région.
+// ⚠️ Ni téléphone ni tarif tant qu'ils ne sont pas confirmés.
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["EventVenue", "LocalBusiness"],
+  "@type": ["BedAndBreakfast", "LodgingBusiness"],
   name: site.name,
+  alternateName: site.signature,
   description: site.tagline,
   url: Astro.site?.href,
   image: ogImage,
   email: site.contact.email,
-  telephone: site.contact.phoneHref.replace("tel:", ""),
   address: {
     "@type": "PostalAddress",
     addressLocality: site.location.locality,
     addressRegion: site.location.region,
-    postalCode: site.location.postalCode,
     addressCountry: site.location.country,
   },
-  areaServed: [
-    site.location.region,
-    "Lorraine",
-    site.location.area,
-    "Épinal",
-    "Nancy",
+  areaServed: [site.location.region, "Lorraine", site.location.area],
+  numberOfRooms: 2,
+  petsAllowed: false,
+  smokingAllowed: false,
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "Piscine naturelle", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Parc boisé clos", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Table d'hôtes", value: true },
   ],
-  maximumAttendeeCapacity: site.capacityMax,
   knowsLanguage: "fr-FR",
-  isAccessibleForFree: false,
 };
 ---
 
@@ -70,10 +70,11 @@ const jsonLd = {
 <link rel="canonical" href={canonical} />
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#0c0c0b" />
+<meta name="theme-color" content="#141f26" />
 
-<!-- Favicon -->
-<link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+<!-- Favicon (blason) -->
+<link rel="icon" type="image/png" sizes="48x48" href={withBase("/favicon-48.png")} />
+<link rel="icon" type="image/png" sizes="512x512" href={withBase("/icon-512.png")} />
 <link rel="apple-touch-icon" href={withBase("/apple-touch-icon.png")} />
 
 <!-- Sitemap -->

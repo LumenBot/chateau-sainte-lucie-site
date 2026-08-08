@@ -1,0 +1,42 @@
+---
+/**
+ * Blason héraldique définitif « Vis Unita Fit Fortior ».
+ * Variante `or` (fonds sombres/photo) ou `encre` (fonds clairs).
+ * Rendu vectoriel rastérisé haute résolution puis optimisé par astro:assets.
+ * Ne jamais redessiner ni simplifier le tracé (identité validée).
+ */
+import { Image } from "astro:assets";
+import blasonOr from "../../assets/brand/blason-or.png";
+import blasonEncre from "../../assets/brand/blason-encre.png";
+
+interface Props {
+  variant?: "or" | "encre";
+  width?: number;
+  class?: string;
+  loading?: "eager" | "lazy";
+  alt?: string;
+}
+
+const {
+  variant = "or",
+  width = 220,
+  class: className,
+  loading = "lazy",
+  alt = "Blason du Château de Sainte-Lucie — Vis Unita Fit Fortior",
+} = Astro.props;
+
+const src = variant === "or" ? blasonOr : blasonEncre;
+const height = Math.round((width * 1323) / 1189);
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  widths={[width, width * 2]}
+  sizes={`${width}px`}
+  class={className}
+  loading={loading}
+  decoding="async"
+/>

@@ -1,19 +1,18 @@
 ---
 /**
- * En-tête + navigation (desktop & mobile).
- * - `transparent` (défaut) : posé au-dessus d'un hero sombre (registre nuit).
- * - `solid` : en-tête sticky clair, pour les pages sans hero sombre.
- * Menu mobile : « checkbox hack » (zéro JS de base, case focusable au clavier),
- * amélioré par un petit script (Échap pour fermer, fermeture au clic d'un lien).
+ * En-tête + navigation. Blason définitif dans le lockup de marque.
+ * `transparent` (défaut, sur hero sombre) / `solid` (pages claires).
+ * Menu mobile accessible (case focusable + Échap).
  */
-import { site, mainNav } from "../data/site";
-import { ctaLabels } from "../data/site";
+import { site, mainNav, ctaLabels } from "../data/site";
 import { withBase, normalizePath } from "../utils/url";
+import Blason from "./brand/Blason.astro";
 
 interface Props {
   solid?: boolean;
 }
 const { solid = false } = Astro.props;
+const crestVariant = solid ? "encre" : "or";
 
 const path = normalizePath(Astro.url.pathname);
 const isActive = (href: string) => {
@@ -35,8 +34,11 @@ const contactActive = isActive("/contact");
 <header class={`site-header${solid ? " solid" : ""}`}>
   <div class="bar">
     <a class="brand" href={withBase("/")} aria-label={`${site.name} — accueil`}>
-      <span class="bn">{site.shortName}</span>
-      <span class="bs">{site.brandLine}</span>
+      <Blason variant={crestVariant} width={46} loading="eager" class="crest" />
+      <span class="brand-text">
+        <span class="bn">{site.name}</span>
+        <span class="bs">{site.signature}</span>
+      </span>
     </a>
 
     <nav class="nav-desktop" aria-label="Navigation principale">
@@ -69,8 +71,11 @@ const contactActive = isActive("/contact");
 <div class="nav-mobile" id="menu-mobile">
   <div class="mtop">
     <span class="brand">
-      <span class="bn">{site.shortName}</span>
-      <span class="bs">{site.brandLine}</span>
+      <Blason variant="or" width={44} class="crest" />
+      <span class="brand-text">
+        <span class="bn">{site.name}</span>
+        <span class="bs">{site.signature}</span>
+      </span>
     </span>
     <label class="mclose" for="navchk" aria-label="Fermer le menu">×</label>
   </div>
@@ -83,7 +88,7 @@ const contactActive = isActive("/contact");
     ))
   }
   <div class="mcta">
-    <a class="btn btn--gold-light" href={withBase("/contact")}>{ctaLabels.contact}</a>
+    <a class="btn btn--gold-light" href={withBase("/contact")}>{ctaLabels.informer}</a>
   </div>
 </div>
 

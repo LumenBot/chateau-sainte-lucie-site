@@ -1,126 +1,132 @@
 /**
- * Contenu éditorial de l'accueil (transposé des maquettes + contenu-redactionnel).
- * Centralisé pour préparer une future traduction (phase 2).
+ * Contenu de l'accueil de pré-ouverture « Les Nuits au Château ».
+ * Composition inspirée du flyer de référence validé.
  */
 import { images, type Visual } from "./images";
 
 export const homeSeo = {
   title:
-    "Château de Sainte-Lucie — Séminaires, événements & tournages aux portes des Vosges",
+    "Les Nuits au Château | Les Suites de Sainte-Lucie dans les Vosges",
   description:
-    "Un château de caractère, à taille humaine, aux portes des Vosges — pour des séminaires, des moments de famille et des tournages d'exception.",
+    "Deux suites dans un château familial de 1876 à Rambervillers : parc boisé, piscine naturelle et table d'hôtes. Ouverture prévue en avril 2027.",
 };
 
 export const hero = {
-  place: "Rambervillers · Vosges · Lorraine",
-  titleTop: "Château de",
-  titleLux: "Sainte-Lucie",
-  promise:
-    "Un château de caractère, à taille humaine, aux portes des Vosges.",
-  scrollcue: "Séminaires · Événements privés · Tournages",
+  eyebrow: "Château de Sainte-Lucie · Vosges",
+  title: "Les Nuits au Château",
+  signature: "Les Suites de Sainte-Lucie",
+  accroche: "Une nuit dans une maison de famille, entre grès rose et lisière.",
+  descriptor: "Maison d'hôtes & table d'hôtes · Domaine de 1876",
   image: images.facadeNuit as Visual,
 };
 
-export interface UsageCard {
-  image: Visual;
-  tag: string;
-  title: string;
-  text: string;
-  cta: string;
-  href: string;
-}
-
-export const usages = {
-  eyebrow: "Trois manières d'habiter le lieu",
-  title: ["Le même château, ", "trois façons", " de le vivre."],
-  lede: "Un lieu élégant et discret qui accueille, principalement en semaine, entreprises, familles et équipes de tournage — cinquante à soixante-dix personnes, jamais davantage.",
-  cards: [
-    {
-      image: images.piscineChateauJour,
-      tag: "Entreprises",
-      title: "Séminaires",
-      text: "Salles de caractère, parc, déjeuner maison et bien-être. Une journée loin des bureaux, à moins d'une heure d'Épinal et de Nancy.",
-      cta: "Demander une proposition",
-      href: "/seminaires",
-    },
-    {
-      image: images.perronIllumine,
-      tag: "Familles",
-      title: "Événements privés",
-      text: "Anniversaires, baptêmes, grands repas de famille. La beauté du lieu pour les vôtres, quelques week-ends choisis dans l'année.",
-      cta: "Demander une visite",
-      href: "/evenements-prives",
-    },
-    {
-      image: images.blason,
-      tag: "Productions",
-      title: "Tournages",
-      text: "Boiseries, blasons, parc et piscine naturelle : un décor d'époque que peu d'endroits offrent, et une lumière rare.",
-      cta: "Étudier un tournage",
-      href: "/tournages",
-    },
-  ] satisfies UsageCard[],
+export const maison = {
+  eyebrow: "Une maison, pas un décor",
+  title: ["Un château habité, ", "pas un hôtel."],
+  paragraphs: [
+    "Sainte-Lucie n'est pas un hôtel installé dans un château vide. C'est un château habité, partagé par trois foyers d'une même famille, qui ouvre deux suites à quelques hôtes seulement.",
+    "On y vient pour ralentir : franchir le perron au soir, dîner dans les boiseries, lire près d'une cheminée, marcher sous les chênes, entrer dans une eau filtrée par les plantes, puis retrouver le silence d'une chambre haute.",
+    "Le luxe recherché n'est pas spectaculaire. Il tient dans l'espace, la matière, la lumière chaude et l'attention portée aux détails.",
+  ],
+  image: images.salleAManger as Visual,
 };
 
-export const histoire = {
-  eyebrow: "L'âme du lieu",
-  title: ["Cent cinquante ans d'amour, de deuils ", "et de transmissions."],
-  text: "Bâti en 1876 comme cadeau de noces, le château porte en ses murs un siècle et demi d'histoire familiale — de la Belle Époque à la Grande Guerre, jusqu'à ses gardiens d'aujourd'hui. C'est cette âme que l'on accueille, autant que les murs.",
-  stats: [
-    { v: "≈750 m²", l: "de demeure" },
-    { v: "50–70", l: "personnes max" },
-    { v: "1876", l: "année de naissance" },
-  ],
-  cta: "Découvrir le château",
-  href: "/le-chateau",
-  image: images.histoireSepia as Visual,
+export const suitesTeaser = {
+  eyebrow: "Deux suites seulement",
+  title: ["Deux suites, ", "deux lumières."],
+  text: "Chacune composée de deux pièces, d'une salle de bain et d'une terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière.",
+  cta: "Découvrir les suites",
+  href: "/les-suites",
+};
+
+export interface SejourStep {
+  time: string;
+  title: string;
+  text: string;
+}
+
+export const sejour = {
+  eyebrow: "Un séjour, du soir au matin",
+  title: ["Le temps ", "ralentit."],
+  steps: [
+    {
+      time: "Le soir",
+      title: "Franchir le perron",
+      text: "Arriver à la tombée du jour, s'installer dans sa suite, retrouver le calme des boiseries.",
+    },
+    {
+      time: "À table",
+      title: "La table d'hôtes",
+      text: "Partager, sur réservation, une cuisine de maison servie dans un lieu spectaculaire sans cérémonial.",
+    },
+    {
+      time: "La nuit",
+      title: "Le silence d'une chambre haute",
+      text: "Lire près d'une cheminée, éteindre, écouter le parc et la nuit vosgienne.",
+    },
+    {
+      time: "Au matin",
+      title: "Le parc au réveil",
+      text: "Le petit-déjeuner, puis la rosée sous les chênes et, quand les conditions le permettent, la piscine naturelle.",
+    },
+  ] satisfies SejourStep[],
+};
+
+export interface ExpItem {
+  icon: "window" | "dish" | "waves" | "tree";
+  title: string;
+  text: string;
+}
+
+export const experienceTeaser = {
+  eyebrow: "L'expérience",
+  title: ["Du perron ", "au petit matin."],
+  items: [
+    {
+      icon: "window",
+      title: "Les espaces partagés",
+      text: "Hall au sol de terrazzo, grand salon boisé, salle à manger et bibliothèque monumentale.",
+    },
+    {
+      icon: "dish",
+      title: "La table d'hôtes",
+      text: "Le soir, une cuisine de maison servie dans les boiseries, sur réservation.",
+    },
+    {
+      icon: "waves",
+      title: "La piscine naturelle",
+      text: "Un bassin de nage filtré par lagunage planté, accessible selon la saison et les conditions.",
+    },
+    {
+      icon: "tree",
+      title: "Le parc vivant",
+      text: "Un hectare clos de prairies, de vieux arbres et de lisières.",
+    },
+  ] satisfies ExpItem[],
+  cta: "Découvrir l'expérience",
+  href: "/experience",
 };
 
 export const galerie = {
   eyebrow: "La galerie",
-  title: ["Le lieu, ", "en lumière."],
-  cta: "Voir la galerie complète",
+  title: ["Sainte-Lucie, ", "au fil des lumières."],
+  cta: "Voir la galerie",
   href: "/galerie",
   strip: [
     images.perronIllumine,
     images.cheneCentenaire,
     { ...images.piscineNuit, wide: true },
-    images.piscineSalon,
+    images.hallEntree,
     images.daims,
   ] as (Visual & { wide?: boolean })[],
 };
 
-export interface Reassurance {
-  icon: "shield" | "lock" | "pin";
-  title: string;
-  text: string;
-}
-
-export const reassurance: Reassurance[] = [
-  {
-    icon: "shield",
-    title: "À taille humaine",
-    text: "Cinquante à soixante-dix personnes au maximum — le format qui préserve l'âme des lieux.",
-  },
-  {
-    icon: "lock",
-    title: "Confidentiel",
-    text: "Un lieu privé, sur réservation. Pas de foules, pas de calendrier public — la discrétion d'une maison de famille.",
-  },
-  {
-    icon: "pin",
-    title: "Aux portes des Vosges",
-    text: "À la sortie de Rambervillers, à moins d'une heure d'Épinal et de Nancy, au cœur d'un parc boisé.",
-  },
-];
-
 export const ctaFinal = {
-  eyebrow: "Parlons de votre projet",
-  title: ["Imaginons votre moment ", "au château."],
-  text: "Dites-nous qui vous êtes et ce que vous cherchez — nous revenons vers vous avec une proposition à la hauteur du lieu.",
+  eyebrow: "Pré-ouverture · avril 2027",
+  title: ["Soyez parmi les premiers ", "à en franchir le seuil."],
+  text: "Les Suites de Sainte-Lucie ouvriront en avril 2027. Laissez-nous vos coordonnées pour être informé de l'ouverture des réservations.",
   actions: [
-    { label: "Demander une proposition", href: "/contact", variant: "gold-light" as const },
-    { label: "Demander une visite", href: "/contact", variant: "ghost-light" as const },
-    { label: "Étudier un tournage", href: "/contact", variant: "ghost-light" as const },
+    { label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" as const },
+    { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" as const },
   ],
 };
