@@ -3,8 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { withBase } from "../utils/url";
 import { contactSeo, contactHeader, form, aside } from "../data/contact";
 
-// Service de formulaire : Netlify Forms par défaut ; Web3Forms si une clé
-// publique est fournie (déploiement hors Netlify). Aucun secret n'est commité.
+// Service de formulaire : Web3Forms lorsqu'une clé publique est fournie.
+// Sans clé, la maquette simule explicitement l'envoi dans le navigateur.
 const web3key = import.meta.env.PUBLIC_WEB3FORMS_KEY;
 const useWeb3 = typeof web3key === "string" && web3key.length > 0;
 const merciPath = withBase("/merci");
@@ -32,14 +32,13 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
         <!-- FORM -->
         <div>
           <form
+            id="contact-form"
             class="contact-form"
             name="contact"
             method="POST"
-            action={useWeb3 ? "https://api.web3forms.com/submit" : merciPath}
-            data-netlify={useWeb3 ? undefined : "true"}
-            netlify-honeypot={useWeb3 ? undefined : "bot-field"}
+            action={useWeb3 ? "https://api.web3forms.com/submit" : "#contact-form"}
+            data-live-capture={String(useWeb3)}
           >
-            {!useWeb3 && <input type="hidden" name="form-name" value="contact" />}
             {useWeb3 && <input type="hidden" name="access_key" value={web3key} />}
             {useWeb3 && <input type="hidden" name="redirect" value={merciUrl} />}
             {
@@ -54,22 +53,14 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
 
             {/* honeypot anti-spam */}
             {
-              !useWeb3 ? (
-                <p class="hp" aria-hidden="true">
-                  <label>
-                    Ne pas remplir : <input name="bot-field" tabindex="-1" autocomplete="off" />
-                  </label>
-                </p>
-              ) : (
-                <input
-                  type="checkbox"
-                  name="botcheck"
-                  class="hp"
-                  tabindex="-1"
-                  autocomplete="off"
-                  aria-hidden="true"
-                />
-              )
+              <input
+                type="checkbox"
+                name="botcheck"
+                class="hp"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+              />
             }
 
             <fieldset class="field seg-field">
@@ -129,7 +120,7 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
 
             <div class="form-actions">
               <button class="btn" type="submit">{form.submit}</button>
-              <span class="form-note">{form.note}</span>
+              <span class="form-note" data-contact-status>{useWeb3 ? form.note : "Mode maquette : l’envoi sera simulé dans ce navigateur et ne sera pas transmis."}</span>
             </div>
           </form>
         </div>
@@ -156,6 +147,27 @@ const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
     </div>
   </section>
 </BaseLayout>
+
+{!useWeb3 && (
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contact-form");
+      const status = form?.querySelector("[data-contact-status]");
+      if (!(form instanceof HTMLFormElement)) return;
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const data = Object.fromEntries(new FormData(form).entries());
+        localStorage.setItem("csl-contact-preview", JSON.stringify({ ...data, savedAt: new Date().toISOString() }));
+        if (status) status.textContent = "Message simulé dans ce navigateur. Aucune donnée n’a été transmise pendant cette phase de maquette.";
+        form.querySelector("button[type='submit']")?.setAttribute("disabled", "");
+      });
+    });
+  </script>
+)}
 
 <style>
   .phero {

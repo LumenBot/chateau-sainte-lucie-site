@@ -145,14 +145,9 @@
     const children = Number(values.children || 0);
     const underSix = Number(values.childrenUnderSix || 0);
     const underThree = Number(values.childrenUnderThree || 0);
-    // Le prix de base couvre les deux occupants dont le supplément unitaire
-    // serait le plus élevé ; seuls les 3e et 4e occupants sont facturés.
-    const occupantSupplements = [
-      ...Array(adults).fill(50),
-      ...Array(Math.max(0, children - underSix)).fill(50),
-      ...Array(underSix).fill(25),
-    ].sort((a, b) => b - a);
-    const additionalPerNight = occupantSupplements.slice(2).reduce((sum, amount) => sum + amount, 0);
+    // Le prix de base couvre la suite pour un ou deux adultes. Chaque enfant
+    // s'ajoute à la formule, quel que soit le nombre d'adultes présents.
+    const additionalPerNight = Math.max(0, children - underSix) * 50 + underSix * 25;
     const accommodation = nights * (200 + additionalPerNight);
     const guests = adults + children;
     const spa = values.spaPass ? nights * (50 + Math.max(0, guests - 2) * 25) : 0;

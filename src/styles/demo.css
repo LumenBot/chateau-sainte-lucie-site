@@ -626,6 +626,46 @@
 
 .demo-summary h2 { font-size: 31px; }
 
+.demo-booking-steps {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.demo-checkout {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(340px, 1.1fr);
+  gap: 28px;
+  align-items: start;
+  margin-top: 24px;
+  padding: clamp(24px, 4vw, 42px);
+  border: 1px solid rgba(200, 164, 91, 0.35);
+  background: linear-gradient(145deg, rgba(200, 164, 91, 0.08), transparent 55%), #111f28;
+}
+
+.demo-checkout__intro h2 {
+  margin: 8px 0 12px;
+  font-size: clamp(31px, 4vw, 48px);
+}
+
+.demo-checkout__intro > p:not(.demo-kicker) { color: var(--demo-muted); }
+
+.demo-checkout__stay {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 26px;
+  padding: 18px 0;
+  border-block: 1px solid rgba(242, 235, 221, 0.12);
+}
+
+.demo-checkout__stay strong {
+  color: var(--demo-gold);
+  font-family: var(--display);
+  font-size: 25px;
+}
+
+.demo-checkout .demo-summary { position: static; }
+
 .demo-price-row {
   display: flex;
   justify-content: space-between;
@@ -748,6 +788,7 @@
   .demo-grid,
   .demo-grid.two,
   .demo-app-grid,
+  .demo-checkout,
   .demo-integration-map { grid-template-columns: 1fr; }
   .demo-hero-visual { min-height: 410px; order: -1; }
   .demo-hero-visual img { min-height: 410px; }

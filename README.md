@@ -31,7 +31,8 @@ Accueil (`/`) · Les Suites (`/les-suites`) · Suite Lumière (`/suite-lumiere`)
 Suite Feuillage (`/suite-feuillage`) · L'Expérience (`/experience`) ·
 Le Château (`/le-chateau`) · Histoire (`/histoire`) · Galerie (`/galerie`) ·
 Contact de pré-ouverture (`/contact`, + `/merci`) · Mentions légales ·
-Confidentialité · 404.
+Confidentialité · Liste d'attente (`/liste-attente`) · Conditions
+prévisionnelles (`/conditions-sejour`) · 404.
 
 **Démonstrateur interne non indexé** : vue d’ensemble (`/demo`), réservation
 fictive (`/demo/reservation`), compagnon client (`/demo/client`), cockpit
@@ -59,9 +60,9 @@ téléphone). Favicon et image sociale = identité définitive (blason).
 | `BASE_PATH` | `/chateau-sainte-lucie-site` | `/` (racine) |
 
 Preview Pages via `.github/workflows/deploy.yml` (build sur `main`). Tous les
-liens internes passent par `withBase()` (`src/utils/url.ts`). Le formulaire
-nécessite un backend (Netlify Forms / Web3Forms) : sur Pages (statique) la
-soumission n'est pas traitée.
+liens internes passent par `withBase()` (`src/utils/url.ts`). Les formulaires
+utilisent Web3Forms lorsque `PUBLIC_WEB3FORMS_KEY` est configurée. Sans clé, la
+maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
 
 ## Référentiel opérationnel
 
@@ -78,6 +79,8 @@ soumission n'est pas traitée.
   et le protocole de revue par les associés.
 - `docs/12-positionnement-tarifaire-et-valeur-v1.md` formalise la grille à 200 €,
   le benchmark local et les preuves nécessaires pour défendre le positionnement.
+- `docs/13-iteration-corrective-site-aout-2026.md` consigne les arbitrages du
+  brief d'itération 2, les corrections livrées et les sujets différés.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 
@@ -88,7 +91,7 @@ soumission n'est pas traitée.
 - **Coordonnées** : e-mail (`contact@chateau-saintelucie.fr`), téléphone
   (aucun affiché), nom de domaine et URL canonique.
 - **Suites** : surfaces, couchages et équipements définitifs.
-- **Table d'hôtes** : boissons comprises et validation du régime applicable.
+- **Dîner au château** : régime applicable, boissons, licences et conditions de service.
 - **Société d'exploitation** : identité, fiscalité et paramètres comptables.
 - **Prestataires** : PMS, channel manager, paiement et futur hébergement.
 - **Légal** : mentions légales, responsable de publication, confidentialité

@@ -18,7 +18,7 @@ Il couvre :
 - la réservation directe et la distribution sur les plateformes ;
 - la synchronisation des disponibilités, prix et dossiers de séjour ;
 - la préparation du séjour et l'accueil ;
-- les préférences de petit-déjeuner et le dîner privatif ;
+- les préférences de petit-déjeuner et le dîner au château ;
 - la vente et la réservation des équipements du spa ;
 - le livret d'accueil et le parcours historique numérique ;
 - les communications client ;
@@ -279,7 +279,7 @@ dossiers incomplets.
   superflues.
 - F06.05 : distinguer demande client et engagement confirmé par l'établissement.
 
-### F07 — Dîner privatif
+### F07 — Dîner au château
 
 - F07.01 : accepter une réservation garantie jusqu'à 18 h la veille.
 - F07.02 : proposer les quantités adultes, enfants 3–11 ans et moins de 3 ans.

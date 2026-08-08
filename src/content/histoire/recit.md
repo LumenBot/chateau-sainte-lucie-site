@@ -11,7 +11,7 @@ hero:
   titleGold: "et de transmission."
   accroche: >-
     Derrière les murs de grès rose se cache un siècle et demi d'histoire — une
-    demande en mariage, un deuil, une guerre, une énigme jamais résolue. Voici
+    histoire d'amour, un deuil, une guerre, une énigme jamais résolue. Voici
     celle du Château de Sainte-Lucie.
   scrollcue: "Le récit commence"
   image: facadeNuit
@@ -27,7 +27,8 @@ sections:
       depuis le premier jour.
     paragraphs:
       - >-
-        En 1876, l'avocat messin Charles Alfred Chonet de Bollemont fait
+        En 1876, l'avocat à la Cour d'appel de Nancy et vicomte Charles Alfred
+        Chonet de Bollemont fait
         construire un château pour celle qu'il a épousée deux ans plus tôt :
         Marie Lucy Velin, jeune femme de Rambervillers. Il le baptise
         Sainte-Lucie — un hommage à triple sens.
@@ -52,7 +53,7 @@ sections:
         Alexandre, fut général sous Napoléon. Marie Lucy, elle, est orpheline de
         père et de mère dès l'adolescence.
       - >-
-        Leur mariage, célébré à Rambervillers en juin 1874, scelle une histoire
+        Leur mariage, célébré à Rambervillers le 15 juin 1874, scelle une histoire
         d'amour ; deux ans plus tard, le château s'élève au nord-ouest de la
         ville, comme un présent gravé dans la pierre.
     image: peintureBelleEpoque
@@ -111,8 +112,9 @@ sections:
     contain: true
     paragraphs:
       - >-
-        Marie Lucy puis Charles Alfred disparaissent à quelques mois
-        d'intervalle, en 1904 et 1905. Sans héritier direct, le château passe au
+        Marie Lucy disparaît le 3 novembre 1904 ; Charles Alfred la suit le
+        11 janvier 1905, à moins de trois mois d'intervalle. Ils reposent ensemble
+        dans la crypte familiale de Rambervillers. Sans héritier direct, le château passe au
         frère de Marie Lucy, puis à sa nièce Lucie, qui épouse André Boucher,
         industriel papetier décoré de la Légion d'honneur.
       - >-
@@ -204,11 +206,12 @@ sections:
         abrite daims et écureuils, sa piscine naturelle reflète encore la
         lumière de l'été.
       - >-
-        Quelques jours par mois, il s'ouvre à ceux qui veulent y travailler, y
-        célébrer ou y filmer — pour que son histoire continue de s'écrire.
+        En avril 2027, deux suites seulement s'ouvriront aux voyageurs. Une
+        manière mesurée de partager la maison sans lui retirer sa vie familiale,
+        pour que son histoire continue de s'écrire.
     image: piscineNuit
     caption: "La piscine naturelle · le reflet de la lumière"
     actions:
-      - { label: "Découvrir le lieu", href: "/le-chateau", variant: "gold-light" }
-      - { label: "Nous contacter", href: "/contact", variant: "ghost-light" }
+      - { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" }
+      - { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" }
 ---

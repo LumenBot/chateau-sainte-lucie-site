@@ -9,6 +9,7 @@ import DayTimeline from "../components/sections/DayTimeline.astro";
 import FeatureGrid from "../components/sections/FeatureGrid.astro";
 import CtaFinal from "../components/CtaFinal.astro";
 import SuiteCard from "../components/suites/SuiteCard.astro";
+import BeforeStay from "../components/BeforeStay.astro";
 import { site } from "../data/site";
 import {
   homeSeo,
@@ -56,15 +57,15 @@ const suites = (await getCollection("suites")).sort(
       <div class="fhero__ornament" aria-hidden="true">✦</div>
       <p class="fhero__opening">{site.opening.label}</p>
       <div class="fhero__cta">
-        <Button href="/demo/reservation" variant="gold-light">Faire ma réservation</Button>
-        <Button href="/les-suites" variant="ghost-light">Découvrir les suites</Button>
+        <Button href="/liste-attente" variant="gold-light">Rejoindre la liste d’attente</Button>
+        <Button href="/demo/reservation" variant="ghost-light">Découvrir le parcours</Button>
       </div>
-      <p class="fhero__demo-note">Parcours de démonstration · aucune réservation ni aucun paiement réel</p>
+      <p class="fhero__demo-note">Les réservations ne sont pas encore ouvertes · parcours numérique en démonstration</p>
       <div class="fhero__proofs" aria-label="Les signatures de l'expérience">
         <span><strong>2</strong> suites seulement</span>
         <span><strong>4</strong> expériences de spa</span>
         <span><strong>1 ha</strong> de parc clos</span>
-        <span><strong>1</strong> table privative</span>
+        <span><strong>1</strong> dîner au château</span>
       </div>
     </div>
     <p class="fhero__projection">Projection de l'expérience après travaux</p>
@@ -230,6 +231,8 @@ const suites = (await getCollection("suites")).sort(
     </div>
   </section>
 
+  <BeforeStay />
+
   <!-- ===================== TARIFS ===================== -->
   <section class="sec home-rates">
     <div class="wrap">
@@ -237,6 +240,7 @@ const suites = (await getCollection("suites")).sort(
         <p class="eyebrow"><span class="ln"></span>{tarifs.eyebrow}</p>
         <h2 class="display-l">{tarifs.title[0]}<em class="gold">{tarifs.title[1]}</em></h2>
         <p class="lede">{tarifs.intro}</p>
+        <p class="home-rates__family">{tarifs.family}</p>
       </div>
       <div class="home-rates__grid">
         {tarifs.items.map((item) => (
@@ -247,7 +251,11 @@ const suites = (await getCollection("suites")).sort(
           </article>
         ))}
       </div>
-      <div class="home-rates__cta"><Button href="/demo/reservation" variant="solid">Faire ma réservation</Button></div>
+      <p class="note home-rates__note">{tarifs.note} <a href={withBase("/conditions-sejour")}>Lire les conditions prévisionnelles.</a></p>
+      <div class="home-rates__cta">
+        <Button href="/liste-attente" variant="solid">Rejoindre la liste d’attente</Button>
+        <Button href="/demo/reservation" variant="ghost">Tester la formule</Button>
+      </div>
     </div>
   </section>
 
@@ -694,6 +702,12 @@ const suites = (await getCollection("suites")).sort(
   .home-rates__intro h2 {
     margin: 18px 0;
   }
+  .home-rates__family {
+    margin-top: 20px;
+    padding-left: 18px;
+    border-left: 2px solid var(--or-prof);
+    color: var(--encre-soft);
+  }
   .home-rates__grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -732,12 +746,21 @@ const suites = (await getCollection("suites")).sort(
     margin-top: 12px !important;
   }
   .home-rates__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-top: 28px;
   }
+  .home-rates__note { max-width: 900px; margin-top: 22px; }
+  .home-rates__note a { color: var(--or-prof); }
   @media (min-width: 760px) {
     .home-rates__grid {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
+  @media (min-width: 1120px) {
+    .home-rates__grid { grid-template-columns: repeat(5, 1fr); }
+    .rate-card { padding: 25px; }
   }
   @media (min-width: 680px) {
     .gal-strip {

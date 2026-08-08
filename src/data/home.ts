@@ -8,7 +8,7 @@ export const homeSeo = {
   title:
     "Les Nuits au Château | Les Suites de Sainte-Lucie dans les Vosges",
   description:
-    "Deux suites seulement dans un château familial de 1876 à Rambervillers : spa réservé, parc d'un hectare, piscine naturelle et dîner privatif.",
+    "Deux suites seulement dans un château familial de 1876 à Rambervillers : spa réservé, parc d'un hectare, piscine naturelle et dîner au château.",
 };
 
 export const hero = {
@@ -16,7 +16,7 @@ export const hero = {
   title: "Les Nuits au Château",
   signature: "Les Suites de Sainte-Lucie",
   accroche: "Deux suites seulement. Le château, dans sa plus rare intimité.",
-  descriptor: "Suites de caractère · spa réservé · table d'hôtes · domaine de 1876",
+  descriptor: "Suites de caractère · spa réservé · dîner au château · domaine de 1876",
   image: images.projFacadeEclairageNuit as Visual,
 };
 
@@ -56,7 +56,7 @@ export const sejour = {
     },
     {
       time: "À table",
-      title: "La table d'hôtes",
+      title: "Le dîner au château",
       text: "Partager, sur réservation, une cuisine de maison servie dans un lieu spectaculaire sans cérémonial.",
     },
     {
@@ -89,8 +89,8 @@ export const experienceTeaser = {
     },
     {
       icon: "dish",
-      title: "La table d'hôtes",
-      text: "Le soir, une table dressée pour votre tablée et un menu composé selon vos goûts.",
+      title: "Le dîner au château",
+      text: "Le soir, une table dressée pour votre tablée et un menu unique composé selon vos goûts.",
     },
     {
       icon: "waves",
@@ -124,10 +124,10 @@ export const galerie = {
 export const signatureExperience = {
   eyebrow: "L'expérience signature",
   title: ["Du premier pas ", "au dernier matin."],
-  text: "Avec deux suites seulement, Sainte-Lucie offre l'intimité rare d'une grande demeure : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, dîner privatif et petit-déjeuner face aux arbres.",
+  text: "Avec deux suites seulement, Sainte-Lucie offre l'intimité rare d'une grande demeure : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, dîner au château et petit-déjeuner face aux arbres.",
   items: [
     { image: images.projPerronArriveeSoir, moment: "À la nuit tombée", title: "L'arrivée au perron", text: "La maison éclairée, les clés remises et le temps qui change de rythme.", wide: true },
-    { image: images.projTableHotes, moment: "Le soir", title: "Le dîner privatif", text: "Une table dressée pour votre tablée, un menu unique et l'accord des vins si vous le souhaitez." },
+    { image: images.projTableHotes, moment: "Le soir", title: "Le dîner au château", text: "Une table dressée, un menu unique et l'accord des vins si vous le souhaitez." },
     { image: images.projPiscineHeureBleue, moment: "Entre chien et loup", title: "La piscine naturelle", text: "Le bassin et son lagunage dans la lumière bleue du jardin." },
     { image: images.projBainNordique, moment: "Sous les arbres", title: "Le spa aux quatre visages", text: "Hammam, bain nordique, sauna finlandais et piscine naturelle, sur des temps réservés." },
     { image: images.projPetitDejeunerTerrasse, moment: "Au réveil", title: "Le petit-déjeuner", text: "Un plateau simple et généreux, servi face au parc lorsque le temps le permet." },
@@ -137,17 +137,17 @@ export const signatureExperience = {
 export const histoireTeaser = {
   eyebrow: "Lucy, Lucia, lux",
   title: ["Une maison née ", "d'une histoire d'amour."],
-  text: "En 1876, la demeure est offerte à Marie Lucy Velin. Son prénom lui donne son nom et son fil conducteur : la lumière. Un siècle et demi plus tard, la maison s'ouvre à nouveau, habitée et transmise.",
+  text: "En 1876, le vicomte Charles Alfred Chonet de Bollemont fait construire la demeure pour Marie Lucy Velin, épousée deux ans plus tôt. Son prénom lui donne son nom et son fil conducteur : la lumière. Disparus à moins de trois mois d'intervalle, ils reposent ensemble à Rambervillers.",
   image: images.histoireSepia as Visual,
   href: "/histoire",
 };
 
 export const ctaFinal = {
-  eyebrow: "Votre séjour · avril 2027",
-  title: ["Le château n'attend ", "que quelques hôtes."],
-  text: "Composez dès maintenant votre séjour dans notre parcours de réservation en démonstration, ou laissez-nous vos coordonnées avant l'ouverture.",
+  eyebrow: "Ouverture · avril 2027",
+  title: ["Soyez parmi les premiers ", "à en franchir le seuil."],
+  text: "Inscrivez-vous sans engagement pour recevoir en priorité les premières dates disponibles. Le parcours de séjour reste accessible en démonstration.",
   actions: [
-    { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" as const },
-    { label: "Nous contacter", href: "/contact", variant: "ghost-light" as const },
+    { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" as const },
+    { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" as const },
   ],
 };

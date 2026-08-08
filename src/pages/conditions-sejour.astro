@@ -1,0 +1,70 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import { withBase } from "../utils/url";
+---
+
+<LegalLayout
+  title="Conditions prévisionnelles du séjour"
+  seoTitle="Conditions prévisionnelles — Les Nuits au Château"
+  description="Principes commerciaux envisagés avant l'ouverture des réservations des Suites de Sainte-Lucie."
+  updated="8 août 2026"
+>
+  <p class="note">
+    Le site est actuellement une maquette de pré-ouverture. Cette page expose
+    les principes envisagés mais ne constitue pas encore les conditions
+    générales de vente définitives. Aucune réservation ni aucun paiement réel
+    n'est actuellement accepté sur le site.
+  </p>
+
+  <h2>La suite</h2>
+  <p>
+    Le tarif de 200 € par nuit couvre une suite pour deux adultes et le
+    petit-déjeuner. Jusqu'à deux enfants peuvent être accueillis : 50 € par nuit
+    et par enfant à partir de 6 ans, 25 € en dessous. La configuration de
+    couchage est confirmée avant le séjour et n'est pas proposée pour quatre
+    adultes.
+  </p>
+  <p>La taxe de séjour s'ajoute selon le tarif applicable au moment du séjour.</p>
+
+  <h2>Arrivée et départ</h2>
+  <ul>
+    <li>Arrivée à partir de 15 h.</li>
+    <li>Arrivée anticipée à 14 h possible sur demande et confirmation.</li>
+    <li>Départ avant 12 h.</li>
+  </ul>
+
+  <h2>Paiement et annulation envisagés</h2>
+  <p>L'hébergement sera payé intégralement lors de la réservation directe.</p>
+  <ul>
+    <li>Plus de 30 jours avant l'arrivée : remboursement intégral.</li>
+    <li>De 30 à 15 jours avant l'arrivée : retenue de 30 % du séjour.</li>
+    <li>Moins de 15 jours avant l'arrivée ou non-présentation : séjour dû en totalité.</li>
+  </ul>
+  <p>
+    Les prestations d'hébergement fournies à une date déterminée sont exclues
+    du droit de rétractation de quatorze jours. Les modalités définitives,
+    notamment la force majeure et le sort des options, seront détaillées dans
+    les futures conditions générales de vente.
+  </p>
+
+  <h2>Options</h2>
+  <ul>
+    <li>Accès spa : 50 € par jour pour deux, puis 25 € par personne supplémentaire.</li>
+    <li>Dîner au château : 50 € par adulte, 25 € de 3 à 11 ans ; sans menu individuel avant 3 ans.</li>
+    <li>Accord mets et vins : 30 € par adulte, sous réserve des autorisations requises.</li>
+  </ul>
+  <p>Une option confirmée engage sa préparation et reste due en cas de non-présentation.</p>
+
+  <h2>Informations essentielles</h2>
+  <p>
+    Trois foyers d'une même famille vivent au château. Leurs appartements sont
+    privatifs. Trois chiens vivent également sur le domaine et peuvent être
+    présents dans le parc ; ils n'accèdent ni aux suites ni au spa. Les animaux
+    des hôtes ne sont pas admis.
+  </p>
+  <p>
+    Les suites sont situées à l'étage, accessible uniquement par escalier. Le
+    château ne dispose pas d'ascenseur. Pour toute question avant inscription,
+    <a href={withBase("/contact")}>contactez-nous</a>.
+  </p>
+</LegalLayout>

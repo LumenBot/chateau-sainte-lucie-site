@@ -4,21 +4,23 @@
 
 - Nom principal : **Les Nuits au Château**.
 - Signature : **Les Suites de Sainte-Lucie**.
-- Descripteur : **Maison d'hôtes et table d'hôtes**.
+- Descripteur public de travail : **Maison d'hôtes et dîner au château**. Le
+  régime exact de table d'hôtes ou de restauration reste à valider.
 - Lieu : Château de Sainte-Lucie, Rambervillers, Vosges.
 - Ouverture prévisionnelle : **avril 2027**.
 - Travaux : septembre 2026 à mars 2027.
-- Tarif public validé : **200 € par suite et par nuit**, pour une ou deux
-  personnes, petit-déjeuner compris.
+- Tarif public validé : **200 € par suite et par nuit**, pour deux adultes,
+  petit-déjeuner compris.
 
 ## Offre
 
 - Deux suites seulement : Lumière et Feuillage.
-- Chaque suite comprend deux pièces, une salle de bain et une terrasse privative.
+- Chaque suite comprend une salle de bain et une terrasse privative. La seconde
+  pièce n'est pas commercialisée comme chambre pour adultes.
 - Petit-déjeuner inclus dans chaque nuitée.
-- Capacité maximale de quatre personnes par suite, avec supplément pour les
-  troisième et quatrième occupants.
-- Dîner privatif sur réservation : 50 € par adulte, 25 € de 3 à 11 ans.
+- Capacité commerciale : deux adultes et jusqu'à deux enfants par suite.
+- Supplément enfant : 50 € par nuit à partir de 6 ans, 25 € en dessous.
+- Dîner au château sur réservation : 50 € par adulte, 25 € de 3 à 11 ans.
 - Accord mets et vins : 30 € par adulte, sous réserve des validations
   réglementaires nécessaires.
 - Spa sur réservation : hammam, piscine naturelle, bain nordique et sauna
@@ -42,8 +44,9 @@ Le fil narratif est la lumière : Sainte-Lucie, Lucy, Lucia, *lux*. Le château 
 été construit en 1876 pour Marie Lucy Velin. La promesse est celle d'une demeure
 de caractère qui ouvre très peu de portes : deux suites seulement, une attention
 personnelle, une table dressée pour la tablée et des temps de spa réservés. Le
-terme « privatif » s'applique aux suites, au dîner et aux équipements réservés,
-jamais à l'ensemble du château qui demeure habité.
+terme « privatif » s'applique aux suites et aux équipements réservés, jamais à
+l'ensemble du château qui demeure habité. Il n'est plus appliqué publiquement
+au dîner tant que son régime d'exploitation n'est pas validé.
 
 ## Décisions de communication
 
@@ -56,6 +59,8 @@ jamais à l'ensemble du château qui demeure habité.
   réévaluée avant l'ouverture.
 - Les photographies commerciales définitives seront réalisées après travaux, en mars 2027.
 - Adresse publique : « Rambervillers, Vosges ». L'adresse exacte est réservée aux clients confirmés.
+- Avant l'ouverture des ventes, l'action principale du site est la liste
+  d'attente ; le tunnel de réservation reste une démonstration secondaire.
 
 ## Sources de vérité opérationnelles
 

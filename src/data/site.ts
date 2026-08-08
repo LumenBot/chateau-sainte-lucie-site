@@ -14,12 +14,12 @@ export const site = {
   /** Signature. */
   signature: "Les Suites de Sainte-Lucie",
   /** Descripteur. */
-  descriptor: "Maison d'hôtes & table d'hôtes",
+  descriptor: "Maison d'hôtes & dîner au château",
   /** Lieu porteur du patrimoine. */
   house: "Château de Sainte-Lucie",
   baseline: "Château de Sainte-Lucie · Rambervillers · Vosges",
   tagline:
-    "Deux suites seulement dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et table d'hôtes dans les Vosges.",
+    "Deux suites seulement dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et dîner au château dans les Vosges.",
 
   /** Ouverture prévisionnelle. */
   opening: {
@@ -49,7 +49,7 @@ export type CtaKind = "suites" | "informer" | "contact";
 /** Libellés de CTA de pré-ouverture. */
 export const ctaLabels: Record<CtaKind, string> = {
   suites: "Découvrir les suites",
-  informer: "Faire ma réservation",
+  informer: "Rejoindre la liste d’attente",
   contact: "Nous contacter",
 };
 
@@ -80,6 +80,7 @@ export const footerDiscover: NavItem[] = [
 
 /** Liens « bas de page ». */
 export const legalNav: NavItem[] = [
+  { label: "Conditions prévisionnelles", href: "/conditions-sejour" },
   { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Confidentialité", href: "/confidentialite" },
 ];

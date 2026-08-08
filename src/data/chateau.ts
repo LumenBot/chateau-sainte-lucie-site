@@ -21,7 +21,7 @@ export const intro = {
   quote:
     "« Lucy, Lucia, lux » — le prénom de Marie Lucy Velin donne au lieu son nom et son fil conducteur : la lumière.",
   paragraphs: [
-    "Construit en 1876 en grès vosgien rose, le château est offert à Marie Lucy Velin, dont le prénom donne au lieu son nom et son fil conducteur : Lucy, Lucia, lux — la lumière.",
+    "En 1876, le vicomte Charles Alfred Chonet de Bollemont fait construire en grès vosgien rose cette demeure pour Marie Lucy Velin, épousée deux ans plus tôt. Son prénom donne au lieu son nom et son fil conducteur : Lucy, Lucia, lux — la lumière.",
     "Boiseries, cheminées, parquets, plafonds à caissons, vitraux et mobilier monumental composent encore aujourd'hui un ensemble habité plutôt qu'un décor reconstitué. En 1914, le château sert de lieu de repos à des soldats engagés dans la bataille de Lorraine. Depuis 2022, les propriétaires actuels poursuivent les recherches historiques et remettent progressivement la maison en état.",
   ],
   links: [
@@ -48,7 +48,7 @@ export const espaces = {
       image: images.salleAManger,
       cap: "Patrimoine",
       title: "Les pièces de réception",
-      text: "Boiseries de chêne sculpté, cheminées de marbre, parquets et plafonds à caissons : des pièces de caractère, baignées de lumière, où se dresse le soir la table d'hôtes.",
+      text: "Boiseries de chêne sculpté, cheminées de marbre, parquets et plafonds à caissons : des pièces de caractère, baignées de lumière, où se dresse le soir le dîner au château.",
       mini: ["Boiseries d'origine", "Cheminées de marbre", "Lumière naturelle"],
     },
     {
@@ -93,7 +93,7 @@ export const chateauCta = {
   title: ["Bientôt, ", "les portes s'ouvrent."],
   text: "Deux suites seulement ouvriront dans la maison. Découvrez comment votre séjour pourra se composer, du perron jusqu'au dernier matin.",
   actions: [
-    { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" as const },
-    { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" as const },
+    { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" as const },
+    { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" as const },
   ],
 };

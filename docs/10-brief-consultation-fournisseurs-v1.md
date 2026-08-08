@@ -20,10 +20,10 @@ spécifiques seront développés au moyen des API et webhooks du socle retenu.
 
 - Deux suites : Lumière et Feuillage.
 - Chaque suite est une unité indivisible.
-- Capacité : une à quatre personnes par suite.
-- Tarif de base : 200 € la nuit pour une ou deux personnes.
-- Troisième et quatrième occupants : 25 € de 0 à 5 ans, 50 € à partir de 6 ans,
-  par personne et par nuit.
+- Capacité : un ou deux adultes et jusqu'à deux enfants par suite ; la formule
+  n'est pas vendue à quatre adultes.
+- Tarif de base : 200 € la nuit pour un ou deux adultes.
+- Chaque enfant : 25 € de 0 à 5 ans, 50 € à partir de 6 ans, par nuit.
 - Petit-déjeuner compris.
 - Vente directe, Airbnb, Booking et futurs canaux touristiques.
 - Langues : français et anglais.

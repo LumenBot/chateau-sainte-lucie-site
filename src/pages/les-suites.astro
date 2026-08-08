@@ -4,7 +4,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/sections/PageHero.astro";
 import SuiteCard from "../components/suites/SuiteCard.astro";
 import CtaFinal from "../components/CtaFinal.astro";
+import BeforeStay from "../components/BeforeStay.astro";
 import { tarifs } from "../data/tarifs";
+import { withBase } from "../utils/url";
 
 const suites = (await getCollection("suites")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -13,19 +15,19 @@ const suites = (await getCollection("suites")).sort(
 
 <BaseLayout
   title="Les Suites | Les Nuits au Château"
-  description="Deux suites seulement — Lumière et Feuillage — dans un château familial de 1876 à Rambervillers. Deux pièces, une salle de bain et une terrasse privative chacune. Ouverture avril 2027."
+  description="Deux suites seulement — Lumière et Feuillage — dans un château familial de 1876 à Rambervillers. Jusqu'à deux enfants peuvent être accueillis. Ouverture avril 2027."
   ogType="article"
 >
   <PageHero
     place="Les Suites de Sainte-Lucie"
     title={["Deux manières", "d'habiter la nuit."]}
-    lead="Deux suites seulement, chacune composée de deux pièces, d'une salle de bain et d'une terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière."
+    lead="Deux suites seulement, chacune avec sa salle de bain et sa terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière."
     image="projLumiereSalon"
     imageAlt="Le salon privé de la Suite Lumière, projeté après travaux"
     imagePosition="center 52%"
     actions={[
-      { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" },
-      { label: "Nous contacter", href: "/contact", variant: "ghost-light" },
+      { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" },
+      { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" },
     ]}
   />
 
@@ -52,12 +54,14 @@ const suites = (await getCollection("suites")).sort(
       </p>
       <div class="suite-essentials" aria-label="Les essentiels du séjour">
         <span><strong>2</strong> suites seulement</span>
-        <span><strong>2</strong> pièces par suite</span>
+        <span><strong>2</strong> enfants possibles</span>
         <span><strong>1</strong> terrasse privative</span>
         <span><strong>200 €</strong> la suite pour deux</span>
       </div>
     </div>
   </section>
+
+  <BeforeStay compact />
 
   <section class="sec tarifs">
     <div class="wrap">
@@ -65,6 +69,7 @@ const suites = (await getCollection("suites")).sort(
         <p class="eyebrow"><span class="ln"></span>{tarifs.eyebrow}</p>
         <h2 class="display-l">{tarifs.title[0]}<em class="gold">{tarifs.title[1]}</em></h2>
         <p class="lede">{tarifs.intro}</p>
+        <p class="family-line">{tarifs.family}</p>
       </div>
       <ul class="tarifs-list">
         {
@@ -81,7 +86,7 @@ const suites = (await getCollection("suites")).sort(
           ))
         }
       </ul>
-      <p class="note tarifs-note">{tarifs.note}</p>
+      <p class="note tarifs-note">{tarifs.note} <a href={withBase("/conditions-sejour")}>Lire les conditions prévisionnelles.</a></p>
     </div>
   </section>
 
@@ -89,10 +94,10 @@ const suites = (await getCollection("suites")).sort(
     eyebrow="Deux suites seulement · avril 2027"
     titleLead="Votre suite vous attend "
     titleGold="au château."
-    text="Composez votre séjour dans le parcours de démonstration et découvrez dès maintenant l'expérience proposée."
+    text="Inscrivez-vous sans engagement pour recevoir en priorité les premières dates disponibles, ou découvrez le parcours de séjour en démonstration."
     actions={[
-      { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" },
-      { label: "Nous contacter", href: "/contact", variant: "ghost-light" },
+      { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" },
+      { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" },
     ]}
   />
 </BaseLayout>
@@ -154,6 +159,13 @@ const suites = (await getCollection("suites")).sort(
     max-width: 720px;
     border-top: 1px solid var(--rule-l-faint);
   }
+  .family-line {
+    max-width: 720px;
+    margin-top: 22px;
+    padding-left: 18px;
+    border-left: 2px solid var(--or-prof);
+    color: var(--encre-soft);
+  }
   .tarif {
     display: flex;
     justify-content: space-between;
@@ -195,4 +207,5 @@ const suites = (await getCollection("suites")).sort(
     margin-top: 22px;
     max-width: 720px;
   }
+  .tarifs-note a { color: var(--or-prof); }
 </style>

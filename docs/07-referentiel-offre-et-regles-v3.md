@@ -14,7 +14,7 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 - Deux suites seulement : Lumière et Feuillage.
 - Chaque suite est vendue comme une unité indivisible.
-- Une suite accueille de une à quatre personnes, enfants et nourrissons compris.
+- Une suite accueille au maximum deux adultes et deux enfants, nourrissons compris.
 - Le petit-déjeuner est compris dans chaque nuitée.
 - Le château demeure une maison de famille habitée.
 - L'accueil peut être humain, autonome ou hybride, au choix du client.
@@ -26,15 +26,15 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 ### 2.1 Tarif de base
 
-- 200 € par suite et par nuit pour une ou deux personnes.
+- 200 € par suite et par nuit pour deux adultes.
 - Petit-déjeuner, linge, ménage de fin de séjour et services inclus dans la
   nuitée selon la fiche tarifaire publiée.
 - Le prix final, les prestations comprises et les suppléments sont affichés
   avant le paiement.
 
-### 2.2 Troisième et quatrième occupants
+### 2.2 Enfants
 
-Les suppléments s'appliquent uniquement aux occupants au-delà des deux premiers :
+Jusqu'à deux enfants peuvent être accueillis avec les suppléments suivants :
 
 | Âge à la date d'arrivée | Supplément par personne et par nuit |
 | --- | ---: |
@@ -47,7 +47,10 @@ Les suppléments s'appliquent uniquement aux occupants au-delà des deux premier
   présentée au client tant qu'elle n'a pas été validée comptablement.
 - Le système doit enregistrer la date de naissance ou, à défaut, l'âge de chaque
   enfant à la date d'arrivée afin d'appliquer la bonne tranche tarifaire.
-- Toute personne, nourrisson compris, compte dans la capacité maximale de quatre.
+- Toute personne, nourrisson compris, compte dans la capacité maximale de deux
+  adultes et deux enfants. La formule n'est pas proposée à quatre adultes.
+- La seconde pièce est présentée comme une configuration préparée pour les
+  enfants, jamais comme une chambre adulte supplémentaire.
 
 ### 2.3 Règles de séjour
 
@@ -95,10 +98,10 @@ Les suppléments s'appliquent uniquement aux occupants au-delà des deux premier
 
 Une seule politique lisible est recommandée au lancement :
 
-- jusqu'à 14 jours avant l'arrivée : remboursement intégral de l'hébergement ;
-- de 13 à 7 jours avant l'arrivée : retenue de 50 % ;
-- à moins de 7 jours, en cas de non-présentation ou de départ anticipé : retenue
-  de 100 %.
+- plus de 30 jours avant l'arrivée : remboursement intégral ;
+- de 30 à 15 jours avant l'arrivée : retenue de 30 % du séjour ;
+- moins de 15 jours avant l'arrivée, en cas de non-présentation ou de départ
+  anticipé : retenue de 100 %.
 
 Les échéances sont calculées en heure locale du château, par rapport à 15 h le
 jour prévu d'arrivée. Une annulation imputable à l'établissement entraîne le
@@ -166,7 +169,7 @@ Seules les informations nécessaires au séjour sont collectées.
 - Les informations relatives aux allergies sont visibles uniquement des rôles
   opérationnels qui en ont besoin.
 
-## 6. Dîner privatif et table d'hôtes
+## 6. Dîner au château
 
 ### 6.1 Offre recommandée
 
@@ -198,6 +201,8 @@ Seules les informations nécessaires au séjour sont collectées.
 - Le statut exact de « table d'hôtes » et le contenu des boissons comprises
   doivent être validés avec la CCI ou le conseil compétent avant publication des
   conditions définitives.
+- Jusqu'à cette validation, le site emploie la formulation neutre « dîner au
+  château » et ne promet ni table séparée ni privatisation du service.
 
 ### 6.3 Facturation et annulation
 
@@ -231,6 +236,9 @@ Seules les informations nécessaires au séjour sont collectées.
 - Un créneau est attaché à une suite, pas à une personne ; tous les occupants de
   la suite peuvent l'utiliser dans la limite de la capacité de sécurité de
   l'équipement.
+- Règle provisoire : la piscine naturelle est accessible aux mineurs accompagnés.
+  Hammam, sauna et bain nordique sont réservés aux 16 ans et plus jusqu'à
+  validation contraire de l'assureur et des fabricants.
 
 ### 7.3 Planning et transitions
 

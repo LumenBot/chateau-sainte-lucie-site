@@ -4,7 +4,7 @@ import { images, type Visual } from "./images";
 export const experienceSeo = {
   title: "L'Expérience | Les Nuits au Château",
   description:
-    "Deux suites seulement, dîner privatif et spa aux quatre expériences : un séjour intime et haut de gamme dans un château familial de 1876.",
+    "Deux suites seulement, dîner au château et spa aux quatre expériences : un séjour intime et haut de gamme dans un château familial de 1876.",
 };
 
 export const phero = {
@@ -50,13 +50,13 @@ export const sections: ExpSection[] = [
   {
     image: images.projTableHotes,
     cap: "Le soir",
-    title: "La table d'hôtes",
+    title: "Le dîner au château",
     rev: true,
     paragraphs: [
-      "Le soir, la table se dresse pour votre seule tablée dans les boiseries : linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine du territoire servie avec précision, sans cérémonial figé.",
+      "Le soir, la table se dresse dans les boiseries : linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine du territoire servie avec précision, sans cérémonial figé.",
       "Le menu unique se prépare en amont selon vos goûts et vos contraintes. Un accord mets et vins peut prolonger le dîner, bouteille après bouteille, au rythme du repas.",
     ],
-    note: "Dîner privatif : + 50 € par personne. Accord mets & vins : + 30 € par adulte, sous réserve des validations réglementaires prévues avant l'ouverture.",
+    note: "Dîner au château : + 50 € par adulte, 25 € de 3 à 11 ans, sans menu individuel avant 3 ans. Accord mets & vins : + 30 € par adulte, sous réserve des validations réglementaires prévues avant l'ouverture.",
   },
   {
     image: images.projPetitDejeunerTerrasse,
@@ -112,7 +112,7 @@ export const experienceCta = {
   title: ["Le château, ", "à votre rythme."],
   text: "Composez un séjour où la suite, le spa et la table s'accordent à vos envies.",
   actions: [
-    { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" as const },
-    { label: "Découvrir les suites", href: "/les-suites", variant: "ghost-light" as const },
+    { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" as const },
+    { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" as const },
   ],
 };

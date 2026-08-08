@@ -4,8 +4,8 @@ Date : 8 août 2026
 
 ## Décision proposée
 
-Le prix public de lancement est fixé à **200 € par suite et par nuit pour une ou
-deux personnes, petit-déjeuner inclus**.
+Le prix public de lancement est fixé à **200 € par suite et par nuit pour un ou
+deux adultes, petit-déjeuner inclus**.
 
 La nuitée n'est pas présentée comme une chambre comparable à une chambre
 d'hôtel, mais comme l'accès à une suite entière et à une demeure qui ne reçoit
@@ -15,12 +15,12 @@ que deux suites à la fois.
 
 | Prestation | Tarif | Unité |
 | --- | ---: | --- |
-| Suite et petit-déjeuner | 200 € | par nuit, pour une ou deux personnes |
-| Troisième ou quatrième occupant de 0 à 5 ans | 25 € | par personne et par nuit |
-| Troisième ou quatrième occupant à partir de 6 ans | 50 € | par personne et par nuit |
+| Suite et petit-déjeuner | 200 € | par nuit, pour un ou deux adultes |
+| Enfant de 0 à 5 ans | 25 € | par enfant et par nuit |
+| Enfant à partir de 6 ans | 50 € | par enfant et par nuit |
 | Spa | 50 € | par jour pour une ou deux personnes |
 | Personne supplémentaire au spa | 25 € | par personne et par jour |
-| Dîner privatif adulte | 50 € | par personne |
+| Dîner au château adulte | 50 € | par personne |
 | Dîner de 3 à 11 ans | 25 € | par personne |
 | Accord mets et vins | 30 € | par adulte, avec le dîner |
 | Privatisation de la piscine naturelle | 50 € | deux heures consécutives |
@@ -50,14 +50,14 @@ avant toute décision de revenue management.
 Le différentiel se justifie par une combinaison de preuves concrètes :
 
 1. deux suites seulement dans toute la demeure ;
-2. deux pièces, une salle de bain et une terrasse privative par suite ;
+2. une suite de caractère, une salle de bain et une terrasse privative ;
 3. petit-déjeuner compris ;
 4. château habité de 1876, environ 750 m² et éléments patrimoniaux conservés ;
 5. parc clos d'environ un hectare ;
 6. piscine naturelle filtrée par lagunage ;
 7. quatre expériences de bien-être : hammam, sauna, bain nordique et piscine ;
 8. équipements chauds réservés à une suite sur chaque créneau ;
-9. dîner dressé pour la seule tablée des clients ;
+9. dîner sur réservation, adapté aux préférences de la tablée ;
 10. accueil humain, autonome ou hybride et préparation personnalisée du séjour.
 
 Le prix ne peut cependant pas être défendu par les seuls mots « luxe » ou
@@ -96,7 +96,8 @@ L'ordre de lecture recommandé est :
 4. personnalisation : accueil et préférences ;
 5. prix : 200 €, présenté comme la suite entière avec petit-déjeuner ;
 6. options : composer librement le séjour ;
-7. action : entrer dans le parcours de réservation.
+7. action : rejoindre la liste d'attente ; le parcours de réservation reste une
+   démonstration secondaire jusqu'à l'ouverture des ventes.
 
 ## Vigilances avant ouverture
 

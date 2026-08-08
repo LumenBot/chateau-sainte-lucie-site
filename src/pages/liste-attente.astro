@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/url";
+
+const web3key = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+const liveCapture = typeof web3key === "string" && web3key.length > 0;
+const merciPath = withBase("/merci");
+const merciUrl = Astro.site ? new URL(merciPath, Astro.site).href : merciPath;
+---
+
+<BaseLayout
+  title="Liste d’attente | Les Nuits au Château"
+  description="Recevez en priorité les premières dates disponibles des Suites de Sainte-Lucie, avant l’ouverture d’avril 2027."
+  stickyCta={false}
+>
+  <header class="wait-hero">
+    <div class="wrap wait-hero__in">
+      <p class="eyebrow on-dark"><span class="ln"></span>Ouverture avril 2027</p>
+      <h1 class="display-xl">Soyez parmi les premiers <em class="gold light">à en franchir le seuil.</em></h1>
+      <p>Deux suites seulement ouvriront à Sainte-Lucie. Inscrivez-vous sans engagement pour recevoir en priorité les premières dates disponibles.</p>
+      <div class="wait-benefits" aria-label="Avantages de la liste d’attente">
+        <span>Priorité d’information</span>
+        <span>Premières dates disponibles</span>
+        <span>Aucun paiement</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec wait-body">
+    <div class="wrap wait-grid">
+      <div>
+        <p class="eyebrow"><span class="ln"></span>Votre projet de séjour</p>
+        <h2 class="display-l">Quelques mots, <em class="gold">sans engagement.</em></h2>
+        <p class="lede">Ces informations nous aideront à préparer l’ouverture et à vous prévenir lorsque les dates qui vous intéressent seront proposées.</p>
+        <div class="wait-note">
+          <strong>Ce formulaire n’est pas une réservation.</strong>
+          <p>Aucune disponibilité n’est bloquée et aucun paiement n’est demandé. Les réservations fermes n’ouvriront qu’après les validations opérationnelles requises.</p>
+        </div>
+      </div>
+
+      <form
+        id="waitlist-form"
+        class="wait-form"
+        method="POST"
+        action={liveCapture ? "https://api.web3forms.com/submit" : "#waitlist-form"}
+        data-live-capture={String(liveCapture)}
+      >
+        {liveCapture && <input type="hidden" name="access_key" value={web3key} />}
+        {liveCapture && <input type="hidden" name="redirect" value={merciUrl} />}
+        <input type="hidden" name="subject" value="Nouvelle inscription — liste d’attente Sainte-Lucie" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+        <div class="row2">
+          <div class="field">
+            <label for="wait-prenom">Prénom <span>*</span></label>
+            <input id="wait-prenom" name="prenom" autocomplete="given-name" required />
+          </div>
+          <div class="field">
+            <label for="wait-nom">Nom <span>*</span></label>
+            <input id="wait-nom" name="nom" autocomplete="family-name" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="wait-email">E-mail <span>*</span></label>
+          <input id="wait-email" name="email" type="email" autocomplete="email" placeholder="vous@exemple.fr" required />
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="wait-voyageurs">Vous viendriez…</label>
+            <select id="wait-voyageurs" name="voyageurs">
+              <option value="couple">En couple</option>
+              <option value="famille-1">Avec un enfant</option>
+              <option value="famille-2">Avec deux enfants</option>
+              <option value="a-definir">À définir</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="wait-periode">Période envisagée</label>
+            <select id="wait-periode" name="periode">
+              <option value="sans-preference">Sans préférence</option>
+              <option value="printemps-2027">Printemps 2027</option>
+              <option value="ete-2027">Été 2027</option>
+              <option value="automne-2027">Automne 2027</option>
+              <option value="hiver-2027">Hiver 2027</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="wait-message">Une envie particulière</label>
+          <textarea id="wait-message" name="message" rows="4" placeholder="Une occasion, une préférence de suite, une question…"></textarea>
+        </div>
+        <label class="consent" for="wait-consent">
+          <input id="wait-consent" name="consentement" type="checkbox" required />
+          <span>J’accepte que mes informations soient utilisées pour m’informer de l’ouverture des réservations, conformément à la <a href={withBase("/confidentialite")}>politique de confidentialité</a>.</span>
+        </label>
+        <button class="btn" type="submit">M’inscrire à la liste d’attente</button>
+        <p class="form-status" aria-live="polite" data-wait-status>
+          {liveCapture
+            ? "Votre inscription sera transmise à l’équipe de Sainte-Lucie."
+            : "Mode maquette : l’inscription sera simulée dans ce navigateur et ne sera pas transmise."}
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <section class="wait-demo">
+    <div class="wrap wait-demo__in">
+      <div>
+        <p class="eyebrow on-dark"><span class="ln"></span>En attendant l’ouverture</p>
+        <h2 class="display-m">Imaginez déjà votre séjour.</h2>
+        <p>Le parcours numérique est une démonstration : vous pouvez choisir des dates, une suite et des options sans effectuer de réservation réelle.</p>
+      </div>
+      <a class="btn btn--ghost-light" href={withBase("/demo/reservation")}>Découvrir le parcours</a>
+    </div>
+  </section>
+</BaseLayout>
+
+{!liveCapture && (
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("waitlist-form");
+      const status = form?.querySelector("[data-wait-status]");
+      if (!(form instanceof HTMLFormElement)) return;
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const data = Object.fromEntries(new FormData(form).entries());
+        localStorage.setItem("csl-waitlist-preview", JSON.stringify({ ...data, savedAt: new Date().toISOString() }));
+        if (status) status.textContent = "Inscription simulée dans ce navigateur. Aucune donnée n’a été transmise pendant cette phase de maquette.";
+        form.querySelector("button[type='submit']")?.setAttribute("disabled", "");
+      });
+    });
+  </script>
+)}
+
+<style>
+  .wait-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 154px 0 82px;
+    color: var(--creme);
+    background: var(--noir);
+  }
+  .wait-hero::before {
+    content: "";
+    position: absolute;
+    inset: -40% -10% 0;
+    background: radial-gradient(circle at 65% 35%, rgba(200,164,91,.2), transparent 38%);
+  }
+  .wait-hero__in { position: relative; max-width: 900px; }
+  .wait-hero h1 { max-width: 13ch; margin: 20px 0; color: var(--creme); }
+  .wait-hero__in > p:not(.eyebrow) { max-width: 62ch; color: var(--creme-dim); font-size: 19px; }
+  .wait-benefits { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
+  .wait-benefits span { padding: 8px 13px; border: 1px solid rgba(231,205,146,.28); color: var(--or-clair); font-size: 12px; }
+  .wait-body { background: var(--parch); }
+  .wait-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+  .wait-grid h2 { margin: 18px 0; }
+  .wait-note { margin-top: 30px; padding: 22px; border-left: 3px solid var(--or-prof); background: var(--parch-2); }
+  .wait-note p { margin: 7px 0 0; color: var(--encre-soft); }
+  .wait-form { padding: clamp(24px,4vw,42px); border: 1px solid var(--rule-l); background: var(--parch-card); }
+  .row2 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+  .field label { color: var(--encre-soft); font-size: 13px; }
+  .field label span { color: var(--or-prof); }
+  .field input, .field select, .field textarea { width: 100%; border: 1px solid var(--rule-l); border-radius: 0; padding: 13px 14px; color: var(--encre); background: #fffdf8; font: inherit; }
+  .field textarea { resize: vertical; }
+  .consent { display: flex; align-items: flex-start; gap: 11px; margin: 4px 0 22px; color: var(--encre-soft); font-size: 13px; }
+  .consent input { margin-top: 4px; }
+  .consent a { color: var(--or-prof); }
+  .form-status { margin: 14px 0 0; color: var(--encre-faint); font-size: 12px; }
+  .hp { position: absolute !important; left: -10000px !important; }
+  .wait-demo { padding: 62px 0; background: var(--noir); color: var(--creme); }
+  .wait-demo__in { display: flex; flex-direction: column; align-items: flex-start; gap: 26px; }
+  .wait-demo h2 { margin: 14px 0 8px; color: var(--creme); }
+  .wait-demo p { max-width: 64ch; color: var(--creme-dim); }
+  @media (min-width: 720px) { .row2 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 920px) {
+    .wait-grid { grid-template-columns: .85fr 1.15fr; gap: 72px; align-items: start; }
+    .wait-demo__in { flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+</style>

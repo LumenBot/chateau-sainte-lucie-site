@@ -28,8 +28,8 @@ const { hero } = data;
     imageAlt={hero.imageAlt}
     imagePosition={hero.imagePosition}
     actions={[
-      { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" },
-      { label: "Nous contacter", href: "/contact", variant: "ghost-light" },
+      { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" },
+      { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" },
     ]}
   />
 
@@ -64,7 +64,12 @@ const { hero } = data;
         <div>
           <span class="suite-offer__eyebrow">La nuit</span>
           <strong>200 €</strong>
-          <span>pour deux personnes · petit-déjeuner inclus</span>
+          <span>pour un ou deux adultes · petit-déjeuner inclus</span>
+        </div>
+        <div>
+          <span class="suite-offer__eyebrow">Avec des enfants</span>
+          <strong>+ 50 €</strong>
+          <span>par enfant dès 6 ans · 25 € en dessous · deux maximum</span>
         </div>
         <div>
           <span class="suite-offer__eyebrow">Sur réservation</span>
@@ -74,7 +79,7 @@ const { hero } = data;
         <div>
           <span class="suite-offer__eyebrow">Le soir</span>
           <strong>+ 50 €</strong>
-          <span>par personne · dîner privatif</span>
+          <span>par adulte · dîner au château · 25 € de 3 à 11 ans</span>
         </div>
         <div>
           <span class="suite-offer__eyebrow">Avec le dîner</span>
@@ -82,6 +87,7 @@ const { hero } = data;
           <span>par adulte · accord mets & vins</span>
         </div>
       </div>
+      <p class="note suite-conditions">Taxe de séjour en sus. Arrivée à partir de 15 h ; arrivée anticipée à 14 h sur demande ; départ avant 12 h. <a href={withBase("/conditions-sejour")}>Lire les conditions prévisionnelles.</a></p>
 
       <p class="suite-nav">
         <a class="link-or" href={withBase("/les-suites")}>
@@ -134,10 +140,10 @@ const { hero } = data;
     eyebrow="Votre séjour · avril 2027"
     titleLead="Composez votre "
     titleGold="première nuit."
-    text="Parcourez la réservation en démonstration et découvrez les choix qui personnaliseront votre séjour."
+    text="Inscrivez-vous pour recevoir les premières dates disponibles ou explorez les choix qui personnaliseront votre séjour dans la démonstration."
     actions={[
-      { label: "Faire ma réservation", href: "/demo/reservation", variant: "gold-light" },
-      { label: "Nous contacter", href: "/contact", variant: "ghost-light" },
+      { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" },
+      { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" },
     ]}
   />
 </BaseLayout>
@@ -225,6 +231,12 @@ const { hero } = data;
     margin-top: 22px;
     text-align: center;
   }
+  .suite-conditions {
+    margin: 0 auto 22px;
+    max-width: 900px;
+    text-align: center;
+  }
+  .suite-conditions a { color: var(--or-prof); }
   .suite-offer {
     display: grid;
     grid-template-columns: 1fr;
@@ -261,7 +273,8 @@ const { hero } = data;
     .suite-offer { grid-template-columns: repeat(2, 1fr); }
   }
   @media (min-width: 1050px) {
-    .suite-offer { grid-template-columns: repeat(4, 1fr); }
+    .suite-offer { grid-template-columns: repeat(5, 1fr); }
+    .suite-offer > div { padding: 21px; }
   }
 
   /* galerie de rendus de projection */

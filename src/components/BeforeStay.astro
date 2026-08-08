@@ -1,0 +1,105 @@
+---
+/** Informations concrètes qui cadrent l'expérience sans rompre le récit. */
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const items = [
+  {
+    label: "Une demeure vivante",
+    title: "Trois foyers, une même famille",
+    text: "Le château reste habité toute l'année. Les appartements familiaux sont strictement privatifs ; les hôtes découvrent les suites et les espaces partagés qui leur sont dédiés.",
+  },
+  {
+    label: "Les gardiens du domaine",
+    title: "Trois chiens vivent au château",
+    text: "Deux cane corso et un berger australien peuvent être rencontrés dans le parc et certains espaces communs. Ils n'accèdent ni aux suites ni au spa. Les animaux des hôtes ne sont pas admis.",
+  },
+  {
+    label: "Accès historique",
+    title: "Les suites sont à l'étage",
+    text: "Elles sont accessibles uniquement par l'escalier monumental. Le château ne dispose pas d'ascenseur ; nous échangeons en amont sur tout besoin particulier.",
+  },
+  {
+    label: "Venir en famille",
+    title: "Jusqu'à deux enfants",
+    text: "La suite peut être préparée pour un couple et un ou deux enfants. La configuration de couchage est confirmée avec la famille avant le séjour et n'est pas proposée pour quatre adultes.",
+  },
+];
+---
+
+<section class={`sec before-stay${compact ? " before-stay--compact" : ""}`}>
+  <div class="wrap">
+    <div class="before-stay__head">
+      <p class="eyebrow"><span class="ln"></span>Avant de venir</p>
+      <h2 class="display-l">Une maison ouverte, <em class="gold">des repères clairs.</em></h2>
+      <p class="lede">L'intimité de Sainte-Lucie tient aussi à sa nature : une demeure familiale, vivante et partagée avec très peu d'hôtes.</p>
+    </div>
+    <div class="before-stay__grid">
+      {items.map((item) => (
+        <article>
+          <p class="before-stay__label">{item.label}</p>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+    <p class="before-stay__schedule">
+      Arrivée à partir de <strong>15 h</strong> · arrivée anticipée à 14 h sur demande · départ avant <strong>12 h</strong>
+    </p>
+  </div>
+</section>
+
+<style>
+  .before-stay { background: var(--parch); }
+  .before-stay--compact { background: var(--parch-2); }
+  .before-stay__head { max-width: 760px; }
+  .before-stay__head h2 { margin: 17px 0; }
+  .before-stay__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    margin-top: 38px;
+    border: 1px solid var(--rule-l-faint);
+    background: var(--rule-l-faint);
+  }
+  .before-stay__grid article {
+    min-height: 100%;
+    padding: 27px;
+    background: var(--parch-card);
+  }
+  .before-stay__label {
+    margin: 0 0 14px;
+    color: var(--or-prof);
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+  .before-stay__grid h3 {
+    margin: 0 0 10px;
+    color: var(--encre);
+    font-family: var(--display);
+    font-size: clamp(22px, 2.4vw, 28px);
+    font-weight: 500;
+  }
+  .before-stay__grid article > p:last-child {
+    margin: 0;
+    color: var(--encre-soft);
+    font-size: 15px;
+  }
+  .before-stay__schedule {
+    margin: 26px 0 0;
+    padding-top: 21px;
+    border-top: 1px solid var(--rule-l-faint);
+    color: var(--encre-soft);
+    text-align: center;
+  }
+  @media (min-width: 720px) {
+    .before-stay__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1080px) {
+    .before-stay__grid { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>

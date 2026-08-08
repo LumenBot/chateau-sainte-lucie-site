@@ -32,27 +32,8 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
       <div class="demo-timeline-step"><small>Après</small><strong>Espace client</strong></div>
     </div>
 
-    <form id="demo-booking-form" class="demo-app-grid" novalidate>
-      <aside class="demo-summary" aria-live="polite">
-        <p class="demo-kicker">Votre séjour</p>
-        <h2 data-summary-suite>Suite Lumière</h2>
-        <p><span data-summary-nights>3 nuits</span> · <span data-summary-guests>3 personnes</span></p>
-        <div class="demo-price-row"><span>Hébergement</span><strong data-price-accommodation>750 €</strong></div>
-        <div class="demo-price-row"><span>Accès spa</span><strong data-price-spa>225 €</strong></div>
-        <div class="demo-price-row"><span>Dîner</span><strong data-price-dinner>125 €</strong></div>
-        <div class="demo-price-row"><span>Accord mets & vins</span><strong data-price-wine>60 €</strong></div>
-        <div class="demo-price-row total"><span>Total du séjour</span><strong data-price-total>1 160 €</strong></div>
-        <p class="note" style="color: var(--demo-muted); margin-top: 17px;">
-          À payer maintenant : <strong data-price-now>750 €</strong>.<br />
-          Options payables sur place : <strong data-price-later>410 €</strong>.
-        </p>
-        <button class="demo-button" type="submit" style="width: 100%; margin-top: 20px;">Simuler le paiement</button>
-        <p class="note" style="color: var(--demo-muted); margin-top: 12px;">
-          Aucune carte bancaire n’est demandée ni enregistrée.
-        </p>
-      </aside>
-
-      <div>
+    <form id="demo-booking-form">
+      <div class="demo-booking-steps">
         <section class="demo-panel">
           <div class="demo-panel-head">
             <div><p class="demo-kicker">01 · Dates & voyageurs</p><h2>Quand venez-vous ?</h2></div>
@@ -69,7 +50,7 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
             </div>
             <div class="demo-field">
               <label for="adults">Adultes</label>
-              <select id="adults" name="adults"><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option></select>
+              <select id="adults" name="adults"><option value="1">1</option><option value="2" selected>2</option></select>
             </div>
             <div class="demo-field">
               <label for="children">Enfants</label>
@@ -89,7 +70,7 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
             </div>
           </div>
           <p class="note" style="color: var(--demo-muted); margin-top: 17px;">
-            Maximum quatre personnes par suite. Supplément à partir du 3e occupant : 50 € par nuit, petit-déjeuner inclus ; 25 € pour les moins de 6 ans.
+            Une suite pour deux adultes, avec possibilité d'accueillir jusqu'à deux enfants — 50 € par nuit et par enfant à partir de 6 ans, 25 € en dessous. La configuration de couchage est confirmée avant le séjour.
           </p>
         </section>
 
@@ -123,7 +104,7 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
             </div>
             <div class="demo-choice">
               <input id="dinner" type="checkbox" name="dinner" checked />
-              <label for="dinner"><strong>Dîner privatif</strong><span>50 € par adulte · 25 € par enfant · menu personnalisé</span></label>
+              <label for="dinner"><strong>Dîner au château</strong><span>50 € par adulte · 25 € de 3 à 11 ans · sans menu individuel avant 3 ans</span></label>
             </div>
             <div class="demo-choice">
               <input id="welcome" type="checkbox" name="welcome" checked />
@@ -136,6 +117,7 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
           </div>
           <p class="note" style="color: var(--demo-muted); margin-top: 16px;">
             Les options sont réglées sur place. Une option confirmée est considérée comme achetée et reste due en cas de non-présentation.
+            La piscine naturelle est accessible aux mineurs accompagnés ; les équipements chauds sont réservés aux 16 ans et plus dans cette simulation, sous réserve de validation avant l'ouverture.
           </p>
         </section>
 
@@ -147,11 +129,44 @@ import feuillage from "../../assets/images/projection/feuillage-chambre.jpg";
             <div class="demo-field full"><label for="email">E-mail</label><input id="email" name="email" type="email" value="camille.martin@exemple.fr" required /></div>
           </div>
           <label style="display: flex; gap: 10px; align-items: start; margin-top: 18px; color: var(--demo-muted);">
-            <input type="checkbox" required checked />
-            <span>J’ai lu les conditions simulées : règlement de l’hébergement à la réservation, animaux des clients non admis, présence de trois chiens résidents dans le domaine.</span>
+            <input name="conditionsAccepted" type="checkbox" required checked />
+            <span>J’ai lu les conditions simulées : règlement de l’hébergement à la réservation, taxe de séjour en sus, animaux des clients non admis, présence de trois chiens résidents et accès aux suites par escalier sans ascenseur.</span>
           </label>
         </section>
       </div>
+
+      <section class="demo-checkout" aria-labelledby="checkout-title">
+        <div class="demo-checkout__intro">
+          <p class="demo-kicker">05 · Vérification</p>
+          <h2 id="checkout-title">Votre formule, avant de confirmer.</h2>
+          <p>Ce récapitulatif évolue avec vos dates, le nombre de voyageurs, la suite et les options sélectionnées.</p>
+          <div class="demo-checkout__stay">
+            <strong data-summary-suite>Suite Lumière</strong>
+            <span><span data-summary-nights>3 nuits</span> · <span data-summary-guests>3 personnes</span></span>
+          </div>
+          <p class="note" style="color: var(--demo-muted); margin-top: 20px;">
+            Arrivée à partir de 15 h · arrivée anticipée à 14 h sur demande · départ avant 12 h.<br />
+            Taxe de séjour non simulée, ajoutée selon le tarif applicable lors de la vente réelle.
+          </p>
+        </div>
+
+        <div class="demo-summary" aria-live="polite" aria-atomic="true">
+          <p class="demo-kicker">Détail dynamique</p>
+          <div class="demo-price-row"><span>Hébergement</span><strong data-price-accommodation>750 €</strong></div>
+          <div class="demo-price-row"><span>Accès spa</span><strong data-price-spa>225 €</strong></div>
+          <div class="demo-price-row"><span>Dîner</span><strong data-price-dinner>125 €</strong></div>
+          <div class="demo-price-row"><span>Accord mets & vins</span><strong data-price-wine>60 €</strong></div>
+          <div class="demo-price-row total"><span>Total du séjour</span><strong data-price-total>1 160 €</strong></div>
+          <p class="note" style="color: var(--demo-muted); margin-top: 17px;">
+            À payer maintenant : <strong data-price-now>750 €</strong>.<br />
+            Options payables sur place : <strong data-price-later>410 €</strong>.
+          </p>
+          <button class="demo-button" type="submit" data-payment-button style="width: 100%; margin-top: 20px;">Simuler le paiement de 750 €</button>
+          <p class="note" style="color: var(--demo-muted); margin-top: 12px;">
+            Aucune carte bancaire n’est demandée ni enregistrée.
+          </p>
+        </div>
+      </section>
     </form>
   </div>
   <script is:inline defer src={withBase("/demo/reservation.js")}></script>
