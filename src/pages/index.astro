@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Blason from "../components/brand/Blason.astro";
+import ProjectionBadge from "../components/ProjectionBadge.astro";
 import DayTimeline from "../components/sections/DayTimeline.astro";
 import FeatureGrid from "../components/sections/FeatureGrid.astro";
 import CtaFinal from "../components/CtaFinal.astro";
@@ -17,8 +18,12 @@ import {
   sejour,
   experienceTeaser,
   galerie,
+  signatureExperience,
+  histoireTeaser,
   ctaFinal,
 } from "../data/home";
+import { tarifs } from "../data/tarifs";
+import { withBase } from "../utils/url";
 
 const suites = (await getCollection("suites")).sort(
   (a, b) => a.data.order - b.data.order,
@@ -55,6 +60,7 @@ const suites = (await getCollection("suites")).sort(
         <Button href="/contact" variant="ghost-light">Être informé de l'ouverture</Button>
       </div>
     </div>
+    <p class="fhero__projection">Projection de l'expérience après travaux</p>
   </header>
 
   <!-- ===================== UNE MAISON, PAS UN DÉCOR ===================== -->
@@ -102,6 +108,11 @@ const suites = (await getCollection("suites")).sort(
           ))
         }
       </div>
+      <div class="suite-promise">
+        <span class="suite-promise__price">250 €</span>
+        <span class="suite-promise__copy">la suite pour deux · petit-déjeuner inclus</span>
+        <a class="link-or" href={withBase("/les-suites")}>Voir les suites <span class="arr">→</span></a>
+      </div>
     </div>
   </section>
 
@@ -112,6 +123,41 @@ const suites = (await getCollection("suites")).sort(
     titleGold={sejour.title[1]}
     items={sejour.steps}
   />
+
+  <!-- ===================== EXPÉRIENCE SIGNATURE ===================== -->
+  <section class="sec signature-exp night">
+    <div class="wrap">
+      <div class="signature-exp__head">
+        <p class="eyebrow on-dark"><span class="ln"></span>{signatureExperience.eyebrow}</p>
+        <h2 class="display-l">{signatureExperience.title[0]}<em class="gold light">{signatureExperience.title[1]}</em></h2>
+        <p class="lede">{signatureExperience.text}</p>
+      </div>
+      <div class="experience-film">
+        {
+          signatureExperience.items.map((item) => (
+            <a class={`film-card${"wide" in item && item.wide ? " film-card--wide" : ""}`} href={withBase("/experience")}>
+              <Image
+                src={item.image.src}
+                alt={item.image.alt}
+                widths={[420, 720, 1100]}
+                sizes={"wide" in item && item.wide ? "(min-width:820px) 66vw, 100vw" : "(min-width:820px) 33vw, 100vw"}
+                loading="lazy"
+              />
+              <ProjectionBadge />
+              <span class="film-card__veil"></span>
+              <span class="film-card__copy">
+                <span class="film-card__moment">{item.moment}</span>
+                <strong>{item.title}</strong>
+                <span>{item.text}</span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+      <p class="projection-legend">Ces projections traduisent l'intention d'aménagement après travaux. Les photographies définitives seront réalisées en mars 2027.</p>
+      <div class="signature-exp__cta"><Button href="/experience" variant="ghost-light">Vivre l'expérience en détail</Button></div>
+    </div>
+  </section>
 
   <!-- ===================== EXPÉRIENCE (teaser) ===================== -->
   <FeatureGrid
@@ -137,7 +183,7 @@ const suites = (await getCollection("suites")).sort(
       <div class="gal-strip">
         {
           galerie.strip.map((img) => (
-            <a href="/galerie" class={img.wide ? "wide" : undefined}>
+            <a href={withBase("/galerie")} class={img.wide ? "wide" : undefined}>
               <Image
                 src={img.src}
                 alt={img.alt}
@@ -145,6 +191,7 @@ const suites = (await getCollection("suites")).sort(
                 sizes="(min-width:680px) 25vw, 50vw"
                 loading="lazy"
               />
+              {img.projection && <ProjectionBadge />}
             </a>
           ))
         }
@@ -152,6 +199,48 @@ const suites = (await getCollection("suites")).sort(
       <div class="gal-foot">
         <Button href={galerie.href} variant="ghost-light">{galerie.cta}</Button>
       </div>
+    </div>
+  </section>
+
+  <!-- ===================== HISTOIRE ===================== -->
+  <section class="sec story-door">
+    <div class="wrap story-door__grid">
+      <div class="story-door__image">
+        <Image
+          src={histoireTeaser.image.src}
+          alt={histoireTeaser.image.alt}
+          widths={[500, 800, 1200]}
+          sizes="(min-width:880px) 50vw, 100vw"
+          loading="lazy"
+        />
+      </div>
+      <div class="story-door__body">
+        <p class="eyebrow"><span class="ln"></span>{histoireTeaser.eyebrow}</p>
+        <h2 class="display-l">{histoireTeaser.title[0]}<em class="gold">{histoireTeaser.title[1]}</em></h2>
+        <p class="lede">{histoireTeaser.text}</p>
+        <Button href={histoireTeaser.href} variant="ghost">Entrer dans l'histoire</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TARIFS ===================== -->
+  <section class="sec home-rates">
+    <div class="wrap">
+      <div class="home-rates__intro">
+        <p class="eyebrow"><span class="ln"></span>{tarifs.eyebrow}</p>
+        <h2 class="display-l">{tarifs.title[0]}<em class="gold">{tarifs.title[1]}</em></h2>
+        <p class="lede">{tarifs.intro}</p>
+      </div>
+      <div class="home-rates__grid">
+        {tarifs.items.map((item) => (
+          <article class="rate-card">
+            <p class="rate-card__label">{item.label}</p>
+            <p class="rate-card__value">{item.value}<span>{item.unit}</span></p>
+            <p class="rate-card__note">{item.note}</p>
+          </article>
+        ))}
+      </div>
+      <div class="home-rates__cta"><Button href="/les-suites" variant="ghost">Choisir sa suite</Button></div>
     </div>
   </section>
 
@@ -281,6 +370,25 @@ const suites = (await getCollection("suites")).sort(
     color: var(--or-clair);
     margin: 0 0 30px;
   }
+  .fhero__projection {
+    position: absolute;
+    z-index: 4;
+    right: clamp(18px, 3vw, 44px);
+    bottom: clamp(18px, 3vw, 34px);
+    margin: 0;
+    font-family: var(--serif);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 9px;
+    color: rgba(242, 235, 221, 0.76);
+  }
+  @media (max-width: 679px) {
+    .fhero__projection {
+      bottom: 76px;
+      max-width: 22ch;
+      text-align: right;
+    }
+  }
   .fhero__cta {
     display: flex;
     flex-wrap: wrap;
@@ -340,6 +448,122 @@ const suites = (await getCollection("suites")).sort(
       grid-template-columns: 1fr 1fr;
     }
   }
+  .suite-promise {
+    margin-top: 30px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule-l);
+    border-bottom: 1px solid var(--rule-l);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 18px;
+  }
+  .suite-promise__price {
+    font-family: var(--display);
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--or-prof);
+    line-height: 1;
+  }
+  .suite-promise__copy {
+    color: var(--encre-soft);
+  }
+  .suite-promise .link-or {
+    margin-left: auto;
+  }
+
+  /* ============ EXPÉRIENCE SIGNATURE ============ */
+  .signature-exp {
+    background: var(--noir);
+    color: var(--creme);
+  }
+  .signature-exp__head {
+    max-width: 760px;
+  }
+  .signature-exp__head h2 {
+    margin: 18px 0;
+    color: var(--creme);
+  }
+  .signature-exp__head .lede {
+    color: var(--creme-dim);
+  }
+  .experience-film {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 46px;
+  }
+  .film-card {
+    position: relative;
+    min-height: 390px;
+    overflow: hidden;
+    border: 1px solid var(--rule-d-faint);
+  }
+  .film-card :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    transition: transform 0.8s ease;
+  }
+  .film-card:hover :global(img) {
+    transform: scale(1.035);
+  }
+  .film-card__veil {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 25%, rgba(8, 14, 18, 0.88));
+  }
+  .film-card__copy {
+    position: absolute;
+    z-index: 3;
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  .film-card__moment {
+    color: var(--or-clair);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.24em;
+    margin-bottom: 7px;
+  }
+  .film-card__copy strong {
+    font-family: var(--display);
+    font-size: clamp(25px, 3vw, 34px);
+    font-weight: 500;
+    line-height: 1.05;
+  }
+  .film-card__copy > span:last-child {
+    color: var(--creme-dim);
+    font-size: 15px;
+    line-height: 1.45;
+    margin-top: 8px;
+  }
+  .projection-legend {
+    max-width: 760px;
+    margin: 24px 0 0;
+    color: var(--creme-faint);
+    font-size: 12.5px;
+    font-style: italic;
+  }
+  .signature-exp__cta {
+    margin-top: 28px;
+  }
+  @media (min-width: 820px) {
+    .experience-film {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .film-card {
+      grid-column: span 2;
+      min-height: 430px;
+    }
+    .film-card--wide {
+      grid-column: span 4;
+    }
+  }
 
   .exp-cta-wrap {
     background: var(--parch-2);
@@ -385,6 +609,96 @@ const suites = (await getCollection("suites")).sort(
     margin-top: 34px;
     display: flex;
     justify-content: center;
+  }
+
+  /* ============ PORTE DE L'HISTOIRE ============ */
+  .story-door {
+    background: var(--parch);
+  }
+  .story-door__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .story-door__image {
+    min-height: 430px;
+    overflow: hidden;
+    border: 1px solid var(--rule-l-faint);
+  }
+  .story-door__image :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(.16) contrast(.96);
+  }
+  .story-door__body h2 {
+    margin: 18px 0 20px;
+  }
+  .story-door__body .lede {
+    margin-bottom: 28px;
+  }
+  @media (min-width: 880px) {
+    .story-door__grid {
+      grid-template-columns: .95fr 1.05fr;
+      gap: 64px;
+    }
+  }
+
+  /* ============ TARIFS ============ */
+  .home-rates {
+    background: var(--parch-2);
+  }
+  .home-rates__intro {
+    max-width: 780px;
+  }
+  .home-rates__intro h2 {
+    margin: 18px 0;
+  }
+  .home-rates__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--rule-l-faint);
+    border: 1px solid var(--rule-l-faint);
+    margin-top: 42px;
+  }
+  .rate-card {
+    background: var(--parch-card);
+    padding: 30px;
+  }
+  .rate-card p { margin: 0; }
+  .rate-card__label {
+    color: var(--encre-soft);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+  }
+  .rate-card__value {
+    font-family: var(--display);
+    color: var(--or-prof);
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1;
+    margin-top: 16px !important;
+  }
+  .rate-card__value span {
+    font-family: var(--serif);
+    color: var(--encre-faint);
+    font-size: 14px;
+    margin-left: 7px;
+  }
+  .rate-card__note {
+    color: var(--encre-faint);
+    font-size: 14px;
+    margin-top: 12px !important;
+  }
+  .home-rates__cta {
+    margin-top: 28px;
+  }
+  @media (min-width: 760px) {
+    .home-rates__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   @media (min-width: 680px) {
     .gal-strip {

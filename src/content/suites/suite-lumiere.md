@@ -33,8 +33,9 @@ composition:
   - Une salle de bain
   - Une terrasse privative tournée vers le parc
 aConfirmer: >-
-  Surface, couchages, équipements détaillés, modalités d'accès et tarif précis
-  seront communiqués à l'ouverture des réservations.
+  Les équipements détaillés et les modalités d'accès seront communiqués à
+  l'ouverture des réservations. Tarif : 250 € la nuit pour deux personnes,
+  petit-déjeuner inclus.
 tagline: La plus claire — gris bleutés, chêne huilé et laiton, ouverte sur le parc.
 cardImage: projLumiereChambre
 cardPosition: "center 55%"

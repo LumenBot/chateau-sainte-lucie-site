@@ -57,6 +57,12 @@ import projTableHotes from "../assets/images/projection/table-hotes.jpg";
 import projBainNordique from "../assets/images/projection/bain-nordique.jpg";
 import projHammam from "../assets/images/projection/hammam.jpg";
 import projSpaTerrasse from "../assets/images/projection/spa-terrasse.jpg";
+import projFacadeEclairageNuit from "../assets/images/projection/facade-eclairage-nuit.jpg";
+import projPiscineHeureBleue from "../assets/images/projection/piscine-heure-bleue.jpg";
+import projPerronArriveeSoir from "../assets/images/projection/perron-arrivee-soir.jpg";
+import projPetitDejeunerTerrasse from "../assets/images/projection/petit-dejeuner-terrasse.jpg";
+import projAccueilSpa from "../assets/images/projection/accueil-spa.jpg";
+import projFacadeMatinAvril from "../assets/images/projection/facade-matin-avril.jpg";
 
 export interface Visual {
   src: ImageMetadata;
@@ -183,9 +189,15 @@ export const images = {
   projFeuillageBain: { src: projFeuillageBain, alt: "Suite Feuillage — salle de bain minérale (visuel de projection non contractuel)", projection: true },
   projFeuillageTerrasse: { src: projFeuillageTerrasse, alt: "Suite Feuillage — grande terrasse à balustrade (visuel de projection non contractuel)", projection: true },
   projTableHotes: { src: projTableHotes, alt: "La table d'hôtes dressée dans les boiseries (visuel de projection non contractuel)", projection: true },
-  projBainNordique: { src: projBainNordique, alt: "Bain nordique dans une clairière — extension envisagée (visuel de projection non contractuel)", projection: true },
+  projBainNordique: { src: projBainNordique, alt: "Bain nordique habillé de bois dans une clairière du parc (visuel de projection non contractuel)", projection: true },
   projHammam: { src: projHammam, alt: "Espace bien-être et hammam (visuel de projection non contractuel)", projection: true },
   projSpaTerrasse: { src: projSpaTerrasse, alt: "Terrasse de détente au crépuscule (visuel de projection non contractuel)", projection: true },
+  projFacadeEclairageNuit: { src: projFacadeEclairageNuit, alt: "Le château et son futur éclairage architectural, la nuit (visuel de projection non contractuel)", projection: true },
+  projPiscineHeureBleue: { src: projPiscineHeureBleue, alt: "La piscine naturelle aménagée pour l'heure bleue (visuel de projection non contractuel)", projection: true },
+  projPerronArriveeSoir: { src: projPerronArriveeSoir, alt: "Le perron illuminé pour l'arrivée des hôtes (visuel de projection non contractuel)", projection: true },
+  projPetitDejeunerTerrasse: { src: projPetitDejeunerTerrasse, alt: "Petit-déjeuner servi sur la terrasse de pierre au lever du jour (visuel de projection non contractuel)", projection: true },
+  projAccueilSpa: { src: projAccueilSpa, alt: "L'accueil de l'espace bien-être dans les boiseries du château (visuel de projection non contractuel)", projection: true },
+  projFacadeMatinAvril: { src: projFacadeMatinAvril, alt: "La façade du château par un matin d'avril (visuel de projection non contractuel)", projection: true },
 } satisfies Record<string, Visual>;
 
 export type ImageKey = keyof typeof images;

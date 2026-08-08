@@ -660,10 +660,11 @@ section {
     grid-template-columns: 2fr 1fr 1fr 1.2fr;
   }
 }
-/* Nav desktop : seuil relevé pour loger les 6 entrées + Contact sans chevauchement */
-@media (min-width: 1100px) {
+/* Nav desktop : seuil adapté aux 5 entrées + Contact sans chevauchement */
+@media (min-width: 1180px) {
   .nav-desktop {
     display: flex;
+    gap: clamp(14px, 1.5vw, 22px);
   }
   .nav-toggle {
     display: none;

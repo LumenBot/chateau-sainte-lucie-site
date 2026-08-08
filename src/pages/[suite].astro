@@ -57,6 +57,24 @@ const { hero } = data;
         </div>
       </div>
 
+      <div class="suite-offer">
+        <div>
+          <span class="suite-offer__eyebrow">La nuit</span>
+          <strong>250 €</strong>
+          <span>pour deux personnes · petit-déjeuner inclus</span>
+        </div>
+        <div>
+          <span class="suite-offer__eyebrow">Sur réservation</span>
+          <strong>+ 50 €</strong>
+          <span>accès spa</span>
+        </div>
+        <div>
+          <span class="suite-offer__eyebrow">Le soir</span>
+          <strong>+ 50 €</strong>
+          <span>par personne · dîner privatif</span>
+        </div>
+      </div>
+
       <p class="suite-nav">
         <a class="link-or" href={withBase("/les-suites")}>
           <span class="arr">←</span> Revenir aux deux suites
@@ -196,6 +214,41 @@ const { hero } = data;
     margin-top: 22px;
     text-align: center;
   }
+  .suite-offer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--rule-l-faint);
+    border: 1px solid var(--rule-l-faint);
+    margin: 48px 0 26px;
+  }
+  .suite-offer > div {
+    background: var(--parch-card);
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+  }
+  .suite-offer__eyebrow {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    color: var(--encre-faint);
+  }
+  .suite-offer strong {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--or-prof);
+    margin: 12px 0 6px;
+  }
+  .suite-offer > div > span:last-child {
+    color: var(--encre-soft);
+    font-size: 14px;
+  }
+  @media (min-width: 740px) {
+    .suite-offer { grid-template-columns: repeat(3, 1fr); }
+  }
 
   /* galerie de rendus de projection */
   .suite-renders {
@@ -241,6 +294,12 @@ const { hero } = data;
   @media (min-width: 900px) {
     .renders-grid {
       grid-template-columns: 1fr 1fr 1fr;
+    }
+    .render-item:first-child {
+      grid-column: span 2;
+    }
+    .render-item:first-child .render-media {
+      aspect-ratio: 2/1;
     }
   }
 </style>

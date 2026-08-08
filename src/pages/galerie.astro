@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectionBadge from "../components/ProjectionBadge.astro";
 import { gallerySeo, galleryHeader, galleryItems } from "../data/gallery";
 
 const n = galleryItems.length;
@@ -12,6 +13,7 @@ const n = galleryItems.length;
       <p class="eyebrow on-dark"><span class="ln"></span>{galleryHeader.eyebrow}</p>
       <h1 class="display-l">{galleryHeader.title[0]}<em class="gold light">{galleryHeader.title[1]}</em></h1>
       <p class="lede">{galleryHeader.text}</p>
+      <p class="gal-key"><span></span>Les images marquées « Visuel de projection » présentent l'intention après travaux.</p>
     </div>
 
     <div class="wrap">
@@ -27,6 +29,7 @@ const n = galleryItems.length;
                   sizes="(min-width:980px) 25vw, (min-width:680px) 33vw, 50vw"
                   loading={i < 4 ? "eager" : "lazy"}
                 />
+                {it.image.projection && <ProjectionBadge />}
                 <span class="cap">{it.caption}</span>
               </a>
             </li>
@@ -61,6 +64,7 @@ const n = galleryItems.length;
                 sizes="92vw"
                 loading="lazy"
               />
+              {it.image.projection && <ProjectionBadge class="proj-badge--br" />}
               <figcaption>{it.caption}</figcaption>
             </figure>
           </div>
@@ -94,6 +98,19 @@ const n = galleryItems.length;
   .gal-head h1 {
     color: var(--creme);
     margin: 18px 0 16px;
+  }
+  .gal-key {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 24px 0 0;
+    color: var(--creme-faint);
+    font-size: 13px;
+  }
+  .gal-key span {
+    width: 22px;
+    height: 1px;
+    background: var(--or);
   }
 
   .gal-grid {

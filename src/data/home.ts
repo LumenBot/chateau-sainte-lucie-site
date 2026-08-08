@@ -17,7 +17,7 @@ export const hero = {
   signature: "Les Suites de Sainte-Lucie",
   accroche: "Une nuit dans une maison de famille, entre grès rose et lisière.",
   descriptor: "Maison d'hôtes & table d'hôtes · Domaine de 1876",
-  image: images.facadeNuit as Visual,
+  image: images.projFacadeEclairageNuit as Visual,
 };
 
 export const maison = {
@@ -85,7 +85,7 @@ export const experienceTeaser = {
     {
       icon: "window",
       title: "Les espaces partagés",
-      text: "Hall au sol de terrazzo, grand salon boisé, salle à manger et bibliothèque monumentale.",
+      text: "Hall au sol en mosaïque, grand salon boisé, salle à manger et bibliothèque monumentale.",
     },
     {
       icon: "dish",
@@ -113,12 +113,33 @@ export const galerie = {
   cta: "Voir la galerie",
   href: "/galerie",
   strip: [
-    images.perronIllumine,
-    images.cheneCentenaire,
-    { ...images.piscineNuit, wide: true },
-    images.hallEntree,
-    images.daims,
+    images.projPerronArriveeSoir,
+    images.projLumiereBain,
+    { ...images.projPiscineHeureBleue, wide: true },
+    images.projTableHotes,
+    images.projPetitDejeunerTerrasse,
   ] as (Visual & { wide?: boolean })[],
+};
+
+export const signatureExperience = {
+  eyebrow: "L'expérience signature",
+  title: ["Du premier pas ", "au dernier matin."],
+  text: "Sainte-Lucie se découvre comme un récit : une arrivée à la lueur des lanternes, une suite préparée pour vous, les eaux au cœur du parc, un dîner dans les boiseries et le petit-déjeuner face aux arbres.",
+  items: [
+    { image: images.projPerronArriveeSoir, moment: "À la nuit tombée", title: "L'arrivée au perron", text: "La maison éclairée, les clés remises et le temps qui change de rythme.", wide: true },
+    { image: images.projTableHotes, moment: "Le soir", title: "Le dîner privatif", text: "Une table dressée pour vous dans les boiseries, sur réservation." },
+    { image: images.projPiscineHeureBleue, moment: "Entre chien et loup", title: "La piscine naturelle", text: "Le bassin et son lagunage dans la lumière bleue du jardin." },
+    { image: images.projBainNordique, moment: "Sous les arbres", title: "Le spa au jardin", text: "Hammam, bain nordique et futur sauna finlandais dans un écrin de bois." },
+    { image: images.projPetitDejeunerTerrasse, moment: "Au réveil", title: "Le petit-déjeuner", text: "Un plateau simple et généreux, servi face au parc lorsque le temps le permet." },
+  ],
+};
+
+export const histoireTeaser = {
+  eyebrow: "Lucy, Lucia, lux",
+  title: ["Une maison née ", "d'une histoire d'amour."],
+  text: "En 1876, la demeure est offerte à Marie Lucy Velin. Son prénom lui donne son nom et son fil conducteur : la lumière. Un siècle et demi plus tard, la maison s'ouvre à nouveau, habitée et transmise.",
+  image: images.histoireSepia as Visual,
+  href: "/histoire",
 };
 
 export const ctaFinal = {

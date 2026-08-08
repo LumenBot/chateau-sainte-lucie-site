@@ -34,14 +34,14 @@ const plausibleDomain = import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN;
 
 // Données structurées : maison d'hôtes (LodgingBusiness / BedAndBreakfast).
 // ⚠️ Ni streetAddress ni code postal (résidence habitée) — localité/région.
-// ⚠️ Ni téléphone ni tarif tant qu'ils ne sont pas confirmés.
+// ⚠️ Ni streetAddress ni téléphone : la demeure reste habitée.
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": ["BedAndBreakfast", "LodgingBusiness"],
   name: site.name,
   alternateName: site.signature,
   description: site.tagline,
-  url: Astro.site?.href,
+  url: new URL(withBase("/"), Astro.site).href,
   image: ogImage,
   email: site.contact.email,
   address: {
@@ -52,12 +52,16 @@ const jsonLd = {
   },
   areaServed: [site.location.region, "Lorraine", site.location.area],
   numberOfRooms: 2,
+  priceRange: "250 € la nuit",
   petsAllowed: false,
   smokingAllowed: false,
   amenityFeature: [
     { "@type": "LocationFeatureSpecification", name: "Piscine naturelle", value: true },
     { "@type": "LocationFeatureSpecification", name: "Parc boisé clos", value: true },
     { "@type": "LocationFeatureSpecification", name: "Table d'hôtes", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Hammam", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Bain nordique", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Sauna finlandais", value: true },
   ],
   knowsLanguage: "fr-FR",
 };

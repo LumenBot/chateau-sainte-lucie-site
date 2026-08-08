@@ -64,7 +64,8 @@ export const mainNav: NavItem[] = [
   { label: "Les Suites", href: "/les-suites", idx: "01" },
   { label: "L'Expérience", href: "/experience", idx: "02" },
   { label: "Le Château", href: "/le-chateau", idx: "03" },
-  { label: "Galerie", href: "/galerie", idx: "04" },
+  { label: "Histoire", href: "/histoire", idx: "04" },
+  { label: "Galerie", href: "/galerie", idx: "05" },
 ];
 
 /** Liens secondaires (footer « Découvrir »). */

@@ -20,9 +20,9 @@ const suites = (await getCollection("suites")).sort(
     place="Les Suites de Sainte-Lucie"
     title={["Deux manières", "d'habiter la nuit."]}
     lead="Deux suites seulement, chacune composée de deux pièces, d'une salle de bain et d'une terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière."
-    image="salonCheminee"
-    imageAlt="Un salon de caractère aux boiseries d'origine"
-    imagePosition="center 40%"
+    image="projLumiereSalon"
+    imageAlt="Le salon privé de la Suite Lumière, projeté après travaux"
+    imagePosition="center 52%"
     actions={[{ label: "Être informé de l'ouverture", href: "/contact", variant: "gold-light" }]}
   />
 
@@ -44,9 +44,15 @@ const suites = (await getCollection("suites")).sort(
         }
       </div>
       <p class="note suites-note">
-        La configuration exacte de chaque suite — surfaces, couchages et
-        équipements — sera précisée à l'ouverture des réservations.
+        Les visuels présentent l'intention d'aménagement après travaux. Les
+        équipements détaillés seront précisés à l'ouverture des réservations.
       </p>
+      <div class="suite-essentials" aria-label="Les essentiels du séjour">
+        <span><strong>2</strong> suites seulement</span>
+        <span><strong>2</strong> pièces par suite</span>
+        <span><strong>1</strong> terrasse privative</span>
+        <span><strong>250 €</strong> la nuit pour deux</span>
+      </div>
     </div>
   </section>
 
@@ -103,8 +109,35 @@ const suites = (await getCollection("suites")).sort(
     margin-top: 30px;
     text-align: center;
   }
+  .suite-essentials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 34px;
+    border: 1px solid var(--rule-l-faint);
+    background: var(--rule-l-faint);
+    gap: 1px;
+  }
+  .suite-essentials span {
+    background: var(--parch-card);
+    padding: 20px;
+    color: var(--encre-soft);
+    text-align: center;
+    font-size: 14px;
+  }
+  .suite-essentials strong {
+    display: block;
+    font-family: var(--display);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--or-prof);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  @media (min-width: 760px) {
+    .suite-essentials { grid-template-columns: repeat(4, 1fr); }
+  }
 
-  /* Tarifs indicatifs */
+  /* Tarifs */
   .tarifs {
     background: var(--parch-2);
   }

@@ -33,8 +33,9 @@ composition:
   - Une salle de bain minérale
   - Une grande terrasse privative à balustrade
 aConfirmer: >-
-  Surface, couchages, équipements détaillés, modalités d'accès et tarif précis
-  seront communiqués à l'ouverture des réservations.
+  Les équipements détaillés et les modalités d'accès seront communiqués à
+  l'ouverture des réservations. Tarif : 250 € la nuit pour deux personnes,
+  petit-déjeuner inclus.
 tagline: La plus enveloppante — verts profonds, bois sombre, ouverte sur les frondaisons.
 cardImage: projFeuillageChambre
 cardPosition: "center 50%"

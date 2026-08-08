@@ -61,11 +61,11 @@ export const espaces = {
       contain: true,
     },
     {
-      image: images.piscineSalon,
+      image: images.projPiscineHeureBleue,
       cap: "Art de vivre",
-      title: "La piscine naturelle & le bien-être",
-      text: "Un bassin naturel filtré par lagunage planté, un salon extérieur et un espace bien-être avec hammam. L'art de vivre du château, au fil des saisons et des conditions.",
-      mini: ["Baignade naturelle", "Salon extérieur", "Hammam"],
+      title: "La piscine naturelle & le spa au jardin",
+      text: "Un bassin filtré par lagunage planté, un hammam, puis un bain nordique et un sauna finlandais habillés de bois. Des pas japonais éclairés composeront un parcours discret entre la maison, l'eau et la lisière.",
+      mini: ["Baignade naturelle", "Hammam", "Bain nordique & sauna"],
     },
   ] satisfies Feature[],
 };
