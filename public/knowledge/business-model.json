@@ -1,84 +1,170 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "3.0",
   "as_of": "2026-08-09",
-  "purpose": "Transparent annual operating simulator, not an accountant-approved forecast",
+  "purpose": "Transparent two-suite operating model for collective decision-making; not an accountant-approved forecast",
   "currency": "EUR",
+  "doctrine": {
+    "public_prices_are_ttc": true,
+    "contractual_sci_rent_is_an_input": true,
+    "operating_result_is_the_residual": true,
+    "maximum_rent_capacity_is_only_an_economic_indicator": true,
+    "renewal_and_cash_reserve_are_separated_from_operating_expenses": true,
+    "every_unpaid_family_hour_must_be_declared": true,
+    "status": "active"
+  },
   "fixed_parameters": {
-    "suite_count": 2,
-    "average_guests": 2.1,
-    "jules_full_time_employer_budget": 28000,
-    "jules_full_time_employer_budget_status": "provisional_working_assumption_to_validate_with_urssaf_and_payroll_quote",
-    "legal_full_time_hours": 1607,
-    "useful_capacity_for_planning": 1350,
-    "initial_capex": 65000,
-    "initial_capex_treatment": "fixed and excluded from annual P&L and SCI rent formula"
+    "suite_count": { "value": 2, "status": "validated" },
+    "average_guests": { "value": 2.1, "status": "working_assumption" },
+    "legal_full_time_hours": { "value": 1607, "status": "official_reference", "note": "Annual legal working-time reference; paid leave must not be subtracted a second time." },
+    "jules_full_time_employer_budget": { "value": 28000, "status": "provisional_quote_required" },
+    "initial_capex_ttc": { "value": 65000, "status": "active_budget", "treatment": "excluded from annual operating result, debt and depreciation model" }
   },
-  "recommended_scenario": {
-    "status": "stabilized_target_not_first_year_guarantee",
-    "nights_per_suite": 155,
-    "average_night_price": 235,
-    "average_length_of_stay": 2.4,
-    "direct_booking_share": 0.65,
-    "spa_take_rate": 0.6,
-    "spa_average_basket_per_buying_stay": 80,
-    "dining_take_rate": 0.3,
-    "dining_average_basket_per_buying_stay": 170,
-    "support_mode": "hourly_outsourcing",
-    "support_hourly_rate": 25,
-    "operating_reserve_before_sci_rent": 5000,
-    "indicative_outputs": {
-      "annual_revenue": 85638,
-      "annual_support_hours": 158,
-      "annual_support_cost": 3938,
-      "maximum_sustainable_sci_rent": 17045
+  "vat": {
+    "modes": ["franchise", "vat_real"],
+    "2026_franchise_threshold_main": 85000,
+    "2026_franchise_threshold_major": 93500,
+    "service_subthreshold": 37500,
+    "simulated_rates": {
+      "lodging": 0.1,
+      "spa": { "value": 0.2, "status": "professional_validation_required" },
+      "table_food": 0.1,
+      "table_alcohol": 0.2
+    },
+    "interpretation": "The applicable regime depends on the year, prior turnover, activity mix and any voluntary election. The simulator compares regimes and does not decide the legal treatment.",
+    "status": "professional_validation_required"
+  },
+  "trajectory": [
+    {
+      "year": "2027_launch_april_to_december",
+      "status": "planning_case_not_budget_commitment",
+      "nights_per_suite": 75,
+      "average_public_price_ttc": 195,
+      "average_length_of_stay": 2.2,
+      "direct_booking_share": 0.35,
+      "spa_take_rate": 0.5,
+      "spa_basket_ttc": 60,
+      "dining_take_rate": 0.3,
+      "dining_basket_ttc": 130,
+      "vat_mode_tested": "franchise",
+      "support_hours": 250,
+      "jules_months": 9,
+      "public_sales_ttc_approx": 34000,
+      "cash_gap_before_sci_rent_approx": -33000
+    },
+    {
+      "year": "2028_consolidation",
+      "status": "planning_case_not_budget_commitment",
+      "nights_per_suite": 110,
+      "average_public_price_ttc": 215,
+      "average_length_of_stay": 2.3,
+      "direct_booking_share": 0.45,
+      "spa_take_rate": 0.6,
+      "spa_basket_ttc": 75,
+      "dining_take_rate": 0.35,
+      "dining_basket_ttc": 150,
+      "vat_mode_tested": "franchise",
+      "support_hours": 300,
+      "jules_months": 12,
+      "public_sales_ttc_approx": 56600,
+      "cash_gap_before_sci_rent_approx": -26000
+    },
+    {
+      "year": "2029_plus_maturity",
+      "status": "strategic_target_requires_new_price_grid_and_market_proof",
+      "nights_per_suite": 150,
+      "average_public_price_ttc": 240,
+      "average_length_of_stay": 2.5,
+      "direct_booking_share": 0.55,
+      "spa_take_rate": 0.7,
+      "spa_basket_ttc": 85,
+      "dining_take_rate": 0.4,
+      "dining_basket_ttc": 170,
+      "vat_mode_tested": "vat_real",
+      "support_hours": 400,
+      "public_sales_ttc_approx": 87300,
+      "accounting_revenue_ht_approx": 78700
     }
-  },
-  "editable_activity_parameters": [
-    "nights_per_suite",
-    "average_night_price",
-    "average_length_of_stay",
-    "direct_booking_share",
-    "spa_take_rate",
-    "spa_average_basket_per_buying_stay",
-    "dining_take_rate",
-    "dining_average_basket_per_buying_stay"
   ],
-  "editable_cost_parameters": {
-    "turnover_cleaning_linen_welcome_per_stay": 90,
-    "breakfast_per_guest_night": 7,
-    "energy_per_suite_night": 7.5,
-    "spa_direct_cost_per_sale": 24,
-    "dining_direct_cost_per_sale": 60,
-    "ota_commission_rate": 0.15,
-    "miscellaneous_operating_cost_rate_of_revenue": 0.06,
-    "operating_reserve_before_sci_rent": 5000
+  "recommended_sustainable_configuration": {
+    "horizon": "2029_plus_maturity",
+    "status": "target_to_test_not_guarantee",
+    "jules_fte_funded_by_opco": 0.7,
+    "paid_support_hours": 400,
+    "declared_family_hours": 60,
+    "contractual_sci_rent": 0,
+    "renewal_cash_allocation": 4000,
+    "annual_cash_reserve_contribution": 3000,
+    "interpretation": "Near break-even target for two suites. It does not finance a full-time Jules position and a significant SCI rent simultaneously. The 60 unpaid family hours must be accepted explicitly or replaced with paid cover."
   },
-  "formulas": {
-    "occupied_suite_nights": "2 * nights_per_suite",
-    "stays": "occupied_suite_nights / average_length_of_stay",
-    "lodging_revenue": "occupied_suite_nights * average_night_price",
-    "spa_revenue": "stays * spa_take_rate * spa_average_basket_per_buying_stay",
-    "dining_revenue": "stays * dining_take_rate * dining_average_basket_per_buying_stay",
-    "variable_costs": "OTA commissions + turnover + breakfast + energy + spa direct cost + dining direct cost + miscellaneous operating costs",
-    "internal_operations_hours": "720 + occupied_suite_nights * 0.65 + stays + spa_sales * 0.75 + dining_sales * 4.5",
-    "minimum_relief_hours": "80 + nights_per_suite * 0.5",
-    "support_hours": "max(minimum_relief_hours, internal_operations_hours - 1350, 0)",
-    "hourly_support_cost": "support_hours * hourly_rate",
-    "part_time_support_fte": "max(0.2, round_up_to_0.1(support_hours / 1607))",
-    "part_time_support_cost": "part_time_support_fte * 28000",
-    "maximum_sustainable_sci_rent": "max(0, revenue - variable_costs - 28000 - support_cost - operating_reserve)",
-    "remaining_deficit": "max(0, -(revenue - variable_costs - 28000 - support_cost - operating_reserve))"
+  "full_time_and_rent_goal": {
+    "jules_fte": 1,
+    "target_sci_rent": 10000,
+    "required_public_sales_ttc_range": [110000, 123000],
+    "status": "sensitivity_estimate",
+    "examples": [
+      { "nights_per_suite": 150, "average_public_price_ttc_approx": 314 },
+      { "nights_per_suite": 159, "average_public_price_ttc_approx": 300 },
+      { "nights_per_suite": 173, "average_public_price_ttc_approx": 280 },
+      { "nights_per_suite": 211, "average_public_price_ttc_approx": 240 }
+    ],
+    "interpretation": "Mathematically possible at two suites, but not commercially demonstrated by the current benchmark or price grid."
+  },
+  "variable_cost_assumptions": {
+    "turnover_cleaning_linen_welcome_per_stay_ttc": { "value": 90, "status": "quote_required" },
+    "breakfast_per_guest_night_ttc": { "value": 7, "range": [6, 9], "status": "test_required" },
+    "energy_per_suite_night_ttc": { "value": 7.5, "range": [7, 12], "status": "measurement_required" },
+    "spa_direct_cost_per_sale_ttc": { "value": 24, "range": [20, 35], "status": "measurement_required" },
+    "dining_material_rate_of_ttc_sales": { "value": 0.35, "range": [0.3, 0.38], "status": "menu_costing_required" },
+    "ota_commission_rate": { "value": 0.15, "range": [0.15, 0.18], "status": "contract_required" },
+    "direct_payment_rate": { "value": 0.015, "range": [0.015, 0.02], "status": "provider_quote_required" },
+    "incidents_and_commercial_gestures_rate": { "value": 0.007, "status": "working_assumption" }
+  },
+  "fixed_operating_cost_budget_ttc": {
+    "central_total": 18000,
+    "stress_range": [15000, 22000],
+    "status": "itemized_working_assumption_all_quotes_required",
+    "lines": {
+      "insurance": 1500,
+      "accounting_and_payroll": 3000,
+      "pms_site_and_telecom": 2400,
+      "acquisition_and_communication": 2000,
+      "cfe_licences_and_mediation": 1200,
+      "bank_fixed": 400,
+      "safety_and_controls": 700,
+      "technical_maintenance": 2800,
+      "fixed_spa_maintenance": 2400,
+      "water_waste_and_energy_base": 1000,
+      "training_and_prevention": 600
+    },
+    "allocation_rule": "Each line must be assigned to OpCo, SCI or shared according to the lease and actual beneficiary."
+  },
+  "workload_model": {
+    "presence_days": "1.2 * nights_per_suite; heuristic pending real booking calendar",
+    "operations_hours": "720 + 1.75 * presence_days + 0.5 * occupied_suite_nights + stays + 0.75 * spa_sales + 4.5 * dining_sales",
+    "calendar_support_floor": "round_to_50(100 + 2 * nights_per_suite), bounded between 250 and 500 hours",
+    "support_hours": "max(planned_support, calendar_support_floor, operations_hours - paid_jules_capacity - declared_family_hours)",
+    "jules_paid_capacity": "1607 * funded_fte * employed_months / 12",
+    "warning": "Annual heuristics do not replace a weekly roster respecting daily and weekly rest."
+  },
+  "result_model": {
+    "operating_result_before_rent": "accounting_revenue - variable_costs - fixed_operating_costs - jules_employer_cost - paid_support_cost",
+    "operating_result_after_rent": "operating_result_before_rent - contractual_sci_rent",
+    "prudent_cash_balance": "operating_result_after_rent - renewal_allocation - annual_cash_reserve_contribution",
+    "maximum_economic_rent_capacity": "max(0, operating_result_before_rent - renewal_allocation - annual_cash_reserve_contribution)"
   },
   "interpretation_rules": [
-    "SCI rent is an economic contribution capacity, not a validated legal or fiscal market rent.",
-    "When obligations are not covered, SCI rent is zero and the remaining deficit is shown; no negative rent is created.",
-    "Turnover cost includes externalized cleaning, linen and welcome consumables; cleaning hours are therefore excluded from internal workload.",
-    "Miscellaneous operating costs are a revenue percentage for unallocated recurring costs and must be replaced by actual accounting data.",
-    "All assumptions must be replaced by invoices, payroll simulations and measured operating times after launch."
+    "The public launch range remains 180 to 220 EUR. A 240 EUR average at maturity requires a formally approved higher price grid and evidence from real demand.",
+    "The 18k fixed-cost budget is a diligence estimate, not a verified fact; possible duplicates and SCI allocations must be resolved.",
+    "The 28k full-time employer budget is provisional and requires an Urssaf simulation, payroll quote and collective-agreement review.",
+    "A third unit is a strategic option, not a proven necessity. Its exact room count must preserve or intentionally leave the legal chambre-d'hotes scope.",
+    "Debt, depreciation, corporate tax and owner remuneration are outside this simplified annual model."
   ],
   "official_validation_links": [
-    "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur",
-    "https://www.urssaf.fr/accueil/employeur/cotisations/comprendre-cotisations/calcul-cotisations-employeur.html",
-    "https://www.service-public.fr/particuliers/vosdroits/F1911"
+    "https://www.impots.gouv.fr/professionnel/tva",
+    "https://www.impots.gouv.fr/professionnel/questions/en-tant-que-micro-entrepreneur-puis-je-etre-redevable-de-la-tva",
+    "https://www.service-public.fr/particuliers/vosdroits/F17452",
+    "https://www.service-public.fr/particuliers/vosdroits/F1911",
+    "https://www.service-public.fr/particuliers/vosdroits/F2327",
+    "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur"
   ]
 }

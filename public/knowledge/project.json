@@ -41,6 +41,13 @@
     "tourist_tax_included": false,
     "status": "validated_except_romantic_offer"
   },
+  "internal_price_trajectory": {
+    "launch_2027_public_range": [180, 220],
+    "consolidation_2028_average_price_test": [210, 225],
+    "maturity_2029_plus_average_price_test": [225, 240],
+    "maturity_requirement": "An average price at 240 EUR requires a public grid whose high dates exceed 240 EUR.",
+    "status": "working_assumption_not_public_commitment"
+  },
   "stay_rules": {
     "check_in_from": "15:00",
     "early_check_in_on_request": "14:00",

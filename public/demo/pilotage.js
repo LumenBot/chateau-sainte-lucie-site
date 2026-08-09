@@ -8,10 +8,17 @@
     const percent = (value) => new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 0 }).format(Number(value || 0));
     const toast = window.CSLDemo?.toast || ((message) => window.alert(message));
 
-    const fixed = { suites: 2, averageGuests: 2.1, julesCost: 28000, julesUsefulHours: 1350, annualHours: 1607, capex: 65000 };
-    const scenarioNames = { recommended: "Scénario recommandé", custom: "Scénario libre" };
+    const fixed = { suites: 2, averageGuests: 2.1, annualHours: 1607, capex: 65000 };
+    const scenarioNames = { recommended: "Configuration soutenable à maturité", custom: "Scénario libre" };
     const scenarios = {
-      recommended: { nightsPerSuite: "155", averageNightPrice: "235", averageStay: "2.4", directShare: "65", spaTake: "60", spaBasket: "80", diningTake: "30", diningBasket: "170", turnoverCost: "90", breakfastCost: "7", energyCost: "7.5", spaUnitCost: "24", diningUnitCost: "60", otaCommission: "15", miscRate: "6", operatingReserve: "5000", supportMode: "subcontract", supportHourlyRate: "25" },
+      recommended: {
+        nightsPerSuite: "150", averageNightPrice: "240", averageStay: "2.5", directShare: "55",
+        spaTake: "70", spaBasket: "85", diningTake: "40", diningBasket: "170",
+        vatMode: "vat", diningAlcoholShare: "20", otaCommission: "15", directPaymentRate: "1.5",
+        turnoverCost: "90", breakfastCost: "7", energyCost: "7.5", spaUnitCost: "24", diningCostRate: "35", incidentRate: "0.7",
+        fixedInsurance: "1500", fixedAccounting: "3000", fixedDigital: "2400", fixedMarketing: "2000", fixedTaxes: "1200", fixedBank: "400", fixedSafety: "700", fixedTechnical: "2800", fixedSpa: "2400", fixedUtilities: "1000", fixedTraining: "600", fixedVatRecovery: "2500",
+        julesFte: "0.7", employeeMonths: "12", supportMode: "subcontract", supportHourlyRate: "28", plannedSupportHours: "400", familyHours: "60", renewalProvision: "4000", cashReserveContribution: "3000", contractRent: "0", julesFullTimeCost: "28000",
+      },
     };
 
     const competitors = [
@@ -53,76 +60,136 @@
     function setValues(next) { Object.entries(next).forEach(([key, value]) => { const field = form.elements.namedItem(key); if (field) field.value = String(value); }); }
     function output(key, value) { document.querySelectorAll(`[data-output="${key}"]`).forEach((node) => { node.textContent = value; }); }
 
-    function calculate(v) {
-      const nightsPerSuite = number(v, "nightsPerSuite");
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const roundTo = (value, step) => Math.round(value / step) * step;
+
+    function calculate(v, overrides) {
+      const next = { ...v, ...(overrides || {}) };
+      const nightsPerSuite = number(next, "nightsPerSuite");
       const occupiedNights = nightsPerSuite * fixed.suites;
-      const stays = occupiedNights / Math.max(1, number(v, "averageStay"));
-      const spaBookings = stays * number(v, "spaTake") / 100;
-      const diningBookings = stays * number(v, "diningTake") / 100;
-      const lodgingRevenue = occupiedNights * number(v, "averageNightPrice");
-      const spaRevenue = spaBookings * number(v, "spaBasket");
-      const diningRevenue = diningBookings * number(v, "diningBasket");
-      const revenue = lodgingRevenue + spaRevenue + diningRevenue;
+      const stays = occupiedNights / Math.max(1, number(next, "averageStay"));
+      const spaBookings = stays * number(next, "spaTake") / 100;
+      const diningBookings = stays * number(next, "diningTake") / 100;
+      const lodgingRevenueTtc = occupiedNights * number(next, "averageNightPrice");
+      const spaRevenueTtc = spaBookings * number(next, "spaBasket");
+      const diningRevenueTtc = diningBookings * number(next, "diningBasket");
+      const revenueTtc = lodgingRevenueTtc + spaRevenueTtc + diningRevenueTtc;
 
-      const commission = lodgingRevenue * (1 - number(v, "directShare") / 100) * number(v, "otaCommission") / 100;
-      const turnover = stays * number(v, "turnoverCost");
-      const breakfast = occupiedNights * fixed.averageGuests * number(v, "breakfastCost");
-      const energy = occupiedNights * number(v, "energyCost");
-      const spaDirect = spaBookings * number(v, "spaUnitCost");
-      const diningDirect = diningBookings * number(v, "diningUnitCost");
-      const misc = revenue * number(v, "miscRate") / 100;
-      const variableCosts = commission + turnover + breakfast + energy + spaDirect + diningDirect + misc;
-      const contribution = revenue - variableCosts;
+      const vatMode = next.vatMode === "vat" ? "vat" : "franchise";
+      const alcoholShare = clamp(number(next, "diningAlcoholShare") / 100, 0, 1);
+      const lodgingRevenue = vatMode === "vat" ? lodgingRevenueTtc / 1.1 : lodgingRevenueTtc;
+      const spaRevenue = vatMode === "vat" ? spaRevenueTtc / 1.2 : spaRevenueTtc;
+      const diningRevenue = vatMode === "vat" ? diningRevenueTtc * (1 - alcoholShare) / 1.1 + diningRevenueTtc * alcoholShare / 1.2 : diningRevenueTtc;
+      const accountingRevenue = lodgingRevenue + spaRevenue + diningRevenue;
+      const collectedVat = revenueTtc - accountingRevenue;
 
-      const operationsHours = 720 + occupiedNights * 0.65 + stays + spaBookings * 0.75 + diningBookings * 4.5;
-      const calendarRelief = 80 + nightsPerSuite * 0.5;
-      const supportHours = Math.max(calendarRelief, operationsHours - fixed.julesUsefulHours, 0);
+      const commission = lodgingRevenueTtc * (1 - number(next, "directShare") / 100) * number(next, "otaCommission") / 100;
+      const directReceipts = lodgingRevenueTtc * number(next, "directShare") / 100 + spaRevenueTtc + diningRevenueTtc;
+      const paymentFees = directReceipts * number(next, "directPaymentRate") / 100;
+      const turnoverTtc = stays * number(next, "turnoverCost");
+      const breakfastTtc = occupiedNights * fixed.averageGuests * number(next, "breakfastCost");
+      const energyTtc = occupiedNights * number(next, "energyCost");
+      const spaDirectTtc = spaBookings * number(next, "spaUnitCost");
+      const diningDirectTtc = diningRevenueTtc * number(next, "diningCostRate") / 100;
+      const turnover = vatMode === "vat" ? turnoverTtc / 1.2 : turnoverTtc;
+      const breakfast = vatMode === "vat" ? breakfastTtc * 0.9 : breakfastTtc;
+      const energy = vatMode === "vat" ? energyTtc / 1.2 : energyTtc;
+      const spaDirect = vatMode === "vat" ? spaDirectTtc / 1.2 : spaDirectTtc;
+      const diningDirect = vatMode === "vat" ? diningDirectTtc / 1.1 : diningDirectTtc;
+      const incidents = accountingRevenue * number(next, "incidentRate") / 100;
+      const variableCosts = commission + paymentFees + turnover + breakfast + energy + spaDirect + diningDirect + incidents;
+      const contribution = accountingRevenue - variableCosts;
+
+      const fixedKeys = ["fixedInsurance", "fixedAccounting", "fixedDigital", "fixedMarketing", "fixedTaxes", "fixedBank", "fixedSafety", "fixedTechnical", "fixedSpa", "fixedUtilities", "fixedTraining"];
+      const fixedCostsTtc = fixedKeys.reduce((sum, key) => sum + number(next, key), 0);
+      const fixedVatRecovery = vatMode === "vat" ? Math.min(fixedCostsTtc, number(next, "fixedVatRecovery")) : 0;
+      const fixedCosts = fixedCostsTtc - fixedVatRecovery;
+
+      const presenceDays = Math.min(275, nightsPerSuite * 1.2);
+      const baseHours = 720;
+      const presenceHours = presenceDays * 1.75;
+      const suiteNightHours = occupiedNights * 0.5;
+      const coordinationHours = stays;
+      const spaHours = spaBookings * 0.75;
+      const diningHours = diningBookings * 4.5;
+      const operationsHours = baseHours + presenceHours + suiteNightHours + coordinationHours + spaHours + diningHours;
+      const calendarRelief = nightsPerSuite > 0 ? clamp(roundTo(100 + nightsPerSuite * 2, 50), 250, 500) : 0;
+      const familyHours = number(next, "familyHours");
+      const julesFte = clamp(number(next, "julesFte"), 0, 1);
+      const employeeMonths = clamp(number(next, "employeeMonths"), 0, 12);
+      const julesFullTimeCost = number(next, "julesFullTimeCost");
+      const paidCapacity = fixed.annualHours * julesFte * employeeMonths / 12;
+      const workloadRelief = Math.max(0, operationsHours - paidCapacity - familyHours);
+      const supportHours = Math.max(number(next, "plannedSupportHours"), calendarRelief, workloadRelief);
       const partTimeFte = Math.max(0.2, Math.ceil(supportHours / fixed.annualHours * 10) / 10);
-      const supportCost = v.supportMode === "parttime" ? fixed.julesCost * partTimeFte : supportHours * number(v, "supportHourlyRate");
-      const reserve = number(v, "operatingReserve");
-      const rentCapacity = contribution - fixed.julesCost - supportCost - reserve;
-      const rent = Math.max(0, rentCapacity);
-      const deficit = Math.max(0, -rentCapacity);
-      const presenceDays = Math.min(275, Math.max(nightsPerSuite, occupiedNights - nightsPerSuite * 0.8));
-      return { nightsPerSuite, occupiedNights, stays, spaBookings, diningBookings, lodgingRevenue, spaRevenue, diningRevenue, revenue, commission, turnover, breakfast, energy, spaDirect, diningDirect, misc, variableCosts, contribution, operationsHours, calendarRelief, supportHours, partTimeFte, supportCost, reserve, rent, deficit, presenceDays };
+      const supportCost = next.supportMode === "parttime" ? julesFullTimeCost * partTimeFte * employeeMonths / 12 : supportHours * number(next, "supportHourlyRate");
+      const julesCost = julesFullTimeCost * julesFte * employeeMonths / 12;
+      const operatingResultBeforeRent = contribution - fixedCosts - julesCost - supportCost;
+      const contractRent = number(next, "contractRent");
+      const operatingResultAfterRent = operatingResultBeforeRent - contractRent;
+      const renewalProvision = number(next, "renewalProvision");
+      const cashReserveContribution = number(next, "cashReserveContribution");
+      const cashResult = operatingResultAfterRent - renewalProvision - cashReserveContribution;
+      const rentCapacity = Math.max(0, operatingResultBeforeRent - renewalProvision - cashReserveContribution);
+      const recoveredVat = (turnoverTtc - turnover) + (breakfastTtc - breakfast) + (energyTtc - energy) + (spaDirectTtc - spaDirect) + (diningDirectTtc - diningDirect) + fixedVatRecovery;
+      const netVat = Math.max(0, collectedVat - recoveredVat);
+
+      const julesAssignedHours = Math.max(0, operationsHours - supportHours - familyHours);
+      return { nightsPerSuite, occupiedNights, stays, spaBookings, diningBookings, lodgingRevenueTtc, spaRevenueTtc, diningRevenueTtc, revenueTtc, lodgingRevenue, spaRevenue, diningRevenue, accountingRevenue, collectedVat, recoveredVat, netVat, commission, paymentFees, turnover, breakfast, energy, spaDirect, diningDirect, incidents, variableCosts, contribution, fixedCostsTtc, fixedVatRecovery, fixedCosts, presenceDays, baseHours, presenceHours, suiteNightHours, coordinationHours, spaHours, diningHours, operationsHours, calendarRelief, supportHours, partTimeFte, supportCost, familyHours, julesFte, paidCapacity, julesAssignedHours, julesCost, operatingResultBeforeRent, contractRent, operatingResultAfterRent, renewalProvision, cashReserveContribution, cashResult, rentCapacity };
     }
 
     const pnlRows = [
-      ["Hébergement", "lodgingRevenue", "revenue"], ["Bien-être", "spaRevenue", "revenue"], ["Table d’hôte", "diningRevenue", "revenue"], ["Chiffre d’affaires", "revenue", "subtotal"],
-      ["Commissions plateformes", "commission", "cost"], ["Rotation ménage, linge & accueil", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Coûts directs table", "diningDirect", "cost"], ["Charges diverses", "misc", "cost"], ["Marge avant emploi", "contribution", "subtotal"],
-      ["CDI Jules — budget employeur", "julesCost", "fixed"], ["Renfort / relève", "supportCost", "fixed"], ["Réserve d’exploitation", "reserve", "fixed"], ["Loyer SCI automatique", "rent", "fixed"], ["Déficit à financer", "deficit", "total"],
+      ["Ventes publiques TTC · hébergement", "lodgingRevenueTtc", "revenue"], ["Ventes publiques TTC · bien-être", "spaRevenueTtc", "revenue"], ["Ventes publiques TTC · table", "diningRevenueTtc", "revenue"], ["Ventes publiques TTC", "revenueTtc", "subtotal"],
+      ["TVA collectée estimée", "collectedVat", "cost"], ["Produits comptables simulés", "accountingRevenue", "subtotal"],
+      ["Commissions plateformes", "commission", "cost"], ["Encaissements directs", "paymentFees", "cost"], ["Rotation ménage, linge & accueil", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie marginale", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Matières table", "diningDirect", "cost"], ["Impayés et gestes", "incidents", "cost"], ["Marge contributive", "contribution", "subtotal"],
+      ["Charges fixes analytiques", "fixedCosts", "fixed"], ["Jules — budget employeur financé", "julesCost", "fixed"], ["Relève rémunérée", "supportCost", "fixed"], ["Résultat avant loyer SCI", "operatingResultBeforeRent", "subtotal"], ["Loyer SCI contractuel testé", "contractRent", "fixed"], ["Résultat d’exploitation simplifié", "operatingResultAfterRent", "subtotal"],
+      ["Enveloppe de renouvellement", "renewalProvision", "cash"], ["Dotation de trésorerie", "cashReserveContribution", "cash"], ["Solde de trésorerie prudent", "cashResult", "total"],
     ];
 
     function renderPnl(data) {
-      const values = { ...data, julesCost: fixed.julesCost };
-      document.querySelector("[data-pnl]").innerHTML = `<div class="pilotage-pnl__head"><span>Compte de résultat annuel</span><strong>Montant</strong></div>${pnlRows.map(([label, key, kind]) => `<div class="pilotage-pnl__row ${kind}"><span>${label}</span><strong>${money(values[key])}</strong></div>`).join("")}`;
+      document.querySelector("[data-pnl]").innerHTML = `<div class="pilotage-pnl__head"><span>Exploitation annuelle simplifiée</span><strong>Montant</strong></div>${pnlRows.map(([label, key, kind]) => `<div class="pilotage-pnl__row ${kind}"><span>${label}</span><strong>${money(data[key])}</strong></div>`).join("")}`;
     }
 
     function render() {
       const v = read(); const data = calculate(v);
+      const fullTime = calculate(v, { julesFte: "1", contractRent: "10000", familyHours: "0" });
       output("scenario-name", scenarioNames[activeScenario] || scenarioNames.custom);
-      output("revenue", money(data.revenue));
-      output("revenue-mix", `${percent(data.lodgingRevenue / Math.max(1, data.revenue))} hébergement · ${percent((data.spaRevenue + data.diningRevenue) / Math.max(1, data.revenue))} expériences`);
-      output("rent", money(data.rent));
-      output("employment", money(fixed.julesCost + data.supportCost));
-      output("support-summary", v.supportMode === "parttime" ? `CDI Jules + ${data.partTimeFte.toFixed(1).replace(".", ",")} ETP` : `CDI Jules + ${integer(data.supportHours)} h sous-traitées`);
-      output("reserve", money(data.reserve));
-      output("contribution", money(data.contribution));
-      output("support-cost", money(data.supportCost));
-      output("support-hours", `${integer(data.supportHours)} h/an`);
-      output("presence-days", `${integer(data.presenceDays)} jours/an`);
-      output("deficit", data.deficit ? money(data.deficit) : "0 €");
+      output("revenue-ttc", money(data.revenueTtc));
+      output("accounting-revenue", money(data.accountingRevenue));
+      output("revenue-mix", `${percent(data.lodgingRevenueTtc / Math.max(1, data.revenueTtc))} hébergement · ${percent((data.spaRevenueTtc + data.diningRevenueTtc) / Math.max(1, data.revenueTtc))} expériences`);
+      output("vat-summary", v.vatMode === "vat" ? `TVA nette estimée ${money(data.netVat)} · taux spa à confirmer` : "Franchise simulée · aucune TVA récupérée");
+      output("cash-result", money(data.cashResult));
+      output("employment", money(data.julesCost + data.supportCost));
+      output("support-summary", `${data.julesFte.toFixed(2).replace(".", ",")} ETP Jules + ${integer(data.supportHours)} h de relève`);
+      output("pre-rent-result", money(data.operatingResultBeforeRent));
+      output("contract-rent", money(data.contractRent));
+      output("rent-capacity", money(data.rentCapacity));
+      output("jules-cost", `${money(data.julesCost)} · ${data.julesFte.toFixed(2).replace(".", ",")} ETP`);
+      output("support-hours", `${integer(data.supportHours)} h · ${money(data.supportCost)}`);
+      output("family-hours", `${integer(data.familyHours)} h/an`);
       output("operations-hours", `${integer(data.operationsHours)} h/an`);
-      output("operations-copy", `${percent(data.operationsHours / fixed.julesUsefulHours)} de la capacité utile de Jules avant organisation de la relève.`);
+      output("operations-copy", `${integer(data.presenceDays)} jours de présence estimés · ${integer(data.paidCapacity)} h de capacité payée pour Jules.`);
+      output("fulltime-gap", fullTime.cashResult < 0 ? `− ${money(Math.abs(fullTime.cashResult))}` : `+ ${money(fullTime.cashResult)}`);
 
-      const staffingTitle = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(1).replace(".", ",")} ETP complémentaire` : `${integer(data.supportHours)} h sous-traitées`;
-      const staffingCopy = v.supportMode === "parttime" ? `Budget estimé à ${money(data.supportCost)} au prorata d’un coût employeur annuel de 28 k€ au SMIC.` : `Budget estimé à ${money(data.supportCost)}, au tarif de ${money(number(v, "supportHourlyRate"))} par heure.`;
+      const staffingTitle = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(1).replace(".", ",")} ETP complémentaire` : `${integer(data.supportHours)} h rémunérées`;
+      const staffingCopy = `${integer(data.calendarRelief)} h de plancher calendaire ; ${integer(data.familyHours)} h familiales déclarées. Coût de relève : ${money(data.supportCost)}.`;
       output("staffing-title", staffingTitle); output("staffing-copy", staffingCopy);
 
+      document.querySelector("[data-workload]").innerHTML = `
+        <div class="pilotage-workload__head"><span>Décomposition du temps annuel</span><strong>${integer(data.operationsHours)} h à organiser</strong></div>
+        <div><span>Socle parc, maintenance & administration</span><strong>${integer(data.baseHours)} h</strong></div>
+        <div><span>Présence clients & petits-déjeuners</span><strong>${integer(data.presenceHours)} h</strong></div>
+        <div><span>Nuits-suite & communs</span><strong>${integer(data.suiteNightHours)} h</strong></div>
+        <div><span>Coordination des séjours</span><strong>${integer(data.coordinationHours)} h</strong></div>
+        <div><span>Bien-être</span><strong>${integer(data.spaHours)} h</strong></div>
+        <div><span>Table d’hôte</span><strong>${integer(data.diningHours)} h</strong></div>
+        <div class="allocation"><span>Jules assigné / capacité payée</span><strong>${integer(data.julesAssignedHours)} / ${integer(data.paidCapacity)} h</strong></div>
+        <div class="allocation"><span>Relève rémunérée / aide familiale</span><strong>${integer(data.supportHours)} / ${integer(data.familyHours)} h</strong></div>`;
+
       const verdict = document.querySelector("[data-verdict]");
-      if (data.deficit > 0) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Activité insuffisante.</strong><span>Après un loyer SCI ramené à zéro, il manque encore ${money(data.deficit)} pour financer emploi, relève et réserve.</span>`; }
-      else if (data.rent < 12000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre opérationnel, contribution limitée.</strong><span>Le modèle finance l’emploi et la réserve, mais seulement ${money(data.rent)} de loyer SCI.</span>`; }
-      else { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Modèle équilibré.</strong><span>L’emploi, la relève et ${money(data.reserve)} de réserve sont financés ; ${money(data.rent)} peuvent contribuer à la SCI.</span>`; }
+      if (data.cashResult < -1000) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Besoin de financement : ${money(Math.abs(data.cashResult))}.</strong><span>Le loyer saisi, l’emploi, la relève, le renouvellement et la réserve ne sont pas tous couverts.</span>`; }
+      else if (data.cashResult < 3000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre très serré.</strong><span>Le scénario absorbe presque tout le résultat et ne laisse que ${money(Math.max(0, data.cashResult))} de marge de sécurité supplémentaire.</span>`; }
+      else { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Marge de sécurité positive.</strong><span>Après les emplois de trésorerie saisis, le solde atteint ${money(data.cashResult)}. Il ne constitue pas automatiquement un loyer distribuable.</span>`; }
       document.querySelector("[data-hourly-field]").hidden = v.supportMode !== "subcontract";
       document.querySelectorAll("[data-pilotage-scenario]").forEach((button) => button.classList.toggle("active", button.dataset.pilotageScenario === activeScenario));
       renderPnl(data);

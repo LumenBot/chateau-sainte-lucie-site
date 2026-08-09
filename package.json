@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "test:pilotage": "node scripts/test-pilotage.mjs",
     "brand": "node scripts/make-brand.mjs",
     "og": "node scripts/make-og.mjs"
   },

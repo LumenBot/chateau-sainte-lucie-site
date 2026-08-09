@@ -9,8 +9,13 @@
     { "id": "legal-consultation-questions", "local_path": "02-sources-associes/blaise-et-agents/Dossier_Consultation_Structuration_SCI_CSL.pdf", "used_for": ["external legal and tax questions"], "warning": "not a professional opinion" },
     { "id": "project-reference", "local_path": "02-sources-associes/blaise-et-agents/Document_Reference_Projet_Les_Nuits_au_Chateau.md", "used_for": ["project consolidation and missing topics"] },
     { "id": "site-iteration-brief", "local_path": "02-sources-associes/blaise-et-agents/Brief_Iteration_2_Site_Les_Nuits_au_Chateau.md", "used_for": ["brand and website decisions"] },
+    { "id": "claude-counter-analysis-operating-scenarios", "local_path": "02-sources-associes/blaise-et-agents/Contre_Analyse_Scenarios_Exploitation.md", "used_for": ["fixed-cost diligence", "human-continuity challenge", "rent-model challenge"], "warning": "external AI analysis, not professional advice; VAT threshold and annual working-time interpretations were corrected in business-model.json v3" },
     { "id": "plans", "local_path": "02-sources-associes/blaise-et-agents/PLANS.pdf", "used_for": ["room organization and dimensions"] },
     { "id": "urssaf-employer-cost", "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur", "used_for": ["future employer-cost validation"] },
-    { "id": "service-public-working-time", "url": "https://www.service-public.fr/particuliers/vosdroits/F1911", "used_for": ["1607-hour legal full-time reference"] }
+    { "id": "impots-vat-2026", "url": "https://www.impots.gouv.fr/professionnel/tva", "used_for": ["2026 VAT franchise thresholds", "VAT regime simulation"] },
+    { "id": "impots-vat-mixed-activities", "url": "https://www.impots.gouv.fr/professionnel/questions/en-tant-que-micro-entrepreneur-puis-je-etre-redevable-de-la-tva", "used_for": ["mixed-activity VAT thresholds"] },
+    { "id": "service-public-guesthouse", "url": "https://www.service-public.fr/particuliers/vosdroits/F17452", "used_for": ["guesthouse legal scope", "five-room and fifteen-guest limits"] },
+    { "id": "service-public-working-time", "url": "https://www.service-public.fr/particuliers/vosdroits/F1911", "used_for": ["1607-hour legal full-time reference"] },
+    { "id": "service-public-weekly-rest", "url": "https://www.service-public.fr/particuliers/vosdroits/F2327", "used_for": ["weekly-rest planning constraint"] }
   ]
 }

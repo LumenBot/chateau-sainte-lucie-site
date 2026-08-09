@@ -95,8 +95,11 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   benchmark de 30 lieux, le budget corrigé de 65 k€ et leurs arbitrages.
 - `docs/19-base-de-verite-partagee-et-simulateur-v2.md` décrit l'architecture
   humain/IA, le modèle d'emploi et les règles de publication des données.
-- `docs/20-simulateur-exploitation-equilibre-v3.md` documente le simulateur
-  annuel simplifié, la relève auto-calculée et le loyer SCI résiduel.
+- `docs/20-simulateur-exploitation-equilibre-v3.md` conserve l’ancienne doctrine
+  du loyer résiduel à titre historique ; elle est remplacée par la version suivante.
+- `docs/21-integration-contre-analyse-et-simulateur-v4.md` documente la doctrine
+  active : TVA par régime, coûts analytiques, continuité humaine, loyer contractuel,
+  résultat résiduel et trajectoire 2027–2029+.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes

@@ -18,7 +18,9 @@ Interpretation rules:
 3. Do not treat the simulator as an accountant-approved forecast.
 4. Do not infer sensitive legal, financial or personal data absent from these files.
 5. When recommending a change, state which current fact or assumption it would replace and why.
-6. The active annual simulator uses a provisional EUR 28k employer budget for Jules, auto-calculated relief, a fixed EUR 65k capex outside annual P&L, and SCI rent equal to the positive residual capacity after reserve.
+6. The active simulator is business-model.json v3. It distinguishes public TTC sales, the tested VAT regime, itemized operating costs, paid support, declared family hours, renewal and cash reserve.
+7. SCI rent is a contractual input. The operating result is the residual; maximum rent capacity is only a secondary economic indicator.
+8. The current two-suite sustainable target is roughly 0.70–0.75 FTE for Jules plus 350–450 paid support hours and little or no SCI rent. Full-time Jules plus EUR 10k rent requires an unproven EUR 110k–123k public TTC sales range.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/
