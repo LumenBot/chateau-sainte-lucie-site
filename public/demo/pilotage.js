@@ -178,7 +178,12 @@
       document.querySelector("[data-spa-policy]").value = activeScenario === "maturity" ? "signature" : activeScenario === "target" || activeScenario === "opening" ? "nordic" : "entry";
       render();
     }));
-    form.addEventListener("input", function () { activeScenario = "custom"; document.querySelector("[data-spa-policy]").value = "custom"; render(); });
+    form.addEventListener("input", function (event) {
+      if (event.target.matches("[data-spa-policy]")) return;
+      activeScenario = "custom";
+      document.querySelector("[data-spa-policy]").value = "custom";
+      render();
+    });
     document.querySelector("[data-spa-policy]").addEventListener("change", function (event) {
       const policy = spaPolicies[event.target.value];
       if (!policy) return;
