@@ -33,6 +33,26 @@ Ne pas inventer les réponses. Utiliser des formulations prudentes ou masquer le
 - Destination exacte des anciennes URLs après redirection.
 - Identité, coordonnées, régime fiscal et paramètres comptables de la société
   commerciale d'exploitation.
+- Arbitrage écrit SAS/SARL, gouvernance et situation sociale du futur salarié.
+- Bail SCI / société d'exploitation : surfaces, loyer, charges, travaux,
+  équipements, accession et TVA.
+- Matrice d'affectation et de financement de chaque lot de travaux avant commande.
+- Qualification TVA des nuitées et de chaque service complémentaire.
+- Qualification écrite par l'ARS de la piscine naturelle et de chaque équipement
+  du spa, protocole sanitaire et calendrier des déclarations.
+- Possibilité de proposer à la fois déjeuner et dîner ainsi qu'un accord
+  mets-vins séparé dans le régime retenu pour la table.
+- Marge réelle du supplément enfant à 20 €, du repas à 40 € et de l'accord à 20 €.
+- Périmètre de protection patrimoniale et autorisations applicables aux
+  éclairages, cheminements et équipements extérieurs.
+- Assurabilité de chaque lot réalisé en direct : dommages-ouvrage,
+  responsabilité décennale, réception et preuves à conserver.
+- Convention collective, minima et coût employeur réel de Jules.
+- Financement du besoin situé au-delà des 28 000 € annoncés face à une
+  fourchette travaux communiquée de 33 500 à 66 500 €, hors sécurité incendie.
+- Attestation/certification de la fonction de caisse et calendrier de
+  facturation électronique de la future société.
+- Avis préalable avant tout dépôt de marque reproduisant le blason historique.
 
 Les règles déjà arbitrées sont regroupées dans
 `docs/07-referentiel-offre-et-regles-v3.md` et ne doivent plus être considérées

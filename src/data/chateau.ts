@@ -52,13 +52,13 @@ export const espaces = {
       mini: ["Boiseries d'origine", "Cheminées de marbre", "Lumière naturelle"],
     },
     {
-      image: images.cheneCentenaire,
+      image: images.projParcDepuisPerronSoir,
       cap: "Le parc",
-      title: "Le parc & les chênes centenaires",
-      text: "Un hectare de parc clos, des chênes, tilleuls et hêtres plantés il y a plus d'un siècle, des lisières et une prairie vosgienne. Un écrin pour la marche, la lecture et le silence.",
-      mini: ["Un hectare clos", "Arbres centenaires", "Lisières & prairie"],
+      title: "Du perron jusqu'à la lisière",
+      text: "Un hectare de parc clos, des chênes, tilleuls et hêtres plantés il y a plus d'un siècle. Le projet d'éclairage accompagne sans l'effacer un cheminement entre la demeure, la prairie, les eaux et le sous-bois.",
+      mini: ["Un hectare clos", "Arbres centenaires", "Parcours éclairé"],
       rev: true,
-      contain: true,
+      contain: false,
     },
     {
       image: images.projPiscineHeureBleue,
@@ -91,7 +91,7 @@ export const situation = {
 export const chateauCta = {
   eyebrow: "Votre séjour · avril 2027",
   title: ["Bientôt, ", "les portes s'ouvrent."],
-  text: "Deux suites seulement ouvriront dans la maison. Découvrez comment votre séjour pourra se composer, du perron jusqu'au dernier matin.",
+  text: "Deux suites intimistes, chacune entièrement privative, ouvriront dans la maison. Découvrez comment votre séjour pourra se composer, du perron jusqu'au dernier matin.",
   actions: [
     { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" as const },
     { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" as const },

@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     departure: form.elements.departure,
     adults: form.elements.adults,
     children: form.elements.children,
-    childrenUnderSix: form.elements.childrenUnderSix,
     childrenUnderThree: form.elements.childrenUnderThree,
     spaPass: form.elements.spaPass,
     dinner: form.elements.dinner,
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
       departure: fields.departure.value,
       adults: Number(fields.adults.value),
       children: Number(fields.children.value),
-      childrenUnderSix: Number(fields.childrenUnderSix.value),
       childrenUnderThree: Number(fields.childrenUnderThree.value),
       spaPass: fields.spaPass.checked,
       dinner: fields.dinner.checked,
@@ -39,13 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function render() {
     const value = values();
-    if (value.childrenUnderSix > value.children) {
-      fields.childrenUnderSix.value = String(value.children);
-      value.childrenUnderSix = value.children;
-    }
-    if (value.childrenUnderThree > value.childrenUnderSix) {
-      fields.childrenUnderThree.value = String(value.childrenUnderSix);
-      value.childrenUnderThree = value.childrenUnderSix;
+    if (value.childrenUnderThree > value.children) {
+      fields.childrenUnderThree.value = String(value.children);
+      value.childrenUnderThree = value.children;
     }
     fields.departure.min = nextDay(value.arrival);
     const compositionValid = value.adults <= 2 && value.children <= 2 && value.adults + value.children <= 4;
@@ -96,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
       departure: value.departure,
       adults: value.adults,
       children: value.children,
-      childrenUnderSix: value.childrenUnderSix,
+      childrenUnderSix: 0,
       childrenUnderThree: value.childrenUnderThree,
       nights: quote.nights,
       accommodationTotal: quote.accommodation,

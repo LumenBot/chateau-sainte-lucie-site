@@ -1,0 +1,233 @@
+---
+import DemoLayout from "../../layouts/DemoLayout.astro";
+import { withBase } from "../../utils/url";
+---
+
+<DemoLayout
+  title="Projet et modèle économique — Les Nuits au Château"
+  description="Atelier interne de simulation économique et de coordination du projet des Suites de Sainte-Lucie."
+  section="pilotage"
+>
+  <div class="demo-shell pilotage-shell">
+    <header class="demo-page-head">
+      <div>
+        <p class="demo-kicker">Atelier des associés · avant-projet 2026–2027</p>
+        <h1>Décider avant<br /><em class="gold light">d’exploiter.</em></h1>
+        <p class="lede">
+          Un modèle économique transparent, plusieurs niveaux d’engagement et un plan
+          directeur commun. Chaque montant reste une hypothèse de travail jusqu’à son
+          remplacement par un devis, un contrat ou une donnée d’exploitation réelle.
+        </p>
+      </div>
+      <div class="demo-page-meta">
+        <span class="demo-status simulated">Simulation locale</span>
+        <p>Version du 9 août 2026</p>
+      </div>
+    </header>
+
+    <div class="pilotage-warning" role="note">
+      <strong>Partage interne, sans authentification.</strong>
+      <span>Cette page est exclue des moteurs de recherche, mais toute personne disposant du lien peut l’ouvrir. Aucun compte bancaire, nom de salarié, donnée personnelle ni détail patrimonial sensible n’y est enregistré.</span>
+    </div>
+
+    <section class="demo-section" id="simulateur">
+      <div class="demo-section-head">
+        <div>
+          <p class="demo-kicker">Simulateur annuel</p>
+          <h2>Du volume accepté au résultat possible.</h2>
+        </div>
+        <p>Les trois scénarios sont des points de départ. Tous les champs restent modifiables ; le lien de partage encode uniquement les hypothèses affichées.</p>
+      </div>
+
+      <div class="pilotage-scenarios" role="group" aria-label="Scénarios préconfigurés">
+        <button class="pilotage-scenario active" type="button" data-pilotage-scenario="launch">
+          <small>01</small><strong>Lancement maîtrisé</strong><span>180 € · 75 nuits/suite</span>
+        </button>
+        <button class="pilotage-scenario" type="button" data-pilotage-scenario="target">
+          <small>02</small><strong>Cap 70 k€</strong><span>200 € · 145 nuits/suite</span>
+        </button>
+        <button class="pilotage-scenario" type="button" data-pilotage-scenario="maturity">
+          <small>03</small><strong>Maturité premium</strong><span>230 € · 150 nuits/suite</span>
+        </button>
+        <button class="pilotage-scenario" type="button" data-pilotage-scenario="custom">
+          <small>04</small><strong>Scénario libre</strong><span>Vos hypothèses</span>
+        </button>
+      </div>
+
+      <div class="pilotage-kpis" aria-live="polite">
+        <article class="pilotage-kpi featured">
+          <span>Chiffre d’affaires</span>
+          <strong data-pilotage-output="revenue">—</strong>
+          <small data-pilotage-output="revenue-gap">—</small>
+        </article>
+        <article class="pilotage-kpi">
+          <span>Marge contributive</span>
+          <strong data-pilotage-output="contribution">—</strong>
+          <small>après coûts variables et plateformes</small>
+        </article>
+        <article class="pilotage-kpi" data-result-card>
+          <span>Solde d’exploitation</span>
+          <strong data-pilotage-output="result">—</strong>
+          <small>avant impôts, dette et rémunération non incluse</small>
+        </article>
+        <article class="pilotage-kpi">
+          <span>Seuil d’équilibre</span>
+          <strong data-pilotage-output="break-even">—</strong>
+          <small data-pilotage-output="break-even-detail">—</small>
+        </article>
+      </div>
+
+      <div class="pilotage-workbench">
+        <form class="pilotage-controls" data-pilotage-form>
+          <fieldset>
+            <legend>1 · Capacité et positionnement</legend>
+            <div class="demo-form-grid three">
+              <label class="demo-field"><span class="label">Jours ouverts / an</span><input name="openDays" type="number" min="30" max="365" step="1" value="275" /></label>
+              <label class="demo-field"><span class="label">Nuits vendues / suite</span><input name="nightsPerSuite" type="number" min="0" max="365" step="1" value="75" /></label>
+              <label class="demo-field"><span class="label">Prix moyen / nuit</span><input name="adr" type="number" min="100" max="500" step="5" value="180" /></label>
+              <label class="demo-field"><span class="label">Durée moyenne</span><input name="los" type="number" min="1" max="14" step="0.1" value="2" /></label>
+              <label class="demo-field"><span class="label">Voyageurs moyens / suite</span><input name="avgGuests" type="number" min="1" max="4" step="0.1" value="2.1" /></label>
+              <label class="demo-field"><span class="label">Séjours regroupés</span><input name="overlapRate" type="number" min="0" max="100" step="5" value="50" /></label>
+            </div>
+            <p class="pilotage-help">Le regroupement mesure la part des nuits où les deux suites sont occupées simultanément. Il transforme le taux d’occupation en jours de présence réellement ressentis par les résidents.</p>
+          </fieldset>
+
+          <fieldset>
+            <legend>2 · Distribution et expériences</legend>
+            <div class="demo-form-grid three">
+              <label class="demo-field"><span class="label">Réservations directes</span><input name="directShare" type="number" min="0" max="100" step="5" value="40" /></label>
+              <label class="demo-field"><span class="label">Commission OTA</span><input name="otaCommission" type="number" min="0" max="30" step="1" value="15" /></label>
+              <span class="pilotage-form-spacer" aria-hidden="true"></span>
+              <label class="demo-field"><span class="label">Acheteurs spa</span><input name="spaTake" type="number" min="0" max="100" step="5" value="35" /></label>
+              <label class="demo-field"><span class="label">Panier spa / séjour</span><input name="spaBasket" type="number" min="0" max="400" step="5" value="55" /></label>
+              <label class="demo-field"><span class="label">Coût variable spa</span><input name="spaCostRate" type="number" min="0" max="100" step="1" value="28" /></label>
+              <label class="demo-field"><span class="label">Séjours avec table</span><input name="dinnerTake" type="number" min="0" max="100" step="5" value="20" /></label>
+              <label class="demo-field"><span class="label">Panier table / séjour</span><input name="dinnerBasket" type="number" min="0" max="400" step="5" value="90" /></label>
+              <label class="demo-field"><span class="label">Coût variable table</span><input name="dinnerCostRate" type="number" min="0" max="100" step="1" value="35" /></label>
+              <label class="demo-field"><span class="label">Séjours avec rituel</span><input name="ritualTake" type="number" min="0" max="100" step="5" value="10" /></label>
+              <label class="demo-field"><span class="label">Panier rituel / séjour</span><input name="ritualBasket" type="number" min="0" max="400" step="5" value="59" /></label>
+              <label class="demo-field"><span class="label">Coût variable rituel</span><input name="ritualCostRate" type="number" min="0" max="100" step="1" value="31" /></label>
+            </div>
+          </fieldset>
+
+          <details class="pilotage-details">
+            <summary>3 · Coûts, obligations et investissement</summary>
+            <div class="demo-form-grid three">
+              <label class="demo-field"><span class="label">Remise en état / séjour</span><input name="turnoverCost" type="number" min="0" max="300" step="1" value="66" /></label>
+              <label class="demo-field"><span class="label">Petit-déjeuner / pers. / nuit</span><input name="breakfastCost" type="number" min="0" max="50" step="0.5" value="7" /></label>
+              <label class="demo-field"><span class="label">Énergie / nuit vendue</span><input name="energyCost" type="number" min="0" max="100" step="0.5" value="7.5" /></label>
+              <label class="demo-field"><span class="label">Loyer annuel à la SCI</span><input name="rent" type="number" min="0" max="100000" step="500" value="18000" /></label>
+              <label class="demo-field"><span class="label">Coût employeur à confirmer</span><input name="salary" type="number" min="0" max="100000" step="500" value="30000" /></label>
+              <label class="demo-field"><span class="label">Autres frais fixes provisoires</span><input name="otherFixed" type="number" min="0" max="100000" step="500" value="8000" /></label>
+              <label class="demo-field"><span class="label">Investissement initial</span><input name="capex" type="number" min="0" max="500000" step="1000" value="50000" /></label>
+            </div>
+            <p class="pilotage-help">66 € = linge, accueil, ménage et provision d’usure du séjour type du business plan reçu. Les 8 000 € d’autres frais fixes sont une provision prudente non devisée à remplacer par assurance, comptabilité, logiciels, maintenance, abonnements, commercialisation et frais administratifs réels.</p>
+          </details>
+        </form>
+
+        <aside class="pilotage-results">
+          <p class="demo-kicker">Lecture du scénario</p>
+          <h3 data-pilotage-output="scenario-name">Lancement maîtrisé</h3>
+          <div class="pilotage-metric"><span>Taux d’occupation</span><strong data-pilotage-output="occupancy">—</strong></div>
+          <div class="pilotage-metric"><span>Nuits-suite vendues</span><strong data-pilotage-output="occupied-nights">—</strong></div>
+          <div class="pilotage-metric"><span>Séjours à produire</span><strong data-pilotage-output="stays">—</strong></div>
+          <div class="pilotage-metric"><span>Jours avec au moins un client</span><strong data-pilotage-output="presence-days">—</strong></div>
+          <div class="pilotage-metric"><span>CA hébergement</span><strong data-pilotage-output="accommodation-revenue">—</strong></div>
+          <div class="pilotage-metric"><span>CA expériences</span><strong data-pilotage-output="experience-revenue">—</strong></div>
+          <div class="pilotage-metric"><span>Coûts variables</span><strong data-pilotage-output="variable-costs">—</strong></div>
+          <div class="pilotage-metric"><span>Obligations annuelles</span><strong data-pilotage-output="fixed-costs">—</strong></div>
+          <div class="pilotage-metric"><span>Retour simple de l’investissement</span><strong data-pilotage-output="payback">—</strong></div>
+          <div class="pilotage-verdict" data-pilotage-verdict></div>
+          <div class="demo-actions">
+            <button class="demo-button" type="button" data-pilotage-share>Copier ce scénario</button>
+            <button class="demo-button quiet" type="button" data-pilotage-reset>Revenir au lancement</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head">
+        <div><p class="demo-kicker">Lecture commune</p><h2>Ce que les chiffres disent vraiment.</h2></div>
+      </div>
+      <div class="demo-grid">
+        <article class="demo-panel">
+          <span class="demo-badge">Volume</span>
+          <h3>120 nuits n’ont pas un seul sens.</h3>
+          <p>120 nuits par suite donnent 240 nuits-suite. Sur 275 jours ouverts, cela représente 43,6 % d’occupation ; selon le regroupement des deux calendriers, la famille peut ressentir entre 120 et 240 jours de présence.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Seuil</span>
+          <h3>70 k€ est un cap, pas encore une garantie.</h3>
+          <p>48 k€ d’engagements annuels divisés par 70 % donnent bien 68,6 k€. Mais ce raccourci suppose que les 30 % absorbent tous les coûts variables et qu’aucun autre frais fixe n’existe.</p>
+        </article>
+        <article class="demo-panel">
+          <span class="demo-badge">Prix</span>
+          <h3>Une trajectoire plutôt qu’un pari.</h3>
+          <p>180 € lance l’offre ; 200 € consolide le positionnement ; 230 € devient un objectif de maturité, soutenu par les avis, les photographies réelles, la demande et la maîtrise opérationnelle.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo-section" id="carte-spa">
+      <div class="demo-section-head">
+        <div><p class="demo-kicker">Carte bien-être à arbitrer</p><h2>Faire payer la valeur, pas l’accès indistinct.</h2></div>
+        <p>Les montants ci-dessous viennent du business plan reçu. Ils ne remplacent pas encore la grille publique à 40 € par suite et par jour.</p>
+      </div>
+      <div class="demo-table-wrap pilotage-table">
+        <table class="demo-table">
+          <thead><tr><th>Expérience de travail</th><th>Prix indicatif</th><th>Rôle</th><th>Point à valider</th></tr></thead>
+          <tbody>
+            <tr><td>Bain nordique privatif</td><td>45 €</td><td>Option extérieure simple</td><td>Énergie, remise en température, durée</td></tr>
+            <tr><td>Sauna finlandais privatif</td><td>35 €</td><td>Option extérieure simple</td><td>Temps de chauffe et remise en état</td></tr>
+            <tr><td>Bain nordique + sauna</td><td>65 €</td><td>Duo extérieur</td><td>Décote de pack et capacité</td></tr>
+            <tr><td>Hammam</td><td>35 €</td><td>Créneau intérieur</td><td>Coût sanitaire et exclusivité</td></tr>
+            <tr><td>Espace intérieur bien-être</td><td>50 €</td><td>Hammam + infrarouge + sport</td><td>Investissement infrarouge</td></tr>
+            <tr><td>Expérience complète</td><td>90 €</td><td>Du jour d’arrivée au lendemain</td><td>Contenu réel et limites d’usage</td></tr>
+            <tr><td>Soirée aux lanternes</td><td>59 €</td><td>Mise en scène + Crémant</td><td>Licence, coût bouteille, temps humain</td></tr>
+            <tr><td>Version Champagne</td><td>79–89 €</td><td>Rituel premium</td><td>Référence et marge par bouteille</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="demo-callout" style="margin-top: 20px;"><p><strong>Recommandation :</strong> conserver une entrée lisible, puis vendre des rituels privatifs limités dans le temps. Un accès à 40 € ouvrant théoriquement jusqu’à huit heures par suite et par jour crée une promesse difficile à tenir et une valeur insuffisamment captée.</p></div>
+    </section>
+
+    <section class="demo-section" id="plan-directeur">
+      <div class="demo-section-head">
+        <div><p class="demo-kicker">Plan directeur simplifié</p><h2>D’août 2026 à l’ouverture.</h2></div>
+        <p>Une lecture volontairement courte pour le comité familial. Le plan réglementaire détaillé reste le référentiel d’exécution.</p>
+      </div>
+      <div class="pilotage-roadmap">
+        <article><span>AOÛT–15 SEPT.</span><strong>Décider</strong><p>Société, bail, TVA, payeur de chaque investissement, coût employeur, budget et gouvernance.</p><em class="demo-status warn">Chemin critique</em></article>
+        <article><span>SEPT.–OCT.</span><strong>Qualifier</strong><p>Mairie/SDIS, ARS, table et boissons, assurances, piscine/spa, sécurité et accessibilité.</p><em class="demo-status warn">À instruire</em></article>
+        <article><span>NOV.–DÉC.</span><strong>Préparer la vente</strong><p>CGV, grille, fiches de marge, distribution, communication et liste d’attente sans promesse trompeuse.</p><em class="demo-status simulated">Prévu</em></article>
+        <article><span>JANVIER</span><strong>Construire l’exploitation</strong><p>PMS, paiement, procédures, fournisseurs, livret, signalétique et plan de continuité.</p><em class="demo-status simulated">Prévu</em></article>
+        <article><span>FÉVRIER</span><strong>Déclarer & intégrer</strong><p>Mairie, taxe, boissons, emploi, assurances, branchements SI et tests d’incidents.</p><em class="demo-status simulated">Prévu</em></article>
+        <article><span>MARS–AVRIL</span><strong>Recetter & ouvrir</strong><p>Photos réelles, trois séjours à blanc, conformité, décision go/no-go, puis montée en charge maîtrisée.</p><em class="demo-status simulated">Prévu</em></article>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-section-head">
+        <div><p class="demo-kicker">Prochain comité</p><h2>Huit décisions à documenter.</h2></div>
+      </div>
+      <div class="pilotage-decisions">
+        <article><span>01</span><div><strong>Calendrier d’ouverture</strong><p>275 jours est une hypothèse : arrêter les mois fermés et les semaines réservées à la famille.</p></div><em class="demo-status warn">À arbitrer</em></article>
+        <article><span>02</span><div><strong>Objectif de présence</strong><p>Fixer à la fois les nuits-suite et les jours avec clients, puis organiser le regroupement des calendriers.</p></div><em class="demo-status warn">À arbitrer</em></article>
+        <article><span>03</span><div><strong>Trajectoire 180 → 230 €</strong><p>Définir les preuves et les dates qui autorisent chaque relèvement de prix.</p></div><em class="demo-status warn">À arbitrer</em></article>
+        <article><span>04</span><div><strong>Architecture de la carte spa</strong><p>Choisir accès simple, équipements à la carte, packs, durées et règles de privatisation.</p></div><em class="demo-status warn">À arbitrer</em></article>
+        <article><span>05</span><div><strong>Coût complet de Jules</strong><p>Remplacer les 30 k€ par un coût employeur annuel et un schéma de temps de travail validés.</p></div><em class="demo-status danger">À chiffrer</em></article>
+        <article><span>06</span><div><strong>Frais fixes hors loyer et emploi</strong><p>Obtenir assurance, comptabilité, PMS, maintenance, énergie fixe et commercialisation.</p></div><em class="demo-status danger">À chiffrer</em></article>
+        <article><span>07</span><div><strong>Enveloppe de 50 k€</strong><p>Remplacer chaque hypothèse par devis et affecter propriétaire, payeur, TVA et financement.</p></div><em class="demo-status danger">À chiffrer</em></article>
+        <article><span>08</span><div><strong>Distribution directe / OTA</strong><p>Fixer la montée en puissance du direct et comparer les commissions nettes par canal.</p></div><em class="demo-status warn">À arbitrer</em></article>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="demo-callout">
+        <p><strong>Périmètre du modèle :</strong> résultat avant impôts, service de la dette, amortissements comptables, TVA et rémunération familiale autre que le coût employeur saisi. Il ne constitue ni un prévisionnel d’expert-comptable ni une validation juridique. Les coûts de table, de spa et d’énergie doivent être remplacés par des fiches techniques et des mesures réelles.</p>
+      </div>
+    </section>
+  </div>
+  <script is:inline src={withBase("/demo/pilotage.js")}></script>
+</DemoLayout>

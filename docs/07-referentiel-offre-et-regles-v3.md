@@ -1,6 +1,6 @@
 # 07 — Référentiel de l'offre et des règles de gestion v3
 
-Date : 8 août 2026
+Date : 9 août 2026
 
 Statut : base fonctionnelle validée, à intégrer aux conditions générales de
 vente et à faire relire sur les volets juridique, assurantiel, fiscal et
@@ -12,7 +12,7 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 ## 1. Principes de l'offre
 
-- Deux suites seulement : Lumière et Feuillage.
+- Deux suites intimistes, chacune entièrement privative : Lumière et Feuillage.
 - Chaque suite est vendue comme une unité indivisible.
 - Une suite accueille au maximum deux adultes et deux enfants, nourrissons compris.
 - Le petit-déjeuner est compris dans chaque nuitée.
@@ -26,7 +26,7 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 ### 2.1 Tarif de base
 
-- 200 € par suite et par nuit pour deux adultes.
+- Tarif d'ouverture 2027 : 180 € par suite et par nuit pour deux adultes.
 - Petit-déjeuner, linge, ménage de fin de séjour et services inclus dans la
   nuitée selon la fiche tarifaire publiée.
 - Le prix final, les prestations comprises et les suppléments sont affichés
@@ -34,19 +34,15 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 ### 2.2 Enfants
 
-Jusqu'à deux enfants peuvent être accueillis avec les suppléments suivants :
+Jusqu'à deux enfants peuvent être accueillis avec le supplément suivant :
 
-| Âge à la date d'arrivée | Supplément par personne et par nuit |
+| Occupant | Supplément par personne et par nuit |
 | --- | ---: |
-| De 0 à 5 ans inclus | 25 € |
-| À partir de 6 ans | 50 € |
+| Enfant, quel que soit l'âge | 20 € |
 
 - Le supplément comprend le couchage, le linge et le petit-déjeuner.
-- La ventilation interne cible pour le tarif plein est de 25 € pour
-  l'hébergement et 25 € pour le petit-déjeuner. Cette ventilation n'est pas
-  présentée au client tant qu'elle n'a pas été validée comptablement.
-- Le système doit enregistrer la date de naissance ou, à défaut, l'âge de chaque
-  enfant à la date d'arrivée afin d'appliquer la bonne tranche tarifaire.
+- Le système enregistre l'âge de chaque enfant pour adapter les couchages, repas,
+  règles d'accès au spa et obligations de sécurité, pas pour tarifer la nuitée.
 - Toute personne, nourrisson compris, compte dans la capacité maximale de deux
   adultes et deux enfants. La formule n'est pas proposée à quatre adultes.
 - La seconde pièce est présentée comme une configuration préparée pour les
@@ -169,11 +165,12 @@ Seules les informations nécessaires au séjour sont collectées.
 - Les informations relatives aux allergies sont visibles uniquement des rôles
   opérationnels qui en ont besoin.
 
-## 6. Dîner au château
+## 6. La table du château
 
 ### 6.1 Offre recommandée
 
-- Dîner proposé chaque soir sur réservation.
+- Déjeuner ou dîner proposé sur réservation, sous réserve de validation de la
+  qualification juridique de l'offre.
 - Menu unique pour la tablée, adapté autant que possible aux préférences et
   contraintes confirmées.
 - Réservé aux clients hébergés.
@@ -181,19 +178,19 @@ Seules les informations nécessaires au séjour sont collectées.
   promesse peut être tenue et tracée.
 - Réservation garantie jusqu'à 18 h la veille ; demande le jour même possible,
   sans garantie.
-- Heure de service proposée entre 19 h et 21 h.
+- Heure du dîner proposée entre 19 h et 21 h ; horaires du déjeuner à définir.
 
 ### 6.2 Tarifs recommandés
 
 | Âge | Tarif par personne |
 | --- | ---: |
 | De 0 à 2 ans, sans menu individuel | Gratuit |
-| De 3 à 11 ans inclus | 25 € |
-| À partir de 12 ans | 50 € |
+| De 3 à 11 ans inclus | 20 € |
+| À partir de 12 ans | 40 € |
 
 - Une eau plate ou gazeuse et une boisson maison sans alcool sont intégrées à la
   formule recommandée.
-- Un accord mets et vins peut être proposé au tarif de 30 € par adulte, en
+- Un accord mets et vins peut être proposé au tarif de 20 € par adulte, en
   complément du dîner. Il est enregistré comme une option distincte.
 - Les autres boissons alcoolisées et références premium restent hors forfait, sous
   réserve de validation du régime de table d'hôtes, des licences, formations et
@@ -201,12 +198,12 @@ Seules les informations nécessaires au séjour sont collectées.
 - Le statut exact de « table d'hôtes » et le contenu des boissons comprises
   doivent être validés avec la CCI ou le conseil compétent avant publication des
   conditions définitives.
-- Jusqu'à cette validation, le site emploie la formulation neutre « dîner au
+- Jusqu'à cette validation, le site emploie la formulation neutre « la table du
   château » et ne promet ni table séparée ni privatisation du service.
 
 ### 6.3 Facturation et annulation
 
-- Le dîner est dû dès confirmation de la réservation.
+- Le repas est dû dès confirmation de la réservation.
 - Il est payé sur place avec les autres options.
 - Une annulation ou une non-présentation du fait du client ne supprime pas la
   somme due.
@@ -217,8 +214,8 @@ Seules les informations nécessaires au séjour sont collectées.
 
 ### 7.1 Forfait journalier
 
-- 50 € par suite et par jour pour un ou deux occupants.
-- 25 € supplémentaires par troisième ou quatrième occupant et par jour.
+- 40 € par suite et par jour pour un ou deux occupants.
+- 20 € supplémentaires par troisième ou quatrième occupant et par jour.
 - Le forfait ouvre l'accès sur réservation au hammam, à la piscine naturelle, au
   bain nordique et au sauna finlandais.
 - Horaires de réservation : 8 h à minuit.

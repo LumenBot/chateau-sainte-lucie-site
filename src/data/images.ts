@@ -63,6 +63,8 @@ import projPerronArriveeSoir from "../assets/images/projection/perron-arrivee-so
 import projPetitDejeunerTerrasse from "../assets/images/projection/petit-dejeuner-terrasse.jpg";
 import projAccueilSpa from "../assets/images/projection/accueil-spa.jpg";
 import projFacadeMatinAvril from "../assets/images/projection/facade-matin-avril.jpg";
+import projParcDepuisPerronSoir from "../assets/images/projection/parc-depuis-perron-soir.jpeg";
+import projCheminBainNordiqueSoir from "../assets/images/projection/chemin-bain-nordique-soir.jpeg";
 
 export interface Visual {
   src: ImageMetadata;
@@ -198,6 +200,8 @@ export const images = {
   projPetitDejeunerTerrasse: { src: projPetitDejeunerTerrasse, alt: "Petit-déjeuner servi sur la terrasse de pierre au lever du jour (visuel de projection non contractuel)", projection: true },
   projAccueilSpa: { src: projAccueilSpa, alt: "L'accueil de l'espace bien-être dans les boiseries du château (visuel de projection non contractuel)", projection: true },
   projFacadeMatinAvril: { src: projFacadeMatinAvril, alt: "La façade du château par un matin d'avril (visuel de projection non contractuel)", projection: true },
+  projParcDepuisPerronSoir: { src: projParcDepuisPerronSoir, alt: "Le parc et son cheminement éclairé vus depuis le perron au crépuscule (visuel de projection non contractuel)", projection: true },
+  projCheminBainNordiqueSoir: { src: projCheminBainNordiqueSoir, alt: "Le chemin éclairé conduisant au bain nordique dans la lisière (visuel de projection non contractuel)", projection: true },
 } satisfies Record<string, Visual>;
 
 export type ImageKey = keyof typeof images;

@@ -8,14 +8,14 @@ export const homeSeo = {
   title:
     "Les Nuits au Château | Les Suites de Sainte-Lucie dans les Vosges",
   description:
-    "Deux suites seulement dans un château familial de 1876 à Rambervillers : spa réservé, parc d'un hectare, piscine naturelle et dîner au château.",
+    "Deux suites intimistes, chacune entièrement privative, dans un château familial de 1876 à Rambervillers : spa réservé, parc d'un hectare, piscine naturelle et table du château.",
 };
 
 export const hero = {
   eyebrow: "Château de Sainte-Lucie · Vosges",
   title: "Les Nuits au Château",
   signature: "Les Suites de Sainte-Lucie",
-  accroche: "Deux suites seulement. Le château, dans sa plus rare intimité.",
+  accroche: "Deux suites intimistes, chacune entièrement privative.",
   descriptor: "Suites de caractère · spa réservé · dîner au château · domaine de 1876",
   image: images.projFacadeEclairageNuit as Visual,
 };
@@ -32,7 +32,7 @@ export const maison = {
 };
 
 export const suitesTeaser = {
-  eyebrow: "Deux suites seulement",
+  eyebrow: "Deux suites intimistes",
   title: ["Deux suites, ", "deux lumières."],
   text: "Chacune réunit deux pièces, une salle de bain et une terrasse privative. Deux véritables appartements d'hôtes, deux atmosphères, et jamais plus de deux suites ouvertes dans toute la demeure.",
   cta: "Découvrir les suites",
@@ -114,9 +114,9 @@ export const galerie = {
   href: "/galerie",
   strip: [
     images.projPerronArriveeSoir,
-    images.projLumiereBain,
+    images.projParcDepuisPerronSoir,
     { ...images.projPiscineHeureBleue, wide: true },
-    images.projTableHotes,
+    images.projCheminBainNordiqueSoir,
     images.projPetitDejeunerTerrasse,
   ] as (Visual & { wide?: boolean })[],
 };
@@ -124,12 +124,12 @@ export const galerie = {
 export const signatureExperience = {
   eyebrow: "L'expérience signature",
   title: ["Du premier pas ", "au dernier matin."],
-  text: "Avec deux suites seulement, Sainte-Lucie offre l'intimité rare d'une grande demeure : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, dîner au château et petit-déjeuner face aux arbres.",
+  text: "Avec deux suites intimistes, chacune entièrement privative, Sainte-Lucie offre la rareté d'une grande demeure accueillant très peu d'hôtes : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, dîner au château et petit-déjeuner face aux arbres.",
   items: [
     { image: images.projPerronArriveeSoir, moment: "À la nuit tombée", title: "L'arrivée au perron", text: "La maison éclairée, les clés remises et le temps qui change de rythme.", wide: true },
     { image: images.projTableHotes, moment: "Le soir", title: "Le dîner au château", text: "Une table dressée, un menu unique et l'accord des vins si vous le souhaitez." },
-    { image: images.projPiscineHeureBleue, moment: "Entre chien et loup", title: "La piscine naturelle", text: "Le bassin et son lagunage dans la lumière bleue du jardin." },
-    { image: images.projBainNordique, moment: "Sous les arbres", title: "Le spa aux quatre visages", text: "Hammam, bain nordique, sauna finlandais et piscine naturelle, sur des temps réservés." },
+    { image: images.projParcDepuisPerronSoir, moment: "Depuis le perron", title: "Le parc mis en lumière", text: "Un cheminement discret relie la demeure, les arbres centenaires et les eaux du jardin." },
+    { image: images.projCheminBainNordiqueSoir, moment: "Sous les arbres", title: "Le spa au bout du chemin", text: "La lumière accompagne les pas jusqu'au bain nordique, puis au sauna, au hammam et à la piscine naturelle." },
     { image: images.projPetitDejeunerTerrasse, moment: "Au réveil", title: "Le petit-déjeuner", text: "Un plateau simple et généreux, servi face au parc lorsque le temps le permet." },
   ],
 };

@@ -25,6 +25,8 @@ export const galleryItems: GalleryItem[] = [
   { image: images.projFacadeEclairageNuit, caption: "Le château, éclairage projeté pour l'ouverture", wide: true },
   { image: images.projFacadeMatinAvril, caption: "Le château, un matin d'avril", wide: true },
   { image: images.projPerronArriveeSoir, caption: "L'arrivée au perron, à la nuit tombée" },
+  { image: images.projParcDepuisPerronSoir, caption: "Le parc éclairé, vu depuis le perron" },
+  { image: images.projCheminBainNordiqueSoir, caption: "Le chemin vers le bain nordique" },
   { image: images.projLumiereChambre, caption: "Suite Lumière — la chambre principale" },
   { image: images.projLumiereSalon, caption: "Suite Lumière — le salon privé" },
   { image: images.projLumiereBain, caption: "Suite Lumière — la salle de bain" },

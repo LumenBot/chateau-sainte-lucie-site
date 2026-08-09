@@ -1,5 +1,10 @@
 # 13 — Itération corrective du site · août 2026
 
+> Historique de l'itération du 8 août. La grille tarifaire et le wording ont été
+> remplacés le 9 août 2026 par `docs/00-decisions-projet-v2.md`,
+> `docs/07-referentiel-offre-et-regles-v3.md` et
+> `docs/12-positionnement-tarifaire-et-valeur-v2.md`.
+
 ## Objet
 
 Cette itération applique le brief familial d'août 2026 sans transformer la

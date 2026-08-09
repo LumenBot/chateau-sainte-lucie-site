@@ -34,7 +34,7 @@ composition:
   - Une terrasse privative tournée vers le parc
 aConfirmer: >-
   Les équipements détaillés et les modalités d'accès seront communiqués à
-  l'ouverture des réservations. Tarif : 200 € la nuit pour deux adultes,
+  l'ouverture des réservations. Tarif d'ouverture 2027 : 180 € la nuit pour deux adultes,
   petit-déjeuner inclus ; jusqu'à deux enfants peuvent être accueillis.
 tagline: La plus claire — gris bleutés, chêne huilé et laiton, ouverte sur le parc.
 cardImage: projLumiereChambre

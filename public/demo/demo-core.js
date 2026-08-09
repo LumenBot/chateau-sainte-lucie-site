@@ -2,7 +2,7 @@
   const STORAGE_KEY = "csl-demo-experience-v1";
 
   const defaultState = {
-    version: 2,
+    version: 3,
     booking: {
       reference: "CSL-270514-LUM",
       suite: "Suite Lumière",
@@ -13,7 +13,7 @@
       childrenUnderSix: 0,
       childrenUnderThree: 0,
       nights: 3,
-      accommodationTotal: 750,
+      accommodationTotal: 600,
       accommodationPaid: true,
       source: "Réservation directe",
       status: "Confirmée",
@@ -41,13 +41,13 @@
     },
     services: {
       spaPass: true,
-      spaTotal: 225,
+      spaTotal: 180,
       dinner: true,
       dinnerGuests: 3,
-      dinnerTotal: 125,
+      dinnerTotal: 100,
       winePairing: true,
       wineGuests: 2,
-      wineTotal: 60,
+      wineTotal: 40,
       poolPrivate: false,
       poolPrivateTotal: 0,
       bookings: [
@@ -59,7 +59,7 @@
     payment: {
       guaranteeAmount: 500,
       guaranteeStatus: "À autoriser",
-      optionsTotal: 410,
+      optionsTotal: 320,
       optionsPaid: false,
       invoiceStatus: "Brouillon",
     },
@@ -143,16 +143,15 @@
     const nights = nightsBetween(values.arrival, values.departure);
     const adults = Number(values.adults || 0);
     const children = Number(values.children || 0);
-    const underSix = Number(values.childrenUnderSix || 0);
     const underThree = Number(values.childrenUnderThree || 0);
     // Le prix de base couvre la suite pour un ou deux adultes. Chaque enfant
     // s'ajoute à la formule, quel que soit le nombre d'adultes présents.
-    const additionalPerNight = Math.max(0, children - underSix) * 50 + underSix * 25;
-    const accommodation = nights * (200 + additionalPerNight);
+    const additionalPerNight = children * 20;
+    const accommodation = nights * (180 + additionalPerNight);
     const guests = adults + children;
-    const spa = values.spaPass ? nights * (50 + Math.max(0, guests - 2) * 25) : 0;
-    const dinner = values.dinner ? adults * 50 + Math.max(0, children - underThree) * 25 : 0;
-    const wine = values.dinner && values.winePairing ? adults * 30 : 0;
+    const spa = values.spaPass ? nights * (40 + Math.max(0, guests - 2) * 20) : 0;
+    const dinner = values.dinner ? adults * 40 + Math.max(0, children - underThree) * 20 : 0;
+    const wine = values.dinner && values.winePairing ? adults * 20 : 0;
     return { nights, accommodation, spa, dinner, wine, total: accommodation + spa + dinner + wine };
   }
 

@@ -64,7 +64,7 @@ Arriver par le perron. S'installer dans sa suite. Lire, marcher, nager lorsque l
 
 **Titre** — Deux manières d'habiter la nuit.
 
-**Introduction** — Deux suites seulement, chacune composée de deux pièces, d'une salle de bain et d'une terrasse privative. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière.
+**Introduction** — Deux suites intimistes, chacune entièrement privative et composée de deux pièces, d'une salle de bain et d'une terrasse. Deux atmosphères différentes, un même rapport à la matière, au calme et à la lumière.
 
 Ne pas publier une capacité précise avant validation de la configuration finale.
 

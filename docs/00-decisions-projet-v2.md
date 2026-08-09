@@ -9,25 +9,46 @@
 - Lieu : Château de Sainte-Lucie, Rambervillers, Vosges.
 - Ouverture prévisionnelle : **avril 2027**.
 - Travaux : septembre 2026 à mars 2027.
-- Tarif public validé : **200 € par suite et par nuit**, pour deux adultes,
-  petit-déjeuner compris.
+- Tarif public d'ouverture 2027 : **180 € par suite et par nuit**, pour deux
+  adultes, petit-déjeuner compris. Revue du tarif à l'automne 2027 pour 2028.
 
 ## Offre
 
-- Deux suites seulement : Lumière et Feuillage.
+- Deux suites intimistes, chacune entièrement privative : Lumière et Feuillage.
 - Chaque suite comprend une salle de bain et une terrasse privative. La seconde
   pièce n'est pas commercialisée comme chambre pour adultes.
 - Petit-déjeuner inclus dans chaque nuitée.
 - Capacité commerciale : deux adultes et jusqu'à deux enfants par suite.
-- Supplément enfant : 50 € par nuit à partir de 6 ans, 25 € en dessous.
-- Dîner au château sur réservation : 50 € par adulte, 25 € de 3 à 11 ans.
-- Accord mets et vins : 30 € par adulte, sous réserve des validations
+- Supplément enfant : 20 € par enfant et par nuit, petit-déjeuner inclus.
+- Déjeuner ou dîner au château sur réservation : 40 € par adulte, 20 € de 3 à 11 ans.
+- Accord mets et vins : 20 € par adulte, sous réserve des validations
   réglementaires nécessaires.
 - Spa sur réservation : hammam, piscine naturelle, bain nordique et sauna
-  finlandais, au tarif de 50 € par jour pour les deux premiers occupants, puis
-  25 € par personne supplémentaire et par jour.
+  finlandais, au tarif de 40 € par jour pour les deux premiers occupants, puis
+  20 € par personne supplémentaire et par jour.
 - Accueil personnalisable : humain, autonome ou hybride, en français ou en
   anglais.
+- Aucune durée minimale de séjour au lancement ; le PMS conserve néanmoins un
+  paramètre configurable pour les périodes futures.
+
+## Gouvernance de travail
+
+- Blaise : pilotage du programme et président non rémunéré envisagé de la
+  société d'exploitation.
+- Jules : travaux, puis gestionnaire salarié de l'exploitation ; aucun mandat
+  social envisagé.
+- Julie : financement familial, suivi comptable et participation minoritaire
+  envisagée.
+- Pascal : associé et présence familiale sur le site.
+- La répartition définitive du capital, des droits de vote et des délégations
+  demeure soumise à l'arbitrage de constitution.
+
+## Extensions hors phase 1
+
+Les pistes suivantes restent non engagées et ne doivent entrer ni dans le budget
+ni dans les promesses de lancement : location meublée du lot de Pascal,
+privatisation complète du château, événements privés et transformation de la
+maison du gardien en troisième suite.
 
 ## Réalité du lieu
 
@@ -42,7 +63,7 @@
 
 Le fil narratif est la lumière : Sainte-Lucie, Lucy, Lucia, *lux*. Le château a
 été construit en 1876 pour Marie Lucy Velin. La promesse est celle d'une demeure
-de caractère qui ouvre très peu de portes : deux suites seulement, une attention
+de caractère qui ouvre très peu de portes : deux suites intimistes, une attention
 personnelle, une table dressée pour la tablée et des temps de spa réservés. Le
 terme « privatif » s'applique aux suites et aux équipements réservés, jamais à
 l'ensemble du château qui demeure habité. Il n'est plus appliqué publiquement
@@ -67,3 +88,7 @@ au dîner tant que son régime d'exploitation n'est pas validé.
 - `docs/07-referentiel-offre-et-regles-v3.md` : offre, prix et règles de séjour.
 - `docs/08-cahier-des-charges-fonctionnel-si-v1.md` : parcours, modules,
   intégrations et critères de recette du système d'information.
+- `docs/14-note-arbitrage-juridique-fiscal-financier-v1.md` : structure et
+  affectation des investissements.
+- `docs/15-plan-directeur-ouverture-avril-2027-v1.md` : programme complet de
+  lancement et jalons de conformité.

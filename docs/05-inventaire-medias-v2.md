@@ -34,6 +34,13 @@ accompagné d'une mention explicite du type « Projection de l'expérience aprè
 travaux ». Ils ne doivent jamais être présentés comme des photographies de
 l'état actuel.
 
+Ajouts du 9 août 2026 :
+
+- `projection/parc-depuis-perron-soir.jpeg` — parc et cheminement éclairé vus
+  depuis le perron ;
+- `projection/chemin-bain-nordique-soir.jpeg` — chemin éclairé conduisant au
+  bain nordique dans la lisière.
+
 Les variantes non retenues restent des outils internes. Avant l'ouverture, les
 projections auront vocation à être remplacées par les photographies
 commerciales réalisées après travaux.

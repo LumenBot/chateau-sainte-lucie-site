@@ -8,7 +8,7 @@ import { withBase } from "../utils/url";
 interface Props {
   title: string;
   description: string;
-  section?: "accueil" | "reservation" | "client" | "gestion" | "integrations";
+  section?: "accueil" | "reservation" | "client" | "gestion" | "pilotage" | "integrations";
 }
 
 const { title, description, section = "accueil" } = Astro.props;
@@ -17,6 +17,7 @@ const demoNav = [
   { key: "reservation", label: "Réservation", href: "/demo/reservation" },
   { key: "client", label: "Espace client", href: "/demo/client" },
   { key: "gestion", label: "Gestion", href: "/demo/gestion" },
+  { key: "pilotage", label: "Projet & économie", href: "/demo/pilotage" },
   { key: "integrations", label: "Intégrations", href: "/demo/integrations" },
 ] as const;
 ---

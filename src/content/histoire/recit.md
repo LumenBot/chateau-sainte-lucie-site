@@ -206,7 +206,7 @@ sections:
         abrite daims et écureuils, sa piscine naturelle reflète encore la
         lumière de l'été.
       - >-
-        En avril 2027, deux suites seulement s'ouvriront aux voyageurs. Une
+        En avril 2027, deux suites intimistes, chacune entièrement privative, s'ouvriront aux voyageurs. Une
         manière mesurée de partager la maison sans lui retirer sa vie familiale,
         pour que son histoire continue de s'écrire.
     image: piscineNuit

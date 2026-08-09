@@ -19,7 +19,7 @@ export const site = {
   house: "Château de Sainte-Lucie",
   baseline: "Château de Sainte-Lucie · Rambervillers · Vosges",
   tagline:
-    "Deux suites seulement dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et dîner au château dans les Vosges.",
+    "Deux suites intimistes, chacune entièrement privative, dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et table du château dans les Vosges.",
 
   /** Ouverture prévisionnelle. */
   opening: {

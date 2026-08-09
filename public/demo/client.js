@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
   qs("[data-save-dinner]").addEventListener("click", function () {
     state.services.winePairing = qs("#winePairingClient").checked;
     state.services.wineGuests = state.booking.adults;
-    state.services.wineTotal = state.services.winePairing ? state.booking.adults * 30 : 0;
+    state.services.wineTotal = state.services.winePairing ? state.booking.adults * 20 : 0;
     state.payment.optionsTotal = calculateOptionsTotal();
     demo.save(state, "dinner.updated", "Préférences du dîner et accord des vins mis à jour");
     demo.toast("Vos préférences fictives ont été transmises à la table.");

@@ -1,7 +1,8 @@
 # Audit et finalisation du site vitrine
 
 > Document historique. La grille à 250 € décrite ci-dessous a été remplacée le
-> 8 août 2026 par le tarif public de 200 € conformément au référentiel d'offre.
+> 8 août 2026 par un tarif à 200 €, lui-même remplacé le 9 août par le tarif
+> d'ouverture 2027 à 180 € conformément au référentiel d'offre.
 
 Date : 8 août 2026
 Périmètre : site public « Les Nuits au Château — Les Suites de Sainte-Lucie »

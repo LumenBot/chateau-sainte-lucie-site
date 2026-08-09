@@ -1,4 +1,8 @@
-# 12 — Positionnement tarifaire et perception de valeur v1
+# 12 — Positionnement tarifaire et perception de valeur v1 — archivé
+
+> Document remplacé le 9 août 2026 par
+> `12-positionnement-tarifaire-et-valeur-v2.md`. Il est conservé pour tracer
+> l'arbitrage antérieur à 200 €.
 
 Date : 8 août 2026
 

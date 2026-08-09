@@ -36,7 +36,8 @@ prévisionnelles (`/conditions-sejour`) · 404.
 
 **Démonstrateur interne non indexé** : vue d’ensemble (`/demo`), réservation
 fictive (`/demo/reservation`), compagnon client (`/demo/client`), cockpit
-gestionnaire (`/demo/gestion`) et architecture (`/demo/integrations`). Les pages
+gestionnaire (`/demo/gestion`), atelier économique des associés
+(`/demo/pilotage`) et architecture (`/demo/integrations`). Les pages
 partagent un scénario local dans le navigateur et ne contiennent aucune donnée réelle.
 
 **Redirections** (base-aware) des anciennes routes v1 → accueil :
@@ -77,10 +78,18 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
 - `docs/11-demonstrateur-experience-et-exploitation-v1.md` décrit la maquette
   fonctionnelle, les rôles, les événements d’intégration, les scénarios de repli
   et le protocole de revue par les associés.
-- `docs/12-positionnement-tarifaire-et-valeur-v1.md` formalise la grille à 200 €,
+- `docs/12-positionnement-tarifaire-et-valeur-v2.md` formalise la grille d'ouverture à 180 €,
   le benchmark local et les preuves nécessaires pour défendre le positionnement.
 - `docs/13-iteration-corrective-site-aout-2026.md` consigne les arbitrages du
   brief d'itération 2, les corrections livrées et les sujets différés.
+- `docs/14-note-arbitrage-juridique-fiscal-financier-v1.md` propose le schéma
+  SCI / société d'exploitation et la règle d'affectation des investissements.
+- `docs/15-plan-directeur-ouverture-avril-2027-v1.md` organise les dix chantiers,
+  les obligations, les jalons et le chemin critique jusqu'à l'ouverture.
+- `docs/16-integration-passation-claude-aout-2026-v1.md` consigne uniquement les
+  éléments nouveaux retenus de la dernière passation et les affirmations écartées.
+- `docs/17-modele-economique-et-atelier-associes-v1.md` documente le simulateur,
+  ses scénarios, ses formules et ses limites de lecture.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 
@@ -103,7 +112,7 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
 - [x] Validation et publication du site vitrine sur GitHub Pages
 - [x] Référentiel d'offre et cahier des charges fonctionnel du SI
 - [x] Présélection documentée du socle PMS, channel manager et paiement
-- [x] Démonstrateur fonctionnel réservation / client / gestion / intégrations
+- [x] Démonstrateur fonctionnel réservation / client / gestion / pilotage / intégrations
 - [ ] Démonstrations fournisseurs, devis et décision contractuelle
 - [ ] Revue du démonstrateur par les associés et arbitrage de la v2
 - [ ] Intégration du PMS et réalisation du MVP opérationnel

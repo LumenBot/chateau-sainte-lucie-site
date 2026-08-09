@@ -34,7 +34,7 @@ composition:
   - Une grande terrasse privative à balustrade
 aConfirmer: >-
   Les équipements détaillés et les modalités d'accès seront communiqués à
-  l'ouverture des réservations. Tarif : 200 € la nuit pour deux adultes,
+  l'ouverture des réservations. Tarif d'ouverture 2027 : 180 € la nuit pour deux adultes,
   petit-déjeuner inclus ; jusqu'à deux enfants peuvent être accueillis.
 tagline: La plus enveloppante — verts profonds, bois sombre, ouverte sur les frondaisons.
 cardImage: projFeuillageChambre

@@ -223,11 +223,10 @@ dossiers incomplets.
 
 ### F02 — Prix et moteur de réservation
 
-- F02.01 : calculer 200 € par nuit jusqu'à deux personnes.
-- F02.02 : appliquer 25 € par nuit à chaque troisième ou quatrième occupant de
-  0 à 5 ans.
-- F02.03 : appliquer 50 € par nuit à chaque troisième ou quatrième occupant à
-  partir de 6 ans.
+- F02.01 : calculer le tarif d'ouverture de 180 € par nuit jusqu'à deux adultes.
+- F02.02 : appliquer 20 € par nuit à chaque enfant, dans la limite de deux.
+- F02.03 : conserver l'âge de l'enfant comme donnée opérationnelle sans l'utiliser
+  pour tarifer la nuitée.
 - F02.04 : refuser une occupation supérieure à quatre personnes.
 - F02.05 : détailler les prestations comprises et les suppléments avant paiement.
 - F02.06 : appliquer la politique d'annulation correspondant au canal et au tarif.
@@ -247,6 +246,14 @@ dossiers incomplets.
 - F03.07 : permettre l'encaissement des options sur place ou le débit autorisé en
   cas d'impayé ou de non-présentation.
 - F03.08 : journaliser toute opération et rapprocher les événements du prestataire.
+- F03.09 : déléguer l'enregistrement des règlements B2C à une fonction de caisse
+  disposant de l'attestation ou de la certification applicable ; ne pas
+  reconstruire cette fonction sensible dans le portail sur mesure.
+- F03.10 : conserver les clôtures, corrections, annulations et justificatifs de
+  caisse de manière inaltérable, sécurisée, conservée et archivée.
+- F03.11 : recevoir les factures électroniques via une plateforme agréée selon
+  le calendrier légal et préparer l'émission ainsi que l'e-reporting avec le
+  cabinet comptable.
 
 ### F04 — Dossier client et onboarding
 
@@ -283,22 +290,22 @@ dossiers incomplets.
 
 - F07.01 : accepter une réservation garantie jusqu'à 18 h la veille.
 - F07.02 : proposer les quantités adultes, enfants 3–11 ans et moins de 3 ans.
-- F07.03 : appliquer 50 €, 25 € ou la gratuité selon la tranche.
+- F07.03 : appliquer 40 €, 20 € ou la gratuité selon la tranche.
 - F07.04 : recueillir préférences, allergies et heure souhaitée.
 - F07.05 : afficher le menu unique, les boissons comprises et les suppléments.
 - F07.06 : marquer le dîner comme dû dès confirmation.
 - F07.07 : générer une tâche de préparation et une synthèse de service.
 - F07.08 : gérer annulation par l'établissement, remplacement accepté ou geste
   commercial avec traçabilité.
-- F07.09 : proposer l'accord mets et vins à 30 € par adulte comme option
+- F07.09 : proposer l'accord mets et vins à 20 € par adulte comme option
   distincte, uniquement lorsque le dîner est réservé.
 - F07.10 : limiter l'accord aux adultes et permettre son retrait jusqu'à
   l'échéance opérationnelle configurée.
 
 ### F08 — Forfait et planning spa
 
-- F08.01 : vendre un forfait de 50 € par suite et par jour pour un ou deux
-  occupants, puis 25 € par troisième ou quatrième occupant et par jour.
+- F08.01 : vendre un forfait de 40 € par suite et par jour pour un ou deux
+  occupants, puis 20 € par troisième ou quatrième occupant et par jour.
 - F08.02 : n'autoriser les créneaux que pour une journée couverte par un forfait.
 - F08.03 : limiter à deux créneaux par équipement et huit au total par suite et
   par jour.
@@ -338,6 +345,9 @@ dossiers incomplets.
 - F10.07 : permettre une mise à jour sans redéploiement complet de l'application si
   le CMS retenu le permet.
 - F10.08 : mesurer les consultations sans identifier inutilement les visiteurs.
+- F10.09 : collecter les données nécessaires à la fiche individuelle de police
+  pour les seuls voyageurs étrangers concernés, produire la fiche et appliquer
+  la durée de conservation réglementaire sans la mélanger au profil marketing.
 
 ### F11 — Communications
 
@@ -466,7 +476,7 @@ données de mesure d'audience.
 
 Chaque intégration doit être évaluée sur l'API, les webhooks, la réversibilité,
 le support, le coût complet, la sécurité et la capacité à fonctionner avec un
-établissement de seulement deux suites.
+établissement de deux suites intimistes.
 
 ## 11. Exigences non fonctionnelles
 

@@ -4,13 +4,13 @@ import { images, type Visual } from "./images";
 export const experienceSeo = {
   title: "L'Expérience | Les Nuits au Château",
   description:
-    "Deux suites seulement, dîner au château et spa aux quatre expériences : un séjour intime et haut de gamme dans un château familial de 1876.",
+    "Deux suites intimistes et entièrement privatives, table du château et spa aux quatre expériences : un séjour intime et haut de gamme dans un château familial de 1876.",
 };
 
 export const phero = {
   place: "L'Expérience",
   title: ["Du perron", "au petit matin."],
-  lead: "Deux suites seulement dans 750 m² d'histoire : arrivée au perron, grands salons, dîner dressé pour votre tablée, temps réservé au spa et matin dans un parc d'un hectare.",
+  lead: "Deux suites intimistes dans 750 m² d'histoire : arrivée au perron, grands salons, table dressée pour votre tablée, temps réservé au spa et matin dans un parc d'un hectare.",
   image: images.hallEntree as Visual,
   imagePosition: "center 42%",
 };
@@ -34,7 +34,7 @@ export const sections: ExpSection[] = [
     title: "Franchir le seuil",
     paragraphs: [
       "L'expérience commence avant la suite. À la tombée du jour, le perron éclairé ouvre sur le hall, ses boiseries et son sol en mosaïque. Le château se révèle par touches, dans un jeu de lumière pensé comme un premier rituel.",
-      "Avec deux suites seulement dans toute la demeure, l'accueil reste personnel, les circulations paisibles et chaque arrivée singulière.",
+      "Avec deux suites intimistes, chacune entièrement privative, l'accueil reste personnel, les circulations paisibles et chaque arrivée singulière.",
     ],
   },
   {
@@ -56,7 +56,7 @@ export const sections: ExpSection[] = [
       "Le soir, la table se dresse dans les boiseries : linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine du territoire servie avec précision, sans cérémonial figé.",
       "Le menu unique se prépare en amont selon vos goûts et vos contraintes. Un accord mets et vins peut prolonger le dîner, bouteille après bouteille, au rythme du repas.",
     ],
-    note: "Dîner au château : + 50 € par adulte, 25 € de 3 à 11 ans, sans menu individuel avant 3 ans. Accord mets & vins : + 30 € par adulte, sous réserve des validations réglementaires prévues avant l'ouverture.",
+    note: "Déjeuner ou dîner au château : + 40 € par adulte, 20 € de 3 à 11 ans, sans menu individuel avant 3 ans. Accord mets & vins : + 20 € par adulte, sous réserve des validations réglementaires prévues avant l'ouverture.",
   },
   {
     image: images.projPetitDejeunerTerrasse,
@@ -77,14 +77,14 @@ export const sections: ExpSection[] = [
     note: "L'accès à la piscine naturelle dépend de la saison, des conditions et des règles de sécurité.",
   },
   {
-    image: images.projBainNordique,
+    image: images.projCheminBainNordiqueSoir,
     cap: "Le bien-être",
     title: "Le spa au jardin",
     paragraphs: [
       "Le parcours bien-être réunit quatre expériences complémentaires : la vapeur du hammam, la chaleur sèche du sauna finlandais, l'immersion du bain nordique et l'eau vivante de la piscine naturelle.",
       "Les équipements secs et chauds se réservent par suite. Des pas japonais, soulignés par une lumière basse, relieront le château aux eaux du jardin ; la traversée nocturne deviendra un rituel à part entière.",
     ],
-    note: "Accès spa : + 50 € par jour pour deux personnes, puis + 25 € par personne supplémentaire. Sur réservation ; visuels de projection après travaux.",
+    note: "Accès spa : + 40 € par jour pour deux personnes, puis + 20 € par personne supplémentaire. Sur réservation ; visuels de projection après travaux.",
   },
   {
     image: images.projAccueilSpa,
@@ -97,11 +97,11 @@ export const sections: ExpSection[] = [
     ],
   },
   {
-    image: images.vueAerienne,
+    image: images.projParcDepuisPerronSoir,
     cap: "Le parc",
     title: "Le parc vivant",
     paragraphs: [
-      "Un hectare clos de prairies, de vieux arbres et de lisières : chênes, tilleuls et hêtres, écureuils et oiseaux, libellules et grenouilles autour du lagunage.",
+      "Depuis le perron, un cheminement doux traversera un hectare clos de prairies, de vieux arbres et de lisières : chênes, tilleuls et hêtres, écureuils et oiseaux, libellules et grenouilles autour du lagunage.",
       "Aucune nature fabriquée : le paysage vosgien, ses saisons et sa faune restent le premier décor de Sainte-Lucie.",
     ],
   },

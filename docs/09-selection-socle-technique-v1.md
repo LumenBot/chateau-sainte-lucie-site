@@ -316,7 +316,8 @@ le même scénario :
 1. créer Lumière et Feuillage comme deux unités ;
 2. connecter un canal de test ou montrer le mapping Booking/Airbnb ;
 3. réserver Lumière pour deux adultes et deux enfants de 4 et 8 ans ;
-4. constater le prix attendu : 200 € + 25 € + 50 € par nuit ;
+4. constater le prix attendu : 180 € + 20 € + 60 € par nuit pour deux adultes,
+   un enfant et le spa à trois occupants ;
 5. encaisser l'hébergement ;
 6. ajouter un forfait spa pour quatre occupants, un dîner enfant et deux accords
    mets et vins adultes ;

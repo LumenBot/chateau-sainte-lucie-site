@@ -22,8 +22,8 @@ spécifiques seront développés au moyen des API et webhooks du socle retenu.
 - Chaque suite est une unité indivisible.
 - Capacité : un ou deux adultes et jusqu'à deux enfants par suite ; la formule
   n'est pas vendue à quatre adultes.
-- Tarif de base : 200 € la nuit pour un ou deux adultes.
-- Chaque enfant : 25 € de 0 à 5 ans, 50 € à partir de 6 ans, par nuit.
+- Tarif d'ouverture 2027 : 180 € la nuit pour un ou deux adultes.
+- Chaque enfant : 20 € par nuit, petit-déjeuner inclus.
 - Petit-déjeuner compris.
 - Vente directe, Airbnb, Booking et futurs canaux touristiques.
 - Langues : français et anglais.
@@ -39,10 +39,10 @@ spécifiques seront développés au moyen des API et webhooks du socle retenu.
 
 ## Services complémentaires
 
-- Forfait spa : 50 € par suite et par jour pour un ou deux occupants, puis 25 €
+- Forfait spa : 40 € par suite et par jour pour un ou deux occupants, puis 20 €
   par personne supplémentaire et par jour.
-- Dîner : 50 € par adulte, 25 € par enfant de 3 à 11 ans.
-- Accord mets et vins : 30 € par adulte, comme option du dîner.
+- Déjeuner ou dîner : 40 € par adulte, 20 € par enfant de 3 à 11 ans.
+- Accord mets et vins : 20 € par adulte, comme option du repas.
 - Privatisation de piscine : 50 € pour deux heures.
 - Autres boissons et services ajoutés au dossier de séjour.
 - Les options doivent être visibles sur la facture et dans les exports.
@@ -70,9 +70,9 @@ Merci de montrer dans votre environnement :
 1. la création des deux suites ;
 2. le mapping avec Airbnb et Booking ;
 3. une réservation de Lumière pour deux adultes et deux enfants de 4 et 8 ans ;
-4. le calcul de 325 € par nuit hors taxe de séjour ;
+4. le calcul de 220 € par nuit hors taxe de séjour ;
 5. le paiement intégral de l'hébergement ;
-6. l'ajout d'un spa à 50 € et d'un dîner enfant à 25 € payables sur place ;
+6. l'ajout d'un spa à 80 € pour quatre occupants et d'un repas enfant à 20 € payables sur place ;
 7. la programmation d'une garantie de 500 € ;
 8. une modification, une annulation et un remboursement partiel ;
 9. les webhooks ou événements API produits ;
