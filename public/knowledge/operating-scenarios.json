@@ -1,21 +1,21 @@
 {
-  "schema_version": "4.0",
+  "schema_version": "5.0",
   "as_of": "2026-08-09",
   "currency": "EUR",
-  "purpose": "Single annual operating reference for the three-suite guest house, with financing-allocation and downside tests",
+  "purpose": "Single annual operating reference for the three-suite guest house, with interest-free shareholder-current-account funding and downside tests",
   "status": "active_working_reference_to_validate",
-  "publication_effect": "The model does not by itself publish prices, authorize borrowing or approve the 80,000 EUR investment.",
+  "publication_effect": "The model does not by itself publish prices, approve the 80,000 EUR investment or create a repayment right.",
   "status_vocabulary": {
     "validated_project_fact": "Collectively confirmed project fact",
     "working_assumption": "Adjustable planning input",
     "calculated_result": "Arithmetic output from the stated assumptions",
     "measurement_required": "Must be replaced by a quote, recipe or timed operating test",
-    "external_validation_required": "Requires written accountant, legal, tax, insurance, bank or public-authority validation"
+    "external_validation_required": "Requires written accountant, legal, tax, insurance or public-authority validation"
   },
   "superseded_references": {
     "two_suite_standard": "docs/23-referentiel-exploitation-standard-v6.md",
     "two_suite_concept_comparison": "docs/24-comparatif-scenarios-exploitation-v1.md",
-    "reading_rule": "These documents remain historical evidence only. They are not active financial references."
+    "reading_rule": "These documents preserve the earlier two-suite reasoning and remain useful for comparing concepts. They are not the active three-suite financial reference."
   },
   "guest_house_scope": {
     "suite_count": { "value": 3, "status": "validated_project_fact" },
@@ -110,118 +110,156 @@
       "paid_support_cost": 29375,
       "result_before_property_rent": 22294.9671,
       "result_after_property_rent": 10294.9671,
-      "operating_company_cash_before_financing": 8044.9671
+      "operating_company_cash_before_shareholder_current_account_repayment": 8044.9671
     }
   },
-  "unified_financing": {
+  "shareholder_current_account_financing": {
     "total_works_and_installation_envelope_ttc": 80000,
-    "sources": {
-      "operating_company_share_capital": 10000,
-      "operating_company_shareholder_current_account": 20000,
-      "new_bank_loan": 50000
+    "funding_sources": {
+      "previously_modelled_interest_free_shareholder_current_accounts": 50000,
+      "additional_interest_free_shareholder_current_account_for_maisonnette": 30000,
+      "total_interest_free_shareholder_current_accounts": 80000,
+      "other_funding_sources": 0
     },
-    "operating_company_shareholder_current_account": {
+    "provisional_entity_allocation": {
+      "property_company_SCI": {
+        "previously_modelled_principal": 35000,
+        "maisonnette_additional_principal": 30000,
+        "total_principal": 65000,
+        "interest_rate": 0,
+        "target_term_years": 5,
+        "target_annual_principal_repayment": 13000
+      },
+      "operating_company": {
+        "previously_modelled_principal": 15000,
+        "maisonnette_additional_principal": 0,
+        "total_principal": 15000,
+        "interest_rate": 0,
+        "target_term_years": 5,
+        "target_annual_principal_repayment": 3000
+      },
+      "allocation_status": "working_assumption_pending_itemized_quotes_and_invoice_ownership",
+      "allocation_reasoning": "The earlier 50,000 EUR convention is preserved at 35,000 EUR for the SCI and 15,000 EUR for the operating company. The additional 30,000 EUR concerns the Maisonnette, which is part of the château, so it is provisionally allocated to the SCI."
+    },
+    "repayment_convention": {
       "interest_rate": 0,
-      "test_term_years": 5,
-      "annual_principal_test": 4000,
+      "target_term_years": 5,
+      "total_target_annual_principal_repayment": 16000,
       "accounting_treatment": "Principal repayment is a cash outflow and balance-sheet movement, not an operating expense.",
-      "repayment_condition": "Pay only when operating-company cash and bank covenants permit; a blocking, deferral or subordination clause may be required behind bank debt.",
-      "status": "working_assumption_to_document"
-    },
-    "new_bank_loan_test": {
-      "principal": 50000,
-      "annual_rate": 0.05,
-      "term_years": 5,
-      "annual_debt_service": 11548.7399,
-      "rate_status": "simulation_assumption_not_a_bank_offer",
-      "fees_insurance_and_guarantees_included": false
-    },
-    "recommended_allocation": {
-      "property_company_SCI": "Borrow for building works and assets incorporated into the property, subject to the actual invoice allocation and the SCI's full debt capacity.",
-      "operating_company": "Use share capital and shareholder current account for detachable furniture, operating equipment and working capital, subject to actual invoice allocation.",
-      "status": "recommended_in_principle_subject_to_professional_validation"
+      "annual_process": "Each entity approves its own repayment after annual closing and a rolling cash forecast. No repayment may create a cash deficit or use the other entity's cash without a documented transaction.",
+      "pro_rata_rule": "If an entity cannot pay its annual target in full, payments to its contributing associates are reduced pro rata to their outstanding principal unless all affected associates unanimously document another order.",
+      "unpaid_target_rule": "An unpaid target remains outstanding principal; it is not capitalized with interest. Achieving full repayment within five years then requires a later catch-up approved only when cash permits.",
+      "contributor_eligibility_rule": "Confirm before transfer that each contributor is eligible to hold a shareholder current account in the receiving entity and reconcile contributors with actual ownership and governance.",
+      "status": "working_convention_to_document_and_approve"
     },
     "reference_cash_by_entity": {
-      "operating_company_cash_after_shareholder_current_account_principal": 4044.9671,
-      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
-      "consolidated_cash_after_new_financing": 4496.2272,
-      "simplified_total_debt_service_coverage": 1.28917,
-      "property_rent_to_new_SCI_loan_coverage": 1.03907,
-      "warning": "The SCI margin of 451 EUR is before all existing property debt and SCI costs. No approval is possible without the restricted consolidated debt schedule."
+      "operating_company_cash_after_3000_principal_repayment": 5044.9671,
+      "property_company_cash_after_13000_principal_repayment_before_existing_costs": -1000,
+      "consolidated_cash_after_16000_principal_repayment": 4044.9671,
+      "simplified_total_repayment_coverage": 1.25281,
+      "property_rent_to_SCI_principal_repayment_coverage": 0.92308,
+      "warning": "The project covers the 16,000 EUR consolidated annual target, but the provisional 65,000/15,000 allocation leaves the SCI 1,000 EUR short before its existing costs. Consolidated cash must not hide this entity-level mismatch."
+    },
+    "allocation_ambiguity": {
+      "known": "The 30,000 EUR additional envelope concerns the Suite Maisonnette and the Maisonnette forms part of the château.",
+      "unknown": "The itemized invoices have not yet confirmed which expenditure is property-incorporated and which is a detachable operating asset or initial operating cash.",
+      "alternative_test": "A 60,000 EUR SCI / 20,000 EUR operating-company allocation would match the SCI's 12,000 EUR annual principal target to the 12,000 EUR rent and leave 4,044.97 EUR in the operating company, but it is valid only if at least 5,000 EUR of invoices legitimately belongs to the operating company.",
+      "decision_rule": "Final allocation follows itemized quotes, invoice ownership and professional accounting and legal validation; it must never be selected solely to improve the displayed cash split."
     }
   },
-  "financing_allocation_tests": {
-    "recommended_SCI_bank_loan": {
-      "description": "The SCI borrows 50,000 EUR for property works; the operating company funds detachable assets and working capital with 10,000 EUR capital and 20,000 EUR shareholder current account.",
-      "operating_company_cash_after_annual_shareholder_current_account_principal": 4044.9671,
-      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
-      "consolidated_cash_after_new_financing": 4496.2272,
-      "reading": "Economically coherent with asset ownership, but the SCI has almost no standalone margin before its existing commitments."
+  "methodological_two_suite_counterfactual": {
+    "purpose": "Isolate the capacity effect of the Suite Maisonnette by holding price, offer, VAT treatment and staffing prudence constant.",
+    "status": "analytical_counterfactual_not_an_additional_operating_concept",
+    "changed_inputs": {
+      "suite_count": 2,
+      "occupied_suite_nights": 300,
+      "base_operations_hours": 720,
+      "fixed_operating_costs_ttc": 8000,
+      "estimated_fixed_cost_vat_recovery": 1200,
+      "renewal_cash_allocation": 1500,
+      "total_interest_free_shareholder_current_accounts": 50000,
+      "total_annual_principal_target": 10000
     },
-    "operating_company_bank_loan_test": {
-      "description": "The operating company borrows the 50,000 EUR and also repays 4,000 EUR of shareholder-current-account principal.",
-      "operating_company_cash_after_new_financing": -7503.7728,
-      "property_company_cash_before_existing_debt_and_costs": 12000,
-      "consolidated_cash_after_new_financing": 4496.2272,
-      "reading": "The operating company cannot support this debt on a standalone basis. This route is also unsuitable for property-incorporated works unless a robust financing and lease agreement is validated."
-    }
+    "calculated_results": {
+      "total_public_sales_ttc": 88575,
+      "accounting_revenue_under_vat_real": 79371.5909,
+      "estimated_operations_hours": 2145.4688,
+      "paid_support_hours": 575,
+      "consolidated_cash_after_annual_principal_target": -1895.0219
+    },
+    "maisonnette_isolated_effect": {
+      "additional_public_sales_ttc": 44287.5,
+      "additional_operations_hours": 559.5898,
+      "additional_paid_support_hours": 600,
+      "additional_shareholder_current_account_principal": 30000,
+      "additional_annual_principal_target": 6000,
+      "improvement_in_consolidated_cash_after_principal": 5939.989
+    },
+    "reading": "At identical standards, two suites do not cover rent, full-time Jules, prudent paid support and the five-year principal target. The Maisonnette improves annual cash after principal by about 5,940 EUR, while adding about 560 operating hours and 30,000 EUR of principal."
   },
   "stress_tests": [
     {
       "id": "lower_activity_140_nights_adr_205",
       "changed_inputs": { "sold_nights_per_suite": 140, "average_public_nightly_price_ttc": 205 },
       "total_public_sales_ttc": 121905,
-      "operating_company_cash_after_shareholder_current_account_principal": -440.05,
-      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
-      "consolidated_cash_after_new_financing": 11.2066,
-      "simplified_total_debt_service_coverage": 1.00072,
-      "reading": "Arithmetic break-even only; not robust and not solvent by entity because the operating company is negative."
+      "operating_company_cash_after_3000_principal_repayment": 559.9466,
+      "property_company_cash_after_13000_principal_repayment_before_existing_costs": -1000,
+      "consolidated_cash_after_16000_principal_repayment": -440.0534,
+      "simplified_total_repayment_coverage": 0.9725,
+      "reading": "The five-year repayment target is not covered. Lower activity cannot support all modeled commitments."
     },
     {
-      "id": "bank_loan_60000_without_share_capital",
-      "changed_inputs": { "operating_company_share_capital": 0, "new_bank_loan": 60000 },
-      "bank_annual_debt_service": 13858.4879,
-      "operating_company_cash_after_shareholder_current_account_principal": 4044.9671,
-      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": -1858.4879,
-      "consolidated_cash_after_new_financing": 2186.4792,
-      "simplified_total_debt_service_coverage": 1.12243,
-      "reading": "The SCI becomes negative before existing commitments; removing capital weakens the plan."
+      "id": "balanced_entity_allocation_60000_20000",
+      "changed_inputs": { "property_company_principal": 60000, "operating_company_principal": 20000 },
+      "operating_company_cash_after_4000_principal_repayment": 4044.9671,
+      "property_company_cash_after_12000_principal_repayment_before_existing_costs": 0,
+      "consolidated_cash_after_16000_principal_repayment": 4044.9671,
+      "reading": "The consolidated result is unchanged. The split is more readable by entity but requires invoice evidence for the additional 5,000 EUR allocated to the operating company."
     },
     {
       "id": "property_rent_18000",
       "changed_inputs": { "property_company_rent": 18000 },
-      "operating_company_cash_after_shareholder_current_account_principal": -1955.0329,
-      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 6451.2601,
-      "consolidated_cash_after_new_financing": 4496.2272,
-      "reading": "Consolidated cash is unchanged, but the operating company becomes negative. Inter-entity solvency matters more than the consolidated total."
+      "operating_company_cash_after_3000_principal_repayment": -955.0329,
+      "property_company_cash_after_13000_principal_repayment_before_existing_costs": 5000,
+      "consolidated_cash_after_16000_principal_repayment": 4044.9671,
+      "reading": "The consolidated result is unchanged, but the operating company becomes cash-negative. A higher rent transfers the tension rather than creating value."
     },
     {
       "id": "consolidation_160_nights_adr_210",
       "changed_inputs": { "sold_nights_per_suite": 160, "average_public_nightly_price_ttc": 210 },
       "total_public_sales_ttc": 141720,
       "paid_support_hours": 1325,
-      "consolidated_cash_after_new_financing": 6624.225,
-      "simplified_total_debt_service_coverage": 1.42603,
-      "reading": "More resilient, but it requires higher occupancy and 150 additional paid-support hours."
+      "consolidated_cash_after_16000_principal_repayment": 6172.9649,
+      "simplified_total_repayment_coverage": 1.38581,
+      "reading": "More resilient financially, but it requires higher occupancy and 150 additional paid-support hours."
+    },
+    {
+      "id": "six_year_repayment_sensitivity",
+      "changed_inputs": { "target_term_years": 6 },
+      "total_annual_principal_repayment": 13333.3333,
+      "operating_company_cash_after_principal_repayment": 5544.9671,
+      "property_company_cash_after_principal_repayment_before_existing_costs": 1166.6667,
+      "consolidated_cash_after_principal_repayment": 6711.6338,
+      "reading": "This is only a sensitivity: it shows the value of flexibility but is not the active five-year convention."
     }
   ],
   "decision_rules": [
     "Use one three-suite model; do not apply a premium price or a separate operating structure to the Maisonnette.",
-    "Keep the public grid at 180–220 EUR, use 205 EUR as its central value and treat 210 EUR as the reference achieved average to prove.",
-    "Do not approve the 80,000 EUR plan before quotes allocate each invoice to property works, detachable assets or working capital.",
-    "Prefer SCI borrowing for property-incorporated works and operating-company funds for detachable furniture and working capital, subject to legal, tax, accounting and bank validation.",
-    "Do not repay the 20,000 EUR shareholder current account ahead of bank debt if doing so creates a liquidity shortfall; document any blocking, deferral or subordination.",
-    "Do not infer SCI debt capacity from the 451 EUR reference margin. Validate all existing SCI debt service and costs in a confidential banking annex.",
-    "Obtain bank offers including annual percentage rate, fees, insurance, security and repayment profile; the 5% rate is only a simulation assumption.",
-    "Build a named weekly roster for 2,705 modeled hours, 1 full-time equivalent Jules, 1,175 paid support hours and no more than 200 associate hours.",
-    "Keep aids and guarantees at zero until eligibility and award are confirmed in writing."
+    "Keep the public grid at 180–220 EUR, use 205 EUR as its central value and treat 210 EUR as the achieved reference average to prove.",
+    "Treat the 80,000 EUR envelope as 50,000 EUR of previously modelled shareholder current accounts plus 30,000 EUR additional shareholder current account for the Maisonnette, all interest-free.",
+    "Preserve separate agreements and cash tests for the SCI and the operating company.",
+    "Do not approve the provisional 65,000/15,000 allocation before quotes identify the asset owner and invoice payer.",
+    "Do not distribute a repayment that makes either entity cash-negative; an unpaid target stays as interest-free principal.",
+    "Do not use the positive 4,044.97 EUR consolidated balance to conceal the SCI's 1,000 EUR shortfall under the provisional allocation.",
+    "Build a named weekly roster for 2,705 modeled hours, 1 full-time equivalent Jules, 1,175 paid support hours and no more than 200 associate hours."
   ],
   "confidentiality": {
     "public_knowledge_excludes": [
-      "exact existing property-company debt balances and terms",
+      "names and individual contribution amounts of contributing associates",
+      "signatures and personal account details",
       "undisclosed historical shareholder-current-account balances",
-      "bank securities, guarantees, statements and lender correspondence"
+      "detailed statements and tax records"
     ],
-    "storage_rule": "These data belong only in a restricted banking annex outside the public repository."
+    "storage_rule": "Individual contribution schedules and signed agreements belong in a restricted annex outside the public repository."
   }
 }

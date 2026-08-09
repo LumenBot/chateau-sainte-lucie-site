@@ -94,7 +94,8 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   historique ; ils ne constituent plus la base active de décision.
 - `docs/25-referentiel-trois-suites-et-financement-v1.md` documente le modèle
   annuel unifié : trois suites au même positionnement, enveloppe totale de
-  80 k€, charge humaine, financement par entité et scénarios de résistance.
+  80 k€ financée par comptes courants d’associés sans intérêt, charge humaine,
+  remboursement-cible sur cinq ans et scénarios de résistance.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes

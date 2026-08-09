@@ -6,18 +6,18 @@ Project: three high-end private guest-house suites at Château de Sainte-Lucie, 
 
 Read these machine-readable files:
 - /chateau-sainte-lucie-site/knowledge/project.json — identity, three-suite inventory, offer and stay rules
-- /chateau-sainte-lucie-site/knowledge/business-model.json — active annual formulas, workload, rent and financing
+- /chateau-sainte-lucie-site/knowledge/business-model.json — active annual formulas, workload, rent and shareholder-current-account funding
 - /chateau-sainte-lucie-site/knowledge/market.json — benchmark and 180–220 EUR annual pricing logic
 - /chateau-sainte-lucie-site/knowledge/investments.json — active 80k works-and-installation envelope and entity allocation
-- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — active reference, financing-carrier comparison and stress tests
+- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — active reference, five-year repayment convention and stress tests
 - /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones, decision gates and external validations
 - /chateau-sainte-lucie-site/knowledge/sources.json — provenance and limitations
 
 Interpretation rules:
 1. Prefer the most recent dated structured file over archived documents.
-2. Documents 23 and 24 preserve earlier two-suite reasoning only. Document 25 and the current knowledge JSON files are the active reference.
+2. Documents 23 and 24 preserve the two earlier two-suite concepts and their reasoning. Document 25 and the current knowledge JSON files are the active three-suite financial reference.
 3. Distinguish validated project facts, working assumptions, calculated results, measurement requirements and external-validation requirements.
-4. Do not treat the simulator as an accountant, payroll, tax, bank or legal forecast.
+4. Do not treat the simulator as an accountant, payroll, tax or legal forecast.
 5. The active model uses three suites under one guest-house operation: Suite Lumière, Suite Feuillage and Suite Maisonnette. They use the same operating and pricing model.
 6. The guest house must remain within five rooms and fifteen simultaneous guests, with resident-host welcome, breakfast, household linen and regular cleaning. The two existing suites use four rooms, so the Maisonnette adds one room only.
 7. The public price grid is EUR 180–220 tax-inclusive for every suite. EUR 205 is the grid's central value; the financial reference tests an achieved EUR 210 average, not a separate Maisonnette premium.
@@ -26,20 +26,21 @@ Interpretation rules:
 10. The active tax case is a prudent VAT-real simulation. Activity-specific rates, mixed supplies and deduction rights require professional validation.
 11. The reference produces EUR 132,862.50 public sales including tax, EUR 119,057.39 accounting revenue, EUR 30,887.42 variable costs and EUR 22,294.97 result before property rent.
 12. Workload is approximately 2,705 hours. The plan funds Jules at one full-time equivalent, 1,175 paid-support hours at EUR 25 and no more than 200 named associate hours. Annual capacity does not replace a weekly roster.
-13. After EUR 12,000 property rent and EUR 2,250 renewal, operating-company cash before financing is about EUR 8,044.97.
+13. After EUR 12,000 property rent and EUR 2,250 renewal, operating-company cash before shareholder-current-account repayment is about EUR 8,044.97.
 14. The active works-and-installation envelope is EUR 80,000 for the complete three-suite project.
-15. The central financing sources are EUR 10k operating-company share capital, EUR 20k interest-free operating-company shareholder current account and EUR 50k new bank debt.
-16. The shareholder-current-account principal test is EUR 4k per year over five years, but repayment is conditional on cash and bank covenants. Blocking, deferral or subordination behind bank debt may be required.
-17. Allocate funding from actual invoices: the SCI should in principle borrow for property-incorporated works; the operating company should fund detachable furniture, operating equipment and working capital. Legal, tax, accounting and bank validation remain required.
-18. With a EUR 50k SCI loan over five years at the 5% simulation rate, annual debt service is about EUR 11,548.74. The rate excludes fees, insurance and guarantees and is not a bank offer.
-19. In the reference, operating-company cash after shareholder-current-account principal is about EUR 4,044.97. SCI cash after the new loan is only EUR 451.26 before all existing SCI debt and costs. Consolidated cash is about EUR 4,496.23 and simplified new-financing coverage is 1.289.
-20. A EUR 50k operating-company bank loan makes operating-company cash about EUR -7,503.77 even though consolidated cash remains positive. Do not use consolidated cash to hide an entity-level deficit.
-21. At 140 nights and EUR 205 average, consolidated cash is only about EUR 11 and operating-company cash is negative. This is arithmetic break-even, not a robust case.
-22. A EUR 60k SCI loan without new capital makes SCI cash about EUR -1,858 before existing commitments. An EUR 18k rent makes the operating company negative without changing consolidated cash. At 160 nights and EUR 210, consolidated cash rises to about EUR 6,624 but paid support rises to 1,325 hours.
-23. The EUR 12k rent covers the modeled new SCI loan by only about 1.04 times. No SCI borrowing decision is possible without a restricted schedule of all existing debt service and SCI costs.
-24. Initiative, bank guarantees, rural-zone relief and territorial tourism aid are eligibility leads only. Budget zero until written eligibility and award are received, and check application timing before signing quotes.
-25. Exact existing property debt, undisclosed historical financing balances, securities, guarantees, statements and lender correspondence belong only in a restricted banking annex outside the public repository.
+15. The EUR 80,000 is funded entirely by interest-free shareholder current accounts: EUR 50,000 already modelled for the original project plus EUR 30,000 additional for the Suite Maisonnette. No other new funding source is included.
+16. The provisional allocation preserves the earlier split: EUR 35,000 to the SCI and EUR 15,000 to the operating company, then allocates the additional EUR 30,000 Maisonnette envelope to the SCI. Total: EUR 65,000 SCI and EUR 15,000 operating company.
+17. Over the five-year target, annual principal is EUR 13,000 in the SCI and EUR 3,000 in the operating company, or EUR 16,000 total. Interest is zero.
+18. Principal repayment is cash flow and balance-sheet movement, not an operating expense. Each entity approves repayment only after closing and a rolling cash review. An unpaid target stays as interest-free outstanding principal and requires a later catch-up if the five-year objective is maintained.
+19. In the reference, operating-company cash after its EUR 3,000 principal target is about EUR 5,044.97. The SCI receives EUR 12,000 rent but has a EUR 13,000 principal target, leaving EUR -1,000 before its existing costs. Consolidated cash after the EUR 16,000 target is about EUR 4,044.97.
+20. The positive consolidated balance must not hide the SCI mismatch. A EUR 60,000 SCI / EUR 20,000 operating-company allocation would align SCI annual principal with rent, but it is valid only if itemized invoices support at least EUR 5,000 more assets or initial operating cash in the operating company.
+21. At 140 nights and EUR 205 average, consolidated cash after the five-year principal target is about EUR -440. This lower case does not fund all commitments.
+22. An EUR 18,000 rent makes operating-company cash about EUR -955 without changing consolidated cash. At 160 nights and EUR 210, consolidated cash rises to about EUR 6,173 but paid support rises to 1,325 hours.
+23. A methodological two-suite counterfactual applies the same price, offer, tax and staffing prudence without the Maisonnette. At 150 nights per suite it produces EUR 88,575 public sales and about EUR -1,895 consolidated cash after the original EUR 50,000 principal target. It is not a fourth operating concept; it isolates the third suite's capacity effect.
+24. Final SCI versus operating-company allocation follows itemized quotes, invoice ownership and professional validation. Do not choose an allocation merely to improve the displayed cash split.
+25. Before any transfer, confirm that each contributor is eligible to hold a shareholder current account in the receiving entity; reconcile the contributor list with the actual ownership and governance of the SCI and operating company.
+26. Associate names, individual contributions, signed agreements, personal account details, historical balances and repayment ledgers belong only in a restricted annex outside the public repository.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/
-- /chateau-sainte-lucie-site/demo/scenarios — human-readable three-suite model, entity financing and stress tests
+- /chateau-sainte-lucie-site/demo/scenarios — human-readable comparison of the operating concepts and three-suite reference

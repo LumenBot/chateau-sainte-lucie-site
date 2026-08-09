@@ -239,7 +239,7 @@ export const theoreticalCoupleBasket = {
 };
 
 const centralContributionRate = (scenarioBCentral.publicRevenue - scenarioBCentral.variableCosts) / scenarioBCentral.publicRevenue;
-const annualCashRequirementBeforeLoan = seasonalDefaults.fixedCosts
+const annualCashRequirementBeforeRepayment = seasonalDefaults.fixedCosts
   + fullTimeEmployerCost * seasonalDefaults.julesFte
   + seasonalDefaults.paidReliefHours * seasonalDefaults.paidReliefRate
   + seasonalDefaults.rent
@@ -247,10 +247,10 @@ const annualCashRequirementBeforeLoan = seasonalDefaults.fixedCosts
 
 export const seasonalBreakEven = {
   contributionRate: centralContributionRate,
-  publicRevenueBeforeLoan: annualCashRequirementBeforeLoan / centralContributionRate,
-  averageBasketAtCapacityBeforeLoan: annualCashRequirementBeforeLoan / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
-  publicRevenueAfterPrincipalRepayment: (annualCashRequirementBeforeLoan + seasonalDefaults.operatingCompanyAnnualPrincipal) / centralContributionRate,
-  averageBasketAtCapacityAfterPrincipalRepayment: (annualCashRequirementBeforeLoan + seasonalDefaults.operatingCompanyAnnualPrincipal) / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
+  publicRevenueBeforeRepayment: annualCashRequirementBeforeRepayment / centralContributionRate,
+  averageBasketAtCapacityBeforeRepayment: annualCashRequirementBeforeRepayment / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
+  publicRevenueAfterPrincipalRepayment: (annualCashRequirementBeforeRepayment + seasonalDefaults.operatingCompanyAnnualPrincipal) / centralContributionRate,
+  averageBasketAtCapacityAfterPrincipalRepayment: (annualCashRequirementBeforeRepayment + seasonalDefaults.operatingCompanyAnnualPrincipal) / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
 };
 
 export const hybridDefaults = {
@@ -393,13 +393,6 @@ export const hybridRecommendation = calculateHybridScenario({
   paidReliefHours: 300,
 });
 
-const annualLoanPayment = (principal, annualRate, years) => {
-  if (principal <= 0 || years <= 0) return 0;
-  if (annualRate === 0) return principal / years;
-  const factor = Math.pow(1 + annualRate, years);
-  return principal * (annualRate * factor) / (factor - 1);
-};
-
 export const ambitiousDefaults = {
   suiteCount: 3,
   soldNightsPerSuite: 150,
@@ -434,13 +427,12 @@ export const ambitiousDefaults = {
   paidReliefRate: 25,
   rent: 12000,
   renewal: 2250,
-  shareCapital: 10000,
-  operatingCompanyShareholderAdvancePrincipal: 20000,
-  operatingCompanyShareholderAdvanceYears: 5,
-  bankLoanPrincipal: 50000,
-  bankLoanRate: 0.05,
-  bankLoanYears: 5,
-  bankLoanCarrier: "sci",
+  baselineShareholderAdvancePrincipal: 50000,
+  thirdSuiteAdditionalAdvancePrincipal: 30000,
+  sciShareholderAdvancePrincipal: 65000,
+  operatingCompanyShareholderAdvancePrincipal: 15000,
+  shareholderAdvanceInterestRate: 0,
+  shareholderAdvanceYears: 5,
 };
 
 const foodAndDrinkRevenueExVat = (revenueTtc) => revenueTtc * (0.8 / 1.1 + 0.2 / 1.2);
@@ -457,6 +449,12 @@ const roundUpTo = (value, step) => Math.ceil(Math.max(0, value) / step) * step;
  */
 export function calculateAmbitiousScenario(input = {}) {
   const p = { ...ambitiousDefaults, ...input };
+  if (p.shareholderAdvanceInterestRate !== 0) {
+    throw new Error("Le scénario C accepte uniquement des comptes courants sans intérêt.");
+  }
+  if (p.shareholderAdvanceYears <= 0) {
+    throw new Error("La durée-cible de remboursement doit être strictement positive.");
+  }
   const occupiedSuiteNights = p.suiteCount * p.soldNightsPerSuite;
   const stays = occupiedSuiteNights / p.averageStay;
   const presenceDays = Math.min(275, p.soldNightsPerSuite * 1.2);
@@ -520,21 +518,32 @@ export function calculateAmbitiousScenario(input = {}) {
   const resultBeforeRent = accountingRevenue - variableCosts - fixedCosts - julesCost - paidReliefCost;
   const resultAfterRent = resultBeforeRent - p.rent;
   const operatingCompanyCashBeforeFinancing = resultAfterRent - p.renewal;
+  const totalShareholderAdvancePrincipal = p.sciShareholderAdvancePrincipal
+    + p.operatingCompanyShareholderAdvancePrincipal;
+  const expectedShareholderAdvancePrincipal = p.baselineShareholderAdvancePrincipal
+    + p.thirdSuiteAdditionalAdvancePrincipal;
+  if (Math.abs(totalShareholderAdvancePrincipal - expectedShareholderAdvancePrincipal) > 0.01) {
+    throw new Error("La ventilation des comptes courants ne correspond pas à l'enveloppe totale du scénario.");
+  }
   const operatingCompanyAnnualPrincipalRepayment = p.operatingCompanyShareholderAdvancePrincipal
-    / p.operatingCompanyShareholderAdvanceYears;
-  const bankAnnualDebtService = annualLoanPayment(p.bankLoanPrincipal, p.bankLoanRate, p.bankLoanYears);
-  const operatingCompanyBankDebtService = p.bankLoanCarrier === "operating_company" ? bankAnnualDebtService : 0;
-  const sciBankDebtService = p.bankLoanCarrier === "sci" ? bankAnnualDebtService : 0;
-  const operatingCompanyCashAfterFinancing = operatingCompanyCashBeforeFinancing
-    - operatingCompanyAnnualPrincipalRepayment - operatingCompanyBankDebtService;
-  const sciCashBeforeExistingCommitments = p.rent - sciBankDebtService;
-  const projectCashBeforeNewFinancing = resultBeforeRent - p.renewal;
-  const totalAnnualFinancingService = bankAnnualDebtService + operatingCompanyAnnualPrincipalRepayment;
-  const consolidatedCashAfterFinancing = projectCashBeforeNewFinancing - totalAnnualFinancingService;
-  const simplifiedDebtCoverage = totalAnnualFinancingService > 0
-    ? projectCashBeforeNewFinancing / totalAnnualFinancingService
+    / p.shareholderAdvanceYears;
+  const sciAnnualPrincipalRepayment = p.sciShareholderAdvancePrincipal / p.shareholderAdvanceYears;
+  const operatingCompanyCashAfterShareholderAdvanceRepayment = operatingCompanyCashBeforeFinancing
+    - operatingCompanyAnnualPrincipalRepayment;
+  const sciCashBeforeExistingCommitments = p.rent - sciAnnualPrincipalRepayment;
+  const projectCashBeforeShareholderAdvanceRepayment = resultBeforeRent - p.renewal;
+  const totalAnnualShareholderAdvanceRepayment = operatingCompanyAnnualPrincipalRepayment
+    + sciAnnualPrincipalRepayment;
+  if (totalAnnualShareholderAdvanceRepayment <= 0) {
+    throw new Error("Le scénario C exige un principal de comptes courants à rembourser.");
+  }
+  const consolidatedCashAfterShareholderAdvanceRepayment = projectCashBeforeShareholderAdvanceRepayment
+    - totalAnnualShareholderAdvanceRepayment;
+  const simplifiedRepaymentCoverage = projectCashBeforeShareholderAdvanceRepayment
+    / totalAnnualShareholderAdvanceRepayment;
+  const rentCoverageOfSciShareholderAdvance = sciAnnualPrincipalRepayment > 0
+    ? p.rent / sciAnnualPrincipalRepayment
     : null;
-  const rentCoverageOfBankLoan = bankAnnualDebtService > 0 ? p.rent / bankAnnualDebtService : null;
 
   return {
     ...p,
@@ -573,24 +582,44 @@ export function calculateAmbitiousScenario(input = {}) {
     resultBeforeRent,
     resultAfterRent,
     operatingCompanyCashBeforeFinancing,
+    operatingCompanyCashBeforeShareholderAdvanceRepayment: operatingCompanyCashBeforeFinancing,
+    totalShareholderAdvancePrincipal,
+    annualShareholderAdvanceRepayment: totalAnnualShareholderAdvanceRepayment,
     operatingCompanyAnnualPrincipalRepayment,
-    bankAnnualDebtService,
-    operatingCompanyBankDebtService,
-    sciBankDebtService,
-    operatingCompanyCashAfterFinancing,
+    sciAnnualPrincipalRepayment,
+    operatingCompanyCashAfterShareholderAdvanceRepayment,
     sciCashBeforeExistingCommitments,
-    projectCashBeforeNewFinancing,
-    totalAnnualFinancingService,
-    consolidatedCashAfterFinancing,
-    simplifiedDebtCoverage,
-    rentCoverageOfBankLoan,
+    sciCashAfterShareholderAdvanceRepaymentBeforeExistingCosts: sciCashBeforeExistingCommitments,
+    projectCashBeforeShareholderAdvanceRepayment,
+    totalAnnualShareholderAdvanceRepayment,
+    consolidatedCashAfterShareholderAdvanceRepayment,
+    cashAfterShareholderAdvanceRepayment: consolidatedCashAfterShareholderAdvanceRepayment,
+    simplifiedRepaymentCoverage,
+    coverageOfShareholderAdvanceRepayment: simplifiedRepaymentCoverage,
+    rentCoverageOfSciShareholderAdvance,
   };
 }
 
 export const ambitiousReference = calculateAmbitiousScenario();
-export const ambitiousFullDebtStress = calculateAmbitiousScenario({
-  shareCapital: 0,
-  bankLoanPrincipal: 60000,
+/**
+ * Methodological counterfactual: the same commercial and prudence assumptions
+ * as the three-suite reference, but without the Suite Maisonnette. It isolates
+ * the capacity effect and is not a fourth operating proposal.
+ */
+export const ambitiousTwoSuiteCounterfactual = calculateAmbitiousScenario({
+  suiteCount: 2,
+  baseOperationsHours: 720,
+  fixedCostsTtc: 8000,
+  fixedVatRecovery: 1200,
+  renewal: 1500,
+  baselineShareholderAdvancePrincipal: 50000,
+  thirdSuiteAdditionalAdvancePrincipal: 0,
+  sciShareholderAdvancePrincipal: 35000,
+  operatingCompanyShareholderAdvancePrincipal: 15000,
+});
+export const ambitiousBalancedAllocation = calculateAmbitiousScenario({
+  sciShareholderAdvancePrincipal: 60000,
+  operatingCompanyShareholderAdvancePrincipal: 20000,
 });
 export const ambitiousHighRentStress = calculateAmbitiousScenario({ rent: 18000 });
 export const ambitiousLowerActivity = calculateAmbitiousScenario({
@@ -600,6 +629,6 @@ export const ambitiousLowerActivity = calculateAmbitiousScenario({
 export const ambitiousConsolidation = calculateAmbitiousScenario({
   soldNightsPerSuite: 160,
 });
-export const ambitiousOperatingCompanyLoanTest = calculateAmbitiousScenario({
-  bankLoanCarrier: "operating_company",
+export const ambitiousSixYearRepayment = calculateAmbitiousScenario({
+  shareholderAdvanceYears: 6,
 });

@@ -1,119 +1,96 @@
 {
-  "schema_version": "4.0",
+  "schema_version": "5.0",
   "as_of": "2026-08-09",
-  "currency": "EUR",
-  "status": "unified_working_budget_to_quote",
-  "glossary": {
-    "property_company": "Société civile immobilière CSL, owner of the château",
-    "operating_company": "Future commercial company operating the guest house",
-    "shareholder_current_account": "Interest-free associate advance recorded as a debt of the operating company",
-    "working_capital": "Cash needed to cover launch stock, timing differences and routine operating payments"
-  },
-  "active_total_envelope_ttc": 80000,
+  "currency": "EUR_TTC",
+  "status": "active_working_reference_to_quote_and_allocate",
+  "purpose": "Three-suite works-and-installation envelope funded entirely through interest-free shareholder current accounts",
   "scope": {
+    "total_envelope": 80000,
+    "baseline_two_suite_project": 50000,
+    "additional_suite_maisonnette": 30000,
     "guest_suites": ["Suite Lumière", "Suite Feuillage", "Suite Maisonnette"],
-    "wellness_facilities": ["hammam", "bain nordique"],
-    "included_families": [
-      "building and network works",
-      "bathrooms and fitted equipment",
-      "detachable furniture, bedding and decoration",
-      "terraces, paths and exterior lighting",
-      "wellness equipment",
-      "professional fees, launch equipment, working capital and contingency to identify"
-    ],
-    "quote_requirement": "Every invoice must be classified as property-incorporated work, detachable operating asset, operating expense or working capital before the borrower and payer are selected."
+    "one_operating_model": true,
+    "warning": "The envelope must be rebuilt from current itemized quotes before any commitment."
   },
-  "unified_financing_plan": {
-    "total_sources": 80000,
-    "sources": [
-      {
-        "recipient_entity": "operating_company",
-        "type": "share_capital",
-        "amount": 10000,
-        "status": "working_assumption"
-      },
-      {
-        "recipient_entity": "operating_company",
-        "type": "shareholder_current_account",
-        "amount": 20000,
-        "interest_rate": 0,
-        "test_term_years": 5,
-        "annual_principal_test": 4000,
-        "status": "working_assumption_to_document"
-      },
-      {
-        "recipient_entity": "to_allocate_from_invoices",
-        "recommended_recipient_if_property_works": "property_company_SCI",
-        "type": "bank_loan",
-        "amount": 50000,
-        "test_term_years": 5,
-        "test_annual_rate": 0.05,
-        "annual_debt_service": 11548.7399,
-        "rate_status": "simulation_assumption_not_a_bank_offer"
-      }
-    ],
-    "balance_check": "10,000 + 20,000 + 50,000 = 80,000 EUR"
-  },
-  "shareholder_current_account_policy": {
-    "debtor_entity": "operating_company",
-    "principal": 20000,
+  "funding_plan": {
+    "total_interest_free_shareholder_current_accounts": 80000,
+    "other_funding_sources": 0,
     "interest_rate": 0,
-    "annual_principal_test": 4000,
-    "nominal_term_years": 5,
-    "accounting_treatment": "Principal repayment is a cash outflow and balance-sheet movement, not an operating expense.",
-    "repayment_priority": "Repay only when operating-company liquidity and bank covenants permit.",
-    "clauses_to_consider": ["blocking behind bank debt", "payment deferral", "subordination", "no repayment while the operating company would become cash-negative"],
-    "external_validation": "Written agreement, corporate approval, accounting treatment and bank acceptability"
+    "target_repayment_term_years": 5,
+    "target_total_annual_principal_repayment": 16000
   },
-  "carrying_structures": {
-    "A_operating_company_bank_loan": {
-      "status": "not_recommended_for_reference_plan",
-      "appropriate_only_for": ["detachable furniture and equipment", "working capital", "operating-company assets"],
-      "property_work_warning": "If the operating company finances an asset incorporated into property owned by the SCI, a robust works, lease, indemnity and tax agreement is required before payment.",
-      "reference_cash_test": {
-        "operating_company_after_bank_and_shareholder_current_account": -7503.7728,
-        "property_company_before_existing_debt_and_costs": 12000,
-        "consolidated_cash": 4496.2272
-      },
-      "reading": "The consolidated total hides an operating-company deficit. The operating company cannot support the full 50,000 EUR loan in the reference case."
+  "provisional_entity_allocation": {
+    "property_company_SCI": {
+      "baseline_principal": 35000,
+      "maisonnette_additional_principal": 30000,
+      "total_principal": 65000,
+      "target_annual_principal_repayment": 13000,
+      "provisional_use": "Property-incorporated works and equipment belonging to the château"
     },
-    "B_property_company_bank_loan": {
-      "status": "recommended_in_principle_subject_to_invoice_allocation_and_full_debt_review",
-      "appropriate_for": ["building works", "networks and fitted assets incorporated into the château"],
-      "operating_company_funding_role": "Use the 10,000 EUR share capital and 20,000 EUR shareholder current account only for detachable furniture, operating equipment and working capital supported by invoices.",
-      "reference_cash_test": {
-        "operating_company_after_shareholder_current_account_principal": 4044.9671,
-        "property_company_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
-        "consolidated_cash": 4496.2272
-      },
-      "warning": "The 12,000 EUR rent covers the modeled new SCI loan by only about 451 EUR before all existing SCI debt service and costs. A confidential consolidated debt review is mandatory."
-    }
+    "operating_company": {
+      "baseline_principal": 15000,
+      "maisonnette_additional_principal": 0,
+      "total_principal": 15000,
+      "target_annual_principal_repayment": 3000,
+      "provisional_use": "Detachable furniture, operating equipment and initial operating cash"
+    },
+    "status": "working_assumption_pending_itemized_quotes_and_invoice_ownership",
+    "quote_requirement": "Every invoice must be classified as property-incorporated work, detachable operating asset, operating expense or initial operating cash before the receiving entity and payer are selected."
   },
-  "funding_and_guarantee_leads": [
-    "Initiative Vosges Centre Ouest interest-free personal honour loan, subject to committee approval and allocation compatible with the plan",
-    "Bpifrance or France Active bank guarantee, subject to borrower, lender and project eligibility",
-    "France Rural Revitalisation Zone tax or employer relief, subject to exact territorial, creation, tax-regime and employment conditions",
-    "2C2R and Vosges Department tourism property-investment aid, only if applicant, guest-house works, timing and expenditure thresholds are confirmed eligible in writing"
-  ],
-  "aid_budgeted_in_financing_plan": 0,
+  "repayment_convention": {
+    "separate_agreements_required": true,
+    "interest_rate": 0,
+    "target_term_years": 5,
+    "linear_annual_principal_target": true,
+    "annual_approval_process": "Repayment is approved separately by each entity after annual closing and review of a rolling cash forecast.",
+    "liquidity_rule": "No repayment may make the receiving entity cash-negative or rely on an undocumented transfer from the other entity.",
+    "associate_equality_rule": "If a target is paid only in part, repayment is proportional to outstanding principal within that entity unless all affected associates document another order.",
+    "unpaid_target_rule": "Any unpaid target remains interest-free outstanding principal. Full repayment within five years then requires a later catch-up expressly approved when cash permits.",
+    "accounting_rule": "Principal repayment is a balance-sheet and cash movement, not an operating expense.",
+    "contributor_eligibility_rule": "Before transfer, confirm that every contributor is eligible to hold a shareholder current account in the receiving entity. Match the contributor list to each entity's actual ownership and governance.",
+    "validation_required": "Written agreements, corporate approvals, accounting treatment, contributor eligibility and individual contribution schedules"
+  },
+  "reference_cash_test": {
+    "operating_company_cash_before_principal_repayment": 8044.9671,
+    "operating_company_annual_principal_target": 3000,
+    "operating_company_cash_after_principal_repayment": 5044.9671,
+    "property_company_rent_received": 12000,
+    "property_company_annual_principal_target": 13000,
+    "property_company_cash_after_principal_repayment_before_existing_costs": -1000,
+    "consolidated_cash_before_principal_repayment": 20044.9671,
+    "consolidated_annual_principal_target": 16000,
+    "consolidated_cash_after_principal_repayment": 4044.9671,
+    "interpretation": "The activity covers the consolidated five-year target, but the provisional entity allocation does not: the SCI is short by 1,000 EUR before existing costs."
+  },
+  "allocation_sensitivity": {
+    "tested_split": {
+      "property_company_SCI_principal": 60000,
+      "operating_company_principal": 20000,
+      "property_company_annual_principal_target": 12000,
+      "operating_company_annual_principal_target": 4000
+    },
+    "cash_after_repayment": {
+      "property_company_before_existing_costs": 0,
+      "operating_company": 4044.9671,
+      "consolidated": 4044.9671
+    },
+    "warning": "This split is not the active accounting allocation. It is acceptable only if itemized invoices substantiate at least 5,000 EUR more detachable assets or initial operating cash in the operating company."
+  },
   "decision_gates": [
-    "itemized 80,000 EUR quote and contingency",
-    "invoice-by-invoice allocation between the SCI and operating company",
-    "confirmation of the guest-house five-room and fifteen-guest limits",
-    "updated municipal declaration, works, destination and insurance checks",
-    "two comparable bank offers including annual percentage rate, fees, insurance and security",
-    "confidential review of all existing SCI debt service and costs",
-    "written shareholder-current-account agreement and bank-approved repayment priority",
-    "collective investment and borrowing approval"
+    "itemized quotes totaling no more than 80,000 EUR with contingencies identified",
+    "invoice-by-invoice owner and payer allocation",
+    "two written interest-free shareholder-current-account agreements",
+    "restricted schedule of individual contributions and outstanding principal",
+    "five-year entity cash schedules showing annual targets and possible catch-up years",
+    "collective approval of the investment, allocations and repayment convention"
   ],
-  "confidential_financing_annex": {
-    "repository_rule": "Do not publish exact existing property-company debt, undisclosed historical shareholder-current-account balances, securities, guarantees or bank statements.",
-    "required_for_bank_review": [
-      "remaining principal, rates, annual payments and maturity of existing property financing",
-      "undisclosed shareholder-current-account balances and repayment or subordination terms by entity",
-      "security ranking and personal guarantees",
-      "recent accounts, tax returns, cash statements and property valuation"
-    ],
-    "storage": "restricted confidential annex outside the public repository"
+  "confidential_annex": {
+    "repository_rule": "Do not publish associate names, individual contributions, signatures, personal account details or undisclosed historical balances.",
+    "required_contents": [
+      "contribution amount and date by associate and receiving entity",
+      "signed agreement and corporate approval",
+      "repayments made and outstanding principal",
+      "annual liquidity decision and any deferred target"
+    ]
   }
 }

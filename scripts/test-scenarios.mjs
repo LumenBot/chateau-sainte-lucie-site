@@ -1,11 +1,13 @@
 import fs from "node:fs";
 import {
   ambitiousConsolidation,
-  ambitiousFullDebtStress,
+  ambitiousBalancedAllocation,
   ambitiousHighRentStress,
   ambitiousLowerActivity,
-  ambitiousOperatingCompanyLoanTest,
   ambitiousReference,
+  ambitiousSixYearRepayment,
+  ambitiousTwoSuiteCounterfactual,
+  calculateAmbitiousScenario,
   hybridActivityCases,
   hybridRecommendation,
   scenarioA,
@@ -34,13 +36,13 @@ assert(theoreticalCoupleBasket.total === 470, "Le panier complet du couple ne va
 assert(theoreticalCoupleBasket.annualRevenueAtCapacity === 59220, "Le plafond arithmétique annuel ne vaut pas 59 220 €.");
 assert(seasonalBreakEven.averageBasketAtCapacityAfterPrincipalRepayment > theoreticalCoupleBasket.total, "Le point mort après remboursement du principal devrait dépasser le panier complet décrit.");
 
-assert(knowledge.schema_version === "4.0", "Le schéma machine du modèle unifié n’est pas à jour.");
+assert(knowledge.schema_version === "5.0", "Le schéma machine du modèle unifié n’est pas à jour.");
 assert(knowledge.guest_house_scope.suite_count.value === 3, "La base machine ne conserve pas trois suites.");
-assert(knowledge.unified_financing.total_works_and_installation_envelope_ttc === 80000, "La base machine ne conserve pas l’enveloppe totale de 80 000 €.");
-assert(knowledge.unified_financing.sources.operating_company_share_capital === 10000, "Le capital de départ diverge.");
-assert(knowledge.unified_financing.sources.operating_company_shareholder_current_account === 20000, "Le compte courant de 20 000 € diverge.");
-assert(knowledge.unified_financing.sources.new_bank_loan === 50000, "Le prêt bancaire de 50 000 € diverge.");
-assert(knowledge.unified_financing.operating_company_shareholder_current_account.interest_rate === 0, "Le compte courant ne doit pas porter intérêt dans la simulation.");
+assert(knowledge.shareholder_current_account_financing.total_works_and_installation_envelope_ttc === 80000, "La base machine ne conserve pas l’enveloppe totale de 80 000 €.");
+assert(knowledge.shareholder_current_account_financing.funding_sources.previously_modelled_interest_free_shareholder_current_accounts === 50000, "Le socle de 50 000 € diverge.");
+assert(knowledge.shareholder_current_account_financing.funding_sources.additional_interest_free_shareholder_current_account_for_maisonnette === 30000, "L’avance supplémentaire de 30 000 € diverge.");
+assert(knowledge.shareholder_current_account_financing.funding_sources.other_funding_sources === 0, "Une ressource extérieure ne doit pas apparaître dans le scénario C.");
+assert(knowledge.shareholder_current_account_financing.repayment_convention.interest_rate === 0, "Les comptes courants ne doivent pas porter intérêt dans la simulation.");
 
 const expectedHybrid = [
   [60, 34230, -1642.41, 983.5],
@@ -66,24 +68,39 @@ assert(close(ambitiousReference.publicRevenueTtc, 132862.5), "Les ventes TTC du 
 assert(close(ambitiousReference.accountingRevenue, 119057.386364), "Le produit comptable du scénario ambitieux est incorrect.");
 assert(close(ambitiousReference.operationsHours, 2705.058594), "La charge humaine du scénario ambitieux est incorrecte.");
 assert(ambitiousReference.paidReliefHours === 1175, "La relève prudente du scénario ambitieux doit être de 1 175 h.");
-assert(close(ambitiousReference.bankAnnualDebtService, 11548.739906), "L’annuité bancaire du financement recommandé est incorrecte.");
-assert(close(ambitiousReference.operatingCompanyAnnualPrincipalRepayment, 4000), "Le remboursement annuel du compte courant est incorrect.");
-assert(close(ambitiousReference.operatingCompanyCashAfterFinancing, 4044.967089), "La trésorerie finale de l’exploitation est incorrecte.");
-assert(close(ambitiousReference.sciCashBeforeExistingCommitments, 451.260094), "La capacité résiduelle de la SCI sur le nouveau prêt est incorrecte.");
-assert(close(ambitiousReference.consolidatedCashAfterFinancing, 4496.227182), "La trésorerie consolidée du nouveau financement est incorrecte.");
-assert(close(ambitiousReference.simplifiedDebtCoverage, 1.28917), "La couverture simplifiée des nouveaux financements est incorrecte.");
+assert(ambitiousReference.baselineShareholderAdvancePrincipal === 50000, "Le socle de comptes courants du modèle diverge.");
+assert(ambitiousReference.thirdSuiteAdditionalAdvancePrincipal === 30000, "L’avance Maisonnette du modèle diverge.");
+assert(ambitiousReference.totalShareholderAdvancePrincipal === 80000, "Le principal total des comptes courants diverge.");
+assert(ambitiousReference.annualShareholderAdvanceRepayment === 16000, "La cible annuelle totale de remboursement diverge.");
+assert(close(ambitiousReference.operatingCompanyAnnualPrincipalRepayment, 3000), "Le remboursement annuel de l’exploitation est incorrect.");
+assert(close(ambitiousReference.sciAnnualPrincipalRepayment, 13000), "Le remboursement annuel de la SCI est incorrect.");
+assert(close(ambitiousReference.operatingCompanyCashAfterShareholderAdvanceRepayment, 5044.967089), "La trésorerie finale de l’exploitation est incorrecte.");
+assert(close(ambitiousReference.sciCashBeforeExistingCommitments, -1000), "La tension de trésorerie de la SCI est incorrecte.");
+assert(close(ambitiousReference.cashAfterShareholderAdvanceRepayment, 4044.967089), "La trésorerie consolidée après remboursement est incorrecte.");
+assert(close(ambitiousReference.coverageOfShareholderAdvanceRepayment, 1.25281), "La couverture simplifiée des comptes courants est incorrecte.");
 assert(close(knowledge.active_reference.calculated_results.total_public_sales_ttc, ambitiousReference.publicRevenueTtc), "La base machine diverge des ventes du modèle à trois suites.");
 assert(close(knowledge.active_reference.calculated_results.estimated_operations_hours, ambitiousReference.operationsHours), "La base machine diverge de la charge humaine du modèle à trois suites.");
-assert(close(knowledge.unified_financing.reference_cash_by_entity.operating_company_cash_after_shareholder_current_account_principal, ambitiousReference.operatingCompanyCashAfterFinancing), "La trésorerie d’exploitation diverge dans la base machine.");
-assert(close(knowledge.unified_financing.reference_cash_by_entity.property_company_cash_after_new_bank_loan_before_existing_debt_and_costs, ambitiousReference.sciCashBeforeExistingCommitments), "La trésorerie SCI diverge dans la base machine.");
-assert(close(knowledge.unified_financing.reference_cash_by_entity.consolidated_cash_after_new_financing, ambitiousReference.consolidatedCashAfterFinancing), "Le solde consolidé diverge dans la base machine.");
-assert(ambitiousLowerActivity.consolidatedCashAfterFinancing > 0 && ambitiousLowerActivity.simplifiedDebtCoverage < 1.01, "Le cas 140 nuits / 205 € devrait être seulement à l’équilibre.");
-assert(ambitiousFullDebtStress.consolidatedCashAfterFinancing > 0 && ambitiousFullDebtStress.sciCashBeforeExistingCommitments < 0, "Le financement sans capital doit fragiliser la SCI.");
-assert(ambitiousHighRentStress.operatingCompanyCashAfterFinancing < 0, "Le loyer immédiat de 18 k€ devrait fragiliser l’exploitation.");
-assert(ambitiousConsolidation.consolidatedCashAfterFinancing > ambitiousReference.consolidatedCashAfterFinancing, "Le cas 160 nuits devrait améliorer la marge.");
-assert(ambitiousOperatingCompanyLoanTest.operatingCompanyCashAfterFinancing < 0, "Le prêt porté par l’exploitation devrait rendre sa trésorerie négative.");
+assert(close(knowledge.shareholder_current_account_financing.reference_cash_by_entity.operating_company_cash_after_3000_principal_repayment, ambitiousReference.operatingCompanyCashAfterShareholderAdvanceRepayment), "La trésorerie d’exploitation diverge dans la base machine.");
+assert(close(knowledge.shareholder_current_account_financing.reference_cash_by_entity.property_company_cash_after_13000_principal_repayment_before_existing_costs, ambitiousReference.sciCashBeforeExistingCommitments), "La trésorerie SCI diverge dans la base machine.");
+assert(close(knowledge.shareholder_current_account_financing.reference_cash_by_entity.consolidated_cash_after_16000_principal_repayment, ambitiousReference.cashAfterShareholderAdvanceRepayment), "Le solde consolidé diverge dans la base machine.");
+assert(ambitiousLowerActivity.cashAfterShareholderAdvanceRepayment < 0 && ambitiousLowerActivity.coverageOfShareholderAdvanceRepayment < 1, "Le cas 140 nuits / 205 € ne doit pas couvrir les comptes courants sur cinq ans.");
+assert(close(ambitiousBalancedAllocation.sciCashBeforeExistingCommitments, 0), "La répartition 60/20 devrait aligner la SCI sur le loyer de 12 k€.");
+assert(ambitiousHighRentStress.operatingCompanyCashAfterShareholderAdvanceRepayment < 0, "Le loyer immédiat de 18 k€ devrait fragiliser l’exploitation.");
+assert(ambitiousConsolidation.cashAfterShareholderAdvanceRepayment > ambitiousReference.cashAfterShareholderAdvanceRepayment, "Le cas 160 nuits devrait améliorer la marge.");
+assert(ambitiousSixYearRepayment.cashAfterShareholderAdvanceRepayment > ambitiousReference.cashAfterShareholderAdvanceRepayment, "L’étalement à six ans devrait améliorer la trésorerie annuelle.");
+assert(ambitiousTwoSuiteCounterfactual.suiteCount === 2, "Le contre-factuel doit conserver deux suites.");
+assert(close(ambitiousTwoSuiteCounterfactual.publicRevenueTtc, 88575), "Les ventes du contre-factuel à deux suites divergent.");
+assert(close(ambitiousTwoSuiteCounterfactual.cashAfterShareholderAdvanceRepayment, -1895.021941), "Le solde du contre-factuel à deux suites diverge.");
+assert(close(ambitiousReference.cashAfterShareholderAdvanceRepayment - ambitiousTwoSuiteCounterfactual.cashAfterShareholderAdvanceRepayment, 5939.98903), "L’effet économique isolé de la Maisonnette diverge.");
+let interestBearingAdvanceRejected = false;
+try {
+  calculateAmbitiousScenario({ shareholderAdvanceInterestRate: 0.01 });
+} catch {
+  interestBearingAdvanceRejected = true;
+}
+assert(interestBearingAdvanceRejected, "Le scénario C ne doit pas accepter de comptes courants portant intérêt.");
 
-for (const marker of ["scenario-a", "scenario-b", "restauration", "hybride", "ambitieux", "Une troisième suite de la même maison d’hôtes", "Initiative Vosges Centre Ouest", "seuils", "operating-scenarios.json", "Aide à la décision"]) {
+for (const marker of ["scenario-a", "scenario-b", "scenario-c", "contexte", "comparaison", "recommandation", "Maisonnette", "operating-scenarios.json", "Aide à la décision"]) {
   assert(page.includes(marker), `La page comparative ne contient pas le marqueur attendu : ${marker}.`);
 }
 
@@ -92,6 +109,7 @@ console.log(JSON.stringify({
   scenarioBCentral: { revenue: Math.round(scenarioBCentral.publicRevenue), afterPrincipal: Math.round(scenarioBCentral.operatingCompanyCashAfterPrincipalRepayment), hours: Math.round(scenarioBCentral.operationsHours) },
   scenarioBStretch: { revenue: Math.round(scenarioBStretch.publicRevenue), afterPrincipal: Math.round(scenarioBStretch.operatingCompanyCashAfterPrincipalRepayment), uncoveredHours: Math.round(scenarioBStretch.staffingGapHours) },
   hybridReference: { revenue: Math.round(hybridRecommendation.publicRevenue), afterPrincipal: Math.round(hybridRecommendation.cashAfterPrincipalRepayment), uncoveredHours: Math.round(hybridRecommendation.staffingGapHours) },
-  ambitiousReference: { revenueTtc: Math.round(ambitiousReference.publicRevenueTtc), accountingRevenue: Math.round(ambitiousReference.accountingRevenue), consolidatedCash: Math.round(ambitiousReference.consolidatedCashAfterFinancing), paidReliefHours: ambitiousReference.paidReliefHours },
+  ambitiousReference: { revenueTtc: Math.round(ambitiousReference.publicRevenueTtc), accountingRevenue: Math.round(ambitiousReference.accountingRevenue), consolidatedCash: Math.round(ambitiousReference.cashAfterShareholderAdvanceRepayment), paidReliefHours: ambitiousReference.paidReliefHours },
+  ambitiousTwoSuiteCounterfactual: { revenueTtc: Math.round(ambitiousTwoSuiteCounterfactual.publicRevenueTtc), consolidatedCash: Math.round(ambitiousTwoSuiteCounterfactual.cashAfterShareholderAdvanceRepayment) },
   theoreticalCeiling: theoreticalCoupleBasket.annualRevenueAtCapacity,
 }, null, 2));

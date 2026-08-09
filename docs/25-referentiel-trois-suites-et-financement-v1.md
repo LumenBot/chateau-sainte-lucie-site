@@ -1,18 +1,19 @@
-# Référentiel unifié à trois suites et financement
+# Référentiel unifié à trois suites et comptes courants d’associés
 
 **Date :** 9 août 2026
 
-**Version documentaire :** 1.0
+**Version documentaire :** 2.0
 
 **Statut :** référence interne de travail à valider
 
 **Périmètre :** trois suites de maison d’hôtes, enveloppe totale de 80 000 €
 
-**Effet contractuel :** aucun sans devis, avis professionnels et décision des associés
+**Effet contractuel :** aucun sans devis, conventions écrites, avis professionnels
+et décision des associés
 
 ## 1. Décision de cadrage
 
-Le projet repose désormais sur **un seul modèle d’exploitation à trois suites** :
+Le projet repose sur **un seul modèle d’exploitation à trois suites** :
 
 - Suite Lumière ;
 - Suite Feuillage ;
@@ -20,12 +21,18 @@ Le projet repose désormais sur **un seul modèle d’exploitation à trois suit
 
 La Maisonnette fait partie du château et de la même maison d’hôtes. Elle suit le
 même modèle de prix, de services, d’accueil et d’exploitation que les deux
-autres suites. Il n’existe plus, dans la référence active, de prix premium
-propre à la Maisonnette, de logement autonome ni de financement marginal limité
-au seul troisième hébergement.
+autres suites. Elle n’est ni un logement autonome ni une activité séparée.
 
-Les référentiels à deux suites des documents 23 et 24 restent des archives de
-raisonnement. Ils ne constituent plus la photographie économique active.
+Le financement de travail est également unifié : **80 000 € de comptes courants
+d’associés sans intérêt**, composés de :
+
+- 50 000 € déjà modélisés pour le projet initial ;
+- 30 000 € supplémentaires pour ouvrir la Suite Maisonnette.
+
+Aucune autre ressource nouvelle n’est intégrée à cette référence. Les documents
+23 et 24 conservent les raisonnements antérieurs à deux suites ; ils restent
+utiles pour comparer les concepts, mais ne constituent plus la base financière
+active du projet à trois suites.
 
 ## 2. Conditions de la maison d’hôtes
 
@@ -40,17 +47,13 @@ rappelle notamment :
 - un maximum de cinq chambres pour quinze personnes simultanément.
 
 Les deux suites existantes couvrent quatre chambres. La Maisonnette ajoute donc
-**une seule chambre**, portant le total à cinq. La capacité exacte de la
-Maisonnette doit être arrêtée sans jamais dépasser quinze personnes dans
-l’ensemble de la maison d’hôtes.
+**une seule chambre**, portant le total à cinq. Sa capacité exacte doit être
+arrêtée sans jamais dépasser quinze personnes dans l’ensemble de la maison
+d’hôtes.
 
-Avant travaux et commercialisation, il faut confirmer :
-
-- la mise à jour de la déclaration ou de l’enregistrement en mairie ;
-- la compatibilité des travaux avec l’urbanisme et la destination existante ;
-- les exigences de sécurité, d’accessibilité, d’assainissement et d’assurance ;
-- le maintien des prestations obligatoires dans les trois suites ;
-- la fiscalité, la taxe de séjour et la taxe sur la valeur ajoutée.
+Avant travaux et commercialisation, il faut confirmer la déclaration en mairie,
+la compatibilité des travaux, les règles de sécurité et d’assurance, la capacité
+exacte, les prestations obligatoires, la taxe de séjour et la fiscalité.
 
 ## 3. Modèle commercial unique
 
@@ -63,15 +66,15 @@ Avant travaux et commercialisation, il faut confirmer :
 | Nuits-suite vendues | 450 | résultat calculé |
 | Grille publique | 180–220 € TTC | politique de travail |
 | Centre de grille | 205 € TTC | repère tarifaire |
-| Prix moyen réalisé | 210 € TTC | objectif du cas de référence |
+| Prix moyen réalisé | 210 € TTC | objectif à prouver |
 | Durée moyenne | 2,5 nuits | hypothèse de travail |
 | Séjours estimés | 180 | résultat calculé |
 | Clients moyens | 2,1 par suite occupée | hypothèse de travail |
 | Réservations directes | 50 % de l’hébergement | hypothèse de travail |
 
-Le prix moyen de 210 € est compatible avec la grille 180–220 €, mais il suppose
-un bon mix saisonnier et une faible dilution promotionnelle. Le cas de baisse à
-140 nuits et 205 € mesure la fragilité de cette ambition.
+Le prix moyen de 210 € reste dans la grille 180–220 €, mais suppose un bon mix
+saisonnier et une faible dilution promotionnelle. Le test à 140 nuits et 205 €
+mesure la fragilité de cette ambition.
 
 ### 3.2 Offre hybride
 
@@ -81,25 +84,22 @@ un bon mix saisonnier et une faible dilution promotionnelle. Le cas de baisse à
 | Garde-manger | 35 % des nuits-suite | 55 €/vente | 55 % du prix | 0,25 h/vente |
 | Table signature | 15 % des nuits-suite | 160 €/vente | 35 % du prix | 4 h/jour de service |
 
-La table signature reste limitée : menu unique, réservation anticipée, heure
-fixe et nombre de services maîtrisé. Les recettes, pertes, boissons, achats,
-stockage, préparation, service, vaisselle et nettoyage doivent être mesurés.
+La table signature reste volontairement limitée : menu unique, réservation
+anticipée, heure fixe et nombre de services maîtrisé. Les recettes, pertes,
+achats, stockage, préparation, service, vaisselle et nettoyage devront être
+mesurés lors de séjours à blanc.
 
 ### 3.3 Fiscalité de référence
 
 Le modèle utilise une simulation prudente au régime réel de taxe sur la valeur
-ajoutée :
-
-- hébergement à 10 % ;
-- spa à 20 %, à confirmer ;
-- alimentation à 10 % et boissons alcoolisées à 20 %, avec un mix provisoire
-  de 80 % et 20 % ;
-- 1 500 € de taxe récupérable explicitement estimée sur les charges fixes.
+ajoutée : hébergement à 10 %, spa à 20 % à confirmer, alimentation à 10 % et
+boissons alcoolisées à 20 %, avec un mix provisoire de 80 % et 20 %. Il retient
+1 500 € de taxe récupérable explicitement estimée sur les charges fixes.
 
 Les règles et seuils sont documentés par
 [Service-Public Entreprendre](https://entreprendre.service-public.gouv.fr/vosdroits/F21746).
-Le régime réel, la ventilation des offres et les droits à déduction doivent être
-validés par l’expert-comptable.
+Le régime, la ventilation des offres et les droits à déduction doivent être
+validés par le professionnel chargé de la comptabilité.
 
 ## 4. Ventes et produit comptable
 
@@ -164,9 +164,9 @@ nuit-suite et 0,2 % d’incidents sur le produit comptable.
 Cette marge annuelle ne garantit pas le planning. Les repos, congés, arrivées,
 petits-déjeuners et services simultanés doivent être testés dans un planning
 hebdomadaire nominatif. Toute heure d’associé doit être réelle, déclarée,
-assurée et juridiquement compatible avec son rôle.
+assurée et compatible avec son rôle.
 
-## 7. Compte d’exploitation avant financement
+## 7. Compte d’exploitation avant remboursement des avances
 
 | Ligne | Montant |
 |---|---:|
@@ -179,186 +179,183 @@ assurée et juridiquement compatible avec son rôle.
 | Loyer versé à la SCI | −12 000,00 € |
 | **Résultat après loyer** | **10 294,97 €** |
 | Renouvellement des équipements | −2 250,00 € |
-| **Trésorerie de la société d’exploitation avant financement** | **8 044,97 €** |
+| **Trésorerie de l’exploitation avant remboursement** | **8 044,97 €** |
 
-## 8. Enveloppe de 80 000 € et ressources
+Le loyer est une charge de l’exploitation et une recette de la société civile
+immobilière. Il ne crée ni ne détruit de trésorerie à l’échelle consolidée, mais
+il détermine quelle entité peut rembourser ses propres comptes courants.
 
-Le budget actif couvre l’ensemble des travaux et installations des trois
-suites. Il doit être reconstitué et ventilé à partir des devis à jour.
+## 8. Enveloppe de 80 000 €
 
-| Ressource | Entité envisagée | Montant |
-|---|---|---:|
-| Capital | société d’exploitation | 10 000 € |
-| Compte courant d’associé sans intérêt | société d’exploitation | 20 000 € |
-| Prêt bancaire | à allouer selon les actifs ; SCI recommandée pour le bâti | 50 000 € |
-| **Total** | — | **80 000 €** |
+| Origine | Montant | Conditions de travail |
+|---|---:|---|
+| Comptes courants déjà modélisés | 50 000 € | sans intérêt |
+| Avance supplémentaire pour la Maisonnette | 30 000 € | sans intérêt |
+| **Total** | **80 000 €** | objectif de remboursement sur cinq ans |
 
-Chaque devis et facture doit être ventilé avant décision :
+Le budget doit être reconstitué à partir de devis à jour. Chaque dépense sera
+classée avant paiement : travaux incorporés au château, mobilier ou équipement
+détachable, dépense d’exploitation ou trésorerie initiale.
 
-- travaux et équipements incorporés au château ;
-- mobilier et équipements détachables ;
-- dépenses d’exploitation et besoin en fonds de roulement.
+L’identité et le montant apporté par chaque associé ne sont pas publiés. Ils
+seront conservés dans un échéancier restreint avec les conventions signées,
+versements, remboursements et soldes restant dus.
 
-L’entité propriétaire ou bénéficiaire de l’actif doit guider le payeur,
-l’emprunteur, le traitement comptable et les conventions entre sociétés.
+Une avance ne peut être qualifiée de compte courant d’associé dans une entité
+que si son apporteur remplit les conditions requises vis-à-vis de cette entité.
+La composition exacte du capital de la SCI et de la future société
+d’exploitation doit donc être rapprochée de la liste des contributeurs avant
+les versements. La règle générale est rappelée par
+[Service-Public Entreprendre](https://entreprendre.service-public.gouv.fr/vosdroits/F32966).
 
-## 9. Compte courant d’associé
+## 9. Ventilation provisoire entre les deux entités
 
-Le compte courant de 20 000 € est modélisé :
+La ventilation antérieure des 50 000 € était de 35 000 € pour la SCI et
+15 000 € pour la société d’exploitation. La Maisonnette faisant partie du
+château, les 30 000 € supplémentaires sont provisoirement affectés à la SCI.
 
-- au nom de la société d’exploitation ;
-- sans intérêt ;
-- sur cinq ans ;
-- avec un remboursement indicatif de principal de 4 000 € par an.
+| Entité débitrice | Socle antérieur | Maisonnette | Principal total |
+|---|---:|---:|---:|
+| Société civile immobilière | 35 000 € | 30 000 € | **65 000 €** |
+| Société d’exploitation | 15 000 € | 0 € | **15 000 €** |
+| **Ensemble** | **50 000 €** | **30 000 €** | **80 000 €** |
 
-Ce remboursement n’est pas une charge d’exploitation. Il ne doit intervenir que
-si la trésorerie le permet. La convention doit prévoir, si la banque le demande
-ou si la prudence l’impose, un blocage, un différé ou une subordination derrière
-la dette bancaire. La durée de cinq ans devient alors une cible, pas un droit à
-paiement inconditionnel.
+Cette ventilation est une **hypothèse comptable provisoire**, pas une décision
+définitive. Les devis peuvent révéler qu’une part du mobilier, des équipements
+détachables ou de la trésorerie initiale appartient légitimement à la société
+d’exploitation.
 
-## 10. Prêt bancaire de référence
+Un test alternatif à 60 000 € dans la SCI et 20 000 € dans l’exploitation
+aligne exactement le remboursement annuel de la SCI sur le loyer de 12 000 €.
+Il n’est recevable que si au moins 5 000 € supplémentaires de dépenses relèvent
+réellement de l’exploitation. La ventilation ne doit jamais être choisie dans
+le seul but d’embellir les soldes.
 
-Le prêt de 50 000 € est simulé sur cinq ans à 5 % par an, soit une annuité
-constante de **11 548,74 €**. Le taux est une hypothèse, pas une offre. Les frais,
-l’assurance et la garantie restent à ajouter.
+## 10. Convention-cible de remboursement sur cinq ans
 
-À titre de contexte seulement, la
-[Banque de France](https://www.banque-france.fr/fr/statistiques/credit/financement-des-entreprises-2026-05)
-publie des moyennes de marché ; le projet doit obtenir au moins deux offres
-comparables exprimées en taux annuel effectif global.
+Le remboursement est linéaire dans la simulation, sans intérêt :
 
-## 11. Comparaison des deux portages
+| Entité | Principal | Cible annuelle | Durée-cible |
+|---|---:|---:|---:|
+| Société civile immobilière | 65 000 € | 13 000 € | 5 ans |
+| Société d’exploitation | 15 000 € | 3 000 € | 5 ans |
+| **Ensemble** | **80 000 €** | **16 000 €** | **5 ans** |
 
-### A — prêt porté par la société d’exploitation
+Les conventions devront prévoir :
 
-Ce portage peut convenir au mobilier détachable, aux équipements d’exploitation
-et au besoin en fonds de roulement. Il est beaucoup plus délicat lorsque la
-société d’exploitation finance un actif incorporé à l’immeuble de la SCI : il
-faut alors une convention robuste sur les travaux, le bail, l’indemnisation et
-le traitement fiscal.
+1. une convention distincte par entité débitrice ;
+2. un taux d’intérêt nul ;
+3. le principal de chaque associé et sa date de versement ;
+4. une cible annuelle approuvée après clôture et prévision de trésorerie ;
+5. l’interdiction de rembourser si l’entité deviendrait déficitaire en
+   trésorerie ;
+6. une réduction proportionnelle entre associés de la même entité lorsqu’une
+   cible n’est que partiellement payée, sauf accord unanime documenté ;
+7. le maintien sans intérêt du principal non remboursé ;
+8. un rattrapage ultérieur expressément approuvé si l’objectif des cinq ans est
+   maintenu.
 
-Dans le cas central :
+Le principal remboursé réduit la trésorerie et la dette au bilan ; il ne réduit
+pas le résultat d’exploitation. Aucune trésorerie d’une entité ne peut être
+utilisée par l’autre sans flux réel et documenté.
 
-| Flux | Montant |
-|---|---:|
-| Société d’exploitation après compte courant et prêt bancaire | **−7 503,77 €** |
-| SCI après encaissement du loyer, avant dettes et charges existantes | 12 000,00 € |
-| Consolidé | 4 496,23 € |
+## 11. Lecture par entité
 
-Le consolidé positif masque une société d’exploitation insolvable seule. Ce
-portage n’est donc pas recommandé pour le prêt complet de 50 000 €.
+| Flux annuel central | Société d’exploitation | SCI | Ensemble |
+|---|---:|---:|---:|
+| Trésorerie avant remboursement | 8 044,97 € | 12 000,00 € de loyer | 20 044,97 € |
+| Remboursement-cible du principal | −3 000,00 € | −13 000,00 € | −16 000,00 € |
+| **Solde après remboursement** | **5 044,97 €** | **−1 000,00 €** | **4 044,97 €** |
 
-### B — prêt porté par la SCI, recommandé en principe
+Le projet couvre globalement 1,25 fois la cible annuelle de 16 000 €. Mais ce
+ratio consolidé masque une tension : la SCI manque de 1 000 € avant même ses
+autres charges. La convention sur cinq ans n’est donc pas autoportée dans
+chaque entité avec la ventilation provisoire 65 000 € / 15 000 €.
 
-La SCI porte le prêt correspondant aux travaux et équipements incorporés au
-château. La société d’exploitation réserve son capital et son compte courant au
-mobilier détachable, aux équipements d’exploitation et au besoin en fonds de
-roulement, selon les factures réelles.
+Trois solutions restent honnêtes :
 
-| Flux | Montant |
-|---|---:|
-| Société d’exploitation après 4 000 € de remboursement du compte courant | **4 044,97 €** |
-| SCI après l’annuité du nouveau prêt, avant dettes et charges existantes | **451,26 €** |
-| Consolidé après les nouveaux financements | **4 496,23 €** |
+- justifier par les factures une ventilation 60 000 € / 20 000 € ;
+- apporter au moins 1 000 € annuels de trésorerie à la SCI pendant la période ;
+- différer une partie de la cible SCI et organiser un rattrapage lorsque la
+  trésorerie le permet.
 
-Ce montage respecte mieux la propriété des actifs, mais il est extrêmement
-tendu dans la SCI : le loyer de 12 000 € ne couvre la nouvelle annuité que par
-451,26 €, soit un ratio simplifié de **1,04**. Cette marge est calculée avant les
-emprunts, charges, impôts et travaux déjà portés par la SCI.
+Augmenter mécaniquement le loyer à 18 000 € n’est pas une solution neutre : la
+SCI disposerait de 5 000 € après sa cible, mais l’exploitation tomberait à
+−955 € après la sienne.
 
-La décision de prêt SCI dépend donc impérativement d’une annexe bancaire
-confidentielle consolidant tous les engagements existants.
+## 12. Contre-factuel méthodologique à deux suites
 
-## 12. Lecture consolidée du cas central
+Pour isoler l’effet réel de la Maisonnette, le modèle applique aux deux suites
+les mêmes hypothèses de prix, de demande, d’offre, de fiscalité et de prudence
+humaine. Seuls reviennent à leur niveau deux suites : 300 nuits-suite, 720 h de
+socle opérationnel, 8 000 € de charges fixes TTC, 1 500 € de renouvellement et
+50 000 € de comptes courants remboursés à hauteur de 10 000 € par an.
 
-| Indicateur | Valeur |
-|---|---:|
-| Trésorerie du projet avant nouveaux remboursements | 20 044,97 € |
-| Remboursement annuel du compte courant | 4 000,00 € |
-| Annuité du nouveau prêt | 11 548,74 € |
-| Service total des nouveaux financements | 15 548,74 € |
-| **Trésorerie consolidée finale** | **4 496,23 €** |
-| Couverture simplifiée du service total | **1,289** |
+Ce test n’est **pas un quatrième concept d’exploitation**. Il répond seulement à
+la question : que change une troisième suite si l’on ne modifie rien d’autre ?
 
-Ce ratio n’est pas un ratio bancaire contractuel. Il exclut les engagements
-existants confidentiels de la SCI et ne remplace pas l’analyse du prêteur.
+| Indicateur comparable | Deux suites | Trois suites | Effet Maisonnette |
+|---|---:|---:|---:|
+| Nuits-suite vendues | 300 | 450 | +150 |
+| Ventes publiques TTC | 88 575,00 € | 132 862,50 € | +44 287,50 € |
+| Charge opérationnelle | 2 145,47 h | 2 705,06 h | +559,59 h |
+| Relève rémunérée | 575 h | 1 175 h | +600 h |
+| Principal total avancé | 50 000 € | 80 000 € | +30 000 € |
+| Cible annuelle de remboursement | 10 000 € | 16 000 € | +6 000 € |
+| Solde consolidé après cible | −1 895,02 € | +4 044,97 € | **+5 939,99 €** |
+
+En conservant les mêmes exigences de qualité et de continuité, les deux suites
+ne financent pas simultanément le loyer, Jules à temps plein, la relève et le
+remboursement du socle de 50 000 €. La troisième suite apporte donc une capacité
+économique utile ; elle n’est pas seulement un investissement supplémentaire.
+Elle ajoute néanmoins environ 560 h de travail et exige 30 000 € d’avance.
 
 ## 13. Tests de résistance
 
-| Cas | Hypothèse | Ventes TTC | Société d’exploitation | SCI avant engagements existants | Consolidé | Couverture |
-|---|---|---:|---:|---:|---:|---:|
-| Référence | 150 nuits, 210 €, prêt SCI 50 k€ | 132 862,50 € | 4 044,97 € | 451,26 € | **4 496,23 €** | 1,289 |
-| Baisse | 140 nuits, 205 € | 121 905,00 € | −440,05 € | 451,26 € | **11,21 €** | 1,001 |
-| Sans capital | prêt SCI 60 k€, compte courant 20 k€ | 132 862,50 € | 4 044,97 € | −1 858,49 € | **2 186,48 €** | 1,122 |
-| Loyer haut | loyer 18 k€ | 132 862,50 € | −1 955,03 € | 6 451,26 € | **4 496,23 €** | 1,289 |
-| Consolidation | 160 nuits, 210 €, 1 325 h de relève | 141 720,00 € | — | — | **6 624,22 €** | 1,426 |
+| Cas | Hypothèse | Ventes TTC | Solde consolidé après principal | Lecture |
+|---|---|---:|---:|---|
+| Référence | 150 nuits, 210 €, 5 ans | 132 862,50 € | **+4 044,97 €** | cible couverte globalement, tension SCI |
+| Baisse | 140 nuits, 205 € | 121 905,00 € | **−440,05 €** | engagements non couverts |
+| Répartition 60/20 | factures compatibles | 132 862,50 € | **+4 044,97 €** | SCI à 0 €, exploitation à +4 044,97 € |
+| Loyer haut | loyer de 18 000 € | 132 862,50 € | **+4 044,97 €** | exploitation à −955,03 € |
+| Consolidation | 160 nuits, 210 € | 141 720,00 € | **+6 172,96 €** | 1 325 h de relève à financer |
+| Sensibilité | remboursement sur 6 ans | 132 862,50 € | **+6 711,63 €** | marge accrue, mais hors convention active |
 
-Le cas à 140 nuits et 205 € n’est pas un équilibre robuste : la société
-d’exploitation est déficitaire, même si le total consolidé reste positif de
-seulement 11 €. Le loyer à 18 000 € ne crée aucune valeur consolidée ; il
-déplace simplement la tension vers la société d’exploitation.
+Le cas à 140 nuits et 205 € ne rembourse pas l’ensemble des 16 000 € annuels.
+Le cas à 160 nuits améliore la marge mais demande 150 heures supplémentaires de
+relève. L’activité et les ressources humaines doivent donc être arbitrées
+ensemble.
 
-## 14. Aides et garanties à instruire
-
-Aucune aide n’est intégrée au plan de financement. Les pistes restent :
-
-- [Initiative Vosges Centre
-  Ouest](https://www.vosges.cci.fr/reseau-initiative-vosges-centre-ouest) :
-  prêt d’honneur personnel à taux zéro soumis à comité ;
-- [garantie création
-  Bpifrance](https://bpifrance-creation.fr/moment-de-vie/garanties-bancaires-quoi-sagit-il) ;
-- [France Active](https://www.franceactive.org/accelerer-votre-reussite/vous-etes-pret-e-s-a-creer-votre-entreprise/) ;
-- [zones France ruralités revitalisation — fiscalité](https://entreprendre.service-public.gouv.fr/vosdroits/F31139)
-  et [cotisations patronales](https://entreprendre.service-public.gouv.fr/vosdroits/F31048) ;
-- [Communauté de communes de la Région de
-  Rambervillers](https://www.2c2r.fr/aides-directes-pour-des-projets-a-vocation-touristique/),
-  sous réserve d’éligibilité écrite de la maison d’hôtes, du porteur et des
-  travaux.
-
-Les aides, exonérations et garanties restent à zéro tant qu’elles ne sont pas
-confirmées. Les demandes doivent être déposées avant engagement lorsqu’un
-dispositif l’exige.
-
-## 15. Annexe bancaire confidentielle
-
-Le dépôt est public. Les éléments suivants restent dans une annexe restreinte :
-
-- encours, taux, échéances et maturités des emprunts immobiliers existants ;
-- soldes historiques non publiés des comptes courants d’associés ;
-- hypothèques, rangs, cautions, garanties et clauses bancaires ;
-- relevés, comptes détaillés, déclarations fiscales et correspondances des
-  prêteurs.
-
-Sans cette annexe, le solde SCI de 451,26 € ne permet aucune conclusion sur sa
-capacité réelle à emprunter.
-
-## 16. Conditions de décision
+## 14. Conditions de décision
 
 Le plan ne peut être approuvé qu’après :
 
 1. un budget de 80 000 € ventilé par devis, propriétaire de l’actif et payeur ;
 2. la confirmation du plafond de cinq chambres et quinze personnes ;
 3. la mise à jour des formalités, assurances et vérifications des travaux ;
-4. un planning hebdomadaire couvrant 2 705 h, 1 équivalent temps plein, 1 175 h
-   de relève et au plus 200 h d’associés ;
-5. deux offres bancaires complètes ;
-6. l’analyse confidentielle de toutes les dettes et charges de la SCI ;
-7. une convention de compte courant sans intérêt, avec différé ou blocage si
-   la trésorerie ou la banque l’exige ;
-8. la validation du loyer de 12 000 € et du bail ;
-9. une décision collective formelle sur l’investissement et l’emprunteur.
+4. un planning hebdomadaire couvrant 2 705 h, un équivalent temps plein,
+   1 175 h de relève et au plus 200 h d’associés ;
+5. la validation du loyer de 12 000 € et du bail ;
+6. deux conventions de comptes courants sans intérêt, une par entité ;
+7. un registre confidentiel des montants versés et dus par associé ;
+8. un plan de trésorerie sur cinq ans montrant les cibles, reports et rattrapages ;
+9. une décision collective formelle sur l’investissement et la ventilation.
 
-## 17. Conclusion
+## 15. Conclusion
 
 Le modèle unifié à trois suites atteint 132 862,50 € de ventes TTC et finance,
 sur le papier, Jules à temps plein, 1 175 h de relève, 12 000 € de loyer, le
-renouvellement et les nouveaux financements. Sa marge consolidée de 4 496 €
-reste étroite.
+renouvellement et 16 000 € de remboursement annuel de principal. Il laisse
+environ 4 045 € de trésorerie consolidée.
 
-Le montage le plus cohérent consiste, sous réserve de la ventilation des devis,
-à faire porter par la SCI la dette liée au bâti et par la société d’exploitation
-le capital, le compte courant, le mobilier détachable et le besoin en fonds de
-roulement. Mais le loyer ne laisse que 451 € dans la SCI avant ses engagements
-existants. Le projet doit donc être arbitré sur la solvabilité de **chaque
-entité**, jamais sur le seul résultat consolidé.
+La comparaison à hypothèses constantes montre que la Maisonnette améliore le
+solde annuel après remboursement d’environ 5 940 €, malgré 30 000 € d’avance
+supplémentaire. Elle stabilise donc le modèle économique.
+
+La difficulté restante n’est pas la couverture consolidée mais la répartition
+entre entités : la ventilation provisoire 65 000 € dans la SCI et 15 000 € dans
+l’exploitation laisse la SCI à −1 000 € avant ses autres coûts. Les devis
+doivent dire si une ventilation 60 000 € / 20 000 € est justifiable. À défaut,
+la convention devra prévoir un report explicite ou un apport annuel ciblé à la
+SCI. Le projet doit être arbitré sur la trésorerie de **chaque entité**, jamais
+sur le seul total consolidé.

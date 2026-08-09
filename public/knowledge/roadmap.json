@@ -1,5 +1,5 @@
 {
-  "schema_version": "3.0",
+  "schema_version": "4.0",
   "as_of": "2026-08-09",
   "opening_target": "2027-04",
   "active_scope": "One guest-house operation with three suites and an 80,000 EUR works-and-installation envelope",
@@ -20,8 +20,8 @@
     { "date": "2026-09-15", "objective": "three-suite scope and room-count compliance confirmed", "status": "planned" },
     { "date": "2026-09-30", "objective": "legal and operating structure, lease principles and asset-allocation method selected", "status": "planned" },
     { "date": "2026-10-15", "objective": "80k quotes allocated between property works, detachable assets and working capital", "status": "planned" },
-    { "date": "2026-10-31", "objective": "confidential SCI debt capacity reviewed and financing carrier selected", "status": "planned" },
-    { "date": "2026-11-30", "objective": "bank offers, shareholder-current-account agreement and aid eligibility responses obtained", "status": "planned" },
+    { "date": "2026-10-31", "objective": "80k interest-free shareholder-current-account commitments allocated between the SCI and operating company", "status": "planned" },
+    { "date": "2026-11-30", "objective": "separate shareholder-current-account agreements, individual schedules and five-year cash plans approved", "status": "planned" },
     { "date": "2026-12-15", "objective": "sellable three-suite offer, conditions and pre-launch communication ready", "status": "planned" },
     { "date": "2027-02-28", "objective": "tools, contracts, staffing and procedures ready for testing", "status": "planned" },
     { "date": "2027-03-31", "objective": "go or no-go after dry runs, real photography and cash review", "status": "planned" },
@@ -29,12 +29,12 @@
   ],
   "critical_dependencies": [
     "three suites -> five rooms and no more than fifteen guests -> updated municipal declaration and insurance",
-    "80k itemized quotes -> property-incorporated versus detachable asset classification -> invoice payers and borrowers",
-    "confidential existing SCI debt schedule -> capacity for a new 50k property loan -> bank decision",
-    "operating company -> lease with SCI -> bank, accounting and contracts -> booking and payment",
+    "80k itemized quotes -> property-incorporated versus detachable asset classification -> invoice owners and payers",
+    "50k baseline shareholder current accounts plus 30k Maisonnette advance -> separate entity agreements -> five-year principal targets",
+    "operating company -> lease with SCI -> accounting and contracts -> booking and payment",
     "VAT qualification -> annual tax-inclusive versus accounting model -> pricing and cash forecast",
     "weekly staffing roster -> 1 full-time equivalent Jules plus 1,175 paid support hours -> service continuity",
-    "interest-free 20k shareholder current account -> written agreement -> possible blocking, deferral or subordination behind bank debt",
+    "provisional 65k SCI and 15k operating-company shareholder current accounts -> written agreements -> annual liquidity decision and possible catch-up",
     "market-consistent 12k rent -> lease -> standalone solvency of both entities",
     "hammam and Nordic bath scope -> safety and insurance -> guest access and slots",
     "pantry and signature table -> recipes and measured labor -> hygiene, allergens, alcohol licensing and booking",
@@ -48,9 +48,9 @@
     "lease, market-consistent 12k rent and allocation of works and recurring costs",
     "invoice and asset allocation between SCI and operating company",
     "tax and VAT real model",
-    "new bank borrower, annual percentage rate, fees, insurance, guarantees and covenants",
-    "confidential capacity of the SCI after all existing debt service and costs",
-    "20k interest-free shareholder-current-account agreement, repayment priority, blocking, deferral and subordination",
+    "80k interest-free shareholder-current-account allocation, agreements and five-year repayment targets",
+    "eligibility of every contributor to hold a shareholder current account in the receiving entity",
+    "standalone annual liquidity of the SCI and operating company before each principal repayment",
     "payroll, weekly rest and paid-support contracts",
     "associate contribution treatment",
     "pool, hammam and Nordic bath obligations",
@@ -60,33 +60,31 @@
   "economic_evidence_to_collect": [
     "itemized quotes reconciling to the 80k total envelope",
     "invoice allocation by asset owner and beneficiary",
-    "two bank offers for the 50k loan and one 60k downside quotation",
-    "restricted schedule of every existing SCI loan payment and recurring SCI cost",
+    "restricted schedule of each associate contribution, receiving entity and outstanding principal",
+    "five-year cash schedule for the SCI and operating company, including deferred-target rules",
     "Urssaf and payroll validation for full-time Jules",
     "paid-support quote around 25 EUR per hour and roster for 1,175 hours",
     "three timed dry stays across all three suites",
     "breakfast, pantry and signature-table recipes and labor measurements",
     "hammam and Nordic-bath energy, water, wood, consumables and opening-time measurements",
     "proof for 150 nights and 210 EUR achieved average within the 180–220 EUR grid",
-    "downside test at 140 nights and 205 EUR",
-    "written eligibility responses from Initiative Vosges, France Active or Bpifrance and the local authority before recognizing any aid"
+    "downside test at 140 nights and 205 EUR"
   ],
   "decision_gates": [
-    "Do not borrow until the 80k spend is allocated by invoice and asset owner.",
-    "Do not select an operating-company loan for property works without a robust validated convention and standalone repayment capacity.",
-    "Do not select an SCI loan until the confidential full-debt schedule confirms that the 451 EUR reference margin is sufficient.",
-    "Do not make the 4k annual shareholder-current-account repayment unconditional if it would create a cash deficit or breach bank covenants.",
+    "Do not allocate the 80k shareholder current accounts until the spend is classified by invoice and asset owner.",
+    "Do not make the 16k consolidated annual principal target unconditional if it would create a cash deficit in either entity.",
+    "Do not use consolidated cash to conceal the SCI's 1k annual shortfall under the provisional 65k/15k allocation.",
     "Do not raise rent to 18k while it makes the operating company cash-negative.",
     "Do not interpret the 140-night case as viable merely because consolidated cash is slightly positive."
   ],
-  "confidential_bank_annex": {
+  "confidential_shareholder_current_account_annex": {
     "repository_status": "excluded_from_public_repository",
     "contents": [
-      "exact existing property debt balances, rates, payments and terms",
+      "associate names and individual contribution amounts",
       "undisclosed historical shareholder-current-account balances",
-      "bank securities, guarantees and covenants",
-      "bank statements, tax returns and lender correspondence"
+      "signed agreements, approvals and personal account details",
+      "repayment history and outstanding principal by associate"
     ],
-    "rule": "Use these data only for accountant, lawyer and lender review; publish only non-sensitive derived conclusions."
+    "rule": "Use these data only for authorized associates and professional review; publish only non-sensitive derived conclusions."
   }
 }
