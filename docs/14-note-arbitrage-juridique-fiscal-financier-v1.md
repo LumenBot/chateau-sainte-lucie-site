@@ -144,13 +144,15 @@ Sources :
 - financement d'un actif d'exploitation : compte courant d'associé dans la
   société d'exploitation ou prêt écrit à cette société ;
 - une convention par prêteur et par emprunteur : montant plafond, tirages,
-  intérêt ou gratuité, maturité, remboursement anticipé, subordination et décès ;
+  absence de rémunération, maturité, remboursement anticipé, subordination et
+  décès ;
 - échéancier compatible avec un plancher de trésorerie et les engagements
   bancaires ;
 - déclaration fiscale des contrats de prêts lorsque le seuil applicable est
   franchi ;
-- intérêts éventuels fixés seulement après validation de leur déductibilité et
-  des limites fiscales.
+- échéanciers séparés : 7 000 € de principal par an pour les 35 000 € dus par
+  la société civile immobilière et 3 000 € par an pour les 15 000 € dus par la
+  société d'exploitation, sous réserve de la trésorerie et des conventions.
 
 Un écrit est requis au-delà de 1 500 € pour la preuve civile et les prêts de
 plus de 5 000 € font l'objet d'une déclaration fiscale. Les formulaires et seuils

@@ -1,10 +1,22 @@
 {
-  "schema_version": "5.0",
+  "schema_version": "5.1",
   "as_of": "2026-08-09",
   "model_type": "standard_annual_operating_model",
   "status": "active_working_reference",
   "purpose": "Transparent annual model for two guest suites; not an accountant, payroll, tax or legal forecast",
   "currency": "EUR",
+  "scenario_comparison_reference": {
+    "file": "operating-scenarios.json",
+    "concepts": ["agile_base", "seasonal_premium_table", "recommended_hybrid"],
+    "strategic_concept_recommended_for_collective_arbitration": "recommended_hybrid",
+    "recommended_reference_case": { "nights_per_suite": 140, "average_public_price_ttc": 205, "status": "working_assumption" },
+    "public_offer_effect": "none_without_separate_collective_decision",
+    "interpretation": "This file remains the detailed technical reference for the agile base. The hybrid is a strategic recommendation for collective arbitration, not an approved operating standard."
+  },
+  "glossary": {
+    "SCI": "Société civile immobilière CSL, propriétaire du château",
+    "operating_company": "Future société commerciale chargée de l'exploitation"
+  },
   "status_vocabulary": {
     "validated_project_fact": "Collectively confirmed project fact",
     "working_assumption": "Current planning input that remains adjustable",
@@ -19,8 +31,8 @@
     "standard_vat_mode_is_adjustable": true,
     "contractual_sci_rent_is_an_input": true,
     "operating_result_is_the_residual": true,
-    "cca_principal_repayment_is_cash_flow_not_operating_expense": true,
-    "cca_interest_is_separated_from_principal_and_entity_specific": true,
+    "shareholder_current_account_principal_repayment_is_cash_flow_not_operating_expense": true,
+    "shareholder_current_accounts_are_repaid_by_their_debtor_entity": true,
     "renewal_and_cash_reserve_are_separated_from_operating_expenses": true,
     "paid_support_input_is_exact": true,
     "support_recommendation_and_coverage_gap_are_separate_outputs": true,
@@ -139,32 +151,28 @@
   "shareholder_current_accounts": {
     "total_principal": { "value": 50000, "unit": "EUR", "status": "working_assumption" },
     "accounts": [
-      { "debtor_entity": "SCI", "principal": 35000, "unit": "EUR", "status": "working_assumption" },
+      { "debtor_entity": "property_company_SCI", "principal": 35000, "unit": "EUR", "status": "working_assumption" },
       { "debtor_entity": "operating_company", "principal": 15000, "unit": "EUR", "status": "working_assumption" }
     ],
     "test_term": { "value": 5, "unit": "years", "status": "working_assumption" },
-    "annual_remuneration_rate": { "value": 0.0433, "unit": "annual_rate", "status": "external_validation_required", "adjustable": true, "note": "Illustrative tax reference current on 2026-08-09 for relevant closing periods; update before signing. A 10% annual rate is a stress case, not the recommended base." },
     "simulation_method": {
-      "payment_type": "linear_principal_repayment_with_interest_on_opening_balance",
+      "payment_type": "linear_principal_repayment_only",
       "principal_formula": "principal / years",
-      "interest_formula": "opening_principal * annual_rate",
-      "first_year_debt_service_formula": "principal / years + opening_principal * annual_rate",
       "entity_separation": "SCI debt service is paid by SCI cash; operating-company debt service is paid by operating-company cash",
-      "accounting_treatment": "Interest is separated as a financial expense of the debtor entity; principal repayment is a cash outflow and not an operating expense."
+      "accounting_treatment": "Principal repayment is a cash outflow and balance-sheet movement, not an operating expense."
     },
     "simulation_outputs_at_standard_inputs": {
-      "combined_first_year_debt_service_approx": 12165,
-      "sci_first_year_debt_service_approx": 8516,
-      "operating_company_first_year_debt_service_approx": 3650,
-      "combined_year_one_interest": 2165,
+      "combined_annual_principal_repayment": 10000,
+      "sci_annual_principal_repayment": 7000,
+      "operating_company_annual_principal_repayment": 3000,
       "combined_year_one_principal_repayment": 10000,
-      "combined_interest_over_five_years_approx": 6495
+      "combined_principal_repaid_over_five_years": 50000
     },
-    "warning": "The rate is a simulation input, not a promised return. A 10% annual rate can exceed tax deductibility limits and may create an usury-law issue depending on the SCI loan qualification. Convention terms, legal limits, tax treatment, payment subordination and repayment capacity require professional validation."
+    "warning": "The two advances require separate written agreements and repayment schedules. Repayment priority, possible subordination and the capacity of each debtor entity require professional validation."
   },
   "investment_financing_bridge": {
     "active_investment_envelope_ttc": 59000,
-    "cca_financing_total": 50000,
+    "shareholder_current_account_financing_total": 50000,
     "remaining_source_to_define": 9000,
     "unit": "EUR",
     "status": "working_assumption"
@@ -195,11 +203,10 @@
     "spa_sales_ttc": "spa_sold_suite_days * spa_price_ttc",
     "table_sales_count": "occupied_suite_nights * table_take_rate",
     "table_sales_ttc": "table_sales_count * table_price_ttc",
-    "operating_result_before_rent_and_interest": "accounting_revenue - variable_costs - fixed_operating_costs - payroll - paid_support",
-    "operating_result_after_rent_before_interest": "operating_result_before_rent_and_interest - contractual_sci_rent",
-    "operating_result_after_financial_interest": "operating_result_after_rent_before_interest - operating_company_CCA_interest",
-    "operating_company_cash_after_financing": "operating_result_after_financial_interest - renewal_allocation - cash_reserve_contribution - operating_company_CCA_principal_repayment",
-    "sci_cash_after_CCA_debt_service_before_other_SCI_costs": "sci_rent_received - sci_CCA_interest - sci_CCA_principal_repayment"
+    "operating_result_before_rent": "accounting_revenue - variable_costs - fixed_operating_costs - payroll - paid_support",
+    "operating_result_after_rent": "operating_result_before_rent - contractual_sci_rent",
+    "operating_company_cash_after_financing": "operating_result_after_rent - renewal_allocation - cash_reserve_contribution - operating_company_principal_repayment",
+    "sci_cash_after_principal_repayment_before_other_sci_costs": "sci_rent_received - sci_principal_repayment"
   },
   "activity_tests": [
     {
@@ -234,10 +241,11 @@
     "Obtain the payroll cost and working-time structure for 0.8 FTE Jules.",
     "Validate the lease, the 12,000 EUR rent test and the 18,000 EUR target against market value and cost allocation.",
     "Draft separate SCI and operating-company shareholder-current-account agreements.",
-    "Update and validate the adjustable CCA remuneration rate; keep 10% annual only as a legal and tax stress test.",
+    "Define separate written repayment schedules for the SCI and the operating company, including priority and possible subordination.",
     "Confirm the local-board unit, contents, food-safety obligations and measured one-hour service assumption.",
     "Measure hammam and Nordic-bath opening days, wood, water, consumables and labor.",
     "Replace each fixed and variable cost with a quote, invoice or dry-run measurement.",
-    "Create a named weekly roster for Jules, paid support and associate contribution."
+    "Create a named weekly roster for Jules, paid support and associate contribution.",
+    "Use operating-scenarios.json to compare the agile base, the seasonal premium-table study and the recommended hybrid concept at 60, 90, 120 and 150 nights per suite."
   ]
 }

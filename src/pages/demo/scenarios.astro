@@ -3,10 +3,13 @@ import { Image } from "astro:assets";
 import DemoLayout from "../../layouts/DemoLayout.astro";
 import { withBase } from "../../utils/url";
 import {
+  hybridActivityCases,
+  hybridRecommendation,
   scenarioA,
   scenarioBCentral,
   scenarioBStretch,
   seasonalBreakEven,
+  shareholderAdvance,
   theoreticalCoupleBasket,
 } from "../../data/operatingScenarios.mjs";
 import "../../styles/scenarios.css";
@@ -19,6 +22,36 @@ const money = (value: number) => new Intl.NumberFormat("fr-FR", { style: "curren
 const integer = (value: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(value);
 const percent = (value: number) => new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 0 }).format(value);
 const signedMoney = (value: number) => `${value >= 0 ? "+ " : "− "}${money(Math.abs(value))}`;
+const fteLabel = (value: number) => value === 0 ? "aucun salaire" : value >= 1 ? "temps plein" : `${integer(value * 100)} % d’un temps plein`;
+const hybridSimulationQuery = new URLSearchParams({
+  scenario: "libre",
+  sellableNightsPerSuite: "220",
+  nightsPerSuite: "140",
+  averageNightPrice: "205",
+  averageStay: "2.5",
+  directShare: "50",
+  averageGuests: "2.1",
+  spaTake: "70",
+  spaDailyPrice: "60",
+  diningMode: "hybrid",
+  diningTake: "35",
+  diningDailyPrice: "55",
+  lunchTake: "0",
+  dinnerTake: "15",
+  dinnerPrice: "76",
+  pairingTake: "0",
+  barTake: "0",
+  diningCostRate: "44",
+  diningLaborHours: "0.25",
+  dinnerLaborHours: "4",
+  fixedDigital: "2500",
+  julesFte: "1",
+  plannedSupportHours: "300",
+  familyHours: "200",
+  renewalProvision: "1500",
+  contractRent: "12000",
+}).toString();
+const hybridSimulationLink = withBase(`/demo/pilotage?${hybridSimulationQuery}#simulateur`);
 
 const months = ["Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre"];
 
@@ -26,30 +59,30 @@ const pnlA = [
   ["Ventes publiques TTC", scenarioA.publicRevenue, "revenue"],
   ["Coûts variables", 14364, "cost"],
   ["Charges fixes", 7000, "cost"],
-  ["Jules · 0,80 ETP", 22400, "cost"],
+  ["Jules · 80 % d’un temps plein", 22400, "cost"],
   ["Relève rémunérée · 100 h", 2500, "cost"],
   ["Résultat avant loyer", 13736, "subtotal"],
-  ["Loyer SCI", 12000, "cost"],
+  ["Loyer versé à la SCI", 12000, "cost"],
   ["Résultat après loyer", scenarioA.operatingResultAfterRent, "subtotal"],
-  ["Renouvellement", scenarioA.renewal, "cash"],
-  ["Trésorerie avant CCA", scenarioA.cashAfterRenewal, "total"],
-  ["Service annuel du CCA OpCo", 3649.5, "cash"],
-  ["Trésorerie OpCo après CCA", scenarioA.opcoCashAfterLoanService, "final"],
+  ["Renouvellement des équipements", scenarioA.renewal, "cash"],
+  ["Trésorerie avant remboursement de l’avance", scenarioA.cashAfterRenewal, "total"],
+  ["Remboursement annuel du principal avancé à l’exploitation", shareholderAdvance.operatingCompanyAnnualPrincipal, "cash"],
+  ["Trésorerie finale de la société d’exploitation", scenarioA.operatingCompanyCashAfterPrincipalRepayment, "final"],
 ] as const;
 
 const pnlB = [
   ["Ventes publiques TTC", scenarioBCentral.publicRevenue, "revenue"],
   ["Coûts variables", scenarioBCentral.variableCosts, "cost"],
-  ["Charges fixes incluant le socle restauration", scenarioBCentral.fixedCosts, "cost"],
-  ["Jules · 0,75 ETP", scenarioBCentral.julesCost, "cost"],
+  ["Charges fixes avec socle restauration", scenarioBCentral.fixedCosts, "cost"],
+  ["Jules · 75 % d’un temps plein", scenarioBCentral.julesCost, "cost"],
   ["Relève rémunérée · 150 h", scenarioBCentral.paidReliefCost, "cost"],
   ["Résultat avant loyer", scenarioBCentral.resultBeforeRent, "subtotal"],
-  ["Loyer SCI", scenarioBCentral.rent, "cost"],
+  ["Loyer versé à la SCI", scenarioBCentral.rent, "cost"],
   ["Résultat après loyer", scenarioBCentral.resultAfterRent, "subtotal"],
-  ["Renouvellement", scenarioBCentral.renewal, "cash"],
-  ["Trésorerie avant CCA", scenarioBCentral.cashAfterRenewal, "total"],
-  ["Service annuel du CCA OpCo", scenarioBCentral.opcoLoanService, "cash"],
-  ["Trésorerie OpCo après CCA", scenarioBCentral.opcoCashAfterLoanService, "final"],
+  ["Renouvellement des équipements", scenarioBCentral.renewal, "cash"],
+  ["Trésorerie avant remboursement de l’avance", scenarioBCentral.cashAfterRenewal, "total"],
+  ["Remboursement annuel du principal avancé à l’exploitation", scenarioBCentral.operatingCompanyAnnualPrincipal, "cash"],
+  ["Trésorerie finale de la société d’exploitation", scenarioBCentral.operatingCompanyCashAfterPrincipalRepayment, "final"],
 ] as const;
 
 const workloadB = [
@@ -66,301 +99,286 @@ const workloadB = [
 ---
 
 <DemoLayout
-  title="Comparatif des scénarios d’exploitation — Les Nuits au Château"
-  description="Comparaison économique, humaine et stratégique entre le modèle annuel allégé et une ouverture saisonnière avec table d’hôtes."
+  title="Aide à la décision — Les Nuits au Château"
+  description="Comprendre, comparer et arbitrer les modèles d’exploitation des Suites de Sainte-Lucie."
   section="scenarios"
 >
   <div class="demo-shell scenarios-page">
-    <header class="scenarios-hero">
+    <header class="scenarios-hero decision-hero">
       <div class="scenarios-hero__copy">
-        <p class="demo-kicker">Atelier de décision · photographie du 9 août 2026</p>
-        <h1>Deux modèles.<br /><em class="gold light">Une même promesse.</em></h1>
-        <p class="lede">Faut-il privilégier le volume maîtrisé d’une maison d’hôtes ouverte largement, ou concentrer l’expérience sur vingt-et-un week-ends avec une véritable table ? Cette page rend visibles le potentiel, le coût et l’engagement humain de chaque choix.</p>
+        <p class="demo-kicker">Aide à la décision · document autonome · 9 août 2026</p>
+        <h1>Quel modèle pour<br /><em class="gold light">faire vivre le château ?</em></h1>
+        <p class="lede">Cette page présente le projet, les contraintes et les choix actuellement ouverts. Elle permet à un associé — même sans avoir suivi les échanges précédents — de comprendre deux modèles d’exploitation, leurs conséquences financières et humaines, puis la voie hybride que nous recommandons.</p>
         <div class="demo-actions">
-          <button class="demo-button" type="button" data-scenario-share>Copier le lien de comparaison</button>
-          <a class="demo-button secondary" href={withBase("/demo/pilotage#simulateur")}>Ouvrir le simulateur</a>
+          <button class="demo-button" type="button" data-scenario-share>Copier ce lien</button>
+          <a class="demo-button secondary" href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Explorer la modélisation</a>
         </div>
       </div>
       <figure class="scenarios-hero__image">
         <Image src={tableHotes} alt="Projection de la table d’hôtes dressée devant la cheminée du château" widths={[620, 900, 1200]} sizes="(max-width: 900px) 100vw, 44vw" loading="eager" />
-        <figcaption><strong>La table comme expérience.</strong><span>Projection d’intention après travaux · non contractuelle</span></figcaption>
+        <figcaption><strong>Une demeure privée à ouvrir sans la banaliser.</strong><span>Projection d’intention après travaux · non contractuelle</span></figcaption>
       </figure>
     </header>
 
-    <section class="scenario-verdict" aria-labelledby="verdict-title">
-      <p class="demo-kicker">Conclusion de travail</p>
-      <div>
-        <h2 id="verdict-title">Le scénario saisonnier enrichit la promesse, mais son calendrier plafonne trop fortement le revenu.</h2>
-        <p>Le modèle annuel allégé demeure le plus soutenable des deux. La table d’hôtes répond à un vrai défaut de l’offre locale et augmente fortement le panier, mais 63 nuits vendables par suite ne suffisent pas à financer simultanément 0,75 ETP, la relève, 12 k€ de loyer et le remboursement du CCA. La piste la plus solide est donc une <strong>hybridation : des week-ends de table signature à l’intérieur d’un calendrier plus large</strong>, après mesure réelle du temps et de la marge.</p>
+    <section class="decision-context" aria-labelledby="context-title">
+      <div class="decision-context__intro">
+        <p class="demo-kicker">Le projet en une minute</p>
+        <h2 id="context-title">Deux suites. Une expérience intime. Trois équilibres à tenir.</h2>
+        <p>Les Nuits au Château accueilleront deux suites privatives au premier étage du Château de Sainte-Lucie, à Rambervillers. La promesse associe demeure historique, parc d’un hectare, piscine naturelle, hammam et bain nordique. Le prix public de la suite nue restera compris entre 180 et 220 € la nuit, petit-déjeuner inclus.</p>
       </div>
-      <span class="scenario-verdict__badge">Avis recommandé</span>
+      <div class="decision-context__facts">
+        <article><span>01 · Promesse client</span><strong>Un dîner possible chaque soir</strong><p>La faible densité de restauration alentour ne doit jamais devenir un irritant du séjour.</p></article>
+        <article><span>02 · Équilibre humain</span><strong>Un emploi juste pour Jules</strong><p>Le temps rémunéré doit rester cohérent avec la charge réelle, les repos et l’implication promise par les associés.</p></article>
+        <article><span>03 · Équilibre économique</span><strong>Loyer et avances remboursés</strong><p>12 000 € de loyer annuel à la société civile immobilière (SCI) et 50 000 € d’avances d’associés à rembourser sur cinq ans, sans intérêt dans cette simulation.</p></article>
+      </div>
     </section>
 
-    <section class="scenario-arithmetic" aria-labelledby="arithmetic-title">
+    <section class="decision-baseline" aria-labelledby="baseline-title">
       <div>
-        <p class="demo-kicker">Le calcul qui structure le débat</p>
-        <h2 id="arithmetic-title">Le panier monte. Le plafond baisse.</h2>
+        <p class="demo-kicker">Ce qui est commun à tous les calculs</p>
+        <h2 id="baseline-title">Une même base pour comparer honnêtement.</h2>
       </div>
-      <div class="scenario-equation" aria-label="Calcul de capacité du scénario saisonnier">
-        <span><strong>7</strong> mois</span><b>×</b><span><strong>3</strong> semaines</span><b>×</b><span><strong>3</strong> nuits</span><b>=</b><span class="result"><strong>63</strong> nuits / suite</span>
+      <div class="decision-baseline__grid">
+        <article><span>Capacité</span><strong>2 suites</strong><small>une nuit-suite = une suite occupée pendant une nuit</small></article>
+        <article><span>Prix moyen de travail</span><strong>200 €</strong><small>dans une grille publique de 180 à 220 €</small></article>
+        <article><span>Loyer obligatoire</span><strong>12 000 € / an</strong><small>montant à documenter dans le futur bail</small></article>
+        <article><span>Coût employeur de référence</span><strong>28 000 € / an</strong><small>pour Jules à temps plein, à confirmer par devis de paie</small></article>
+        <article><span>Avance à la SCI</span><strong>35 000 €</strong><small>soit 7 000 € de principal à rembourser chaque année</small></article>
+        <article><span>Avance à l’exploitation</span><strong>15 000 €</strong><small>soit 3 000 € de principal à rembourser chaque année</small></article>
       </div>
-      <div class="scenario-arithmetic__facts">
-        <article><span>Capacité totale</span><strong>126 nuits-suite</strong><small>deux suites, remplissage théorique de 100 %</small></article>
-        <article><span>Panier maximal décrit</span><strong>{money(theoreticalCoupleBasket.total)}</strong><small>pour un couple et une nuit, hors consommations de bar supplémentaires</small></article>
-        <article><span>CA maximal arithmétique</span><strong>{money(theoreticalCoupleBasket.annualRevenueAtCapacity)}</strong><small>si chaque suite achète chaque prestation chaque nuit</small></article>
-      </div>
-      <p class="scenario-correction"><strong>Clarification :</strong> les suppléments totalisent {money(theoreticalCoupleBasket.extrasIncludingSpa)}, et non 210 €. Les 210 € correspondent au déjeuner, au dîner et à l’accord pour deux, <em>hors spa</em>. Même en facturant toutes les nuits 220 €, le plafond hors bar ne serait que de 61 740 €.</p>
+      <p class="scenario-note standalone"><strong>Lecture :</strong> les ventes sont présentées toutes taxes comprises (TTC). Le remboursement du capital n’est pas une charge d’exploitation : il apparaît après le résultat, comme une sortie de trésorerie. Les deux entités restent séparées ; le loyer reçu par la SCI ne peut pas combler librement un déficit de la société d’exploitation.</p>
     </section>
 
-    <nav class="scenario-jump" aria-label="Navigation dans la comparaison">
-      <a href="#comparaison">Vue comparée</a>
-      <a href="#scenario-a">Modèle diffus</a>
-      <a href="#scenario-b">Week-ends de table</a>
-      <a href="#recommandation">Recommandation</a>
+    <nav class="scenario-jump" aria-label="Navigation dans l’aide à la décision">
+      <a href="#comparaison">Comparer</a>
+      <a href="#scenario-a">Socle agile</a>
+      <a href="#scenario-b">Saison table</a>
+      <a href="#restauration">Solution de dîner</a>
+      <a href="#hybride">Voie recommandée</a>
+      <a href="#seuils">Seuils d’activité</a>
     </nav>
 
     <section id="comparaison" class="scenario-section" aria-labelledby="comparison-title">
       <div class="scenario-section__head">
-        <div><p class="demo-kicker">Lecture immédiate</p><h2 id="comparison-title">La comparaison en neuf indicateurs.</h2></div>
-        <p>Les deux colonnes utilisent une franchise de TVA comme hypothèse de simulation et un loyer SCI de 12 k€. Les taux et régimes devront être validés avant décision.</p>
+        <div><p class="demo-kicker">Les deux hypothèses étudiées</p><h2 id="comparison-title">Deux réponses opposées à la même question.</h2></div>
+        <p>Le scénario A protège la capacité d’hébergement ; le scénario B protège la qualité de service alimentaire en concentrant l’ouverture. Aucun des deux ne constitue encore la décision finale.</p>
       </div>
+      <div class="scenario-reading-grid scenario-introductions">
+        <article>
+          <span>A</span><p class="demo-kicker">Socle agile</p><h3>Ouvrir largement, servir simplement.</h3>
+          <p>120 nuits vendues par suite sur un calendrier souple. La suite, le parc et la piscine forment le cœur de l’offre ; le spa et une planche du territoire complètent le séjour. Jules est financé à 80 % d’un temps plein, avec une forte implication familiale.</p>
+          <a href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Tester ce scénario dans le simulateur</a>
+        </article>
+        <article>
+          <span>B</span><p class="demo-kicker">Saison table d’hôtes</p><h3>Ouvrir peu, servir intensément.</h3>
+          <p>Avril à octobre, trois semaines sur quatre, uniquement du jeudi au dimanche. Le déjeuner, le dîner, les vins et le spa enrichissent fortement chaque nuit, mais la capacité est limitée à 63 nuits par suite avant même de parler de remplissage.</p>
+          <a href={withBase("/demo/pilotage?scenario=saisonnier#simulateur")}>Tester ce scénario dans le simulateur</a>
+        </article>
+      </div>
+
       <div class="scenario-scorecard" role="table" aria-label="Comparaison des deux scénarios">
         <div class="scenario-scorecard__head" role="row">
           <span role="columnheader">Indicateur</span>
-          <strong role="columnheader">A · Modèle diffus</strong>
-          <strong role="columnheader">B · Week-ends de table</strong>
+          <strong role="columnheader">A · Socle agile</strong>
+          <strong role="columnheader">B · Saison table d’hôtes</strong>
         </div>
         {[
-          ["Nuits vendues / suite", `${scenarioA.soldNightsPerSuite}`, `${scenarioBCentral.soldNightsPerSuite} sur 63`],
+          ["Calendrier", "ouverture large et flexible", "21 semaines · jeudi au dimanche"],
+          ["Nuits vendues par suite", `${scenarioA.soldNightsPerSuite}`, `${scenarioBCentral.soldNightsPerSuite} sur 63 possibles`],
           ["Prix moyen de la suite", money(scenarioA.averageNightPrice), money(scenarioBCentral.averageNightPrice)],
           ["Ventes publiques TTC", money(scenarioA.publicRevenue), money(scenarioBCentral.publicRevenue)],
-          ["Panier total / nuit-suite", money(scenarioA.averageBasketPerSuiteNight), money(scenarioBCentral.averageBasketPerSuiteNight)],
-          ["Extras / nuit-suite", money(scenarioA.averageExtrasPerSuiteNight), money(scenarioBCentral.averageExtrasPerSuiteNight)],
+          ["Suppléments moyens par nuit-suite", money(scenarioA.averageExtrasPerSuiteNight), money(scenarioBCentral.averageExtrasPerSuiteNight)],
           ["Temps annuel à organiser", `${integer(scenarioA.operationsHours)} h`, `${integer(scenarioBCentral.operationsHours)} h`],
-          ["Implication des associés", `${integer(scenarioA.familyHours)} h`, `${integer(scenarioBCentral.familyHours)} h`],
-          ["Trésorerie avant CCA", signedMoney(scenarioA.cashAfterRenewal), signedMoney(scenarioBCentral.cashAfterRenewal)],
-          ["Trésorerie après CCA OpCo", signedMoney(scenarioA.opcoCashAfterLoanService), signedMoney(scenarioBCentral.opcoCashAfterLoanService)],
+          ["Temps familial non rémunéré", `${integer(scenarioA.familyHours)} h`, `${integer(scenarioBCentral.familyHours)} h`],
+          ["Jules financé", "80 % d’un temps plein", "75 % d’un temps plein"],
+          ["Après loyer et renouvellement", signedMoney(scenarioA.cashAfterRenewal), signedMoney(scenarioBCentral.cashAfterRenewal)],
+          ["Après remboursement annuel de l’avance", signedMoney(scenarioA.operatingCompanyCashAfterPrincipalRepayment), signedMoney(scenarioBCentral.operatingCompanyCashAfterPrincipalRepayment)],
         ].map(([label, a, b]) => (
           <div class="scenario-scorecard__row" role="row">
             <span role="rowheader">{label}</span><strong>{a}</strong><strong class:list={{ negative: String(b).startsWith("−") }}>{b}</strong>
           </div>
         ))}
       </div>
-      <div class="scenario-reading-grid">
-        <article><span>A</span><h3>Plus sobre, plus robuste</h3><p>Le chiffre d’affaires repose d’abord sur l’hébergement. Le modèle frôle l’équilibre courant mais demande encore beaucoup de temps familial et ne rembourse pas son CCA.</p></article>
-        <article><span>B</span><h3>Plus désirable, plus fragile</h3><p>Les expériences représentent {percent(scenarioBCentral.experienceRevenue / scenarioBCentral.publicRevenue)} du revenu. La promesse gagne en valeur, mais la rareté volontaire des dates détruit davantage de capacité qu’elle ne crée de marge.</p></article>
-      </div>
     </section>
 
     <section id="scenario-a" class="scenario-section scenario-detail" aria-labelledby="scenario-a-title">
-      <div class="scenario-label"><span>A</span><small>{scenarioA.status}</small></div>
+      <div class="scenario-label"><span>A</span><small>Scénario sauvegardé</small></div>
       <div class="scenario-detail__intro">
-        <div><p class="demo-kicker">Exploitation annuelle allégée</p><h2 id="scenario-a-title">Vendre davantage de nuits.<br />Simplifier chaque séjour.</h2></div>
-        <p>Deux suites commercialisées à 180–220 €, un spa facultatif et une planche du territoire simple. L’effort se répartit sur l’année ; la restauration ne devient pas le cœur du métier.</p>
+        <div><p class="demo-kicker">Socle agile · exploitation diffuse</p><h2 id="scenario-a-title">La maison d’hôtes d’abord.</h2></div>
+        <p>Ce modèle maximise les dates disponibles et simplifie les prestations. Il suppose 120 nuits vendues par suite, soit 240 nuits-suite au total. Le spa est une option quotidienne ; la restauration se limite à une planche prête à dresser.</p>
       </div>
-
+      <div class="scenario-offer-grid compact">
+        <article><span>Suite nue</span><strong>180–220 €</strong><p>Petit-déjeuner, parc et piscine naturelle inclus.</p></article>
+        <article><span>Spa</span><strong>50 € / suite / jour</strong><p>Hammam et bain nordique, sur réservation.</p></article>
+        <article><span>Planche du territoire</span><strong>50 € / service</strong><p>Produits locaux prêts à servir, sans cuisine élaborée.</p></article>
+      </div>
       <div class="scenario-kpis">
         <article><span>Activité</span><strong>120</strong><small>nuits vendues / suite / an</small></article>
         <article><span>Ventes</span><strong>{money(scenarioA.publicRevenue)}</strong><small>dont {money(scenarioA.experienceRevenue)} d’expériences</small></article>
-        <article><span>Emploi</span><strong>0,80 ETP</strong><small>Jules + 100 h de relève</small></article>
-        <article class="warn"><span>Après CCA OpCo</span><strong>{signedMoney(scenarioA.opcoCashAfterLoanService)}</strong><small>le remboursement n’est pas couvert</small></article>
+        <article><span>Moyens humains</span><strong>80 %</strong><small>Jules + 100 h payées + 380 h familiales</small></article>
+        <article class="warn"><span>Trésorerie finale</span><strong>{signedMoney(scenarioA.operatingCompanyCashAfterPrincipalRepayment)}</strong><small>après remboursement de 3 000 € de principal</small></article>
       </div>
-
-      <div class="scenario-offer-grid compact">
-        <article><span>Suite nue</span><strong>180–220 €</strong><p>Parc et piscine naturelle inclus.</p></article>
-        <article><span>Spa</span><strong>50 € / suite / jour</strong><p>Hammam et bain nordique, 75 % des séjours visés.</p></article>
-        <article><span>Planche</span><strong>50 € / service</strong><p>Commande quotidienne simple, 25 % des nuits-suite visées.</p></article>
-      </div>
-
       <div class="scenario-two-columns">
-        <div>
-          <h3>Ce que ce modèle protège</h3>
-          <ul class="scenario-list positive">{scenarioA.strengths.map((item) => <li>{item}</li>)}</ul>
-        </div>
-        <div>
-          <h3>Ce qu’il ne résout pas</h3>
-          <ul class="scenario-list negative">{scenarioA.limits.map((item) => <li>{item}</li>)}</ul>
-        </div>
+        <div><h3>Ce que ce modèle protège</h3><ul class="scenario-list positive">{scenarioA.strengths.map((item) => <li>{item}</li>)}</ul></div>
+        <div><h3>Ce qu’il ne résout pas</h3><ul class="scenario-list negative">{scenarioA.limits.map((item) => <li>{item}</li>)}</ul></div>
       </div>
-
       <details class="scenario-details">
-        <summary>Afficher le compte d’exploitation du scénario A</summary>
-        <div class="scenario-pnl">
-          {pnlA.map(([label, value, kind]) => <div class:list={["scenario-pnl__row", kind]}><span>{label}</span><strong>{kind === "cost" || kind === "cash" ? `− ${money(Number(value))}` : signedMoney(Number(value)).replace("+ ", "")}</strong></div>)}
-        </div>
-        <p class="scenario-note">Modèle simplifié avant impôt, dette bancaire et amortissements. Les {scenarioA.familyHours} h familiales ne sont pas rémunérées.</p>
+        <summary>Voir le calcul complet du scénario A</summary>
+        <div class="scenario-pnl">{pnlA.map(([label, value, kind]) => <div class:list={["scenario-pnl__row", kind]}><span>{label}</span><strong>{kind === "cost" || kind === "cash" ? `− ${money(Number(value))}` : signedMoney(Number(value)).replace("+ ", "")}</strong></div>)}</div>
+        <p class="scenario-note">Simulation simplifiée avant impôt et amortissements. La franchise de taxe sur la valeur ajoutée (TVA) est une hypothèse à requalifier. Les 380 h familiales correspondent à près de 48 journées de huit heures.</p>
       </details>
+      <a class="scenario-model-link" href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Ouvrir le scénario A dans « Modélisation »</a>
     </section>
 
     <section id="scenario-b" class="scenario-section scenario-detail seasonal" aria-labelledby="scenario-b-title">
-      <div class="scenario-label"><span>B</span><small>Hypothèse à challenger</small></div>
+      <div class="scenario-label"><span>B</span><small>Hypothèse d’étude</small></div>
       <div class="scenario-detail__intro">
-        <div><p class="demo-kicker">Saison courte · table signature</p><h2 id="scenario-b-title">Ouvrir moins.<br />Servir davantage.</h2></div>
-        <p>Une expérience concentrée d’avril à octobre, du jeudi au dimanche, trois semaines sur quatre. La restauration répond au manque d’offre locale et devient un élément central du séjour.</p>
+        <div><p class="demo-kicker">Saison courte · table d’hôtes</p><h2 id="scenario-b-title">Le séjour comme rendez-vous.</h2></div>
+        <p>Ce modèle concentre l’ouverture sur 21 semaines. Chaque séjour devient plus complet : déjeuner, dîner, vins et bar accompagnent le spa. La contrepartie est une capacité maximale de 63 nuits par suite et des journées de service très denses.</p>
       </div>
-
       <div class="season-calendar" aria-label="Calendrier annuel du scénario saisonnier">
-        {months.map((month) => (
-          <article>
-            <span>{month}</span>
-            <div aria-label="Trois semaines ouvertes, une semaine fermée"><i></i><i></i><i></i><i class="closed"></i></div>
-            <small>9 nuits / suite</small>
-          </article>
-        ))}
+        {months.map((month) => <article><span>{month}</span><div aria-label="Trois semaines ouvertes, une semaine fermée"><i></i><i></i><i></i><i class="closed"></i></div><small>9 nuits / suite</small></article>)}
       </div>
-
       <div class="scenario-visual-split">
         <figure><Image src={spaTerrasse} alt="Projection d’une table dressée sur la terrasse du spa au crépuscule" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 50vw" /><figcaption>Une expérience condensée, prévisible et scénographiée.</figcaption></figure>
         <div class="scenario-menu">
-          <p class="demo-kicker">Carte de travail</p>
-          <h3>Une offre courte, lisible et précommandée.</h3>
+          <p class="demo-kicker">Carte de travail</p><h3>Une offre courte et précommandée.</h3>
           <article><span>Spa quotidien</span><strong>60 €</strong><small>par suite · hammam et bain nordique</small></article>
-          <article><span>Déjeuner snack</span><strong>25 €</strong><small>par personne · format terroir à définir</small></article>
+          <article><span>Déjeuner snack</span><strong>25 €</strong><small>par personne</small></article>
           <article><span>Dîner table d’hôtes</span><strong>50 €</strong><small>par personne · menu unique</small></article>
-          <article><span>Accord mets & vins</span><strong>30 €</strong><small>par personne · avec le dîner</small></article>
+          <article><span>Accord mets et vins</span><strong>30 €</strong><small>par personne · avec le dîner</small></article>
           <article><span>Bar de la maison</span><strong>sur demande</strong><small>hypothèse moyenne : 25 € par suite acheteuse</small></article>
         </div>
       </div>
-
-      <div class="scenario-basket" aria-labelledby="basket-title">
-        <div><p class="demo-kicker">Une nuit en formule complète · couple</p><h3 id="basket-title">{money(theoreticalCoupleBasket.total)} avant consommations de bar.</h3></div>
-        <div class="scenario-basket__bar" aria-label="Composition du panier maximal">
-          <i style={`--share:${theoreticalCoupleBasket.lodging / theoreticalCoupleBasket.total * 100}%`}><span>Suite</span><strong>{money(theoreticalCoupleBasket.lodging)}</strong></i>
-          <i style={`--share:${theoreticalCoupleBasket.spa / theoreticalCoupleBasket.total * 100}%`}><span>Spa</span><strong>{money(theoreticalCoupleBasket.spa)}</strong></i>
-          <i style={`--share:${theoreticalCoupleBasket.lunch / theoreticalCoupleBasket.total * 100}%`}><span>Déjeuner</span><strong>{money(theoreticalCoupleBasket.lunch)}</strong></i>
-          <i style={`--share:${theoreticalCoupleBasket.dinner / theoreticalCoupleBasket.total * 100}%`}><span>Dîner</span><strong>{money(theoreticalCoupleBasket.dinner)}</strong></i>
-          <i style={`--share:${theoreticalCoupleBasket.pairing / theoreticalCoupleBasket.total * 100}%`}><span>Accord</span><strong>{money(theoreticalCoupleBasket.pairing)}</strong></i>
-        </div>
-        <p>Ce panier est un plafond produit, pas un panier moyen : il suppose que deux personnes achètent toutes les prestations le même jour.</p>
+      <div class="scenario-basket">
+        <div><p class="demo-kicker">Plafond produit · une nuit · un couple</p><h3>{money(theoreticalCoupleBasket.total)} avant consommations de bar.</h3></div>
+        <p>Ce montant associe 200 € de chambre, 60 € de spa et 210 € de restauration et vins. Il ne constitue pas un panier moyen : il suppose l’achat de toutes les prestations.</p>
       </div>
-
       <div class="scenario-kpis seasonal-kpis">
         <article><span>Activité centrale</span><strong>54 / 63</strong><small>nuits vendues / suite · {percent(scenarioBCentral.occupancyRate)} des dates ouvertes</small></article>
-        <article><span>Ventes centrales</span><strong>{money(scenarioBCentral.publicRevenue)}</strong><small>panier moyen {money(scenarioBCentral.averageBasketPerSuiteNight)} / nuit-suite</small></article>
-        <article><span>Emploi</span><strong>0,75 ETP</strong><small>Jules + 150 h payées + 100 h associées</small></article>
-        <article class="negative"><span>Après CCA OpCo</span><strong>{signedMoney(scenarioBCentral.opcoCashAfterLoanService)}</strong><small>déficit annuel de l’hypothèse centrale</small></article>
+        <article><span>Ventes centrales</span><strong>{money(scenarioBCentral.publicRevenue)}</strong><small>{money(scenarioBCentral.averageBasketPerSuiteNight)} / nuit-suite</small></article>
+        <article><span>Moyens humains</span><strong>75 %</strong><small>Jules + 150 h payées + 100 h familiales</small></article>
+        <article class="negative"><span>Trésorerie finale</span><strong>{signedMoney(scenarioBCentral.operatingCompanyCashAfterPrincipalRepayment)}</strong><small>après remboursement de 3 000 € de principal</small></article>
       </div>
-
-      <div class="scenario-assumptions">
-        <article><span>Spa</span><strong>75 %</strong><small>des nuits-suite · {money(scenarioBCentral.spaRevenue)}</small></article>
-        <article><span>Déjeuner</span><strong>45 %</strong><small>des nuits-suite · {money(scenarioBCentral.lunchRevenue)}</small></article>
-        <article><span>Dîner</span><strong>75 %</strong><small>des nuits-suite · {money(scenarioBCentral.dinnerRevenue)}</small></article>
-        <article><span>Accord</span><strong>50 %</strong><small>des convives au dîner · {money(scenarioBCentral.pairingRevenue)}</small></article>
-        <article><span>Bar</span><strong>35 %</strong><small>des nuits-suite · {money(scenarioBCentral.barRevenue)}</small></article>
-      </div>
-
       <div class="scenario-two-columns implication">
-        <div>
-          <p class="demo-kicker">Potentiel</p>
-          <h3>Une vraie destination de court séjour.</h3>
-          <ul class="scenario-list positive">
-            <li>Le client n’a plus à arbitrer entre luxe au château et recherche d’un restaurant éloigné.</li>
-            <li>Le panier moyen central atteint {money(scenarioBCentral.averageBasketPerSuiteNight)}, dont {money(scenarioBCentral.averageExtrasPerSuiteNight)} d’expériences.</li>
-            <li>Les jours de service sont connus à l’avance ; les achats et les repos peuvent être planifiés.</li>
-            <li>La table, le feu, le parc et le spa composent un récit de marque très différenciant.</li>
-          </ul>
-        </div>
-        <div>
-          <p class="demo-kicker">Fragilités</p>
-          <h3>Une économie contrainte par son propre calendrier.</h3>
-          <ul class="scenario-list negative">
-            <li>À {money(scenarioBCentral.publicRevenue)} de ventes, il manque déjà {money(8000 + 21000 + 3750 + 12000 - scenarioBCentral.publicRevenue)} pour couvrir charges fixes, moyens humains et loyer — avant tout coût variable.</li>
-            <li>Le scénario central mobilise déjà {integer(scenarioBCentral.operationsHours)} h pour {integer(scenarioBCentral.declaredCapacityHours)} h déclarées : la marge humaine est quasi nulle.</li>
-            <li>Le service « toute la journée » crée une astreinte incompatible avec une petite équipe ; des créneaux fixes sont nécessaires.</li>
-            <li>La rentabilité dépend de taux d’achat très élevés, notamment {percent(scenarioBCentral.dinnerTakeRate)} au dîner.</li>
-          </ul>
-        </div>
+        <div><h3>Pourquoi l’idée séduit</h3><ul class="scenario-list positive"><li>Elle résout directement le problème du dîner et renforce la sensation de séjour privatif.</li><li>Elle concentre les achats, les repos et les mises en place sur des dates connues.</li><li>Les expériences représentent {percent(scenarioBCentral.experienceRevenue / scenarioBCentral.publicRevenue)} des ventes du scénario central.</li><li>Elle crée un récit de marque très différenciant autour de la table, du feu, du parc et du spa.</li></ul></div>
+        <div><h3>Pourquoi elle ne tient pas seule</h3><ul class="scenario-list negative"><li>Le calendrier supprime 57 nuits par suite par rapport au scénario A avant même de mesurer la demande.</li><li>Le scénario central produit {money(scenarioBCentral.publicRevenue)}, insuffisants pour financer la structure humaine prévue.</li><li>Les journées regroupent petit-déjeuner, ménage, spa, déjeuner, dîner et boissons : la marge de repos disparaît.</li><li>Les taux d’achat requis sont très élevés, notamment {percent(scenarioBCentral.dinnerTakeRate)} au dîner.</li></ul></div>
       </div>
-
-      <details class="scenario-details" open>
-        <summary>Compte d’exploitation · hypothèse centrale</summary>
-        <div class="scenario-pnl">
-          {pnlB.map(([label, value, kind]) => <div class:list={["scenario-pnl__row", kind]}><span>{label}</span><strong>{kind === "cost" || kind === "cash" ? `− ${money(Number(value))}` : signedMoney(Number(value)).replace("+ ", "")}</strong></div>)}
-        </div>
-        <p class="scenario-note">Hypothèse de franchise de TVA. Modèle avant impôt et amortissements. Les coûts matières incluent 10 € par déjeuner, 17,50 € par dîner, 12 € par accord et 35 % du bar. Ils doivent être remplacés par des fiches techniques et des devis.</p>
-      </details>
-
       <details class="scenario-details">
-        <summary>Charge humaine · hypothèse centrale</summary>
-        <div class="scenario-workload">
-          {workloadB.map(([label, value]) => <div><span>{label}</span><strong>{integer(Number(value))} h</strong></div>)}
-          <div class="total"><span>Total annuel estimé</span><strong>{integer(scenarioBCentral.operationsHours)} h</strong></div>
-          <div class="capacity"><span>Jules · 0,75 ETP</span><strong>{integer(scenarioBCentral.julesCapacityHours)} h</strong></div>
-          <div class="capacity"><span>Relève rémunérée</span><strong>{integer(scenarioBCentral.paidReliefHours)} h</strong></div>
-          <div class="capacity"><span>Associés</span><strong>{integer(scenarioBCentral.familyHours)} h</strong></div>
-        </div>
-        <p class="scenario-note">Le temps de dîner est évalué à 4 h par jour de service et le déjeuner à 1,5 h. Une ambition réellement gastronomique augmenterait sensiblement ces durées.</p>
+        <summary>Voir le calcul complet du scénario B</summary>
+        <div class="scenario-pnl">{pnlB.map(([label, value, kind]) => <div class:list={["scenario-pnl__row", kind]}><span>{label}</span><strong>{kind === "cost" || kind === "cash" ? `− ${money(Number(value))}` : signedMoney(Number(value)).replace("+ ", "")}</strong></div>)}</div>
+        <p class="scenario-note">Les coûts matières et temps sont des hypothèses d’étude. Même le test tendu à pleine capacité atteint {money(scenarioBStretch.publicRevenue)} et reste à {signedMoney(scenarioBStretch.operatingCompanyCashAfterPrincipalRepayment)} après loyer, renouvellement et remboursement annuel du principal.</p>
       </details>
-
-      <section class="scenario-stretch" aria-labelledby="stretch-title">
-        <div><p class="demo-kicker">Test de tension</p><h3 id="stretch-title">Même plein, le calendrier reste trop court.</h3><p>Le test ci-dessous suppose toutes les dates vendues, un prix moyen de 210 €, 85 % de spa et dîner, 60 % de déjeuner, 65 % d’accord et 50 % de bar.</p></div>
-        <div class="scenario-stretch__numbers">
-          <article><span>Ventes TTC</span><strong>{money(scenarioBStretch.publicRevenue)}</strong><small>{money(scenarioBStretch.averageBasketPerSuiteNight)} / nuit-suite</small></article>
-          <article><span>Après loyer et renouvellement</span><strong>{signedMoney(scenarioBStretch.cashAfterRenewal)}</strong><small>avant CCA</small></article>
-          <article><span>Temps non couvert</span><strong>{integer(scenarioBStretch.staffingGapHours)} h</strong><small>à rémunérer ou répartir</small></article>
-        </div>
-      </section>
-
+      <details class="scenario-details">
+        <summary>Voir les {integer(scenarioBCentral.operationsHours)} heures de travail estimées</summary>
+        <div class="scenario-workload">{workloadB.map(([label, value]) => <div><span>{label}</span><strong>{integer(Number(value))} h</strong></div>)}<div class="total"><span>Total annuel</span><strong>{integer(scenarioBCentral.operationsHours)} h</strong></div><div class="capacity"><span>Capacité déclarée</span><strong>{integer(scenarioBCentral.declaredCapacityHours)} h</strong></div></div>
+      </details>
       <section class="scenario-break-even" aria-labelledby="break-even-title">
         <figure><Image src={piscine} alt="Piscine naturelle éclairée à l’heure bleue" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 43vw" /><figcaption>La désirabilité ne supprime pas le plafond de capacité.</figcaption></figure>
-        <div>
-          <p class="demo-kicker">Point mort indicatif</p>
-          <h3 id="break-even-title">Environ {money(seasonalBreakEven.averageBasketAtCapacityBeforeLoan)} par nuit-suite vendable.</h3>
-          <p>À structure de marge constante et avec 100 % de remplissage, il faudrait environ {money(seasonalBreakEven.publicRevenueBeforeLoan)} de ventes pour couvrir Jules à 75 %, la relève, les charges, le loyer et le renouvellement — avant remboursement du CCA.</p>
-          <p>Après service du CCA OpCo, le besoin monte vers <strong>{money(seasonalBreakEven.averageBasketAtCapacityAfterLoan)} par nuit-suite</strong>. C’est supérieur au panier complet de {money(theoreticalCoupleBasket.total)} décrit pour un couple, avant même de financer des heures supplémentaires.</p>
-        </div>
+        <div><p class="demo-kicker">Point mort indicatif</p><h3 id="break-even-title">{money(seasonalBreakEven.averageBasketAtCapacityAfterPrincipalRepayment)} par nuit-suite disponible.</h3><p>Avec 100 % de remplissage et la structure de marge centrale, il faudrait environ {money(seasonalBreakEven.publicRevenueAfterPrincipalRepayment)} de ventes pour financer Jules à 75 %, la relève, les charges, le loyer, le renouvellement et les 3 000 € de remboursement annuel du principal.</p><p>Ce seuil dépasse le panier complet de {money(theoreticalCoupleBasket.total)} avant même de financer les heures supplémentaires nécessaires.</p></div>
       </section>
+      <a class="scenario-model-link" href={withBase("/demo/pilotage?scenario=saisonnier#simulateur")}>Ouvrir le scénario B dans « Modélisation »</a>
+    </section>
 
-      <aside class="scenario-regulatory" aria-labelledby="regulatory-title">
-        <div><p class="demo-kicker">Cadre à sécuriser</p><h3 id="regulatory-title">Table d’hôtes oui ; bar permanent, à qualifier.</h3></div>
-        <p>Le régime simplifié de la table d’hôtes suppose notamment un menu unique, réservé aux occupants, servi à une table unique et fondé sur une cuisine locale. La fiche officielle prévoit un prix affiché boissons comprises et un alcool servi pendant les repas, avec permis et licence. Le cumul déjeuner + dîner, l’accord facturé séparément et des cocktails « toute la journée » doivent donc être qualifiés : la version opérationnelle devrait privilégier un service unique, une sélection en chambre ou des horaires définis, puis être validée avec la mairie et la DDPP.</p>
-        <div><a href="https://www.service-public.fr/particuliers/vosdroits/F17452" target="_blank" rel="noreferrer">Règles officielles · chambres et table d’hôtes</a><a href="https://entreprendre.service-public.fr/vosdroits/F22379" target="_blank" rel="noreferrer">Licence restaurant et boissons</a></div>
+    <section id="restauration" class="scenario-section food-guarantee" aria-labelledby="food-title">
+      <div class="scenario-section__head"><div><p class="demo-kicker">Le vrai irritant client</p><h2 id="food-title">Ne jamais laisser l’hôte sans solution de dîner.</h2></div><p>La petite cuisine partagée doit devenir un espace de finition pour l’exploitation, et non la réponse principale proposée au client. À ce niveau de prix, l’hôte ne devrait ni faire ses courses, ni improviser sa cuisine.</p></div>
+      <div class="food-guarantee__promise"><strong>Promesse recommandée</strong><span>« Une solution de dîner choisie avant l’arrivée est disponible chaque soir : table signature à certaines dates, repas partenaire ou garde-manger du château les autres soirs. »</span></div>
+      <div class="food-service-ladder">
+        <article><span>Disponible chaque soir</span><h3>Le garde-manger de Sainte-Lucie</h3><strong>45–65 € / couple</strong><p>Planche de producteurs, pâté lorrain, fromage, soupe ou plat en bocal, pain et dessert. Assemblage élégant, vaisselle du château et service en suite, sur terrasse ou dans un salon.</p><small>Précommande avant midi ou stock court contrôlé · très peu de cuisine</small></article>
+        <article><span>Sur précommande</span><h3>Le dîner d’un partenaire</h3><strong>75–110 € / couple</strong><p>Menu conçu avec un traiteur ou restaurant local, livré froid ou prêt à remettre en température, dressé et servi par la maison. La qualité perçue vient aussi du service, de la vaisselle et du récit du producteur.</p><small>Commande 48 h avant · marge et responsabilité à contractualiser</small></article>
+        <article><span>Dates choisies</span><h3>La table signature du château</h3><strong>160 € / couple</strong><p>Menu unique et accord de boissons, une à deux séries de week-ends par mois. Heure fixe, nombre de convives connu et mise en scène forte : c’est une expérience, pas une permanence.</p><small>Objectif du modèle hybride : 15 % des nuits-suite</small></article>
+        <article><span>Conciergerie</span><h3>La bonne table réservée</h3><strong>service inclus</strong><p>Sélection resserrée de restaurants réellement ouverts, réservation faite pour le client et solution de transport anticipée. À proposer comme choix, jamais comme unique échappatoire.</p><small>Horaires vérifiés chaque semaine · retour sécurisé à organiser</small></article>
+      </div>
+      <div class="local-partners">
+        <div><p class="demo-kicker">Pistes locales à contacter</p><h3>Un écosystème existe déjà.</h3><p>Il faut désormais tester sa fiabilité, ses jours de production, la livraison, les allergènes, la chaîne du froid et le niveau de présentation attendu. Aucun partenariat n’est conclu à ce stade.</p></div>
+        <ul>
+          <li><strong><a href="https://www.margueriteriolait.fr/" target="_blank" rel="noreferrer">Marguerite Riolait</a></strong><span>plats locaux et de saison, vente à emporter et livraison annoncée à Rambervillers</span></li>
+          <li><strong><a href="https://www.croustillance.fr/" target="_blank" rel="noreferrer">Croustillance</a></strong><span>traiteur labellisé Vosges Terroir intervenant notamment à Rambervillers</span></li>
+          <li><strong><a href="https://entreprises-rambervillers.com/entreprise/physalis" target="_blank" rel="noreferrer">Physalis</a>, <a href="https://entreprises-rambervillers.com/entreprise/maison-renard" target="_blank" rel="noreferrer">Maison Renard</a> et <a href="https://entreprises-rambervillers.com/entreprise/fromagerie-des-hetz" target="_blank" rel="noreferrer">Ferme des Hetz</a></strong><span>épicerie fine, charcuterie-traiteur et plateaux de fromages pour composer le garde-manger</span></li>
+          <li><strong><a href="https://entreprises-rambervillers.com/entreprise/les-toques-du-gout" target="_blank" rel="noreferrer">Les Toqués du Goût</a></strong><span>restaurant travaillant des produits frais et locaux, avec activité sur place ou à emporter</span></li>
+        </ul>
+      </div>
+      <aside class="scenario-regulatory">
+        <div><p class="demo-kicker">À sécuriser avant vente</p><h3>Le format juridique suit la prestation réelle.</h3></div>
+        <p>La table d’hôtes suppose notamment un menu unique, réservé aux occupants, servi à une table unique et fondé sur une cuisine locale. L’alcool servi en dehors des repas et la revente de repas ou boissons à emporter répondent à d’autres règles. Chaque niveau de service doit donc être qualifié avec la mairie, la direction départementale de la protection des populations et le conseil juridique avant lancement.</p>
+        <div><a href="https://www.service-public.fr/particuliers/vosdroits/F17452" target="_blank" rel="noreferrer">Règles officielles · table d’hôtes</a><a href="https://entreprendre.service-public.fr/vosdroits/F22379" target="_blank" rel="noreferrer">Licences de boissons</a></div>
       </aside>
     </section>
 
-    <section id="recommandation" class="scenario-section scenario-recommendation" aria-labelledby="recommendation-title">
+    <section id="hybride" class="scenario-section scenario-recommendation hybrid-recommendation" aria-labelledby="recommendation-title">
       <div class="scenario-recommendation__image"><Image src={petitDejeuner} alt="Petit-déjeuner servi sur la terrasse du château au matin" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 44vw" /></div>
       <div>
-        <p class="demo-kicker">Voie recommandée</p>
-        <h2 id="recommendation-title">Tester la table sans condamner la capacité.</h2>
-        <p>Le besoin client est réel ; le scénario strict ne le finance pas. La meilleure prochaine étape est un modèle hybride, mesuré sur quelques week-ends avant toute réduction irréversible du calendrier.</p>
+        <p class="demo-kicker">Notre recommandation</p>
+        <h2 id="recommendation-title">Un calendrier large. Une restauration à intensité variable.</h2>
+        <p>Le compromis le plus solide consiste à conserver la souplesse commerciale du scénario A tout en empruntant au scénario B son pouvoir de désirabilité. La restauration quotidienne est garantie, mais la cuisine intensive n’est activée que sur des dates choisies.</p>
         <ol>
-          <li><strong>Conserver le modèle A comme socle de commercialisation.</strong><span>Il reste imparfait, mais son volume absorbe mieux les coûts fixes.</span></li>
-          <li><strong>Programmer 1 à 2 week-ends « table du château » par mois.</strong><span>Menu unique, réservation 48 h avant, heure de service fixe et jauge limitée aux hôtes.</span></li>
-          <li><strong>Transformer le bar permanent en rituel léger.</strong><span>Carte courte, plateau en suite ou créneau apéritif ; aucune promesse de disponibilité continue.</span></li>
-          <li><strong>Mesurer quatre données pendant trois mois.</strong><span>Taux d’achat, marge matière, minutes réelles par service et impact sur les avis.</span></li>
-          <li><strong>Décider ensuite du calendrier.</strong><span>Étendre la table si elle contribue réellement à la marge ; réduire l’ouverture seulement si le panier observé le justifie.</span></li>
+          <li><strong>Ouvrir largement la réservation.</strong><span>Ne pas plafonner la capacité à 63 nuits avant d’avoir observé la demande réelle.</span></li>
+          <li><strong>Garantir le dîner sans garantir une table quotidienne.</strong><span>Garde-manger et repas partenaire sont précommandés pendant l’onboarding client.</span></li>
+          <li><strong>Programmer la table signature.</strong><span>Une à deux séries de week-ends par mois, affichées comme des dates d’expérience.</span></li>
+          <li><strong>Remplacer le bar permanent par un minibar et des rituels.</strong><span>Cave en chambre, plateau apéritif ou cocktail précommandé : davantage de marge, moins d’astreinte.</span></li>
+          <li><strong>Piloter par la marge et les minutes.</strong><span>Chaque format doit être évalué sur ventes, coût matière, temps réel, satisfaction et fatigue générée.</span></li>
         </ol>
+        <div class="hybrid-recommendation__numbers">
+          <article><span>Point de travail</span><strong>{hybridRecommendation.soldNightsPerSuite} nuits / suite</strong><small>pas un engagement commercial</small></article>
+          <article><span>Ventes TTC</span><strong>{money(hybridRecommendation.publicRevenue)}</strong><small>avec prix moyen de 205 €</small></article>
+          <article><span>Trésorerie finale</span><strong>{signedMoney(hybridRecommendation.cashAfterPrincipalRepayment)}</strong><small>après loyer, Jules à temps plein et remboursement annuel</small></article>
+        </div>
+        <a class="scenario-model-link" href={hybridSimulationLink}>Ouvrir cette recommandation dans le scénario libre</a>
       </div>
+    </section>
+
+    <section id="seuils" class="scenario-section activity-ladder" aria-labelledby="threshold-title">
+      <div class="scenario-section__head"><div><p class="demo-kicker">Bornes du modèle hybride recommandé</p><h2 id="threshold-title">Ce que signifient 60, 90, 120 ou 150 nuits.</h2></div><p>Les quatre niveaux appliquent la même offre : 200 € la suite, spa à 60 € acheté sur 70 % des nuits, garde-manger sur 35 % et table signature sur 15 %. Ils incluent 12 000 € de loyer, 1 500 € de renouvellement et 3 000 € de remboursement annuel du principal avancé à l’exploitation.</p></div>
+      <div class="activity-ladder__table" role="table" aria-label="Comparaison des niveaux d’activité du modèle hybride">
+        <div class="activity-ladder__head" role="row"><span role="columnheader">Activité / suite</span><span role="columnheader">60 nuits</span><span role="columnheader">90 nuits</span><span role="columnheader">120 nuits</span><span role="columnheader">150 nuits</span></div>
+        {[
+          ["Ventes publiques TTC", ...hybridActivityCases.map((item) => money(item.publicRevenue))],
+          ["Jules rémunéré", ...hybridActivityCases.map((item) => fteLabel(item.julesFte))],
+          ["Relève rémunérée", ...hybridActivityCases.map((item) => `${integer(item.paidReliefHours)} h`)],
+          ["Contribution familiale intégrée", ...hybridActivityCases.map((item) => `${integer(item.familyHours)} h`)],
+          ["Temps total à organiser", ...hybridActivityCases.map((item) => `${integer(item.operationsHours)} h`)],
+          ["Temps encore non couvert", ...hybridActivityCases.map((item) => `${integer(item.staffingGapHours)} h`)],
+          ["Trésorerie finale", ...hybridActivityCases.map((item) => signedMoney(item.cashAfterPrincipalRepayment))],
+        ].map(([label, ...values]) => <div class="activity-ladder__row" role="row"><strong role="rowheader">{label}</strong>{values.map((value) => <span>{value}</span>)}</div>)}
+      </div>
+      <div class="activity-ladder__readings">
+        <article class="negative"><span>60 nuits</span><h3>Un test familial, pas une exploitation autonome.</h3><p>Même sans salaire pour Jules, la structure manque d’environ {money(Math.abs(hybridActivityCases[0].cashAfterPrincipalRepayment))} et laisse {integer(hybridActivityCases[0].staffingGapHours)} h à absorber. Elle ne peut pas financer simultanément loyer, remboursement et travail.</p></article>
+        <article class="warn"><span>90 nuits</span><h3>L’équilibre financier cache le travail.</h3><p>Le modèle peut rémunérer Jules à 35 % et rester presque neutre, mais {integer(hybridActivityCases[1].staffingGapHours)} h demeurent non couvertes. Ce format reporte l’exploitation sur la famille.</p></article>
+        <article class="warn"><span>120 nuits</span><h3>Le seuil économique fragile.</h3><p>Le loyer, 80 % d’un temps plein et le remboursement annuel sont presque couverts, mais il ne reste aucune marge et environ {integer(hybridActivityCases[2].staffingGapHours)} h doivent encore être planifiées.</p></article>
+        <article class="positive"><span>140–150 nuits</span><h3>La première zone réellement cohérente.</h3><p>Vers 140 nuits et 205 € de prix moyen, un temps plein, 300 h de relève et 200 h familiales sont couverts de justesse. À 150 nuits et 200 €, la marge simulée atteint {money(hybridActivityCases[3].cashAfterPrincipalRepayment)}, avec 350 h de relève.</p></article>
+      </div>
+      <div class="financing-reading">
+        <div><p class="demo-kicker">Remboursement des 50 000 € avancés</p><h3>Deux flux, cinq ans, aucun intérêt simulé.</h3></div>
+        <article><span>Dans la SCI</span><strong>7 000 € / an</strong><p>Prélevés sur les 12 000 € de loyer reçu, avant les autres charges et la fiscalité de la SCI.</p></article>
+        <article><span>Dans la société d’exploitation</span><strong>3 000 € / an</strong><p>Prélevés sur sa propre trésorerie après exploitation et renouvellement.</p></article>
+        <article><span>Total remboursé</span><strong>10 000 € / an</strong><p>Soit 50 000 € de principal en cinq ans si chaque entité couvre réellement sa part.</p></article>
+      </div>
+      <p class="scenario-correction"><strong>Conclusion :</strong> 60 nuits par suite constituent un format de découverte financé par les associés, pas un modèle viable au regard des trois objectifs. Autour de 120 nuits, le modèle peut financer environ 80 % d’un temps plein mais reste humainement et financièrement tendu. La zone de décision la plus cohérente se situe autour de 140 à 150 nuits par suite, ou plus bas si le prix moyen, la marge des expériences ou l’implication familiale sont durablement supérieurs aux hypothèses.</p>
+      <p class="scenario-correction prudent"><strong>Prudence :</strong> « cohérent » ne signifie pas encore « robuste ». À 150 nuits et 200 € de prix moyen, il ne reste qu’environ {money(hybridActivityCases[3].cashAfterPrincipalRepayment)} après remboursement du principal, sans réserve supplémentaire. Un prix moyen proche de 210 € porterait ce coussin vers 5 000 €, mais rapprocherait les ventes du seuil de TVA : les deux régimes doivent être comparés avant décision.</p>
     </section>
 
     <section class="scenario-decisions" aria-labelledby="decisions-title">
-      <div class="scenario-section__head">
-        <div><p class="demo-kicker">Questions à trancher en famille</p><h2 id="decisions-title">Ce que cette comparaison doit permettre de décider.</h2></div>
-      </div>
+      <div class="scenario-section__head"><div><p class="demo-kicker">Décisions proposées aux associés</p><h2 id="decisions-title">Ce qu’il faut valider avant de figer l’offre.</h2></div></div>
       <div>
-        <article><span>01</span><h3>Quel calendrier protège la vie familiale ?</h3><p>Le volume annuel diffuse la charge ; les week-ends signature la concentrent sur des journées très intenses.</p></article>
-        <article><span>02</span><h3>Quelle restauration voulons-nous réellement opérer ?</h3><p>Planche prête à servir, menu unique cuisiné, ou partenariat local livré : le temps et la marge n’ont rien de comparable.</p></article>
-        <article><span>03</span><h3>Combien d’heures chaque associé garantit-il ?</h3><p>100 h représentent 12,5 journées de 8 h à planifier. Une promesse vague ne constitue pas une relève.</p></article>
-        <article><span>04</span><h3>Quel seuil valide le test ?</h3><p>Proposition : au moins 60 % de dîners, 65 % de marge après matières et moins de 4 h de travail par service.</p></article>
+        <article><span>01</span><h3>Adopter le principe hybride</h3><p>Calendrier large, dîner garanti, table signature sur dates choisies.</p></article>
+        <article><span>02</span><h3>Tester trois partenaires</h3><p>Obtenir prix, jours de livraison, minimum de commande, allergènes et protocole de remise en température.</p></article>
+        <article><span>03</span><h3>Garantir des heures, pas des intentions</h3><p>Les 200 h familiales du modèle représentent 25 journées de huit heures à inscrire dans un planning nominatif.</p></article>
+        <article><span>04</span><h3>Choisir le seuil de lancement</h3><p>Décider si l’objectif est un pilote familial à 60–90 nuits ou une exploitation employeuse à 120–150 nuits.</p></article>
       </div>
+      <div class="decision-final-cta"><div><p class="demo-kicker">Étape suivante</p><h3>Modifier les hypothèses, puis comparer les conséquences.</h3></div><div><a class="demo-button" href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Simuler le socle agile</a><a class="demo-button secondary" href={withBase("/demo/pilotage?scenario=saisonnier#simulateur")}>Simuler la saison table</a><a class="demo-button quiet" href={withBase("/demo/pilotage?scenario=libre#simulateur")}>Créer un scénario libre</a></div></div>
     </section>
 
     <footer class="scenario-method">
-      <strong>Méthode et statut des chiffres.</strong>
-      <p>Le scénario A reprend le simulateur sauvegardé. Le scénario B est une modélisation d’étude : 54 nuits vendues sur 63, deux suites, 2,1 personnes et 2,5 nuits par séjour. Les probabilités de service tiennent compte de la présence possible des deux suites le même jour. Les coûts, heures et taux d’achat sont des hypothèses de pilotage à remplacer par des fiches techniques, devis, chronométrages et validations professionnelles. Les projections visuelles sont des images d’intention après travaux.</p>
-      <div><a href={withBase("/knowledge/operating-scenarios.json")}>Données structurées des scénarios</a><a href={withBase("/demo/pilotage#referentiel")}>Consulter la base de vérité</a></div>
+      <strong>Méthode et limites.</strong>
+      <p>Ces modèles sont des outils de décision, pas des prévisions. Les coûts, taux d’achat, temps de travail, régimes de TVA et conditions de remboursement doivent être remplacés par des devis, tests et validations professionnelles. Le modèle hybride valorise la restauration partenaire comme une promesse client ; les accords commerciaux n’existent pas encore. Les projections visuelles représentent une intention après travaux.</p>
+      <div><a href={withBase("/knowledge/operating-scenarios.json")}>Données structurées des scénarios</a><a href={withBase("/demo/pilotage#referentiel")}>Consulter la modélisation et ses sources</a></div>
     </footer>
   </div>
   <script is:inline>
     document.querySelector("[data-scenario-share]")?.addEventListener("click", async () => {
       const url = window.location.href.split("#")[0];
-      try {
-        await navigator.clipboard.writeText(url);
-        window.CSLDemo?.toast("Le lien de comparaison est copié.");
-      } catch (_) {
-        window.prompt("Copiez ce lien :", url);
-      }
+      try { await navigator.clipboard.writeText(url); window.CSLDemo?.toast("Le lien d’aide à la décision est copié."); }
+      catch (_) { window.prompt("Copiez ce lien :", url); }
     });
   </script>
 </DemoLayout>

@@ -52,8 +52,9 @@ Ne pas inventer les réponses. Utiliser des formulations prudentes ou masquer le
 - Validation du contrat à 0,8 ETP, des 100 h de relève rémunérée et du traitement
   des 380 h de contribution des associés.
 - Bail, valeur locative, loyer annuel testé à 12 000 € et cible à 18 000 €.
-- Conventions séparées des comptes courants SCI et OpCo, taux de rémunération,
-  déductibilité et échéanciers de remboursement.
+- Conventions séparées des comptes courants de la société civile immobilière et
+  de la société d'exploitation, échéanciers de principal sur cinq ans, ordre de
+  remboursement et éventuelle subordination.
 - Source des 9 000 € d'investissement non couverts par les 50 000 € de comptes
   courants d'associés.
 - Attestation/certification de la fonction de caisse et calendrier de

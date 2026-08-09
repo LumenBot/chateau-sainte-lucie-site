@@ -1,7 +1,11 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "as_of": "2026-08-09",
   "currency": "EUR",
+  "glossary": {
+    "SCI": "Société civile immobilière CSL, propriétaire du château",
+    "operating_company": "Future société commerciale chargée de l'exploitation"
+  },
   "active_envelope_ttc": 59000,
   "documented_range_ttc": [55000, 58000],
   "status": "working_budget",
@@ -23,19 +27,22 @@
   "financing_plan": {
     "shareholder_current_accounts_total": 50000,
     "shareholder_current_accounts": [
-      { "debtor_entity": "SCI", "principal": 35000, "status": "working_assumption" },
+      { "debtor_entity": "property_company_SCI", "principal": 35000, "status": "working_assumption" },
       { "debtor_entity": "operating_company", "principal": 15000, "status": "working_assumption" }
     ],
     "remaining_source_to_define": 9000,
     "test_term_years": 5,
-    "annual_remuneration_rate_test": 0.0433,
-    "repayment_method_test": "linear principal repayment with interest on opening balance",
+    "repayment_method_test": "linear principal repayment only",
+    "annual_principal_repayments": {
+      "SCI": 7000,
+      "operating_company": 3000,
+      "combined": 10000
+    },
     "status": "working_assumption",
-    "warning": "The SCI and operating-company accounts require separate agreements and repayment schedules. The 4.33% input is an adjustable fiscal reference, not a promised return; 10% annual is retained only as a stress test requiring legal, tax and accounting validation."
+    "warning": "The SCI and operating-company accounts require separate written agreements and repayment schedules. Each entity must demonstrate its own repayment capacity."
   },
   "accounting_and_cash_treatment": {
     "principal_repayment": "cash outflow and balance-sheet movement, not operating expense",
-    "interest": "financial expense of the debtor entity, subject to agreement and validation",
     "entity_separation": "SCI repayments are not operating-company repayments; the rent is an inter-entity flow governed by the lease"
   },
   "excluded": [
@@ -46,7 +53,7 @@
     "final photography",
     "launch consumables",
     "unidentified regulatory works",
-    "financing costs beyond the adjustable current-account simulation",
+    "financing arrangements beyond the stated principal repayment schedules",
     "hammam work not already included in the documented items"
   ],
   "priority_order": ["safety and water-tightness", "bathrooms and networks", "bedding and suite usability", "night park lighting and access", "landscape-integrated wellness", "additional decoration"]

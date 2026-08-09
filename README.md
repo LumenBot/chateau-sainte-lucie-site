@@ -92,8 +92,9 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   historique et ne constituent plus la photographie active du projet.
 - `docs/23-referentiel-exploitation-standard-v6.md` documente le modèle annuel
   actif, les tests à 120 et 150 nuits par suite, le loyer et les financements.
-- `docs/24-comparatif-scenarios-exploitation-v1.md` conserve le modèle annuel
-  actif et compare l’étude saisonnière avec table, ses plafonds et sa charge.
+- `docs/24-comparatif-scenarios-exploitation-v1.md` compare le socle agile,
+  l’étude saisonnière avec table premium et le compromis hybride recommandé,
+  avec des sensibilités de 60 à 150 nuits par suite.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes

@@ -9,7 +9,7 @@ Read these machine-readable files:
 - /chateau-sainte-lucie-site/knowledge/business-model.json — annual formulas, assumptions, staffing, rent and financing
 - /chateau-sainte-lucie-site/knowledge/market.json — benchmark and annual pricing logic
 - /chateau-sainte-lucie-site/knowledge/investments.json — active 59k investment envelope and financing bridge
-- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — scenario A reference and scenario B internal comparison
+- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — agile base, seasonal premium-table study and recommended hybrid concept
 - /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones and external validations
 - /chateau-sainte-lucie-site/knowledge/sources.json — provenance and limitations
 
@@ -19,24 +19,25 @@ Interpretation rules:
 3. Do not treat the simulator as an accountant, payroll, tax or legal forecast.
 4. Do not infer sensitive legal, financial or personal data absent from these files.
 5. The active model represents one standard annual operation. The 120 and 150 nights-per-suite cases are comparable activity tests, not successive years.
-6. The standard activity input is 120 nights per suite, EUR 200 average public TTC price within a EUR 180–220 grid, 2.5 nights per stay and 50% direct lodging sales.
-7. The spa offer is EUR 50 TTC per suite day and is modeled as purchased by 75% of stays, then billed on every occupied day of each buying stay. It includes the hammam and Nordic bath. Shared use of the natural pool is included with the stay; any private-use offer remains to be validated.
-8. The simplified local board offer is EUR 50 TTC per sold suite day, modeled on 25% of occupied suite nights, with EUR 20 TTC direct cost and one service hour per sale.
+6. The standard activity input is 120 nights per suite, EUR 200 average public tax-inclusive price within a EUR 180–220 grid, 2.5 nights per stay and 50% direct lodging sales.
+7. The spa offer is EUR 50 tax-inclusive per suite day and is modeled as purchased by 75% of stays, then billed on every occupied day of each buying stay. It includes the hammam and Nordic bath. Shared use of the natural pool is included with the stay; any private-use offer remains to be validated.
+8. The simplified local board offer is EUR 50 tax-inclusive per sold suite day, modeled on 25% of occupied suite nights, with EUR 20 tax-inclusive direct cost and one service hour per sale.
 9. The standard VAT mode is franchise and remains adjustable. Eligibility, activity-specific treatment and any election require professional validation.
-10. Fixed operating costs total EUR 7,000 TTC in the standard case. Zero-budget maintenance or marketing lines are self-provision assumptions and must not be interpreted as proof of zero economic cost.
+10. Fixed operating costs total EUR 7,000 tax-inclusive in the standard case. Zero-budget maintenance or marketing lines are self-provision assumptions and must not be interpreted as proof of zero economic cost.
 11. The staffing case funds Jules at 0.8 FTE on a provisional EUR 28,000 full-time employer budget, plus 100 paid support hours and 380 declared, rostered associate hours.
-12. The tested contractual SCI rent is EUR 12,000 per year. EUR 18,000 is a strategic target, not an automatic rent. Lease terms, market value and tax treatment require professional validation.
-13. The active investment range is EUR 55–58k TTC; the working envelope is EUR 59k TTC for the defined scope.
-14. Shareholder current accounts total EUR 50k: EUR 35k owed by the SCI and EUR 15k owed by the operating company. The five-year term and adjustable 4.33% annual reference are simulation inputs requiring separate agreements and professional validation; 10% annual is only a stress test.
-15. Interest is a financial expense of the debtor entity. Principal repayment is a cash outflow and balance-sheet movement, not an operating expense. SCI and operating-company debt service must remain separate.
+12. The tested contractual rent paid to the property-owning société civile immobilière is EUR 12,000 per year. EUR 18,000 is a strategic target, not an automatic rent. Lease terms, market value and tax treatment require professional validation.
+13. The active investment range is EUR 55–58k tax-inclusive; the working envelope is EUR 59k tax-inclusive for the defined scope.
+14. Shareholder current accounts total EUR 50k: EUR 35k owed by the property-owning société civile immobilière and EUR 15k owed by the operating company. Principal-only repayment is modeled over five years: EUR 7k and EUR 3k per year respectively. Separate written agreements and professional validation remain required.
+15. Principal repayment is a cash outflow and balance-sheet movement, not an operating expense. Each entity repays only the principal recorded in its own accounts; property-company and operating-company cash must remain separate.
 16. Paid support entered in the simulator is exact. Workload recommendations and coverage gaps are separate outputs.
 17. Cash savings from internalized housekeeping, spa, maintenance or marketing work must be matched by explicit workload hours and named responsibility.
-18. Scenario A remains the active operating reference. Scenario B is an internal study with 63 available and 54 sold nights per suite; it does not replace any public price or service rule.
-19. Scenario B includes explicit working assumptions for food-and-beverage costs and service hours. They enable comparison but are not recipes, quotes or measured operations; replace them before a decision.
-20. Scenario B central reaches EUR 41,013 public sales and an estimated EUR -20,397 operating-company cash position after its CCA service. The full-capacity commercial stress case reaches about EUR 54,376 but leaves about 109 workload hours uncovered.
-21. The EUR 470 theoretical couple basket contains EUR 270 extras including spa. EUR 210 refers to lunch, dinner and pairing only, excluding spa. This ceiling requires 100% occupancy and 100% purchase and is not a forecast.
-22. The recommended next step is to retain scenario A as the base and test one or two signature table-host weekends per month before reducing the annual sales calendar.
+18. The agile base remains the simple active working reference: 120 nights per suite, EUR 60k public sales and approximately EUR -2,764 cash after rent, renewal and the operating-company principal repayment.
+19. The seasonal premium-table concept is study-only: 63 available and 54 sold nights per suite, EUR 41,013 public sales and approximately EUR -19,748 cash after rent, renewal and principal repayment. Its recipes and service times require validation.
+20. The recommended hybrid concept keeps a broad sales calendar and models spa at 60–70%, a EUR 55 pantry offer at 35% and a EUR 160 signature table at 15%. Associate contribution is capped at 200 hours. It does not change the public offer without a separate decision.
+21. Hybrid sensitivity uses 60, 90, 120 and 150 nights per suite as comparable annual tests and adjusts Jules and paid support by volume. The cash outputs after rent, renewal and operating-company principal are approximately EUR -1,642, +611, -2,435 and +2,144; the uncovered workload is respectively 984, 678, 111 and 0 hours. A positive cash number with uncovered work is not operational viability.
+22. The recommended hybrid reference for collective arbitration is 140 nights per suite at EUR 205 average, Jules full-time, 300 paid support hours and 200 associate hours. It reaches EUR 81,270 public sales, covers modeled annual workload and leaves only about EUR 449 after rent, renewal and principal repayment. It is a point to test, not an approved operating standard or a forecast.
+23. Pilot pantry and signature table separately, measure margins and full labor, build a weekly roster and test downside sales before selecting the target volume.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/
-- /chateau-sainte-lucie-site/demo/scenarios — human-readable comparison of scenarios A and B
+- /chateau-sainte-lucie-site/demo/scenarios — human-readable comparison of the three internal concepts

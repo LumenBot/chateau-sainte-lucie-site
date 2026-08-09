@@ -1,5 +1,14 @@
 const annualHours = 1607;
 const fullTimeEmployerCost = 28000;
+const shareholderAdvance = {
+  sci: 35000,
+  operatingCompany: 15000,
+  repaymentYears: 5,
+  sciAnnualPrincipal: 7000,
+  operatingCompanyAnnualPrincipal: 3000,
+};
+
+export { shareholderAdvance };
 
 export const scenarioA = {
   id: "annual-lean",
@@ -16,7 +25,7 @@ export const scenarioA = {
   averageExtrasPerSuiteNight: 50,
   operatingResultAfterRent: 1736,
   cashAfterRenewal: 236,
-  opcoCashAfterLoanService: -3414,
+  operatingCompanyCashAfterPrincipalRepayment: -2764,
   operationsHours: 1756,
   julesFte: 0.8,
   julesCapacityHours: annualHours * 0.8,
@@ -31,7 +40,7 @@ export const scenarioA = {
     "La restauration reste volontairement légère à produire.",
   ],
   limits: [
-    "Le résultat reste trop faible pour rembourser le CCA de l’exploitation.",
+    "Le résultat reste trop faible pour rembourser intégralement l’avance versée à la société d’exploitation.",
     "L’effort familial atteint 380 h par an, soit près de 48 journées de 8 h.",
     "L’absence de vraie solution de dîner peut freiner les séjours premium.",
   ],
@@ -70,7 +79,7 @@ export const seasonalDefaults = {
   familyHours: 100,
   rent: 12000,
   renewal: 1500,
-  opcoLoanService: 3649.5,
+  operatingCompanyAnnualPrincipal: shareholderAdvance.operatingCompanyAnnualPrincipal,
 };
 
 const probabilityAtLeastOne = (individualProbability, suites) =>
@@ -135,7 +144,7 @@ export function calculateSeasonalScenario(input) {
   const resultBeforeRent = contribution - p.fixedCosts - julesCost - paidReliefCost;
   const resultAfterRent = resultBeforeRent - p.rent;
   const cashAfterRenewal = resultAfterRent - p.renewal;
-  const opcoCashAfterLoanService = cashAfterRenewal - p.opcoLoanService;
+  const operatingCompanyCashAfterPrincipalRepayment = cashAfterRenewal - p.operatingCompanyAnnualPrincipal;
 
   return {
     ...p,
@@ -187,7 +196,7 @@ export function calculateSeasonalScenario(input) {
     resultBeforeRent,
     resultAfterRent,
     cashAfterRenewal,
-    opcoCashAfterLoanService,
+    operatingCompanyCashAfterPrincipalRepayment,
   };
 }
 
@@ -240,6 +249,146 @@ export const seasonalBreakEven = {
   contributionRate: centralContributionRate,
   publicRevenueBeforeLoan: annualCashRequirementBeforeLoan / centralContributionRate,
   averageBasketAtCapacityBeforeLoan: annualCashRequirementBeforeLoan / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
-  publicRevenueAfterLoan: (annualCashRequirementBeforeLoan + seasonalDefaults.opcoLoanService) / centralContributionRate,
-  averageBasketAtCapacityAfterLoan: (annualCashRequirementBeforeLoan + seasonalDefaults.opcoLoanService) / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
+  publicRevenueAfterPrincipalRepayment: (annualCashRequirementBeforeLoan + seasonalDefaults.operatingCompanyAnnualPrincipal) / centralContributionRate,
+  averageBasketAtCapacityAfterPrincipalRepayment: (annualCashRequirementBeforeLoan + seasonalDefaults.operatingCompanyAnnualPrincipal) / centralContributionRate / (seasonalDefaults.sellableNightsPerSuite * seasonalDefaults.suites),
 };
+
+export const hybridDefaults = {
+  suites: 2,
+  averageGuests: 2.1,
+  averageStay: 2.5,
+  averageNightPrice: 200,
+  directShare: 0.5,
+  otaCommission: 0.15,
+  paymentRate: 0.015,
+  incidentRate: 0.002,
+  breakfastCostPerGuestNight: 6,
+  energyCostPerSuiteNight: 5,
+  turnoverCashPerStay: 30,
+  turnoverHoursPerStay: 4,
+  spaPricePerSuiteDay: 60,
+  spaTakeRate: 0.7,
+  spaCostPerSoldSuiteDay: 10,
+  pantryPricePerSuiteDay: 55,
+  pantryTakeRate: 0.35,
+  pantryCostRate: 0.55,
+  pantryLaborHoursPerSale: 0.25,
+  signatureTablePricePerSuiteDay: 160,
+  signatureTableTakeRate: 0.15,
+  signatureTableCostRate: 0.35,
+  signatureTableHoursPerServiceDay: 4,
+  fixedCosts: 8000,
+  baseOperationsHours: 720,
+  paidReliefRate: 25,
+  familyHours: 200,
+  rent: 12000,
+  renewal: 1500,
+  operatingCompanyAnnualPrincipal: shareholderAdvance.operatingCompanyAnnualPrincipal,
+};
+
+export function calculateHybridScenario(input) {
+  const p = { ...hybridDefaults, ...input };
+  const occupiedSuiteNights = p.soldNightsPerSuite * p.suites;
+  const stays = occupiedSuiteNights / p.averageStay;
+  const presenceDays = Math.min(275, p.soldNightsPerSuite * 1.2);
+
+  const lodgingRevenue = occupiedSuiteNights * p.averageNightPrice;
+  const spaSales = occupiedSuiteNights * p.spaTakeRate;
+  const pantrySales = occupiedSuiteNights * p.pantryTakeRate;
+  const signatureTableSales = occupiedSuiteNights * p.signatureTableTakeRate;
+  const spaRevenue = spaSales * p.spaPricePerSuiteDay;
+  const pantryRevenue = pantrySales * p.pantryPricePerSuiteDay;
+  const signatureTableRevenue = signatureTableSales * p.signatureTablePricePerSuiteDay;
+  const experienceRevenue = spaRevenue + pantryRevenue + signatureTableRevenue;
+  const publicRevenue = lodgingRevenue + experienceRevenue;
+
+  const otaCommission = lodgingRevenue * (1 - p.directShare) * p.otaCommission;
+  const paymentFees = (lodgingRevenue * p.directShare + experienceRevenue) * p.paymentRate;
+  const turnoverCash = stays * p.turnoverCashPerStay;
+  const breakfast = occupiedSuiteNights * p.averageGuests * p.breakfastCostPerGuestNight;
+  const energy = occupiedSuiteNights * p.energyCostPerSuiteNight;
+  const spaDirect = spaSales * p.spaCostPerSoldSuiteDay;
+  const pantryDirect = pantryRevenue * p.pantryCostRate;
+  const signatureTableDirect = signatureTableRevenue * p.signatureTableCostRate;
+  const incidents = publicRevenue * p.incidentRate;
+  const variableCosts = otaCommission + paymentFees + turnoverCash + breakfast + energy + spaDirect + pantryDirect + signatureTableDirect + incidents;
+  const contribution = publicRevenue - variableCosts;
+
+  const spaProbabilityPerSuitePresenceDay = presenceDays > 0 ? Math.min(1, spaSales / (p.suites * presenceDays)) : 0;
+  const signatureProbabilityPerSuitePresenceDay = presenceDays > 0 ? Math.min(1, signatureTableSales / (p.suites * presenceDays)) : 0;
+  const spaServiceDays = presenceDays * probabilityAtLeastOne(spaProbabilityPerSuitePresenceDay, p.suites);
+  const signatureTableServiceDays = presenceDays * probabilityAtLeastOne(signatureProbabilityPerSuitePresenceDay, p.suites);
+  const baseHours = p.baseOperationsHours;
+  const guestPresenceHours = presenceDays * 1.75;
+  const commonAreasHours = occupiedSuiteNights * 0.5;
+  const coordinationHours = stays;
+  const turnoverHours = stays * p.turnoverHoursPerStay;
+  const spaHours = spaServiceDays;
+  const pantryHours = pantrySales * p.pantryLaborHoursPerSale;
+  const signatureTableHours = signatureTableServiceDays * p.signatureTableHoursPerServiceDay;
+  const operationsHours = baseHours + guestPresenceHours + commonAreasHours + coordinationHours + turnoverHours + spaHours + pantryHours + signatureTableHours;
+
+  const paidReliefCost = p.paidReliefHours * p.paidReliefRate;
+  const cashAvailableForJules = contribution - p.fixedCosts - paidReliefCost - p.rent - p.renewal - p.operatingCompanyAnnualPrincipal;
+  const maximumAffordableJulesFte = Math.min(1, Math.max(0, cashAvailableForJules / fullTimeEmployerCost));
+  const requiredJulesHours = Math.max(0, operationsHours - p.paidReliefHours - p.familyHours);
+  const requiredJulesFte = requiredJulesHours / annualHours;
+  const julesFte = Math.min(1, Math.max(0, p.julesFte));
+  const julesCost = fullTimeEmployerCost * julesFte;
+  const declaredCapacityHours = annualHours * julesFte + p.paidReliefHours + p.familyHours;
+  const staffingGapHours = Math.max(0, operationsHours - declaredCapacityHours);
+  const cashAfterPrincipalRepayment = cashAvailableForJules - julesCost;
+
+  return {
+    ...p,
+    occupiedSuiteNights,
+    stays,
+    presenceDays,
+    lodgingRevenue,
+    spaRevenue,
+    pantryRevenue,
+    signatureTableRevenue,
+    experienceRevenue,
+    publicRevenue,
+    averageBasketPerSuiteNight: publicRevenue / occupiedSuiteNights,
+    averageExtrasPerSuiteNight: experienceRevenue / occupiedSuiteNights,
+    variableCosts,
+    contribution,
+    spaServiceDays,
+    signatureTableServiceDays,
+    baseHours,
+    guestPresenceHours,
+    commonAreasHours,
+    coordinationHours,
+    turnoverHours,
+    spaHours,
+    pantryHours,
+    signatureTableHours,
+    operationsHours,
+    paidReliefCost,
+    cashAvailableForJules,
+    maximumAffordableJulesFte,
+    requiredJulesHours,
+    requiredJulesFte,
+    julesCost,
+    declaredCapacityHours,
+    staffingGapHours,
+    cashAfterPrincipalRepayment,
+  };
+}
+
+const hybridActivityInputs = [
+  { soldNightsPerSuite: 60, julesFte: 0, paidReliefHours: 100 },
+  { soldNightsPerSuite: 90, julesFte: 0.35, paidReliefHours: 125 },
+  { soldNightsPerSuite: 120, julesFte: 0.8, paidReliefHours: 250 },
+  { soldNightsPerSuite: 150, julesFte: 1, paidReliefHours: 350 },
+];
+
+export const hybridActivityCases = hybridActivityInputs.map(calculateHybridScenario);
+
+export const hybridRecommendation = calculateHybridScenario({
+  soldNightsPerSuite: 140,
+  averageNightPrice: 205,
+  julesFte: 1,
+  paidReliefHours: 300,
+});
