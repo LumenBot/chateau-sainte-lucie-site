@@ -9,15 +9,15 @@
     const toast = window.CSLDemo?.toast || ((message) => window.alert(message));
 
     const fixed = { suites: 2, averageGuests: 2.1, annualHours: 1607, capex: 65000 };
-    const scenarioNames = { recommended: "Configuration soutenable à maturité", custom: "Scénario libre" };
+    const scenarioNames = { recommended: "Plein temps sous contraintes", custom: "Scénario libre" };
     const scenarios = {
       recommended: {
-        nightsPerSuite: "150", averageNightPrice: "240", averageStay: "2.5", directShare: "55",
-        spaTake: "70", spaBasket: "85", diningTake: "40", diningBasket: "170",
+        nightsPerSuite: "150", averageNightPrice: "220", averageStay: "2.5", directShare: "50",
+        spaTake: "66", spaBasket: "100", diningTake: "33", diningBasket: "200",
         vatMode: "vat", diningAlcoholShare: "20", otaCommission: "15", directPaymentRate: "1.5",
-        turnoverCost: "90", breakfastCost: "7", energyCost: "7.5", spaUnitCost: "24", diningCostRate: "35", incidentRate: "0.7",
-        fixedInsurance: "1500", fixedAccounting: "3000", fixedDigital: "2400", fixedMarketing: "2000", fixedTaxes: "1200", fixedBank: "400", fixedSafety: "700", fixedTechnical: "2800", fixedSpa: "2400", fixedUtilities: "1000", fixedTraining: "600", fixedVatRecovery: "2500",
-        julesFte: "0.7", employeeMonths: "12", supportMode: "subcontract", supportHourlyRate: "28", plannedSupportHours: "400", familyHours: "60", renewalProvision: "4000", cashReserveContribution: "3000", contractRent: "0", julesFullTimeCost: "28000",
+        turnoverCost: "30", turnoverInternalHours: "4", breakfastCost: "7", energyCost: "7", spaUnitCost: "25", spaLaborHours: "1", diningCostRate: "30", diningLaborHours: "4.5", incidentRate: "0.5",
+        fixedInsurance: "1500", fixedAccounting: "2000", fixedDigital: "1800", fixedMarketing: "1000", fixedTaxes: "700", fixedBank: "400", fixedSafety: "600", fixedTechnical: "2000", fixedSpa: "1300", fixedUtilities: "1200", fixedTraining: "500", fixedVatRecovery: "2000",
+        julesFte: "1", employeeMonths: "12", supportMode: "subcontract", supportHourlyRate: "25", supportEmployeeMonths: "12", plannedSupportHours: "350", familyHours: "100", renewalProvision: "2500", cashReserveContribution: "2500", contractRent: "0", julesFullTimeCost: "28000",
       },
     };
 
@@ -92,7 +92,7 @@
       const spaDirectTtc = spaBookings * number(next, "spaUnitCost");
       const diningDirectTtc = diningRevenueTtc * number(next, "diningCostRate") / 100;
       const turnover = vatMode === "vat" ? turnoverTtc / 1.2 : turnoverTtc;
-      const breakfast = vatMode === "vat" ? breakfastTtc * 0.9 : breakfastTtc;
+      const breakfast = vatMode === "vat" ? breakfastTtc / 1.1 : breakfastTtc;
       const energy = vatMode === "vat" ? energyTtc / 1.2 : energyTtc;
       const spaDirect = vatMode === "vat" ? spaDirectTtc / 1.2 : spaDirectTtc;
       const diningDirect = vatMode === "vat" ? diningDirectTtc / 1.1 : diningDirectTtc;
@@ -110,9 +110,10 @@
       const presenceHours = presenceDays * 1.75;
       const suiteNightHours = occupiedNights * 0.5;
       const coordinationHours = stays;
-      const spaHours = spaBookings * 0.75;
-      const diningHours = diningBookings * 4.5;
-      const operationsHours = baseHours + presenceHours + suiteNightHours + coordinationHours + spaHours + diningHours;
+      const turnoverHours = stays * number(next, "turnoverInternalHours");
+      const spaHours = spaBookings * number(next, "spaLaborHours");
+      const diningHours = diningBookings * number(next, "diningLaborHours");
+      const operationsHours = baseHours + presenceHours + suiteNightHours + coordinationHours + turnoverHours + spaHours + diningHours;
       const calendarRelief = nightsPerSuite > 0 ? clamp(roundTo(100 + nightsPerSuite * 2, 50), 250, 500) : 0;
       const familyHours = number(next, "familyHours");
       const julesFte = clamp(number(next, "julesFte"), 0, 1);
@@ -120,9 +121,14 @@
       const julesFullTimeCost = number(next, "julesFullTimeCost");
       const paidCapacity = fixed.annualHours * julesFte * employeeMonths / 12;
       const workloadRelief = Math.max(0, operationsHours - paidCapacity - familyHours);
-      const supportHours = Math.max(number(next, "plannedSupportHours"), calendarRelief, workloadRelief);
-      const partTimeFte = Math.max(0.2, Math.ceil(supportHours / fixed.annualHours * 10) / 10);
-      const supportCost = next.supportMode === "parttime" ? julesFullTimeCost * partTimeFte * employeeMonths / 12 : supportHours * number(next, "supportHourlyRate");
+      const calendarSupportNeed = Math.max(0, calendarRelief - familyHours);
+      const recommendedSupportHours = Math.max(calendarSupportNeed, workloadRelief);
+      const supportHours = Math.max(0, number(next, "plannedSupportHours"));
+      const supportGap = Math.max(0, recommendedSupportHours - supportHours);
+      const supportEmployeeMonths = clamp(number(next, "supportEmployeeMonths"), 0, 12);
+      const partTimeAnnualCapacity = fixed.annualHours * supportEmployeeMonths / 12;
+      const partTimeFte = supportHours > 0 && partTimeAnnualCapacity > 0 ? Math.max(0.2, Math.ceil(supportHours / partTimeAnnualCapacity * 20) / 20) : 0;
+      const supportCost = next.supportMode === "parttime" ? julesFullTimeCost * partTimeFte * supportEmployeeMonths / 12 : supportHours * number(next, "supportHourlyRate");
       const julesCost = julesFullTimeCost * julesFte * employeeMonths / 12;
       const operatingResultBeforeRent = contribution - fixedCosts - julesCost - supportCost;
       const contractRent = number(next, "contractRent");
@@ -132,17 +138,17 @@
       const cashResult = operatingResultAfterRent - renewalProvision - cashReserveContribution;
       const rentCapacity = Math.max(0, operatingResultBeforeRent - renewalProvision - cashReserveContribution);
       const recoveredVat = (turnoverTtc - turnover) + (breakfastTtc - breakfast) + (energyTtc - energy) + (spaDirectTtc - spaDirect) + (diningDirectTtc - diningDirect) + fixedVatRecovery;
-      const netVat = Math.max(0, collectedVat - recoveredVat);
+      const netVat = collectedVat - recoveredVat;
 
       const julesAssignedHours = Math.max(0, operationsHours - supportHours - familyHours);
-      return { nightsPerSuite, occupiedNights, stays, spaBookings, diningBookings, lodgingRevenueTtc, spaRevenueTtc, diningRevenueTtc, revenueTtc, lodgingRevenue, spaRevenue, diningRevenue, accountingRevenue, collectedVat, recoveredVat, netVat, commission, paymentFees, turnover, breakfast, energy, spaDirect, diningDirect, incidents, variableCosts, contribution, fixedCostsTtc, fixedVatRecovery, fixedCosts, presenceDays, baseHours, presenceHours, suiteNightHours, coordinationHours, spaHours, diningHours, operationsHours, calendarRelief, supportHours, partTimeFte, supportCost, familyHours, julesFte, paidCapacity, julesAssignedHours, julesCost, operatingResultBeforeRent, contractRent, operatingResultAfterRent, renewalProvision, cashReserveContribution, cashResult, rentCapacity };
+      return { nightsPerSuite, occupiedNights, stays, spaBookings, diningBookings, lodgingRevenueTtc, spaRevenueTtc, diningRevenueTtc, revenueTtc, lodgingRevenue, spaRevenue, diningRevenue, accountingRevenue, collectedVat, recoveredVat, netVat, commission, paymentFees, turnover, breakfast, energy, spaDirect, diningDirect, incidents, variableCosts, contribution, fixedCostsTtc, fixedVatRecovery, fixedCosts, presenceDays, baseHours, presenceHours, suiteNightHours, coordinationHours, turnoverHours, spaHours, diningHours, operationsHours, calendarRelief, calendarSupportNeed, workloadRelief, recommendedSupportHours, supportHours, supportGap, supportEmployeeMonths, partTimeFte, supportCost, familyHours, julesFte, paidCapacity, julesAssignedHours, julesCost, operatingResultBeforeRent, contractRent, operatingResultAfterRent, renewalProvision, cashReserveContribution, cashResult, rentCapacity };
     }
 
     const pnlRows = [
       ["Ventes publiques TTC · hébergement", "lodgingRevenueTtc", "revenue"], ["Ventes publiques TTC · bien-être", "spaRevenueTtc", "revenue"], ["Ventes publiques TTC · table", "diningRevenueTtc", "revenue"], ["Ventes publiques TTC", "revenueTtc", "subtotal"],
       ["TVA collectée estimée", "collectedVat", "cost"], ["Produits comptables simulés", "accountingRevenue", "subtotal"],
-      ["Commissions plateformes", "commission", "cost"], ["Encaissements directs", "paymentFees", "cost"], ["Rotation ménage, linge & accueil", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie marginale", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Matières table", "diningDirect", "cost"], ["Impayés et gestes", "incidents", "cost"], ["Marge contributive", "contribution", "subtotal"],
-      ["Charges fixes analytiques", "fixedCosts", "fixed"], ["Jules — budget employeur financé", "julesCost", "fixed"], ["Relève rémunérée", "supportCost", "fixed"], ["Résultat avant loyer SCI", "operatingResultBeforeRent", "subtotal"], ["Loyer SCI contractuel testé", "contractRent", "fixed"], ["Résultat d’exploitation simplifié", "operatingResultAfterRent", "subtotal"],
+      ["Commissions plateformes", "commission", "cost"], ["Encaissements directs", "paymentFees", "cost"], ["Linge et consommables de rotation", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie marginale", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Matières table", "diningDirect", "cost"], ["Impayés et gestes", "incidents", "cost"], ["Marge contributive", "contribution", "subtotal"],
+      ["Charges fixes analytiques · net TVA simulée", "fixedCosts", "fixed"], ["Jules — budget employeur financé", "julesCost", "fixed"], ["Relève rémunérée", "supportCost", "fixed"], ["Résultat avant loyer SCI", "operatingResultBeforeRent", "subtotal"], ["Loyer SCI contractuel testé", "contractRent", "fixed"], ["Résultat d’exploitation simplifié", "operatingResultAfterRent", "subtotal"],
       ["Enveloppe de renouvellement", "renewalProvision", "cash"], ["Dotation de trésorerie", "cashReserveContribution", "cash"], ["Solde de trésorerie prudent", "cashResult", "total"],
     ];
 
@@ -152,27 +158,33 @@
 
     function render() {
       const v = read(); const data = calculate(v);
-      const fullTime = calculate(v, { julesFte: "1", contractRent: "10000", familyHours: "0" });
+      const fullTime = calculate(v, { julesFte: "1", contractRent: "10000" });
       output("scenario-name", scenarioNames[activeScenario] || scenarioNames.custom);
       output("revenue-ttc", money(data.revenueTtc));
       output("accounting-revenue", money(data.accountingRevenue));
       output("revenue-mix", `${percent(data.lodgingRevenueTtc / Math.max(1, data.revenueTtc))} hébergement · ${percent((data.spaRevenueTtc + data.diningRevenueTtc) / Math.max(1, data.revenueTtc))} expériences`);
-      output("vat-summary", v.vatMode === "vat" ? `TVA nette estimée ${money(data.netVat)} · taux spa à confirmer` : "Franchise simulée · aucune TVA récupérée");
+      const vatLabel = data.netVat >= 0 ? `TVA nette estimée ${money(data.netVat)}` : `Crédit de TVA estimé ${money(Math.abs(data.netVat))}`;
+      output("vat-summary", v.vatMode === "vat" ? `${vatLabel} · taux spa à confirmer` : "Franchise simulée · aucune TVA récupérée");
       output("cash-result", money(data.cashResult));
       output("employment", money(data.julesCost + data.supportCost));
       output("support-summary", `${data.julesFte.toFixed(2).replace(".", ",")} ETP Jules + ${integer(data.supportHours)} h de relève`);
+      output("fixed-total-ttc", money(data.fixedCostsTtc));
+      output("fixed-total-net", money(data.fixedCosts));
       output("pre-rent-result", money(data.operatingResultBeforeRent));
       output("contract-rent", money(data.contractRent));
       output("rent-capacity", money(data.rentCapacity));
       output("jules-cost", `${money(data.julesCost)} · ${data.julesFte.toFixed(2).replace(".", ",")} ETP`);
       output("support-hours", `${integer(data.supportHours)} h · ${money(data.supportCost)}`);
+      output("support-recommended", `${integer(data.recommendedSupportHours)} h/an`);
+      output("support-gap", data.supportGap > 0 ? `${integer(data.supportGap)} h non couvertes` : "0 h · couverture déclarée");
       output("family-hours", `${integer(data.familyHours)} h/an`);
       output("operations-hours", `${integer(data.operationsHours)} h/an`);
       output("operations-copy", `${integer(data.presenceDays)} jours de présence estimés · ${integer(data.paidCapacity)} h de capacité payée pour Jules.`);
       output("fulltime-gap", fullTime.cashResult < 0 ? `− ${money(Math.abs(fullTime.cashResult))}` : `+ ${money(fullTime.cashResult)}`);
 
-      const staffingTitle = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(1).replace(".", ",")} ETP complémentaire` : `${integer(data.supportHours)} h rémunérées`;
-      const staffingCopy = `${integer(data.calendarRelief)} h de plancher calendaire ; ${integer(data.familyHours)} h familiales déclarées. Coût de relève : ${money(data.supportCost)}.`;
+      const staffingTitle = data.supportGap > 0 ? `${integer(data.supportGap)} h à couvrir` : "Couverture déclarée complète";
+      const supportForm = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(2).replace(".", ",")} ETP de relève` : `${integer(data.supportHours)} h rémunérées`;
+      const staffingCopy = `${integer(data.calendarRelief)} h de plancher calendaire brut ; ${supportForm} et ${integer(data.familyHours)} h associées. Coût de relève : ${money(data.supportCost)}.`;
       output("staffing-title", staffingTitle); output("staffing-copy", staffingCopy);
 
       document.querySelector("[data-workload]").innerHTML = `
@@ -181,16 +193,25 @@
         <div><span>Présence clients & petits-déjeuners</span><strong>${integer(data.presenceHours)} h</strong></div>
         <div><span>Nuits-suite & communs</span><strong>${integer(data.suiteNightHours)} h</strong></div>
         <div><span>Coordination des séjours</span><strong>${integer(data.coordinationHours)} h</strong></div>
+        <div><span>Ménage internalisé</span><strong>${integer(data.turnoverHours)} h</strong></div>
         <div><span>Bien-être</span><strong>${integer(data.spaHours)} h</strong></div>
         <div><span>Table d’hôte</span><strong>${integer(data.diningHours)} h</strong></div>
         <div class="allocation"><span>Jules assigné / capacité payée</span><strong>${integer(data.julesAssignedHours)} / ${integer(data.paidCapacity)} h</strong></div>
         <div class="allocation"><span>Relève rémunérée / aide familiale</span><strong>${integer(data.supportHours)} / ${integer(data.familyHours)} h</strong></div>`;
 
       const verdict = document.querySelector("[data-verdict]");
-      if (data.cashResult < -1000) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Besoin de financement : ${money(Math.abs(data.cashResult))}.</strong><span>Le loyer saisi, l’emploi, la relève, le renouvellement et la réserve ne sont pas tous couverts.</span>`; }
-      else if (data.cashResult < 3000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre très serré.</strong><span>Le scénario absorbe presque tout le résultat et ne laisse que ${money(Math.max(0, data.cashResult))} de marge de sécurité supplémentaire.</span>`; }
+      if (data.cashResult < -1000) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Besoin de financement : ${money(Math.abs(data.cashResult))}.</strong><span>Le loyer saisi, l’emploi, la relève, le renouvellement et la réserve ne sont pas tous couverts.${data.supportGap > 0 ? ` Il manque aussi ${integer(data.supportGap)} h de couverture.` : ""}</span>`; }
+      else if (data.supportGap > 0) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Couverture humaine incomplète.</strong><span>Le budget ne finance pas ${integer(data.supportGap)} h du besoin estimé. Le solde financier n’est donc pas suffisant pour qualifier le scénario de soutenable.</span>`; }
+      else if (data.cashResult < 3000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre très serré.</strong><span>Le scénario couvre les heures déclarées, mais ne laisse que ${money(Math.max(0, data.cashResult))} de marge de sécurité supplémentaire.</span>`; }
       else { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Marge de sécurité positive.</strong><span>Après les emplois de trésorerie saisis, le solde atteint ${money(data.cashResult)}. Il ne constitue pas automatiquement un loyer distribuable.</span>`; }
       document.querySelector("[data-hourly-field]").hidden = v.supportMode !== "subcontract";
+      document.querySelector("[data-support-months]").hidden = v.supportMode !== "parttime";
+      document.querySelectorAll("[data-vat-only]").forEach((label) => {
+        const disabled = v.vatMode !== "vat";
+        label.classList.toggle("is-disabled", disabled);
+        const field = label.querySelector("input, select");
+        if (field) field.disabled = disabled;
+      });
       document.querySelectorAll("[data-pilotage-scenario]").forEach((button) => button.classList.toggle("active", button.dataset.pilotageScenario === activeScenario));
       renderPnl(data);
     }

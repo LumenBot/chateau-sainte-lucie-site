@@ -98,6 +98,33 @@
 .pilotage-controls-v2 summary span { margin-right: 9px; color: var(--demo-gold); font-family: var(--serif); font-size: 11px; letter-spacing: .12em; }
 .pilotage-controls-v2 details[open] summary { margin-bottom: 25px; }
 .pilotage-help { margin: 17px 0 0; color: var(--demo-muted); font-size: 12px; }
+.pilotage-help strong { color: var(--demo-ink); font-weight: 600; }
+.pilotage-input-unit {
+  display: grid;
+  grid-template-columns: minmax(90px,1fr) minmax(88px,auto);
+  min-height: 47px;
+  border: 1px solid rgba(242,235,221,.2);
+  background: #101c23;
+}
+.pilotage-input-unit input {
+  min-width: 0;
+  border: 0 !important;
+  background: transparent !important;
+}
+.pilotage-input-unit > span {
+  display: flex;
+  align-items: center;
+  max-width: 155px;
+  padding: 7px 10px;
+  border-left: 1px solid rgba(242,235,221,.14);
+  color: var(--demo-muted);
+  font-size: 10px;
+  line-height: 1.25;
+  text-transform: none;
+}
+.demo-field.is-disabled { opacity: .48; }
+.demo-field.is-disabled .pilotage-input-unit { background: rgba(16,28,35,.45); }
+.demo-field.is-disabled input { cursor: not-allowed; }
 .pilotage-controls-v2 .compact-fields .label { min-height: 32px; }
 .pilotage-live-results { position: sticky; top: 166px; padding: 28px; }
 .pilotage-live-results h3 { margin: 9px 0 23px; font-size: 34px; }
@@ -198,6 +225,13 @@
 .pilotage-year-grid .demo-field + .demo-field { margin-top: 14px; }
 .pilotage-pack-note { display: grid; grid-template-columns: 190px 1fr; gap: 18px; margin-top: 18px; padding: 16px 18px; border-left: 2px solid var(--demo-gold); background: rgba(200,164,91,.07); color: var(--demo-muted); font-size: 12px; }
 .pilotage-pack-note strong { color: var(--demo-ink); }
+.pilotage-tariff-target { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; margin-top: 12px; }
+.pilotage-tariff-target article { padding: 15px; border: 1px solid rgba(242,235,221,.1); background: rgba(242,235,221,.025); }
+.pilotage-tariff-target span,
+.pilotage-tariff-target small { display: block; color: var(--demo-muted); }
+.pilotage-tariff-target span { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.pilotage-tariff-target strong { display: block; margin: 7px 0 4px; color: var(--demo-gold); font-family: var(--display); font-size: 21px; font-weight: 500; }
+.pilotage-tariff-target small { font-size: 11px; line-height: 1.4; }
 .pilotage-fixed-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 18px; }
 .pilotage-fixed-facts article { padding: 18px; border: 1px solid rgba(242,235,221,.12); background: rgba(242,235,221,.025); }
 .pilotage-fixed-facts span,
@@ -283,6 +317,7 @@
   .pilotage-value-grid,
   .pilotage-budget-grid,
   .pilotage-insights,
+  .pilotage-tariff-target,
   .pilotage-capacity-grid,
   .pilotage-trajectory { grid-template-columns: 1fr; }
   .pilotage-value-grid figure,

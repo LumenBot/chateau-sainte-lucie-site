@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.2",
   "as_of": "2026-08-09",
   "sample": { "total": 30, "vosges": 10, "france_outside_vosges": 20 },
   "indicative_medians": { "vosges": 206, "france": 213, "global": 210, "currency": "EUR" },
@@ -12,8 +12,9 @@
   ],
   "current_recommendation": {
     "launch_range": [180, 220],
-    "maturity_average_price_test": [225, 240],
-    "maturity_public_grid_implication": "A 240 EUR average requires strong dates priced above 240 EUR; the future grid is not yet approved.",
+    "maturity_average_price_target": 220,
+    "maturity_public_grid_test": [200, 250],
+    "maturity_public_grid_implication": "A 220 EUR maturity average is compatible with a 200–250 EUR seasonal working grid if demand supports the high dates; the future grid is not yet approved.",
     "conditions": ["finished bathrooms", "professional real photography", "verified private spaces", "night park lighting", "reliable service", "strong guest reviews"],
     "status": "working_assumption"
   },

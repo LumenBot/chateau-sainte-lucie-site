@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "as_of": "2026-08-09",
   "project": {
     "name": "Les Nuits au Château — Les Suites de Sainte-Lucie",
@@ -44,8 +44,25 @@
   "internal_price_trajectory": {
     "launch_2027_public_range": [180, 220],
     "consolidation_2028_average_price_test": [210, 225],
-    "maturity_2029_plus_average_price_test": [225, 240],
-    "maturity_requirement": "An average price at 240 EUR requires a public grid whose high dates exceed 240 EUR.",
+    "maturity_2029_plus_public_range_test": [200, 250],
+    "maturity_2029_plus_average_price_target": 220,
+    "maturity_requirement": "The 220 EUR average is an internal maturity target, not a validated public launch price. It requires seasonal yield management, sufficient high-date sales and evidence from real demand.",
+    "status": "working_assumption_not_public_commitment"
+  },
+  "internal_experience_economics": {
+    "maturity_spa_take_rate_target": 0.66,
+    "maturity_spa_basket_ttc_target": 100,
+    "maturity_table_take_rate_target": 0.33,
+    "maturity_table_basket_ttc_target": 200,
+    "working_maturity_tariff_card": {
+      "suite_public_price_points_ttc": [200, 220, 250],
+      "spa_day_for_suite_ttc": 50,
+      "spa_two_day_pack_for_suite_ttc": 90,
+      "table_per_adult_ttc": 60,
+      "wine_pairing_per_adult_ttc": 30,
+      "private_signature_dinner_per_couple_ttc": 240
+    },
+    "interpretation": "These are annual average basket targets for the operating model, not a replacement for the validated public launch tariff card. Packs and menus must be redesigned and approved before publication.",
     "status": "working_assumption_not_public_commitment"
   },
   "stay_rules": {

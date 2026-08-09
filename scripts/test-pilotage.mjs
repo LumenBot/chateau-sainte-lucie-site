@@ -15,7 +15,11 @@ const makeNode = (value = "") => ({
   className: "",
   classList: { toggle() {}, add() {}, remove() {} },
   setAttribute() {},
-  addEventListener() {},
+  addEventListener(type, handler) {
+    this.listeners ||= {};
+    this.listeners[type] ||= [];
+    this.listeners[type].push(handler);
+  },
   appendChild() {},
 });
 
@@ -81,11 +85,65 @@ vm.runInThisContext(source, { filename: "pilotage.js" });
 const normalized = (value) => String(value || "").replace(/[\s\u00a0\u202f]/g, "");
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 
-assert(normalized(outputs.get("revenue-ttc")?.textContent).includes("87300€"), "Le CA TTC recommandé ne vaut pas 87 300 €.");
-assert(normalized(outputs.get("support-hours")?.textContent).startsWith("400h"), "La relève recommandée ne vaut pas 400 h.");
+assert(normalized(outputs.get("revenue-ttc")?.textContent).includes("81840€"), "Le CA TTC recommandé ne vaut pas 81 840 €.");
+assert(normalized(outputs.get("support-hours")?.textContent).startsWith("350h"), "La relève budgétée recommandée ne vaut pas 350 h.");
+assert(outputs.get("support-gap")?.textContent?.includes("couverture déclarée"), "Le scénario recommandé ne couvre pas les heures estimées.");
 assert(outputs.get("cash-result")?.textContent && outputs.get("cash-result")?.textContent !== "—", "Le solde prudent ne s’affiche pas.");
 assert(getNode("[data-pnl]").innerHTML.includes("Loyer SCI contractuel testé"), "Le loyer contractuel manque dans le compte d’exploitation.");
 assert(getNode("[data-workload]").innerHTML.includes("Décomposition du temps annuel"), "La décomposition de charge ne s’affiche pas.");
+
+const rerender = (target = form) => {
+  for (const handler of form.listeners?.input || []) handler({ target });
+};
+const fingerprint = () => [
+  ...Array.from(outputs.entries()).filter(([key]) => key !== "scenario-name").map(([key, node]) => `${key}:${node.textContent}`),
+  getNode("[data-pnl]").innerHTML,
+  getNode("[data-workload]").innerHTML,
+].join("|");
+
+for (const field of fields.filter((item) => item.name !== "supportEmployeeMonths")) {
+  if (!/^[-+]?\d/.test(field.value)) continue;
+  const initial = field.value;
+  const before = fingerprint();
+  const step = Number(astro.match(new RegExp(`name="${field.name}"[^>]*step="([^"]+)"`))?.[1] || 1);
+  const max = Number(astro.match(new RegExp(`name="${field.name}"[^>]*max="([^"]+)"`))?.[1] || Number.POSITIVE_INFINITY);
+  field.value = String(Number(initial) + step <= max ? Number(initial) + step : Number(initial) - step);
+  rerender(field);
+  assert(fingerprint() !== before, `Le champ ${field.name} ne modifie aucun résultat visible.`);
+  field.value = initial;
+  rerender(field);
+}
+
+const supportMode = form.elements.namedItem("supportMode");
+const supportModeBefore = fingerprint();
+supportMode.value = "parttime";
+rerender(supportMode);
+assert(fingerprint() !== supportModeBefore, "Le mode de relève ne modifie aucun résultat visible.");
+const supportMonths = form.elements.namedItem("supportEmployeeMonths");
+const partTimeBefore = fingerprint();
+supportMonths.value = "11";
+rerender(supportMonths);
+assert(fingerprint() !== partTimeBefore, "Le nombre de mois du CDI de relève ne modifie aucun résultat visible.");
+supportMonths.value = "12";
+supportMode.value = "subcontract";
+rerender(supportMode);
+
+const vatMode = form.elements.namedItem("vatMode");
+const vatBefore = fingerprint();
+vatMode.value = "franchise";
+rerender(vatMode);
+assert(fingerprint() !== vatBefore, "Le régime de TVA ne modifie aucun résultat visible.");
+vatMode.value = "vat";
+rerender(vatMode);
+
+const plannedSupport = form.elements.namedItem("plannedSupportHours");
+plannedSupport.value = "300";
+rerender(plannedSupport);
+assert(normalized(outputs.get("support-hours")?.textContent).startsWith("300h"), "La relève saisie à 300 h est encore remplacée silencieusement.");
+assert(outputs.get("support-gap")?.textContent?.includes("non couvertes"), "L’écart de couverture n’est pas signalé après réduction de la relève.");
+
+plannedSupport.value = "350";
+rerender(plannedSupport);
 
 console.log(JSON.stringify({
   revenueTtc: outputs.get("revenue-ttc").textContent,
@@ -94,5 +152,8 @@ console.log(JSON.stringify({
   julesCost: outputs.get("jules-cost").textContent,
   cashResult: outputs.get("cash-result").textContent,
   support: outputs.get("support-hours").textContent,
+  recommendedSupport: outputs.get("support-recommended").textContent,
+  supportGap: outputs.get("support-gap").textContent,
+  operationsHours: outputs.get("operations-hours").textContent,
   fullTimeAndRentGap: outputs.get("fulltime-gap").textContent,
 }, null, 2));

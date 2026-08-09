@@ -18,9 +18,15 @@ Interpretation rules:
 3. Do not treat the simulator as an accountant-approved forecast.
 4. Do not infer sensitive legal, financial or personal data absent from these files.
 5. When recommending a change, state which current fact or assumption it would replace and why.
-6. The active simulator is business-model.json v3. It distinguishes public TTC sales, the tested VAT regime, itemized operating costs, paid support, declared family hours, renewal and cash reserve.
+6. The active simulator doctrine is v5 and is described by business-model.json schema 4.0. It distinguishes public TTC sales, the tested VAT regime, itemized operating costs, paid support, declared family hours, renewal and cash reserve.
 7. SCI rent is a contractual input. The operating result is the residual; maximum rent capacity is only a secondary economic indicator.
-8. The current two-suite sustainable target is roughly 0.70–0.75 FTE for Jules plus 350–450 paid support hours and little or no SCI rent. Full-time Jules plus EUR 10k rent requires an unproven EUR 110k–123k public TTC sales range.
+8. The current two-suite maturity reference is 150 nights per suite at EUR 220 average public TTC price, 50% direct bookings, 66% spa take-up at EUR 100 per buying stay and 33% table take-up at EUR 200 per buying stay: EUR 81,840 public TTC sales.
+9. The v5 staffing priority is 1.00 FTE for Jules, 350 paid support hours and 100 declared, rostered family hours. Family hours are an economic coverage assumption, not legal authorization for unpaid work.
+10. The v5 lean cost target is EUR 13k TTC fixed costs, approximately EUR 11k after estimated VAT recovery, plus EUR 2.5k renewal and EUR 2.5k cash reserve. Every line still requires a quote or measurement.
+11. Paid support entered in the simulator is exact. The calendar/workload recommendation and any coverage gap are separate outputs; the model must never silently increase the user's input.
+12. Cash savings from internalized housekeeping, spa or maintenance work must be matched by explicit workload hours.
+13. The active v5 reference prioritizes a full-time Jules position and therefore assumes zero SCI rent. A EUR 10k contractual rent is not financed by the same activity level.
+14. Apprenticeship is only a phase-2 option. Do not include it as cheap autonomous cover without a suitable course, tutor capacity, work-schedule review and verified employer cost.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/

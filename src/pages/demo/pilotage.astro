@@ -45,7 +45,7 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
 
     <section id="panel-simulateur" class="pilotage-panel" role="tabpanel" data-pilotage-panel="simulateur">
       <div class="pilotage-section-head">
-        <div><p class="demo-kicker">Simulateur économique v4 · prudence explicite</p><h2>Tester l’activité.<br />Laisser le résultat apparaître.</h2></div>
+        <div><p class="demo-kicker">Simulateur économique v5 · modèle lean sous contraintes</p><h2>Tester l’activité.<br />Voir l’argent et le temps.</h2></div>
         <div class="pilotage-actions"><button class="demo-button secondary" type="button" data-pilotage-share>Copier le scénario</button><button class="demo-button quiet" type="button" data-pilotage-reset>Réinitialiser</button></div>
       </div>
 
@@ -55,14 +55,14 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
       </div>
 
       <div class="pilotage-scenarios-v2" role="group" aria-label="Choisir un scénario de départ">
-        <button class="active" type="button" data-pilotage-scenario="recommended"><span>01 · MATURITÉ 2 SUITES</span><strong>Configuration soutenable</strong><small>150 nuits/suite · 0,70 ETP + relève</small></button>
+        <button class="active" type="button" data-pilotage-scenario="recommended"><span>01 · MATURITÉ 2 SUITES</span><strong>Plein temps sous contraintes</strong><small>150 nuits/suite · Jules à 1 ETP + relève</small></button>
         <button type="button" data-pilotage-scenario="custom"><span>02 · EXPLORER</span><strong>Scénario libre</strong><small>tous les paramètres restent ajustables</small></button>
       </div>
 
       <div class="pilotage-trajectory" aria-label="Trajectoire économique de référence">
         <article><span>2027 · lancement</span><strong>75 nuits · 195 €</strong><small>34,0 k€ TTC · déficit indicatif 33 k€ avec 9 mois de CDI</small></article>
         <article><span>2028 · consolidation</span><strong>110 nuits · 215 €</strong><small>56,6 k€ TTC · déficit indicatif 26 k€ avec CDI plein</small></article>
-        <article class="active"><span>2029+ · maturité</span><strong>150 nuits · 240 €</strong><small>87,3 k€ TTC · équilibre proche à 0,70 ETP, sans loyer</small></article>
+        <article class="active"><span>2029+ · maturité</span><strong>150 nuits · 220 €</strong><small>81,8 k€ TTC · plein temps financé, équilibre serré sans loyer</small></article>
       </div>
 
       <div class="pilotage-summary-grid" aria-live="polite">
@@ -76,24 +76,29 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
         <form class="pilotage-controls-v2" data-pilotage-form>
           <details open>
             <summary><span>01</span>Activité hébergement</summary>
-            <p class="pilotage-help">Les nuits sont exprimées par suite. La grille publique validée reste 180–220 € au lancement ; 240 € est une cible interne de maturité qui suppose une future grille plus haute.</p>
+            <p class="pilotage-help">Les nuits sont exprimées par suite. La grille publique validée reste 180–220 € au lancement. La cible interne de maturité teste une grille 200–250 € pondérée pour atteindre 220 € de prix moyen.</p>
             <div class="demo-form-grid two">
-              <label class="demo-field"><span class="label">Nuits vendues / suite / an</span><input name="nightsPerSuite" type="number" min="0" max="275" step="5" value="150" /></label>
-              <label class="demo-field"><span class="label">Prix moyen public TTC</span><input name="averageNightPrice" type="number" min="100" max="500" step="5" value="240" /></label>
-              <label class="demo-field"><span class="label">Durée moyenne du séjour</span><input name="averageStay" type="number" min="1" max="7" step="0.1" value="2.5" /></label>
-              <label class="demo-field"><span class="label">Réservations directes</span><input name="directShare" type="number" min="0" max="100" step="5" value="55" /></label>
+              <label class="demo-field"><span class="label">Nuits vendues</span><span class="pilotage-input-unit"><input name="nightsPerSuite" type="number" min="0" max="275" step="5" value="150" /><span>nuits / suite / an</span></span></label>
+              <label class="demo-field"><span class="label">Prix moyen public</span><span class="pilotage-input-unit"><input name="averageNightPrice" type="number" min="100" max="500" step="5" value="220" /><span>€ TTC / nuit-suite</span></span></label>
+              <label class="demo-field"><span class="label">Durée moyenne du séjour</span><span class="pilotage-input-unit"><input name="averageStay" type="number" min="1" max="7" step="0.1" value="2.5" /><span>nuits / séjour</span></span></label>
+              <label class="demo-field"><span class="label">Réservations directes</span><span class="pilotage-input-unit"><input name="directShare" type="number" min="0" max="100" step="5" value="50" /><span>% des réservations</span></span></label>
             </div>
           </details>
 
           <details open>
             <summary><span>02</span>Expériences et paniers moyens</summary>
             <div class="demo-form-grid two">
-              <label class="demo-field"><span class="label">Séjours acheteurs spa</span><input name="spaTake" type="number" min="0" max="100" step="5" value="70" /></label>
-              <label class="demo-field"><span class="label">Panier moyen spa TTC / séjour</span><input name="spaBasket" type="number" min="0" max="500" step="5" value="85" /></label>
-              <label class="demo-field"><span class="label">Séjours acheteurs table</span><input name="diningTake" type="number" min="0" max="100" step="5" value="40" /></label>
-              <label class="demo-field"><span class="label">Panier moyen table TTC / séjour</span><input name="diningBasket" type="number" min="0" max="600" step="5" value="170" /></label>
+              <label class="demo-field"><span class="label">Séjours acheteurs spa</span><span class="pilotage-input-unit"><input name="spaTake" type="number" min="0" max="100" step="1" value="66" /><span>% des séjours</span></span></label>
+              <label class="demo-field"><span class="label">Panier moyen spa</span><span class="pilotage-input-unit"><input name="spaBasket" type="number" min="0" max="500" step="5" value="100" /><span>€ TTC / séjour acheteur</span></span></label>
+              <label class="demo-field"><span class="label">Séjours acheteurs table</span><span class="pilotage-input-unit"><input name="diningTake" type="number" min="0" max="100" step="1" value="33" /><span>% des séjours</span></span></label>
+              <label class="demo-field"><span class="label">Panier moyen table</span><span class="pilotage-input-unit"><input name="diningBasket" type="number" min="0" max="600" step="5" value="200" /><span>€ TTC / séjour acheteur</span></span></label>
             </div>
             <div class="pilotage-pack-note"><strong>Lecture simple</strong><span>Les paniers agrègent packs et options. La table doit rester pilotée par sa marge et par ses heures : augmenter les ventes sans organiser la relève peut dégrader le résultat.</span></div>
+            <div class="pilotage-tariff-target" aria-label="Carte interne cible à maturité">
+              <article><span>Nuitée</span><strong>200 · 220 · 250 €</strong><small>grille saisonnière testée pour viser 220 € de moyenne</small></article>
+              <article><span>Bien-être</span><strong>50 € / jour · 90 € / 2 jours</strong><small>options privatives à construire pour viser 100 € par séjour acheteur</small></article>
+              <article><span>Table</span><strong>60 € + accord 30 € / pers.</strong><small>dîner signature privatif autour de 240 € par couple</small></article>
+            </div>
           </details>
 
           <details>
@@ -101,51 +106,57 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
             <p class="pilotage-help">La franchise de TVA n’est ni automatique ni exclue. Le régime dépend de l’année, du chiffre d’affaires antérieur, du mix d’activités et d’une éventuelle option. Les taux spa et boissons restent à valider.</p>
             <div class="demo-form-grid two">
               <label class="demo-field"><span class="label">Régime de TVA simulé</span><select name="vatMode"><option value="franchise">Franchise en base · hypothèse</option><option value="vat" selected>TVA au réel · simulation prudente</option></select></label>
-              <label class="demo-field"><span class="label">Part boissons à 20 % dans la table</span><input name="diningAlcoholShare" type="number" min="0" max="100" step="5" value="20" /></label>
-              <label class="demo-field"><span class="label">Commission OTA</span><input name="otaCommission" type="number" min="0" max="30" step="1" value="15" /></label>
-              <label class="demo-field"><span class="label">Frais d’encaissement direct</span><input name="directPaymentRate" type="number" min="0" max="10" step="0.1" value="1.5" /></label>
-              <label class="demo-field"><span class="label">Rotation ménage, linge & accueil / séjour TTC</span><input name="turnoverCost" type="number" min="0" max="300" step="5" value="90" /></label>
-              <label class="demo-field"><span class="label">Petit-déjeuner / personne-nuit TTC</span><input name="breakfastCost" type="number" min="0" max="40" step="0.5" value="7" /></label>
-              <label class="demo-field"><span class="label">Énergie / nuit-suite TTC</span><input name="energyCost" type="number" min="0" max="50" step="0.5" value="7.5" /></label>
-              <label class="demo-field"><span class="label">Prix de revient spa TTC / vente</span><input name="spaUnitCost" type="number" min="0" max="250" step="1" value="24" /></label>
-              <label class="demo-field"><span class="label">Coût matière table / ventes TTC</span><input name="diningCostRate" type="number" min="0" max="80" step="1" value="35" /></label>
-              <label class="demo-field"><span class="label">Impayés et gestes commerciaux / produit</span><input name="incidentRate" type="number" min="0" max="10" step="0.1" value="0.7" /></label>
+              <label class="demo-field" data-vat-only><span class="label">Part boissons taxée à 20 %</span><span class="pilotage-input-unit"><input name="diningAlcoholShare" type="number" min="0" max="100" step="5" value="20" /><span>% du CA table TTC</span></span></label>
+              <label class="demo-field"><span class="label">Commission OTA</span><span class="pilotage-input-unit"><input name="otaCommission" type="number" min="0" max="30" step="1" value="15" /><span>% du CA hébergement OTA</span></span></label>
+              <label class="demo-field"><span class="label">Frais d’encaissement direct</span><span class="pilotage-input-unit"><input name="directPaymentRate" type="number" min="0" max="10" step="0.1" value="1.5" /><span>% des encaissements directs</span></span></label>
+              <label class="demo-field"><span class="label">Linge et consommables de rotation</span><span class="pilotage-input-unit"><input name="turnoverCost" type="number" min="0" max="300" step="5" value="30" /><span>€ TTC / séjour</span></span></label>
+              <label class="demo-field"><span class="label">Temps de ménage internalisé</span><span class="pilotage-input-unit"><input name="turnoverInternalHours" type="number" min="0" max="10" step="0.5" value="4" /><span>h / séjour</span></span></label>
+              <label class="demo-field"><span class="label">Petit-déjeuner</span><span class="pilotage-input-unit"><input name="breakfastCost" type="number" min="0" max="40" step="0.5" value="7" /><span>€ TTC / personne-nuit</span></span></label>
+              <label class="demo-field"><span class="label">Énergie marginale</span><span class="pilotage-input-unit"><input name="energyCost" type="number" min="0" max="50" step="0.5" value="7" /><span>€ TTC / nuit-suite</span></span></label>
+              <label class="demo-field"><span class="label">Prix de revient spa</span><span class="pilotage-input-unit"><input name="spaUnitCost" type="number" min="0" max="250" step="1" value="25" /><span>€ TTC / vente spa</span></span></label>
+              <label class="demo-field"><span class="label">Temps de préparation spa</span><span class="pilotage-input-unit"><input name="spaLaborHours" type="number" min="0" max="8" step="0.25" value="1" /><span>h / vente spa</span></span></label>
+              <label class="demo-field"><span class="label">Coût matière table</span><span class="pilotage-input-unit"><input name="diningCostRate" type="number" min="0" max="80" step="1" value="30" /><span>% du CA table TTC</span></span></label>
+              <label class="demo-field"><span class="label">Temps de production et service table</span><span class="pilotage-input-unit"><input name="diningLaborHours" type="number" min="0" max="12" step="0.5" value="4.5" /><span>h / vente table</span></span></label>
+              <label class="demo-field"><span class="label">Impayés et gestes commerciaux</span><span class="pilotage-input-unit"><input name="incidentRate" type="number" min="0" max="10" step="0.1" value="0.5" /><span>% des produits comptables</span></span></label>
             </div>
+            <div class="pilotage-pack-note"><strong>Économie de trésorerie ≠ gratuité</strong><span>Réduire la facture de ménage ou choisir un bain nordique simple diminue les décaissements, mais ajoute du temps de préparation, de nettoyage et de contrôle. Les champs d’heures rendent ce transfert visible.</span></div>
           </details>
 
           <details>
             <summary><span>04</span>Charges fixes analytiques</summary>
-            <p class="pilotage-help">Budget central provisoire : 18 k€ TTC avant récupération éventuelle. Chaque poste doit être remplacé par un devis et affecté à l’OpCo, à la SCI ou aux deux selon le bail.</p>
+            <p class="pilotage-help">Budget saisi : <strong data-output="fixed-total-ttc">—</strong> TTC ; coût simulé après TVA déductible : <strong data-output="fixed-total-net">—</strong>. La cible lean reste une hypothèse à remplacer par des devis et une affectation OpCo / SCI.</p>
             <div class="demo-form-grid two compact-fields">
-              <label class="demo-field"><span class="label">Assurances exploitation</span><input name="fixedInsurance" type="number" min="0" max="10000" step="100" value="1500" /></label>
-              <label class="demo-field"><span class="label">Comptabilité et paie</span><input name="fixedAccounting" type="number" min="0" max="15000" step="100" value="3000" /></label>
-              <label class="demo-field"><span class="label">PMS, site et télécom</span><input name="fixedDigital" type="number" min="0" max="15000" step="100" value="2400" /></label>
-              <label class="demo-field"><span class="label">Acquisition et communication</span><input name="fixedMarketing" type="number" min="0" max="15000" step="100" value="2000" /></label>
-              <label class="demo-field"><span class="label">CFE, licences et médiation</span><input name="fixedTaxes" type="number" min="0" max="10000" step="100" value="1200" /></label>
-              <label class="demo-field"><span class="label">Banque hors commissions</span><input name="fixedBank" type="number" min="0" max="5000" step="100" value="400" /></label>
-              <label class="demo-field"><span class="label">Sécurité et contrôles</span><input name="fixedSafety" type="number" min="0" max="10000" step="100" value="700" /></label>
-              <label class="demo-field"><span class="label">Maintenance technique</span><input name="fixedTechnical" type="number" min="0" max="20000" step="100" value="2800" /></label>
-              <label class="demo-field"><span class="label">Maintenance fixe spa</span><input name="fixedSpa" type="number" min="0" max="15000" step="100" value="2400" /></label>
-              <label class="demo-field"><span class="label">Eau, déchets et socle énergie</span><input name="fixedUtilities" type="number" min="0" max="10000" step="100" value="1000" /></label>
-              <label class="demo-field"><span class="label">Formation et prévention</span><input name="fixedTraining" type="number" min="0" max="10000" step="100" value="600" /></label>
-              <label class="demo-field"><span class="label">TVA déductible estimée sur ces postes</span><input name="fixedVatRecovery" type="number" min="0" max="10000" step="100" value="2500" /></label>
+              <label class="demo-field"><span class="label">Assurances exploitation</span><span class="pilotage-input-unit"><input name="fixedInsurance" type="number" min="0" max="10000" step="100" value="1500" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Comptabilité et paie</span><span class="pilotage-input-unit"><input name="fixedAccounting" type="number" min="0" max="15000" step="100" value="2000" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">PMS, site et télécom</span><span class="pilotage-input-unit"><input name="fixedDigital" type="number" min="0" max="15000" step="100" value="1800" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Acquisition et communication</span><span class="pilotage-input-unit"><input name="fixedMarketing" type="number" min="0" max="15000" step="100" value="1000" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">CFE, licences et médiation</span><span class="pilotage-input-unit"><input name="fixedTaxes" type="number" min="0" max="10000" step="100" value="700" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Banque hors commissions</span><span class="pilotage-input-unit"><input name="fixedBank" type="number" min="0" max="5000" step="100" value="400" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Sécurité et contrôles</span><span class="pilotage-input-unit"><input name="fixedSafety" type="number" min="0" max="10000" step="100" value="600" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Maintenance technique</span><span class="pilotage-input-unit"><input name="fixedTechnical" type="number" min="0" max="20000" step="100" value="2000" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Maintenance fixe spa</span><span class="pilotage-input-unit"><input name="fixedSpa" type="number" min="0" max="15000" step="100" value="1300" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Eau, déchets et socle énergie</span><span class="pilotage-input-unit"><input name="fixedUtilities" type="number" min="0" max="10000" step="100" value="1200" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field"><span class="label">Formation et prévention</span><span class="pilotage-input-unit"><input name="fixedTraining" type="number" min="0" max="10000" step="100" value="500" /><span>€ TTC / an</span></span></label>
+              <label class="demo-field" data-vat-only><span class="label">TVA déductible estimée</span><span class="pilotage-input-unit"><input name="fixedVatRecovery" type="number" min="0" max="10000" step="100" value="2000" /><span>€ de TVA / an</span></span></label>
             </div>
           </details>
 
           <details open>
             <summary><span>05</span>Emploi, continuité et loyer</summary>
             <div class="demo-form-grid two">
-              <label class="demo-field"><span class="label">Temps de Jules financé par l’exploitation</span><input name="julesFte" type="number" min="0" max="1" step="0.05" value="0.7" /></label>
-              <label class="demo-field"><span class="label">Mois de CDI dans l’année</span><input name="employeeMonths" type="number" min="0" max="12" step="1" value="12" /></label>
-              <label class="demo-field"><span class="label">Forme de la relève</span><select name="supportMode"><option value="subcontract" selected>Sous-traitance rémunérée à l’heure</option><option value="parttime">CDI à temps partiel</option></select></label>
-              <label class="demo-field" data-hourly-field><span class="label">Tarif de relève / heure</span><input name="supportHourlyRate" type="number" min="15" max="80" step="1" value="28" /></label>
-              <label class="demo-field"><span class="label">Relève planifiée / an</span><input name="plannedSupportHours" type="number" min="0" max="1200" step="25" value="400" /></label>
-              <label class="demo-field"><span class="label">Contribution familiale non rémunérée / an</span><input name="familyHours" type="number" min="0" max="1000" step="10" value="60" /></label>
-              <label class="demo-field"><span class="label">Renouvellement équipements / an</span><input name="renewalProvision" type="number" min="0" max="30000" step="500" value="4000" /></label>
-              <label class="demo-field"><span class="label">Dotation annuelle de trésorerie</span><input name="cashReserveContribution" type="number" min="0" max="30000" step="500" value="3000" /></label>
-              <label class="demo-field"><span class="label">Loyer SCI contractuel testé / an</span><input name="contractRent" type="number" min="0" max="80000" step="1000" value="0" /></label>
-              <label class="demo-field"><span class="label">Budget employeur Jules à temps plein</span><input name="julesFullTimeCost" type="number" min="0" max="80000" step="500" value="28000" /></label>
+              <label class="demo-field"><span class="label">Temps de Jules financé par l’exploitation</span><span class="pilotage-input-unit"><input name="julesFte" type="number" min="0" max="1" step="0.05" value="1" /><span>ETP</span></span></label>
+              <label class="demo-field"><span class="label">Mois de CDI de Jules</span><span class="pilotage-input-unit"><input name="employeeMonths" type="number" min="0" max="12" step="1" value="12" /><span>mois / an</span></span></label>
+              <label class="demo-field"><span class="label">Forme de la relève</span><select name="supportMode"><option value="subcontract" selected>Renfort horaire · salarié, groupement ou prestataire</option><option value="parttime">CDI à temps partiel annualisé</option></select></label>
+              <label class="demo-field" data-hourly-field><span class="label">Coût de relève horaire</span><span class="pilotage-input-unit"><input name="supportHourlyRate" type="number" min="15" max="80" step="1" value="25" /><span>€ employeur ou facturé / h</span></span></label>
+              <label class="demo-field" data-support-months hidden><span class="label">Mois du CDI de relève</span><span class="pilotage-input-unit"><input name="supportEmployeeMonths" type="number" min="0" max="12" step="1" value="12" /><span>mois / an</span></span></label>
+              <label class="demo-field"><span class="label">Relève rémunérée budgétée</span><span class="pilotage-input-unit"><input name="plannedSupportHours" type="number" min="0" max="1200" step="25" value="350" /><span>h / an</span></span></label>
+              <label class="demo-field"><span class="label">Contribution des associés déclarée</span><span class="pilotage-input-unit"><input name="familyHours" type="number" min="0" max="1000" step="10" value="100" /><span>h / an · hors paie</span></span></label>
+              <label class="demo-field"><span class="label">Renouvellement équipements</span><span class="pilotage-input-unit"><input name="renewalProvision" type="number" min="0" max="30000" step="500" value="2500" /><span>€ / an</span></span></label>
+              <label class="demo-field"><span class="label">Dotation annuelle de trésorerie</span><span class="pilotage-input-unit"><input name="cashReserveContribution" type="number" min="0" max="30000" step="500" value="2500" /><span>€ / an</span></span></label>
+              <label class="demo-field"><span class="label">Loyer SCI contractuel testé</span><span class="pilotage-input-unit"><input name="contractRent" type="number" min="0" max="80000" step="1000" value="0" /><span>€ / an</span></span></label>
+              <label class="demo-field"><span class="label">Budget employeur Jules à temps plein</span><span class="pilotage-input-unit"><input name="julesFullTimeCost" type="number" min="0" max="80000" step="500" value="28000" /><span>€ employeur / ETP / an</span></span></label>
             </div>
+            <p class="pilotage-help">La contribution des associés est un engagement opérationnel à nommer et planifier. Sa qualification juridique et sociale reste à valider ; l’entraide occasionnelle ne doit pas masquer un poste permanent.</p>
             <div class="pilotage-fixed-facts">
               <article><span>Temps légal de référence</span><strong>1 607 h / ETP</strong><small>les congés sont déjà intégrés ; la couverture des repos reste une contrainte calendaire distincte</small></article>
               <article><span>Investissement initial</span><strong>65 000 € TTC</strong><small>fixe, hors résultat annuel, dette et amortissements</small></article>
@@ -155,7 +166,7 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
 
         <aside class="pilotage-live-results" aria-live="polite">
           <p class="demo-kicker">Lecture du scénario</p>
-          <h3 data-output="scenario-name">Configuration soutenable</h3>
+          <h3 data-output="scenario-name">Plein temps sous contraintes</h3>
           <div class="pilotage-big-result"><span>Solde après prudence</span><strong data-output="cash-result">—</strong></div>
           <div class="pilotage-result-row"><span>Ventes publiques TTC</span><strong data-output="revenue-ttc">—</strong></div>
           <div class="pilotage-result-row"><span>Produit comptable</span><strong data-output="accounting-revenue">—</strong></div>
@@ -163,8 +174,10 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
           <div class="pilotage-result-row"><span>Loyer contractuel testé</span><strong data-output="contract-rent">—</strong></div>
           <div class="pilotage-result-row"><span>Capacité contributive maximale</span><strong data-output="rent-capacity">—</strong></div>
           <div class="pilotage-result-row"><span>Jules financé</span><strong data-output="jules-cost">—</strong></div>
-          <div class="pilotage-result-row"><span>Relève retenue</span><strong data-output="support-hours">—</strong></div>
-          <div class="pilotage-result-row"><span>Effort familial explicite</span><strong data-output="family-hours">—</strong></div>
+          <div class="pilotage-result-row"><span>Relève rémunérée saisie</span><strong data-output="support-hours">—</strong></div>
+          <div class="pilotage-result-row"><span>Relève recommandée</span><strong data-output="support-recommended">—</strong></div>
+          <div class="pilotage-result-row"><span>Écart de couverture</span><strong data-output="support-gap">—</strong></div>
+          <div class="pilotage-result-row"><span>Contribution associés</span><strong data-output="family-hours">—</strong></div>
           <div class="pilotage-verdict" data-verdict></div>
           <p class="pilotage-footnote">La capacité contributive n’est ni une valeur locative ni un loyer conseillé. Modèle avant dette, amortissements, impôt et rémunération éventuelle des associés.</p>
         </aside>
@@ -181,9 +194,10 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
       <div class="pilotage-workload" data-workload aria-live="polite"></div>
 
       <div class="pilotage-insights">
-        <details open><summary>Conclusion opérationnelle actuelle</summary><p>À deux suites, la cible centrale soutient environ 0,70 à 0,75 ETP pour Jules, 350 à 450 h de relève et peu ou pas de loyer SCI. Financer simultanément un plein temps et 10 k€ de loyer demanderait plutôt 110 à 123 k€ TTC selon le couple prix/remplissage — objectif non démontré aujourd’hui.</p></details>
+        <details open><summary>Conclusion opérationnelle actuelle</summary><p>La cible v5 donne priorité au CDI plein temps de Jules : 150 nuits par suite, 220 € de prix moyen, 350 h de relève rémunérée, 100 h associées et aucun loyer SCI au départ. Elle approche l’équilibre, mais ne finance pas simultanément un loyer annuel de 10 k€.</p></details>
         <details><summary>Doctrine TVA corrigée</summary><p>Le seuil principal 2026 de franchise applicable à l’hébergement et aux ventes à consommer sur place est de 85 k€, avec un seuil majoré de 93,5 k€. Les prestations de services accessoires doivent aussi respecter leur sous-seuil. L’année, l’historique et une éventuelle option volontaire changent le résultat : le sélecteur teste donc les deux régimes sans trancher à la place de l’expert-comptable.</p></details>
-        <details><summary>Modèle de temps</summary><p>La charge additionne un socle de 720 h/an, les jours de présence, nuits-suite, séjours et ventes. Les 1 607 h sont la référence légale annuelle par ETP ; elles ne sont pas diminuées une seconde fois des congés. La relève minimale est portée entre 250 et 500 h selon l’activité, puis augmentée si la capacité payée et l’aide familiale déclarée ne suffisent pas.</p></details>
+        <details><summary>Modèle de temps</summary><p>La charge additionne un socle de 720 h/an, les jours de présence, nuits-suite, séjours, temps de rotation et ventes. Les 1 607 h sont la référence légale annuelle par ETP. La relève saisie n’est plus modifiée : le simulateur calcule à côté un besoin de couverture et signale tout écart.</p></details>
+        <details><summary>Apprentissage : phase 2, pas socle de lancement</summary><p>Un apprenti alterne avec le CFA et nécessite un maître d’apprentissage. Il peut devenir un levier de formation après stabilisation, mais ne doit pas être compté comme la personne autonome indispensable aux repos de Jules en avril 2027.</p></details>
         <details><summary>Ce qu’il faut faire deviser et mesurer</summary><p>Paie et convention collective, ménage/linge, petit-déjeuner, énergie, spa, entretien technique, assurances, PMS, comptabilité, calendrier de repos et ventilation SCI/OpCo. Trois séjours à blanc et un planning hebdomadaire devront remplacer les heuristiques avant l’ouverture.</p></details>
         <details><summary>Troisième unité : option, pas conclusion</summary><p>Une unité supplémentaire diluerait les coûts fixes, mais elle ajoute du CAPEX et du travail. Il faut également préserver la limite réglementaire de cinq chambres et quinze personnes attachée aux chambres d’hôtes : l’inventaire exact doit être vérifié avant toute décision.</p></details>
       </div>
@@ -191,12 +205,12 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
 
     <section id="panel-marche" class="pilotage-panel" role="tabpanel" data-pilotage-panel="marche" hidden>
       <div class="pilotage-section-head"><div><p class="demo-kicker">Benchmark de 30 lieux</p><h2>Le patrimoine seul ne crée pas le premium.</h2></div><p>Les prix sont indicatifs, observés à des dates et sur des canaux différents. Ils donnent des ordres de grandeur et des modèles de valeur, pas un tarif garanti.</p></div>
-      <div class="pilotage-market-kpis"><article><span>Médiane Vosges</span><strong>206 €</strong><small>10 références</small></article><article><span>Médiane France</span><strong>213 €</strong><small>20 références</small></article><article><span>Médiane globale</span><strong>210 €</strong><small>30 références</small></article><article><span>Prix moyen testé à maturité</span><strong>225–240 €</strong><small>hypothèse, si l’exécution le démontre</small></article></div>
+      <div class="pilotage-market-kpis"><article><span>Médiane Vosges</span><strong>206 €</strong><small>10 références</small></article><article><span>Médiane France</span><strong>213 €</strong><small>20 références</small></article><article><span>Médiane globale</span><strong>210 €</strong><small>30 références</small></article><article><span>Prix moyen testé à maturité</span><strong>220 €</strong><small>grille interne cible 200–250 €</small></article></div>
       <div class="pilotage-market-tools"><label class="demo-field"><span class="label">Périmètre</span><select data-market-scope><option value="vosges">Vosges · 10 lieux</option><option value="france">France · 20 lieux</option><option value="all">Ensemble · 30 lieux</option></select></label><label class="demo-field"><span class="label">Examiner un lieu</span><select data-competitor-select></select></label></div>
       <div class="pilotage-market-layout"><div class="pilotage-chart" data-market-chart aria-label="Comparaison des prix indicatifs"></div><article class="pilotage-competitor-detail" data-competitor-detail></article></div>
       <div class="pilotage-section-head compact"><div><p class="demo-kicker">Raisonnement reproductible</p><h2>De l’observation à la recommandation.</h2></div></div>
       <div class="pilotage-insights">
-        <details open><summary>Conclusion</summary><p>Ouvrir avec une gamme 180–220 € limite le risque sans enfermer la marque dans un prix bas. Après photographies réelles, avis et preuve du service, une grille plus large pourra être testée. Atteindre 225–240 € de prix moyen impose nécessairement des dates fortes au-dessus de cette moyenne : ce n’est pas acquis par le benchmark.</p></details>
+        <details open><summary>Conclusion</summary><p>Ouvrir avec une gamme 180–220 € limite le risque sans enfermer la marque dans un prix bas. Après photographies réelles, avis et preuve du service, une grille 200–250 € pourra être testée pour viser 220 € de prix moyen. Cette cible reste à démontrer par la demande réelle.</p></details>
         <details><summary>Les cinq références centrales</summary><p>Failloux valide la demande locale ; Landin associe patrimoine et bien-être ; Château Réal travaille l’ancrage territorial ; Maison Durieux prouve le premium hors grande destination ; Château Duo monétise de grandes suites et un spa privatif.</p></details>
         <details><summary>Chaîne de valeur retenue</summary><p>1. Volumes réels d’une suite. 2. Finition des salles de bain. 3. Parc nocturne. 4. Créneaux bien-être réservés. 5. Table incarnée. 6. Vente directe. Le prix n’est que la conséquence de cette exécution.</p></details>
         <details><summary>Limites de la donnée</summary><p>Échantillon construit pour éclairer le positionnement, non statistiquement représentatif. Les prix doivent être revérifiés sur les mêmes dates, pour deux personnes, avec conditions et prestations comparables avant la grille 2027.</p></details>
@@ -226,13 +240,13 @@ import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpe
 
     <section id="panel-referentiel" class="pilotage-panel" role="tabpanel" data-pilotage-panel="referentiel" hidden>
       <div class="pilotage-section-head"><div><p class="demo-kicker">Lisible par les humains et les agents</p><h2>La vérité courante, avec son niveau de certitude.</h2></div><p>Les décisions obsolètes ne sont pas affichées comme options actives. La provenance et le raisonnement restent accessibles pour auditer une recommandation.</p></div>
-      <div class="pilotage-truth-grid"><article><span class="truth-status validated">Validé</span><h3>Produit</h3><p>Deux suites vendues intégralement, jusqu’à quatre personnes, petit-déjeuner inclus. Ouverture visée en avril 2027.</p></article><article><span class="truth-status validated">Validé</span><h3>Prix public d’ouverture</h3><p>180 € la nuit comme point d’entrée, à traduire en gamme saisonnière 180–220 €. Enfant : +20 €. Spa : base +40 €. Table : 40 € ; accord 20 €.</p></article><article><span class="truth-status assumption">Hypothèse</span><h3>Économie à deux suites</h3><p>À maturité, environ 0,70–0,75 ETP pour Jules, 350–450 h de relève et peu ou pas de loyer SCI. Le plein temps + 10 k€ de loyer demanderait environ 110–123 k€ TTC.</p></article><article><span class="truth-status external">À confirmer</span><h3>Montage et fiscalité</h3><p>Régime de TVA, bail et valeur locative, ventilation SCI/OpCo, convention collective, coût de paie, licences et conformité doivent être validés par les conseils compétents.</p></article></div>
+      <div class="pilotage-truth-grid"><article><span class="truth-status validated">Validé</span><h3>Produit</h3><p>Deux suites vendues intégralement, jusqu’à quatre personnes, petit-déjeuner inclus. Ouverture visée en avril 2027.</p></article><article><span class="truth-status validated">Validé</span><h3>Prix public d’ouverture</h3><p>180 € la nuit comme point d’entrée, à traduire en gamme saisonnière 180–220 €. Enfant : +20 €. Spa : base +40 €. Table : 40 € ; accord 20 €.</p></article><article><span class="truth-status assumption">Hypothèse</span><h3>Économie à deux suites</h3><p>La cible v5 teste 150 nuits par suite à 220 €, Jules à 1 ETP, 350 h de relève et 100 h associées. Elle finance l’emploi avec une marge étroite, mais pas un loyer SCI de 10 k€.</p></article><article><span class="truth-status external">À confirmer</span><h3>Montage et fiscalité</h3><p>Régime de TVA, bail et valeur locative, ventilation SCI/OpCo, convention collective, coût de paie, licences et conformité doivent être validés par les conseils compétents.</p></article></div>
       <div class="pilotage-section-head compact"><div><p class="demo-kicker">Points d’entrée machine</p><h2>Un agent peut reprendre le projet sans reconstruire le contexte.</h2></div></div>
       <div class="pilotage-machine-grid"><a href={withBase("/llms.txt")}><span>TXT</span><strong>llms.txt</strong><small>Index compact et consignes de lecture</small></a><a href={withBase("/knowledge/project.json")}><span>JSON</span><strong>project.json</strong><small>Offre, règles et identité</small></a><a href={withBase("/knowledge/business-model.json")}><span>JSON</span><strong>business-model.json</strong><small>Hypothèses, formules et emploi</small></a><a href={withBase("/knowledge/market.json")}><span>JSON</span><strong>market.json</strong><small>Benchmark et positionnement</small></a><a href={withBase("/knowledge/investments.json")}><span>JSON</span><strong>investments.json</strong><small>Budget et périmètre</small></a><a href={withBase("/knowledge/roadmap.json")}><span>JSON</span><strong>roadmap.json</strong><small>Plan directeur et dépendances</small></a><a href={withBase("/knowledge/sources.json")}><span>JSON</span><strong>sources.json</strong><small>Provenance et limites des sources</small></a></div>
-      <div class="pilotage-source-map"><details open><summary>Offre et expérience</summary><p>Référentiel fonctionnel v3, arbitrages tarifaires d’août 2026, maquette client et règles de séjour. Statut : valeurs publiques validées ; paniers moyens avancés encore simulés.</p></details><details><summary>Modèle économique v4</summary><p>Business plan Julie, scénario Codex, contre-analyse Claude puis vérification croisée. La version active distingue ventes TTC, régime de TVA, onze postes fixes, continuité, loyer contractuel, résultat, renouvellement et trésorerie. Aucun loyer n’est fabriqué automatiquement.</p></details><details><summary>Marché</summary><p>Analyse de 30 lieux : 10 dans les Vosges, 20 en France. Les médianes et le raisonnement de positionnement sont publiés ; les URLs et observations brutes sont conservées dans la source locale.</p></details><details><summary>Investissements</summary><p>Budget corrigé Jules : 39,5 k€ intérieur, 21,5–24,5 k€ extérieur, enveloppe active 65 k€. Main-d’œuvre familiale et BFR hors périmètre.</p></details><details><summary>Juridique et réglementaire</summary><p>Le dossier de consultation et la contre-analyse structurent les questions mais ne constituent pas des avis. Toute mention juridique reste marquée « validation externe requise » jusqu’aux consultations.</p></details></div>
+      <div class="pilotage-source-map"><details open><summary>Offre et expérience</summary><p>Référentiel fonctionnel v3, arbitrages tarifaires d’août 2026, maquette client et règles de séjour. Statut : valeurs publiques validées ; paniers moyens avancés encore simulés.</p></details><details><summary>Modèle économique v5</summary><p>Business plan Julie, scénarios Codex, contre-analyse Claude puis vérification croisée. La version active donne priorité au CDI plein temps, distingue dépenses et heures internalisées, conserve les saisies exactes et rend visible tout écart de couverture.</p></details><details><summary>Marché</summary><p>Analyse de 30 lieux : 10 dans les Vosges, 20 en France. Les médianes et le raisonnement de positionnement sont publiés ; les URLs et observations brutes sont conservées dans la source locale.</p></details><details><summary>Investissements</summary><p>Budget corrigé Jules : 39,5 k€ intérieur, 21,5–24,5 k€ extérieur, enveloppe active 65 k€. Main-d’œuvre familiale et BFR hors périmètre.</p></details><details><summary>Juridique et réglementaire</summary><p>Le dossier de consultation et la contre-analyse structurent les questions mais ne constituent pas des avis. Toute mention juridique reste marquée « validation externe requise » jusqu’aux consultations.</p></details></div>
     </section>
 
     <footer class="pilotage-method"><strong>Doctrine documentaire.</strong><p>La page montre l’état courant. Les fichiers structurés portent les statuts et formules. Les sources originales restent classées localement. Les hypothèses financières devront être remplacées par des devis, simulations de paie, chronométrages et validations professionnelles.</p></footer>
   </div>
-  <script is:inline src={withBase("/demo/pilotage.js?v=20260809-7")}></script>
+  <script is:inline src={withBase("/demo/pilotage.js?v=20260809-8")}></script>
 </DemoLayout>

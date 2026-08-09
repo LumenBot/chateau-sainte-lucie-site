@@ -2,7 +2,7 @@
 
 Date : 9 août 2026
 
-Statut : doctrine active pour le pilotage économique
+Statut : **supplanté par `22-simulateur-v5-modele-lean-sous-contraintes.md`** ; conservé pour traçabilité
 
 Remplace : les conclusions et formules du simulateur v3 documentées dans `20-simulateur-exploitation-equilibre-v3.md`
 
