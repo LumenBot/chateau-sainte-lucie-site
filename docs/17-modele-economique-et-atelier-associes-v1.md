@@ -20,7 +20,9 @@ forte valeur perçue et à capacité maîtrisée, pas d'un accès illimité sous
 
 - deux suites de niveau comparable ;
 - durée moyenne de travail de deux nuits ;
-- enveloppe d'investissement indicative de 50 000 €, à remplacer par devis ;
+- enveloppe d'investissement initialement indicative de 50 000 €, désormais
+  remplacée dans le simulateur par l'enveloppe corrigée de 65 000 € TTC de
+  fournitures ;
 - coûts du séjour type : 66 € par rotation, 7 € par petit-déjeuner et par personne,
   7,50 € d'énergie additionnelle par nuit-suite ;
 - commission OTA de sensibilité à 15 % ;
@@ -103,10 +105,10 @@ d'équipements par suite et par jour sans cette analyse.
 
 ## 6. Trois scénarios préchargés
 
-### Lancement maîtrisé
+### Prudence familiale
 
 - 275 jours ouverts ;
-- 75 nuits par suite ;
+- 80 nuits par suite ;
 - 180 € par nuit ;
 - 40 % de réservations directes ;
 - prise modérée des expériences.
@@ -115,20 +117,31 @@ Ce scénario teste le quotidien, mais ne peut financer 18 k€ de loyer et un em
 à temps plein. Il doit être assumé comme phase d'apprentissage ou accompagné d'un
 calendrier de montée en charge et d'une trésorerie dédiée.
 
-### Cap 70 k€
+### Ouverture affirmée
 
-- 145 nuits par suite ;
-- 200 € par nuit ;
-- 55 % de direct ;
-- vente progressive des expériences.
+- 110 nuits par suite ;
+- 205 € par nuit ;
+- 50 % de direct ;
+- formule « Parc nordique » en progression.
 
-Il montre le volume approximatif nécessaire pour atteindre 70 k€ avec cette
-structure de panier. Il ne garantit pas l'équilibre après tous les coûts.
+Ce scénario installe la promesse premium mais reste une phase de montée en
+charge non équilibrée avec un emploi complet et 18 k€ de loyer.
+
+### Cible de consolidation
+
+- 140 nuits par suite ;
+- 225 € de prix moyen réalisé ;
+- 60 % de direct ;
+- prise croissante des expériences et de la table.
+
+Le chiffre d'affaires approche 75 k€, mais le solde reste légèrement négatif
+avec les provisions prudentes actuelles. Ce résultat confirme que 70 k€ est un
+cap commercial et non un seuil d'équilibre garanti.
 
 ### Maturité premium
 
-- 150 nuits par suite ;
-- 230 € par nuit ;
+- 155 nuits par suite ;
+- 235 € de prix moyen réalisé ;
 - 70 % de direct ;
 - meilleure prise des expériences.
 
@@ -144,6 +157,10 @@ Route : `/demo/pilotage`
 - hypothèses encodées dans le lien uniquement lorsque l'utilisateur clique sur
   « Copier ce scénario » ;
 - aucune sauvegarde serveur ni collaboration en temps réel.
+
+La version 2 de la page ajoute cinq onglets : synthèse, simulateur, marché,
+investissements et plan directeur. L'initialisation ne dépend plus de l'ordre de
+chargement du moteur commun du démonstrateur.
 
 Une vraie zone privée nécessitera ultérieurement authentification, autorisations,
 journalisation et hébergement adapté.

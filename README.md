@@ -90,6 +90,8 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   éléments nouveaux retenus de la dernière passation et les affirmations écartées.
 - `docs/17-modele-economique-et-atelier-associes-v1.md` documente le simulateur,
   ses scénarios, ses formules et ses limites de lecture.
+- `docs/18-integration-benchmark-et-budget-aout-2026-v1.md` consolide le
+  benchmark de 30 lieux, le budget corrigé de 65 k€ et leurs arbitrages.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 
