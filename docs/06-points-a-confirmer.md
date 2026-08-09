@@ -11,7 +11,7 @@ Ne pas inventer les réponses. Utiliser des formulations prudentes ou masquer le
 - Liste définitive des équipements de chaque suite.
 - Composition détaillée du petit-déjeuner et fournisseurs retenus.
 - Saison d'ouverture et contraintes techniques de la piscine naturelle.
-- Régime exact du dîner au château : table d'hôtes ou restauration, boissons
+- Régime exact de la table ou planche : table d'hôtes ou restauration, boissons
   comprises, licence et vente éventuelle de boissons alcoolisées.
 - Validation du montant et du fonctionnement de la garantie bancaire par
   l'assureur, le prestataire de paiement et les plateformes.
@@ -20,7 +20,7 @@ Ne pas inventer les réponses. Utiliser des formulations prudentes ou masquer le
 - Zones exactes du domaine accessibles aux chiens des résidents.
 - Conditions de sécurité, d'assurance et d'utilisation des équipements du spa.
 - Validation assureur et fabricants de la règle provisoire : piscine naturelle
-  pour les mineurs accompagnés ; hammam, sauna et bain nordique à partir de 16 ans.
+  pour les mineurs accompagnés ; hammam et bain nordique à partir de 16 ans.
 - Configuration de couchage exacte proposée aux enfants dans chaque suite.
 - Classement réglementaire du lieu, obligations d'accessibilité et circuit de
   validation avec la mairie et les services compétents.
@@ -40,16 +40,22 @@ Ne pas inventer les réponses. Utiliser des formulations prudentes ou masquer le
 - Qualification TVA des nuitées et de chaque service complémentaire.
 - Qualification écrite par l'ARS de la piscine naturelle et de chaque équipement
   du spa, protocole sanitaire et calendrier des déclarations.
-- Possibilité de proposer à la fois déjeuner et dîner ainsi qu'un accord
-  mets-vins séparé dans le régime retenu pour la table.
-- Marge réelle du supplément enfant à 20 €, du repas à 40 € et de l'accord à 20 €.
+- Définition finale de la table ou planche simplifiée à 50 € par suite et par
+  jour vendu, et qualification de son régime.
+- Marge réelle du supplément enfant à 20 €, du spa à 50 € et de la table ou
+  planche à 50 €.
 - Périmètre de protection patrimoniale et autorisations applicables aux
   éclairages, cheminements et équipements extérieurs.
 - Assurabilité de chaque lot réalisé en direct : dommages-ouvrage,
   responsabilité décennale, réception et preuves à conserver.
 - Convention collective, minima et coût employeur réel de Jules.
-- Financement du besoin situé au-delà des 28 000 € annoncés face à une
-  fourchette travaux communiquée de 33 500 à 66 500 €, hors sécurité incendie.
+- Validation du contrat à 0,8 ETP, des 100 h de relève rémunérée et du traitement
+  des 380 h de contribution des associés.
+- Bail, valeur locative, loyer annuel testé à 12 000 € et cible à 18 000 €.
+- Conventions séparées des comptes courants SCI et OpCo, taux de rémunération,
+  déductibilité et échéanciers de remboursement.
+- Source des 9 000 € d'investissement non couverts par les 50 000 € de comptes
+  courants d'associés.
 - Attestation/certification de la fonction de caisse et calendrier de
   facturation électronique de la future société.
 - Avis préalable avant tout dépôt de marque reproduisant le blason historique.

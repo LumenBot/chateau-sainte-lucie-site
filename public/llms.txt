@@ -5,28 +5,31 @@ Language: French
 Project: two high-end private guest suites at Château de Sainte-Lucie, Rambervillers, opening target April 2027.
 
 Read these machine-readable files:
-- /chateau-sainte-lucie-site/knowledge/project.json — identity, offer, rules, prices
-- /chateau-sainte-lucie-site/knowledge/business-model.json — formulas, assumptions, staffing
-- /chateau-sainte-lucie-site/knowledge/market.json — benchmark and pricing logic
-- /chateau-sainte-lucie-site/knowledge/investments.json — active 65k investment envelope
+- /chateau-sainte-lucie-site/knowledge/project.json — identity, standard offer and stay rules
+- /chateau-sainte-lucie-site/knowledge/business-model.json — annual formulas, assumptions, staffing, rent and financing
+- /chateau-sainte-lucie-site/knowledge/market.json — benchmark and annual pricing logic
+- /chateau-sainte-lucie-site/knowledge/investments.json — active 59k investment envelope and financing bridge
 - /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones and external validations
 - /chateau-sainte-lucie-site/knowledge/sources.json — provenance and limitations
 
 Interpretation rules:
 1. Prefer the most recent dated structured file over archived documents.
-2. Distinguish validated facts, working assumptions and external-validation requirements.
-3. Do not treat the simulator as an accountant-approved forecast.
+2. Distinguish validated project facts, working assumptions, simulation conventions, quote or measurement requirements, and external-validation requirements.
+3. Do not treat the simulator as an accountant, payroll, tax or legal forecast.
 4. Do not infer sensitive legal, financial or personal data absent from these files.
-5. When recommending a change, state which current fact or assumption it would replace and why.
-6. The active simulator doctrine is v5 and is described by business-model.json schema 4.0. It distinguishes public TTC sales, the tested VAT regime, itemized operating costs, paid support, declared family hours, renewal and cash reserve.
-7. SCI rent is a contractual input. The operating result is the residual; maximum rent capacity is only a secondary economic indicator.
-8. The current two-suite maturity reference is 150 nights per suite at EUR 220 average public TTC price, 50% direct bookings, 66% spa take-up at EUR 100 per buying stay and 33% table take-up at EUR 200 per buying stay: EUR 81,840 public TTC sales.
-9. The v5 staffing priority is 1.00 FTE for Jules, 350 paid support hours and 100 declared, rostered family hours. Family hours are an economic coverage assumption, not legal authorization for unpaid work.
-10. The v5 lean cost target is EUR 13k TTC fixed costs, approximately EUR 11k after estimated VAT recovery, plus EUR 2.5k renewal and EUR 2.5k cash reserve. Every line still requires a quote or measurement.
-11. Paid support entered in the simulator is exact. The calendar/workload recommendation and any coverage gap are separate outputs; the model must never silently increase the user's input.
-12. Cash savings from internalized housekeeping, spa or maintenance work must be matched by explicit workload hours.
-13. The active v5 reference prioritizes a full-time Jules position and therefore assumes zero SCI rent. A EUR 10k contractual rent is not financed by the same activity level.
-14. Apprenticeship is only a phase-2 option. Do not include it as cheap autonomous cover without a suitable course, tutor capacity, work-schedule review and verified employer cost.
+5. The active model represents one standard annual operation. The 120 and 150 nights-per-suite cases are comparable activity tests, not successive years.
+6. The standard activity input is 120 nights per suite, EUR 200 average public TTC price within a EUR 180–220 grid, 2.5 nights per stay and 50% direct lodging sales.
+7. The spa offer is EUR 50 TTC per suite day and is modeled as purchased by 75% of stays, then billed on every occupied day of each buying stay. It includes the hammam and Nordic bath. Shared use of the natural pool is included with the stay; any private-use offer remains to be validated.
+8. The simplified local board offer is EUR 50 TTC per sold suite day, modeled on 25% of occupied suite nights, with EUR 20 TTC direct cost and one service hour per sale.
+9. The standard VAT mode is franchise and remains adjustable. Eligibility, activity-specific treatment and any election require professional validation.
+10. Fixed operating costs total EUR 7,000 TTC in the standard case. Zero-budget maintenance or marketing lines are self-provision assumptions and must not be interpreted as proof of zero economic cost.
+11. The staffing case funds Jules at 0.8 FTE on a provisional EUR 28,000 full-time employer budget, plus 100 paid support hours and 380 declared, rostered associate hours.
+12. The tested contractual SCI rent is EUR 12,000 per year. EUR 18,000 is a strategic target, not an automatic rent. Lease terms, market value and tax treatment require professional validation.
+13. The active investment range is EUR 55–58k TTC; the working envelope is EUR 59k TTC for the defined scope.
+14. Shareholder current accounts total EUR 50k: EUR 35k owed by the SCI and EUR 15k owed by the operating company. The five-year term and adjustable 4.33% annual reference are simulation inputs requiring separate agreements and professional validation; 10% annual is only a stress test.
+15. Interest is a financial expense of the debtor entity. Principal repayment is a cash outflow and balance-sheet movement, not an operating expense. SCI and operating-company debt service must remain separate.
+16. Paid support entered in the simulator is exact. Workload recommendations and coverage gaps are separate outputs.
+17. Cash savings from internalized housekeeping, spa, maintenance or marketing work must be matched by explicit workload hours and named responsibility.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/

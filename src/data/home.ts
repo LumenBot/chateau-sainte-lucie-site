@@ -8,7 +8,7 @@ export const homeSeo = {
   title:
     "Les Nuits au Château | Les Suites de Sainte-Lucie dans les Vosges",
   description:
-    "Deux suites intimistes, chacune entièrement privative, dans un château familial de 1876 à Rambervillers : spa réservé, parc d'un hectare, piscine naturelle et table du château.",
+    "Deux suites intimistes, chacune entièrement privative, dans un château familial de 1876 à Rambervillers : hammam et bain nordique réservés, parc d'un hectare, piscine naturelle et planche du territoire.",
 };
 
 export const hero = {
@@ -16,7 +16,7 @@ export const hero = {
   title: "Les Nuits au Château",
   signature: "Les Suites de Sainte-Lucie",
   accroche: "Deux suites intimistes, chacune entièrement privative.",
-  descriptor: "Suites de caractère · spa réservé · dîner au château · domaine de 1876",
+  descriptor: "Suites de caractère · spa réservé · saveurs du territoire · domaine de 1876",
   image: images.projFacadeEclairageNuit as Visual,
 };
 
@@ -25,7 +25,7 @@ export const maison = {
   title: ["Un château habité, ", "presque rien que pour vous."],
   paragraphs: [
     "Sainte-Lucie n'est pas un hôtel installé dans un château vide. C'est une demeure de 1876 toujours habitée, qui n'ouvre que deux suites et reçoit volontairement très peu d'hôtes à la fois.",
-    "On y vient pour habiter le lieu : franchir le perron au soir, retrouver les boiseries et les cheminées, dîner à sa propre table, marcher sous les chênes puis gagner, à l'heure choisie, les eaux et la chaleur du spa.",
+    "On y vient pour habiter le lieu : franchir le perron au soir, retrouver les boiseries et les cheminées, partager une planche du territoire, marcher sous les chênes puis gagner, à l'heure choisie, les eaux et la chaleur du spa.",
     "Le luxe tient ici à ce qui ne se multiplie pas : l'espace, le silence, la lumière, un parc d'un hectare et le temps personnel que la famille peut consacrer à chaque séjour.",
   ],
   image: images.salleAManger as Visual,
@@ -56,8 +56,8 @@ export const sejour = {
     },
     {
       time: "À table",
-      title: "Le dîner au château",
-      text: "Partager, sur réservation, une cuisine de maison servie dans un lieu spectaculaire sans cérémonial.",
+      title: "La planche du territoire",
+      text: "Partager, sur réservation, une sélection locale prête à servir dans un lieu spectaculaire sans cérémonial.",
     },
     {
       time: "La nuit",
@@ -89,13 +89,13 @@ export const experienceTeaser = {
     },
     {
       icon: "dish",
-      title: "Le dîner au château",
-      text: "Le soir, une table dressée pour votre tablée et un menu unique composé selon vos goûts.",
+      title: "La planche du territoire",
+      text: "Le soir, des produits locaux, une bouteille sélectionnée et une table dressée pour votre suite.",
     },
     {
       icon: "waves",
       title: "Le spa réservé",
-      text: "Hammam, bain nordique, sauna finlandais et piscine naturelle, à découvrir sur des temps choisis.",
+      text: "Hammam, bain nordique et piscine naturelle, à découvrir sur des temps choisis.",
     },
     {
       icon: "tree",
@@ -124,12 +124,12 @@ export const galerie = {
 export const signatureExperience = {
   eyebrow: "L'expérience signature",
   title: ["Du premier pas ", "au dernier matin."],
-  text: "Avec deux suites intimistes, chacune entièrement privative, Sainte-Lucie offre la rareté d'une grande demeure accueillant très peu d'hôtes : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, dîner au château et petit-déjeuner face aux arbres.",
+  text: "Avec deux suites intimistes, chacune entièrement privative, Sainte-Lucie offre la rareté d'une grande demeure accueillant très peu d'hôtes : arrivée à la lueur des lanternes, suite préparée pour vous, temps réservé dans les eaux du parc, planche du territoire et petit-déjeuner face aux arbres.",
   items: [
     { image: images.projPerronArriveeSoir, moment: "À la nuit tombée", title: "L'arrivée au perron", text: "La maison éclairée, les clés remises et le temps qui change de rythme.", wide: true },
-    { image: images.projTableHotes, moment: "Le soir", title: "Le dîner au château", text: "Une table dressée, un menu unique et l'accord des vins si vous le souhaitez." },
+    { image: images.projTableHotes, moment: "Le soir", title: "La planche du territoire", text: "Une table dressée, des produits locaux prêts à partager et une bouteille sélectionnée." },
     { image: images.projParcDepuisPerronSoir, moment: "Depuis le perron", title: "Le parc mis en lumière", text: "Un cheminement discret relie la demeure, les arbres centenaires et les eaux du jardin." },
-    { image: images.projCheminBainNordiqueSoir, moment: "Sous les arbres", title: "Le spa au bout du chemin", text: "La lumière accompagne les pas jusqu'au bain nordique, puis au sauna, au hammam et à la piscine naturelle." },
+    { image: images.projCheminBainNordiqueSoir, moment: "Sous les arbres", title: "Le spa au bout du chemin", text: "La lumière accompagne les pas jusqu'au bain nordique, puis au hammam et à la piscine naturelle." },
     { image: images.projPetitDejeunerTerrasse, moment: "Au réveil", title: "Le petit-déjeuner", text: "Un plateau simple et généreux, servi face au parc lorsque le temps le permet." },
   ],
 };

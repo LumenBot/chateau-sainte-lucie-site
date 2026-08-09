@@ -48,7 +48,7 @@ export const espaces = {
       image: images.salleAManger,
       cap: "Patrimoine",
       title: "Les pièces de réception",
-      text: "Boiseries de chêne sculpté, cheminées de marbre, parquets et plafonds à caissons : des pièces de caractère, baignées de lumière, où se dresse le soir le dîner au château.",
+      text: "Boiseries de chêne sculpté, cheminées de marbre, parquets et plafonds à caissons : des pièces de caractère, baignées de lumière, où peut être servie le soir la planche du territoire.",
       mini: ["Boiseries d'origine", "Cheminées de marbre", "Lumière naturelle"],
     },
     {
@@ -64,8 +64,8 @@ export const espaces = {
       image: images.projPiscineHeureBleue,
       cap: "Art de vivre",
       title: "La piscine naturelle & le spa au jardin",
-      text: "Un bassin filtré par lagunage planté, un hammam, puis un bain nordique et un sauna finlandais habillés de bois. Des pas japonais éclairés composeront un parcours discret entre la maison, l'eau et la lisière.",
-      mini: ["Baignade naturelle", "Hammam", "Bain nordique & sauna"],
+      text: "Un bassin filtré par lagunage planté, un hammam, puis un bain nordique chauffé au bois. Des pas japonais éclairés composeront un parcours discret entre la maison, l'eau et la lisière.",
+      mini: ["Baignade naturelle", "Hammam", "Bain nordique"],
     },
   ] satisfies Feature[],
 };

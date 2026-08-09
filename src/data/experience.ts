@@ -4,13 +4,13 @@ import { images, type Visual } from "./images";
 export const experienceSeo = {
   title: "L'Expérience | Les Nuits au Château",
   description:
-    "Deux suites intimistes et entièrement privatives, table du château et spa aux quatre expériences : un séjour intime et haut de gamme dans un château familial de 1876.",
+    "Deux suites intimistes et entièrement privatives, planche du territoire, piscine naturelle, hammam et bain nordique : un séjour intime et haut de gamme dans un château familial de 1876.",
 };
 
 export const phero = {
   place: "L'Expérience",
   title: ["Du perron", "au petit matin."],
-  lead: "Deux suites intimistes dans 750 m² d'histoire : arrivée au perron, grands salons, table dressée pour votre tablée, temps réservé au spa et matin dans un parc d'un hectare.",
+  lead: "Deux suites intimistes dans 750 m² d'histoire : arrivée au perron, grands salons, planche du territoire, temps réservé au spa et matin dans un parc d'un hectare.",
   image: images.hallEntree as Visual,
   imagePosition: "center 42%",
 };
@@ -50,13 +50,13 @@ export const sections: ExpSection[] = [
   {
     image: images.projTableHotes,
     cap: "Le soir",
-    title: "Le dîner au château",
+    title: "La planche du territoire",
     rev: true,
     paragraphs: [
-      "Le soir, la table se dresse dans les boiseries : linge naturel, bougies, feu dans la cheminée lorsque la saison le permet. Une cuisine du territoire servie avec précision, sans cérémonial figé.",
-      "Le menu unique se prépare en amont selon vos goûts et vos contraintes. Un accord mets et vins peut prolonger le dîner, bouteille après bouteille, au rythme du repas.",
+      "Le soir, une planche se partage dans les boiseries : pâté lorrain, charcuteries, fromages et douceurs choisis auprès de producteurs du territoire, selon la saison et les disponibilités.",
+      "L'offre privilégie des produits prêts à servir, une mise en scène soignée et une bouteille sélectionnée. Sa composition exacte et les alternatives liées aux régimes alimentaires seront confirmées avant le séjour.",
     ],
-    note: "Déjeuner ou dîner au château : + 40 € par adulte, 20 € de 3 à 11 ans, sans menu individuel avant 3 ans. Accord mets & vins : + 20 € par adulte, sous réserve des validations réglementaires prévues avant l'ouverture.",
+    note: "Planche du territoire : objectif + 50 € par suite et par service, sur réservation. Composition et vente de boissons soumises aux validations réglementaires prévues avant l'ouverture.",
   },
   {
     image: images.projPetitDejeunerTerrasse,
@@ -81,10 +81,10 @@ export const sections: ExpSection[] = [
     cap: "Le bien-être",
     title: "Le spa au jardin",
     paragraphs: [
-      "Le parcours bien-être réunit quatre expériences complémentaires : la vapeur du hammam, la chaleur sèche du sauna finlandais, l'immersion du bain nordique et l'eau vivante de la piscine naturelle.",
+      "Le parcours bien-être réunit trois expériences complémentaires : la vapeur du hammam, l'immersion du bain nordique et l'eau vivante de la piscine naturelle.",
       "Les équipements secs et chauds se réservent par suite. Des pas japonais, soulignés par une lumière basse, relieront le château aux eaux du jardin ; la traversée nocturne deviendra un rituel à part entière.",
     ],
-    note: "Accès spa : + 40 € par jour pour deux personnes, puis + 20 € par personne supplémentaire. Sur réservation ; visuels de projection après travaux.",
+    note: "Accès hammam et bain nordique : + 50 € par suite et par jour, puis + 20 € par personne supplémentaire. Sur réservation ; visuels de projection après travaux.",
   },
   {
     image: images.projAccueilSpa,
@@ -93,7 +93,7 @@ export const sections: ExpSection[] = [
     rev: true,
     paragraphs: [
       "Lumière douce et créneau choisi en amont : les équipements sont pensés comme une parenthèse réservée à votre suite, à l'écart du rythme ordinaire.",
-      "La piscine naturelle peut être partagée par les deux suites ou privatisée. Hammam, sauna et bain nordique accueillent une seule suite à la fois.",
+      "La piscine naturelle peut être partagée par les deux suites ou privatisée. Hammam et bain nordique accueillent une seule suite à la fois.",
     ],
   },
   {
@@ -110,7 +110,7 @@ export const sections: ExpSection[] = [
 export const experienceCta = {
   eyebrow: "Votre expérience · avril 2027",
   title: ["Le château, ", "à votre rythme."],
-  text: "Composez un séjour où la suite, le spa et la table s'accordent à vos envies.",
+  text: "Composez un séjour où la suite, le spa et les saveurs du territoire s'accordent à vos envies.",
   actions: [
     { label: "Rejoindre la liste d’attente", href: "/liste-attente", variant: "gold-light" as const },
     { label: "Découvrir le parcours", href: "/demo/reservation", variant: "ghost-light" as const },

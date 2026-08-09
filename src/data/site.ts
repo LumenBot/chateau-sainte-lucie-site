@@ -14,12 +14,12 @@ export const site = {
   /** Signature. */
   signature: "Les Suites de Sainte-Lucie",
   /** Descripteur. */
-  descriptor: "Maison d'hôtes & dîner au château",
+  descriptor: "Maison d'hôtes & saveurs du territoire",
   /** Lieu porteur du patrimoine. */
   house: "Château de Sainte-Lucie",
   baseline: "Château de Sainte-Lucie · Rambervillers · Vosges",
   tagline:
-    "Deux suites intimistes, chacune entièrement privative, dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et table du château dans les Vosges.",
+    "Deux suites intimistes, chacune entièrement privative, dans un château familial de 1876 — spa réservé, parc boisé, piscine naturelle et planche du territoire dans les Vosges.",
 
   /** Ouverture prévisionnelle. */
   opening: {

@@ -6,7 +6,7 @@ import { images, type Visual } from "./images";
 export const gallerySeo = {
   title: "Galerie | Les Nuits au Château",
   description:
-    "Le Château de Sainte-Lucie aujourd'hui et l'expérience imaginée après travaux : suites, piscine naturelle, dîner au château, spa et parc au fil des lumières.",
+    "Le Château de Sainte-Lucie aujourd'hui et l'expérience imaginée après travaux : suites, piscine naturelle, planche du territoire, spa et parc au fil des lumières.",
 };
 
 export const galleryHeader = {
@@ -35,7 +35,7 @@ export const galleryItems: GalleryItem[] = [
   { image: images.projFeuillageChambre2, caption: "Suite Feuillage — la seconde chambre" },
   { image: images.projFeuillageBain, caption: "Suite Feuillage — la salle de bain minérale" },
   { image: images.projFeuillageTerrasse, caption: "Suite Feuillage — la grande terrasse", wide: true },
-  { image: images.projTableHotes, caption: "Le dîner au château dans les boiseries", wide: true },
+  { image: images.projTableHotes, caption: "La planche du territoire servie dans les boiseries", wide: true },
   { image: images.projPetitDejeunerTerrasse, caption: "Le petit-déjeuner face au parc" },
   { image: images.projPiscineHeureBleue, caption: "La piscine naturelle à l'heure bleue", wide: true },
   { image: images.projBainNordique, caption: "Le bain nordique dans la lisière" },

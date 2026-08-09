@@ -1,7 +1,9 @@
 # Simulateur v5 — modèle lean sous contraintes
 
 **Date de référence :** 9 août 2026  
-**Statut :** scénario interne de travail actif, non validé par un expert-comptable, un gestionnaire de paie ou un juriste  
+**Statut :** document historique supplanté — ne pas utiliser comme référentiel actif
+
+**Référentiel actif :** `23-referentiel-exploitation-standard-v6.md` et `public/knowledge/business-model.json` schéma 5.0
 **Périmètre :** activité à maturité de deux suites, avant dette, amortissements, impôt et rémunération des associés
 
 ## 1. Décision de cadrage

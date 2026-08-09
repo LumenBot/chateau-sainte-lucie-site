@@ -81,10 +81,11 @@ Le bail doit être signé avant la mise à disposition commerciale et préciser 
 - accès aux équipements et règles de sécurité ;
 - durée, résiliation, révision et sort de l'activité en cas de cession.
 
-Le loyer ne doit pas dépendre du chiffre d'affaires ou du résultat de la société
-d'exploitation. La SCI ne doit ni louer un fonds équipé clef en main ni fournir
-des prestations commerciales. Ce cloisonnement protège son caractère civil et
-doit être revu au regard de la doctrine fiscale applicable aux SCI.
+Le scénario retient un loyer fixe. Toute clause variable ou participation aux
+résultats doit être examinée spécifiquement par le conseil avant d'être inscrite
+dans le bail. La SCI ne doit ni louer un fonds équipé clef en main ni fournir des
+prestations commerciales. Ce cloisonnement protège son caractère civil et doit
+être revu au regard de la doctrine fiscale applicable aux SCI.
 
 Sources :
 
@@ -121,7 +122,7 @@ paiement croisé entre SCI, société d'exploitation et personnes physiques.
 | Structure, réseaux incorporés, maçonnerie, menuiseries attachées | SCI | Nature fiscale des travaux, déductibilité ou immobilisation |
 | Mobilier, literie, linge, vaisselle, décoration détachable | Société d'exploitation | Immobilisation/amortissement ou charge |
 | Logiciels, PMS, site, photographie, communication | Société d'exploitation | Charge ou immobilisation incorporelle |
-| Hammam, sauna, bain nordique, éclairage et cheminements | À décider équipement par équipement | Degré d'incorporation, propriété, bail, TVA, sort en fin de bail |
+| Hammam, bain nordique, éclairage et cheminements | À décider équipement par équipement | Degré d'incorporation, propriété, bail, TVA, sort en fin de bail |
 | Travail familial non facturé | Aucune facture fictive | Temps suivi pour pilotage, mais traitement fiscal validé séparément |
 
 Pour la SCI à l'IR, tous les travaux ne sont pas déductibles : construction,
@@ -162,10 +163,11 @@ Sources :
 
 ## 5. TVA et modèle économique
 
-L'hébergement devient soumis à la TVA lorsqu'il offre au moins trois des quatre
-prestations para-hôtelières dans les conditions requises : petit-déjeuner,
-nettoyage régulier, linge et réception. Sainte-Lucie vise précisément ce niveau
-de service ; le régime de TVA doit donc être modélisé avant les achats.
+L'hébergement entre dans le champ des prestations taxables lorsqu'il offre au
+moins trois des quatre prestations para-hôtelières dans les conditions requises :
+petit-déjeuner, nettoyage régulier, linge et réception. La collecte effective
+reste notamment subordonnée au régime de franchise en base. Sainte-Lucie vise
+ce niveau de service ; le régime de TVA doit donc être modélisé avant les achats.
 
 En 2026, les seuils généraux de franchise en base applicables aux prestations
 d'hébergement sont de 85 000 € de chiffre d'affaires, avec seuil majoré à

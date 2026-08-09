@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.2",
+  "schema_version": "1.3",
   "as_of": "2026-08-09",
   "sample": { "total": 30, "vosges": 10, "france_outside_vosges": 20 },
   "indicative_medians": { "vosges": 206, "france": 213, "global": 210, "currency": "EUR" },
@@ -11,12 +11,11 @@
     { "name": "Château Duo", "role": "large suites and private spa" }
   ],
   "current_recommendation": {
-    "launch_range": [180, 220],
-    "maturity_average_price_target": 220,
-    "maturity_public_grid_test": [200, 250],
-    "maturity_public_grid_implication": "A 220 EUR maturity average is compatible with a 200–250 EUR seasonal working grid if demand supports the high dates; the future grid is not yet approved.",
+    "public_price_range_ttc": [180, 220],
+    "standard_annual_average_price_ttc": 200,
+    "interpretation": "The annual model uses a 200 EUR average within the 180–220 EUR public grid. The average must be recalibrated from actual conversion and channel data.",
     "conditions": ["finished bathrooms", "professional real photography", "verified private spaces", "night park lighting", "reliable service", "strong guest reviews"],
-    "status": "working_assumption"
+    "status": "active_working_assumption"
   },
   "positioning_logic": [
     "The local market validates demand but does not justify the premium by heritage alone.",

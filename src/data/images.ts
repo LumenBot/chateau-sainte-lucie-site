@@ -190,7 +190,7 @@ export const images = {
   projFeuillageChambre2: { src: projFeuillageChambre2, alt: "Suite Feuillage — seconde chambre (visuel de projection non contractuel)", projection: true },
   projFeuillageBain: { src: projFeuillageBain, alt: "Suite Feuillage — salle de bain minérale (visuel de projection non contractuel)", projection: true },
   projFeuillageTerrasse: { src: projFeuillageTerrasse, alt: "Suite Feuillage — grande terrasse à balustrade (visuel de projection non contractuel)", projection: true },
-  projTableHotes: { src: projTableHotes, alt: "Le dîner au château dressé dans les boiseries (visuel de projection non contractuel)", projection: true },
+  projTableHotes: { src: projTableHotes, alt: "La table dressée pour la planche du territoire dans les boiseries (visuel de projection non contractuel)", projection: true },
   projBainNordique: { src: projBainNordique, alt: "Bain nordique habillé de bois dans une clairière du parc (visuel de projection non contractuel)", projection: true },
   projHammam: { src: projHammam, alt: "Espace bien-être et hammam (visuel de projection non contractuel)", projection: true },
   projSpaTerrasse: { src: projSpaTerrasse, alt: "Terrasse de détente au crépuscule (visuel de projection non contractuel)", projection: true },

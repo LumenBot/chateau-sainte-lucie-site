@@ -29,7 +29,9 @@ for (const match of astro.matchAll(/<input\s+([^>]+)>/g)) {
   const name = attrs.match(/name="([^"]+)"/)?.[1];
   if (!name) continue;
   const value = attrs.match(/value="([^"]*)"/)?.[1] || "";
-  fields.push({ ...makeNode(value), name });
+  const min = attrs.match(/min="([^"]*)"/)?.[1];
+  const max = attrs.match(/max="([^"]*)"/)?.[1];
+  fields.push({ ...makeNode(value), name, min, max });
 }
 for (const match of astro.matchAll(/<select\s+name="([^"]+)"[^>]*>([\s\S]*?)<\/select>/g)) {
   const [, name, body] = match;
@@ -43,6 +45,7 @@ form.elements.namedItem = (name) => fields.find((field) => field.name === name) 
 
 const nodes = new Map();
 const outputs = new Map();
+const declaredOutputs = new Set(Array.from(astro.matchAll(/data-output="([^"]+)"/g), (match) => match[1]));
 const getNode = (selector) => {
   if (!nodes.has(selector)) nodes.set(selector, makeNode());
   return nodes.get(selector);
@@ -62,6 +65,7 @@ globalThis.document = {
   querySelectorAll(selector) {
     const outputName = selector.match(/^\[data-output="([^"]+)"\]$/)?.[1];
     if (outputName) {
+      if (!declaredOutputs.has(outputName)) return [];
       if (!outputs.has(outputName)) outputs.set(outputName, makeNode());
       return [outputs.get(outputName)];
     }
@@ -85,23 +89,29 @@ vm.runInThisContext(source, { filename: "pilotage.js" });
 const normalized = (value) => String(value || "").replace(/[\s\u00a0\u202f]/g, "");
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
 
-assert(normalized(outputs.get("revenue-ttc")?.textContent).includes("81840€"), "Le CA TTC recommandé ne vaut pas 81 840 €.");
-assert(normalized(outputs.get("support-hours")?.textContent).startsWith("350h"), "La relève budgétée recommandée ne vaut pas 350 h.");
-assert(outputs.get("support-gap")?.textContent?.includes("couverture déclarée"), "Le scénario recommandé ne couvre pas les heures estimées.");
-assert(outputs.get("cash-result")?.textContent && outputs.get("cash-result")?.textContent !== "—", "Le solde prudent ne s’affiche pas.");
-assert(getNode("[data-pnl]").innerHTML.includes("Loyer SCI contractuel testé"), "Le loyer contractuel manque dans le compte d’exploitation.");
+assert(normalized(outputs.get("revenue-ttc")?.textContent).includes("60000€"), "Les ventes TTC du modèle standard ne valent pas 60 000 €.");
+assert(normalized(outputs.get("support-hours")?.textContent).startsWith("100h"), "La relève budgétée standard ne vaut pas 100 h.");
+assert(outputs.get("support-gap")?.textContent?.includes("couverture déclarée"), "Le modèle standard ne couvre pas les heures estimées.");
+assert(outputs.get("cash-result")?.textContent && outputs.get("cash-result")?.textContent !== "—", "Le solde annuel ne s’affiche pas.");
+assert(normalized(outputs.get("opco-after-cca")?.textContent).includes("−3414€") || normalized(outputs.get("opco-after-cca")?.textContent).includes("-3414€"), "La trésorerie OpCo après service du CCA n’affiche pas le déficit attendu.");
+assert(getNode("[data-pnl]").innerHTML.includes("Hypothèse de loyer SCI"), "Le loyer SCI testé manque dans le compte d’exploitation.");
+assert(getNode("[data-financing]").innerHTML.includes("Compte courant SCI"), "Le financement des comptes courants ne s’affiche pas.");
 assert(getNode("[data-workload]").innerHTML.includes("Décomposition du temps annuel"), "La décomposition de charge ne s’affiche pas.");
 
 const rerender = (target = form) => {
   for (const handler of form.listeners?.input || []) handler({ target });
 };
+const changeAndRender = (target = form) => {
+  for (const handler of form.listeners?.change || []) handler({ target });
+};
 const fingerprint = () => [
   ...Array.from(outputs.entries()).filter(([key]) => key !== "scenario-name").map(([key, node]) => `${key}:${node.textContent}`),
   getNode("[data-pnl]").innerHTML,
   getNode("[data-workload]").innerHTML,
+  getNode("[data-financing]").innerHTML,
 ].join("|");
 
-for (const field of fields.filter((item) => item.name !== "supportEmployeeMonths")) {
+for (const field of fields.filter((item) => !["diningAlcoholShare", "fixedVatRecovery"].includes(item.name))) {
   if (!/^[-+]?\d/.test(field.value)) continue;
   const initial = field.value;
   const before = fingerprint();
@@ -119,31 +129,42 @@ const supportModeBefore = fingerprint();
 supportMode.value = "parttime";
 rerender(supportMode);
 assert(fingerprint() !== supportModeBefore, "Le mode de relève ne modifie aucun résultat visible.");
-const supportMonths = form.elements.namedItem("supportEmployeeMonths");
-const partTimeBefore = fingerprint();
-supportMonths.value = "11";
-rerender(supportMonths);
-assert(fingerprint() !== partTimeBefore, "Le nombre de mois du CDI de relève ne modifie aucun résultat visible.");
-supportMonths.value = "12";
 supportMode.value = "subcontract";
 rerender(supportMode);
 
 const vatMode = form.elements.namedItem("vatMode");
 const vatBefore = fingerprint();
-vatMode.value = "franchise";
+vatMode.value = "vat";
 rerender(vatMode);
 assert(fingerprint() !== vatBefore, "Le régime de TVA ne modifie aucun résultat visible.");
-vatMode.value = "vat";
+for (const name of ["diningAlcoholShare", "fixedVatRecovery"]) {
+  const field = form.elements.namedItem(name);
+  const before = fingerprint();
+  field.value = String(Number(field.value) + 1);
+  rerender(field);
+  assert(fingerprint() !== before, `Le champ TVA ${name} ne modifie aucun résultat visible au réel.`);
+  field.value = name === "diningAlcoholShare" ? "50" : "0";
+  rerender(field);
+}
+vatMode.value = "franchise";
 rerender(vatMode);
 
 const plannedSupport = form.elements.namedItem("plannedSupportHours");
-plannedSupport.value = "300";
+plannedSupport.value = "50";
 rerender(plannedSupport);
-assert(normalized(outputs.get("support-hours")?.textContent).startsWith("300h"), "La relève saisie à 300 h est encore remplacée silencieusement.");
+assert(normalized(outputs.get("support-hours")?.textContent).startsWith("50h"), "La relève saisie à 50 h est remplacée silencieusement.");
 assert(outputs.get("support-gap")?.textContent?.includes("non couvertes"), "L’écart de couverture n’est pas signalé après réduction de la relève.");
 
-plannedSupport.value = "350";
+plannedSupport.value = "100";
 rerender(plannedSupport);
+
+const contractRent = form.elements.namedItem("contractRent");
+contractRent.value = "5000";
+rerender(contractRent);
+assert(outputs.get("rent-input-warning")?.textContent?.includes("12 000"), "Le loyer hors corridor n’est pas signalé près du champ.");
+changeAndRender(contractRent);
+assert(contractRent.value === "12000", "Le loyer hors corridor n’est pas normalisé à la validation du champ.");
+assert(normalized(outputs.get("contract-rent")?.textContent).includes("12000€"), "Le loyer normalisé n’est pas repris par le calcul.");
 
 console.log(JSON.stringify({
   revenueTtc: outputs.get("revenue-ttc").textContent,
@@ -151,9 +172,13 @@ console.log(JSON.stringify({
   preRentResult: outputs.get("pre-rent-result").textContent,
   julesCost: outputs.get("jules-cost").textContent,
   cashResult: outputs.get("cash-result").textContent,
+  opcoAfterCca: outputs.get("opco-after-cca").textContent,
   support: outputs.get("support-hours").textContent,
   recommendedSupport: outputs.get("support-recommended").textContent,
   supportGap: outputs.get("support-gap").textContent,
   operationsHours: outputs.get("operations-hours").textContent,
-  fullTimeAndRentGap: outputs.get("fulltime-gap").textContent,
+  afterRentResult: outputs.get("after-rent-result").textContent,
+  familyEffort: outputs.get("family-effort-title").textContent,
+  shareholderLoanService: outputs.get("shareholder-loan-annuity").textContent,
+  opcoLoanGap: outputs.get("opco-loan-gap").textContent,
 }, null, 2));

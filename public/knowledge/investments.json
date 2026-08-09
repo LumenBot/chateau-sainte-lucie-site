@@ -1,21 +1,53 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "as_of": "2026-08-09",
   "currency": "EUR",
-  "active_envelope": 65000,
-  "documented_range": [61000, 64000],
+  "active_envelope_ttc": 59000,
+  "documented_range_ttc": [55000, 58000],
   "status": "working_budget",
+  "scope": {
+    "wellness_facilities": ["hammam", "bain nordique"],
+    "hammam_treatment": "existing_or_included_scope_to_confirm",
+    "warning": "Any hammam work not already included must fit the envelope or be added explicitly."
+  },
   "items": [
-    { "name": "Suites", "amount": 12000 },
-    { "name": "Bathrooms", "amount": 21500, "detail": { "large": 15000, "small": 6500 } },
-    { "name": "Terraces", "amount": 4000 },
-    { "name": "Additional decoration", "amount": 2000 },
-    { "name": "Japanese path", "amount": 2500 },
-    { "name": "Outdoor lighting", "range": [7500, 10500] },
-    { "name": "Nordic bath", "amount": 4000 },
-    { "name": "Finnish sauna", "amount": 6000 },
-    { "name": "Networks and miscellaneous", "amount": 1500 }
+    { "name": "Suites", "amount_ttc": 12000 },
+    { "name": "Bathrooms", "amount_ttc": 21500, "detail": { "large": 15000, "small": 6500 } },
+    { "name": "Terraces", "amount_ttc": 4000 },
+    { "name": "Additional decoration", "amount_ttc": 2000 },
+    { "name": "Japanese path", "amount_ttc": 2500 },
+    { "name": "Outdoor lighting", "range_ttc": [7500, 10500] },
+    { "name": "Nordic bath", "amount_ttc": 4000 },
+    { "name": "Networks and miscellaneous", "amount_ttc": 1500 }
   ],
-  "excluded": ["family labor valuation", "working capital", "legal and accounting setup", "digital stack", "final photography", "launch consumables", "unidentified regulatory works", "financing costs"],
+  "financing_plan": {
+    "shareholder_current_accounts_total": 50000,
+    "shareholder_current_accounts": [
+      { "debtor_entity": "SCI", "principal": 35000, "status": "working_assumption" },
+      { "debtor_entity": "operating_company", "principal": 15000, "status": "working_assumption" }
+    ],
+    "remaining_source_to_define": 9000,
+    "test_term_years": 5,
+    "annual_remuneration_rate_test": 0.0433,
+    "repayment_method_test": "linear principal repayment with interest on opening balance",
+    "status": "working_assumption",
+    "warning": "The SCI and operating-company accounts require separate agreements and repayment schedules. The 4.33% input is an adjustable fiscal reference, not a promised return; 10% annual is retained only as a stress test requiring legal, tax and accounting validation."
+  },
+  "accounting_and_cash_treatment": {
+    "principal_repayment": "cash outflow and balance-sheet movement, not operating expense",
+    "interest": "financial expense of the debtor entity, subject to agreement and validation",
+    "entity_separation": "SCI repayments are not operating-company repayments; the rent is an inter-entity flow governed by the lease"
+  },
+  "excluded": [
+    "family labor valuation",
+    "working capital beyond the stated annual reserve",
+    "legal and accounting setup",
+    "digital stack",
+    "final photography",
+    "launch consumables",
+    "unidentified regulatory works",
+    "financing costs beyond the adjustable current-account simulation",
+    "hammam work not already included in the documented items"
+  ],
   "priority_order": ["safety and water-tightness", "bathrooms and networks", "bedding and suite usability", "night park lighting and access", "landscape-integrated wellness", "additional decoration"]
 }

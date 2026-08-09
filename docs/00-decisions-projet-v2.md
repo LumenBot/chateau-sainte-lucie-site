@@ -4,13 +4,13 @@
 
 - Nom principal : **Les Nuits au Château**.
 - Signature : **Les Suites de Sainte-Lucie**.
-- Descripteur public de travail : **Maison d'hôtes et dîner au château**. Le
+- Descripteur public de travail : **Maison d'hôtes et table au château**. Le
   régime exact de table d'hôtes ou de restauration reste à valider.
 - Lieu : Château de Sainte-Lucie, Rambervillers, Vosges.
 - Ouverture prévisionnelle : **avril 2027**.
 - Travaux : septembre 2026 à mars 2027.
-- Tarif public d'ouverture 2027 : **180 € par suite et par nuit**, pour deux
-  adultes, petit-déjeuner compris. Revue du tarif à l'automne 2027 pour 2028.
+- Grille publique de travail : **180 à 220 € par suite et par nuit**, pour deux
+  adultes, petit-déjeuner compris. Le modèle annuel utilise une moyenne de 200 €.
 
 ## Offre
 
@@ -20,12 +20,11 @@
 - Petit-déjeuner inclus dans chaque nuitée.
 - Capacité commerciale : deux adultes et jusqu'à deux enfants par suite.
 - Supplément enfant : 20 € par enfant et par nuit, petit-déjeuner inclus.
-- Déjeuner ou dîner au château sur réservation : 40 € par adulte, 20 € de 3 à 11 ans.
-- Accord mets et vins : 20 € par adulte, sous réserve des validations
-  réglementaires nécessaires.
-- Spa sur réservation : hammam, piscine naturelle, bain nordique et sauna
-  finlandais, au tarif de 40 € par jour pour les deux premiers occupants, puis
-  20 € par personne supplémentaire et par jour.
+- Table ou planche simplifiée sur réservation : 50 € par suite et par jour
+  vendu, sous réserve de la définition finale du contenu et des validations.
+- Spa sur réservation : hammam et bain nordique, au tarif de 50 € par suite et
+  par jour. Le projet ne comprend pas de sauna. Le traitement commercial de la
+  piscine naturelle reste à confirmer.
 - Accueil personnalisable : humain, autonome ou hybride, en français ou en
   anglais.
 - Aucune durée minimale de séjour au lancement ; le PMS conserve néanmoins un
@@ -67,7 +66,7 @@ de caractère qui ouvre très peu de portes : deux suites intimistes, une attent
 personnelle, une table dressée pour la tablée et des temps de spa réservés. Le
 terme « privatif » s'applique aux suites et aux équipements réservés, jamais à
 l'ensemble du château qui demeure habité. Il n'est plus appliqué publiquement
-au dîner tant que son régime d'exploitation n'est pas validé.
+au service de table tant que son régime d'exploitation n'est pas validé.
 
 ## Décisions de communication
 
@@ -92,3 +91,5 @@ au dîner tant que son régime d'exploitation n'est pas validé.
   affectation des investissements.
 - `docs/15-plan-directeur-ouverture-avril-2027-v1.md` : programme complet de
   lancement et jalons de conformité.
+- `docs/23-referentiel-exploitation-standard-v6.md` : modèle annuel actif,
+  charge de travail, loyer SCI et comptes courants d'associés.

@@ -44,7 +44,7 @@ import { withBase } from "../../utils/url";
             <div class="demo-kpi"><span>Occupation · mai</span><strong>71 %</strong><small>simulation · +6 pts vs objectif</small></div>
             <div class="demo-kpi"><span>CA hébergement</span><strong>10 750 €</strong><small>14 séjours fictifs</small></div>
             <div class="demo-kpi"><span>CA services</span><strong>2 840 €</strong><small>26 % du CA hébergement</small></div>
-            <div class="demo-kpi"><span>À préparer aujourd’hui</span><strong>2</strong><small>1 arrivée · 1 dîner</small></div>
+            <div class="demo-kpi"><span>À préparer aujourd’hui</span><strong>2</strong><small>1 arrivée · 1 planche</small></div>
           </div>
           <div class="demo-grid two">
             <article class="demo-panel">
@@ -52,7 +52,7 @@ import { withBase } from "../../utils/url";
               <ul class="demo-checklist">
                 <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon" data-room-icon>1</span><span><strong>Préparer la Suite Lumière</strong><br><small>Arrivée Camille Martin · 15h30</small></span></span><button class="demo-button quiet" type="button" data-room-ready>Marquer prête</button></li>
                 <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span><strong>Brief petit-déjeuner</strong><br><small>8h30 · sucré & salé · sans fruits à coque</small></span></span><span class="demo-status ok">Transmis</span></li>
-                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span><strong>Dîner au château</strong><br><small>3 couverts · accord mets & vins pour 2 adultes</small></span></span><span class="demo-status ok">Confirmé</span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span><strong>Planche du territoire</strong><br><small>Pour la suite · préférences transmises</small></span></span><span class="demo-status ok">Confirmée</span></li>
                 <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon">4</span><span><strong>Garantie de séjour</strong><br><small data-manager-guarantee>Empreinte fictive à autoriser</small></span></span><span class="demo-status warn" data-manager-guarantee-status>À suivre</span></li>
               </ul>
             </article>
@@ -132,14 +132,14 @@ import { withBase } from "../../utils/url";
               <ul class="demo-checklist">
                 <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Maximum 2 h par équipement, suite et jour</span></span></li>
                 <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Maximum 8 h de spa par suite et jour</span></span></li>
-                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Exclusivité hammam, sauna et bain nordique</span></span></li>
+                <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Exclusivité hammam et bain nordique</span></span></li>
                 <li class="demo-check"><span class="demo-check-main"><span class="demo-check-icon done">✓</span><span>Partage piscine notifié aux deux suites</span></span></li>
               </ul>
             </article>
           </div>
           <article class="demo-panel">
-            <div class="demo-panel-head"><div><p class="demo-kicker">Production culinaire</p><h2>Demain matin & dîner.</h2></div></div>
-            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Service</th><th>Suite</th><th>Horaire</th><th>Couverts</th><th>Préférences</th><th>Statut</th></tr></thead><tbody><tr><td>Petit-déjeuner</td><td>Lumière</td><td data-service-breakfast-time>08:30</td><td>3</td><td data-service-dietary>Sans fruits à coque</td><td><span class="demo-status ok">Brief prêt</span></td></tr><tr><td>Dîner au château</td><td>Lumière</td><td>19:30</td><td>3</td><td>Cuisine végétale · accord vins pour 2</td><td><span class="demo-status ok">Confirmé</span></td></tr></tbody></table></div>
+            <div class="demo-panel-head"><div><p class="demo-kicker">Service alimentaire</p><h2>Petit-déjeuner & planche.</h2></div></div>
+            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Service</th><th>Suite</th><th>Horaire</th><th>Couverts</th><th>Préférences</th><th>Statut</th></tr></thead><tbody><tr><td>Petit-déjeuner</td><td>Lumière</td><td data-service-breakfast-time>08:30</td><td>3</td><td data-service-dietary>Sans fruits à coque</td><td><span class="demo-status ok">Brief prêt</span></td></tr><tr><td>Planche du territoire</td><td>Lumière</td><td>19:30</td><td>Suite</td><td>Végétale · sans fruits à coque</td><td><span class="demo-status ok">Confirmée</span></td></tr></tbody></table></div>
           </article>
         </section>
 
@@ -157,13 +157,13 @@ import { withBase } from "../../utils/url";
         <section class="demo-view" data-manager-view="finance" hidden>
           <div class="demo-kpis">
             <div class="demo-kpi"><span>Hébergement du séjour</span><strong data-finance-accommodation>600 €</strong><small>encaissé fictivement</small></div>
-            <div class="demo-kpi"><span>Options du séjour</span><strong data-finance-options>320 €</strong><small data-finance-options-status>à encaisser</small></div>
-            <div class="demo-kpi"><span>Panier total</span><strong data-finance-total>920 €</strong><small>307 € / nuit environ</small></div>
+            <div class="demo-kpi"><span>Options du séjour</span><strong data-finance-options>260 €</strong><small data-finance-options-status>à encaisser</small></div>
+            <div class="demo-kpi"><span>Panier total</span><strong data-finance-total>860 €</strong><small>287 € / nuit environ</small></div>
             <div class="demo-kpi"><span>Garantie</span><strong>500 €</strong><small data-finance-guarantee>non autorisée</small></div>
           </div>
           <article class="demo-panel">
             <div class="demo-panel-head"><div><p class="demo-kicker">Rapprochement</p><h2>De la réservation à la comptabilité.</h2></div><span class="demo-status simulated">Export fictif</span></div>
-            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Écriture</th><th>Source</th><th>Nature</th><th>Montant</th><th>État</th></tr></thead><tbody><tr><td>CSL-270514-LUM-01</td><td>Direct</td><td>Hébergement</td><td data-finance-accommodation>600 €</td><td><span class="demo-status ok">Rapproché</span></td></tr><tr><td>CSL-270514-LUM-02</td><td>Portail client</td><td>Spa</td><td data-finance-spa>180 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr><tr><td>CSL-270514-LUM-03</td><td>Portail client</td><td>Table du château</td><td data-finance-dinner>100 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr><tr><td>CSL-270514-LUM-04</td><td>Portail client</td><td>Accord mets & vins</td><td data-finance-wine>40 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr></tbody></table></div>
+            <div class="demo-table-wrap" style="margin-top: 18px;"><table class="demo-table"><thead><tr><th>Écriture</th><th>Source</th><th>Nature</th><th>Montant</th><th>État</th></tr></thead><tbody><tr><td>CSL-270514-LUM-01</td><td>Direct</td><td>Hébergement</td><td data-finance-accommodation>600 €</td><td><span class="demo-status ok">Rapproché</span></td></tr><tr><td>CSL-270514-LUM-02</td><td>Portail client</td><td>Hammam et bain nordique</td><td data-finance-spa>210 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr><tr><td>CSL-270514-LUM-03</td><td>Portail client</td><td>Planche du territoire</td><td data-finance-dinner>50 €</td><td><span class="demo-status warn" data-finance-payment-state>À encaisser</span></td></tr></tbody></table></div>
             <div class="demo-actions"><button class="demo-button secondary" type="button" data-export-accounting>Simuler l’export comptable</button><button class="demo-button secondary" type="button" data-export-kpi>Exporter les indicateurs</button></div>
           </article>
         </section>

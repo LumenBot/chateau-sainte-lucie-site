@@ -2,7 +2,9 @@
 
 Date : 9 août 2026
 
-Statut : **supplanté par `22-simulateur-v5-modele-lean-sous-contraintes.md`** ; conservé pour traçabilité
+Statut : **document historique supplanté — ne pas utiliser comme référentiel actif**
+
+Référentiel actif : `23-referentiel-exploitation-standard-v6.md` et `public/knowledge/business-model.json` schéma 5.0.
 
 Remplace : les conclusions et formules du simulateur v3 documentées dans `20-simulateur-exploitation-equilibre-v3.md`
 

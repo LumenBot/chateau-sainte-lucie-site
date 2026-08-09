@@ -6,8 +6,8 @@ Château de Sainte-Lucie — Rambervillers, Vosges. **Ouverture prévue en avril
 
 > Refonte v2 du dépôt : l'ancienne vitrine « réception » (séminaires, événements,
 > tournages) est remplacée par le projet de maison d'hôtes à deux suites.
-> Documentation de reprise et d'exploitation : `docs/00-…` à `docs/08-…` et
-> `CLAUDE.md`.
+> Documentation de reprise et d'exploitation : `docs/00-…` à `docs/08-…`,
+> puis référentiel annuel actif dans `docs/23-referentiel-exploitation-standard-v6.md`.
 
 ## Stack
 
@@ -79,7 +79,7 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
 - `docs/11-demonstrateur-experience-et-exploitation-v1.md` décrit la maquette
   fonctionnelle, les rôles, les événements d’intégration, les scénarios de repli
   et le protocole de revue par les associés.
-- `docs/12-positionnement-tarifaire-et-valeur-v2.md` formalise la grille d'ouverture à 180 €,
+- `docs/12-positionnement-tarifaire-et-valeur-v2.md` documente le cadrage tarifaire initial,
   le benchmark local et les preuves nécessaires pour défendre le positionnement.
 - `docs/13-iteration-corrective-site-aout-2026.md` consigne les arbitrages du
   brief d'itération 2, les corrections livrées et les sujets différés.
@@ -87,19 +87,10 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   SCI / société d'exploitation et la règle d'affectation des investissements.
 - `docs/15-plan-directeur-ouverture-avril-2027-v1.md` organise les dix chantiers,
   les obligations, les jalons et le chemin critique jusqu'à l'ouverture.
-- `docs/16-integration-passation-claude-aout-2026-v1.md` consigne uniquement les
-  éléments nouveaux retenus de la dernière passation et les affirmations écartées.
-- `docs/17-modele-economique-et-atelier-associes-v1.md` documente le simulateur,
-  ses scénarios, ses formules et ses limites de lecture.
-- `docs/18-integration-benchmark-et-budget-aout-2026-v1.md` consolide le
-  benchmark de 30 lieux, le budget corrigé de 65 k€ et leurs arbitrages.
-- `docs/19-base-de-verite-partagee-et-simulateur-v2.md` décrit l'architecture
-  humain/IA, le modèle d'emploi et les règles de publication des données.
-- `docs/20-simulateur-exploitation-equilibre-v3.md` conserve l’ancienne doctrine
-  du loyer résiduel à titre historique ; elle est remplacée par la version suivante.
-- `docs/21-integration-contre-analyse-et-simulateur-v4.md` documente la doctrine
-  active : TVA par régime, coûts analytiques, continuité humaine, loyer contractuel,
-  résultat résiduel et trajectoire 2027–2029+.
+- Les documents numérotés 16 à 22 conservent les travaux préparatoires à titre
+  historique et ne constituent plus la photographie active du projet.
+- `docs/23-referentiel-exploitation-standard-v6.md` documente le modèle annuel
+  actif, les tests à 120 et 150 nuits par suite, le loyer et les financements.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes

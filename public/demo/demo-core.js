@@ -2,7 +2,7 @@
   const STORAGE_KEY = "csl-demo-experience-v1";
 
   const defaultState = {
-    version: 3,
+    version: 4,
     booking: {
       reference: "CSL-270514-LUM",
       suite: "Suite Lumière",
@@ -41,13 +41,10 @@
     },
     services: {
       spaPass: true,
-      spaTotal: 180,
+      spaTotal: 210,
       dinner: true,
       dinnerGuests: 3,
-      dinnerTotal: 100,
-      winePairing: true,
-      wineGuests: 2,
-      wineTotal: 40,
+      dinnerTotal: 50,
       poolPrivate: false,
       poolPrivateTotal: 0,
       bookings: [
@@ -59,7 +56,7 @@
     payment: {
       guaranteeAmount: 500,
       guaranteeStatus: "À autoriser",
-      optionsTotal: 320,
+      optionsTotal: 260,
       optionsPaid: false,
       invoiceStatus: "Brouillon",
     },
@@ -143,16 +140,14 @@
     const nights = nightsBetween(values.arrival, values.departure);
     const adults = Number(values.adults || 0);
     const children = Number(values.children || 0);
-    const underThree = Number(values.childrenUnderThree || 0);
     // Le prix de base couvre la suite pour un ou deux adultes. Chaque enfant
     // s'ajoute à la formule, quel que soit le nombre d'adultes présents.
     const additionalPerNight = children * 20;
     const accommodation = nights * (180 + additionalPerNight);
     const guests = adults + children;
-    const spa = values.spaPass ? nights * (40 + Math.max(0, guests - 2) * 20) : 0;
-    const dinner = values.dinner ? adults * 40 + Math.max(0, children - underThree) * 20 : 0;
-    const wine = values.dinner && values.winePairing ? adults * 20 : 0;
-    return { nights, accommodation, spa, dinner, wine, total: accommodation + spa + dinner + wine };
+    const spa = values.spaPass ? nights * (50 + Math.max(0, guests - 2) * 20) : 0;
+    const dinner = values.dinner ? 50 : 0;
+    return { nights, accommodation, spa, dinner, total: accommodation + spa + dinner };
   }
 
   function toast(message) {

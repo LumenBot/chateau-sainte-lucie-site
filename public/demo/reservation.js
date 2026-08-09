@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     childrenUnderThree: form.elements.childrenUnderThree,
     spaPass: form.elements.spaPass,
     dinner: form.elements.dinner,
-    winePairing: form.elements.winePairing,
   };
   const paymentButton = form.querySelector("[data-payment-button]");
 
@@ -31,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
       childrenUnderThree: Number(fields.childrenUnderThree.value),
       spaPass: fields.spaPass.checked,
       dinner: fields.dinner.checked,
-      winePairing: fields.winePairing.checked,
     };
   }
 
@@ -52,10 +50,9 @@ document.addEventListener("DOMContentLoaded", function () {
     form.querySelector("[data-price-accommodation]").textContent = demo.money(quote.accommodation);
     form.querySelector("[data-price-spa]").textContent = demo.money(quote.spa);
     form.querySelector("[data-price-dinner]").textContent = demo.money(quote.dinner);
-    form.querySelector("[data-price-wine]").textContent = demo.money(quote.wine);
     form.querySelector("[data-price-total]").textContent = demo.money(quote.total);
     form.querySelector("[data-price-now]").textContent = demo.money(quote.accommodation);
-    form.querySelector("[data-price-later]").textContent = demo.money(quote.spa + quote.dinner + quote.wine);
+    form.querySelector("[data-price-later]").textContent = demo.money(quote.spa + quote.dinner);
     if (paymentButton) {
       paymentButton.textContent = "Simuler le paiement de " + demo.money(quote.accommodation);
       paymentButton.disabled = !compositionValid || !datesValid;
@@ -105,13 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
     state.services.dinner = value.dinner;
     state.services.dinnerGuests = value.adults + value.children;
     state.services.dinnerTotal = quote.dinner;
-    state.services.winePairing = value.dinner && value.winePairing;
-    state.services.wineGuests = value.adults;
-    state.services.wineTotal = quote.wine;
     state.services.bookings = [];
     state.services.poolPrivate = false;
     state.services.poolPrivateTotal = 0;
-    state.payment.optionsTotal = quote.spa + quote.dinner + quote.wine;
+    state.payment.optionsTotal = quote.spa + quote.dinner;
     state.payment.optionsPaid = false;
     state.payment.invoiceStatus = "Brouillon";
     const dateCode = value.arrival.slice(2).replaceAll("-", "");

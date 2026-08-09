@@ -8,16 +8,17 @@
     const percent = (value) => new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 0 }).format(Number(value || 0));
     const toast = window.CSLDemo?.toast || ((message) => window.alert(message));
 
-    const fixed = { suites: 2, averageGuests: 2.1, annualHours: 1607, capex: 65000 };
-    const scenarioNames = { recommended: "Plein temps sous contraintes", custom: "Scénario libre" };
+    const fixed = { suites: 2, averageGuests: 2.1, annualHours: 1607, capex: 59000 };
+    const scenarioNames = { standard: "Modèle annuel standard", custom: "Hypothèses ajustées" };
     const scenarios = {
-      recommended: {
-        nightsPerSuite: "150", averageNightPrice: "220", averageStay: "2.5", directShare: "50",
-        spaTake: "66", spaBasket: "100", diningTake: "33", diningBasket: "200",
-        vatMode: "vat", diningAlcoholShare: "20", otaCommission: "15", directPaymentRate: "1.5",
-        turnoverCost: "30", turnoverInternalHours: "4", breakfastCost: "7", energyCost: "7", spaUnitCost: "25", spaLaborHours: "1", diningCostRate: "30", diningLaborHours: "4.5", incidentRate: "0.5",
-        fixedInsurance: "1500", fixedAccounting: "2000", fixedDigital: "1800", fixedMarketing: "1000", fixedTaxes: "700", fixedBank: "400", fixedSafety: "600", fixedTechnical: "2000", fixedSpa: "1300", fixedUtilities: "1200", fixedTraining: "500", fixedVatRecovery: "2000",
-        julesFte: "1", employeeMonths: "12", supportMode: "subcontract", supportHourlyRate: "25", supportEmployeeMonths: "12", plannedSupportHours: "350", familyHours: "100", renewalProvision: "2500", cashReserveContribution: "2500", contractRent: "0", julesFullTimeCost: "28000",
+      standard: {
+        nightsPerSuite: "120", averageNightPrice: "200", averageStay: "2.5", directShare: "50",
+        spaTake: "75", spaDailyPrice: "50", diningTake: "25", diningDailyPrice: "50",
+        vatMode: "franchise", diningAlcoholShare: "50", otaCommission: "15", directPaymentRate: "1.5",
+        turnoverCost: "30", turnoverInternalHours: "4", breakfastCost: "6", energyCost: "5", spaUnitCost: "10", spaLaborHours: "1", diningUnitCost: "20", diningLaborHours: "1", incidentRate: "0.2",
+        fixedInsurance: "1500", fixedAccounting: "800", fixedDigital: "1500", fixedTaxes: "700", fixedBank: "400", fixedSafety: "600", fixedUtilities: "1200", fixedTraining: "300", fixedVatRecovery: "0",
+        baseOperationsHours: "720", julesFte: "0.8", supportMode: "subcontract", supportHourlyRate: "25", plannedSupportHours: "100", familyHours: "380", renewalProvision: "1500", contractRent: "12000", julesFullTimeCost: "28000",
+        sciShareholderLoan: "35000", opcoShareholderLoan: "15000", shareholderLoanYears: "5", shareholderLoanRate: "4.33",
       },
     };
 
@@ -37,7 +38,7 @@
       ["Maison Durieux", "Haute-Vienne", "france", 230, "Luxe discret", "Une destination secondaire soutient 200–300 € grâce au design et au service."],
       ["Château de Fontariol", "Allier", "france", 160, "Expérience signature", "Une activité signature cohérente vaut mieux qu’une longue liste d’options."],
       ["Château d’Omiécourt", "Somme", "france", 170, "Château-spa", "La privatisation par créneau doit être expliquée sans ambiguïté."],
-      ["Château Écrin de Lumière", "Dordogne", "france", 220, "Art de recevoir", "La table et le petit-déjeuner participent autant au luxe perçu que le spa."],
+      ["Château Écrin de Lumière", "Dordogne", "france", 220, "Art de recevoir", "Le petit-déjeuner et l’offre du soir participent autant au luxe perçu que le spa."],
       ["Château du Palanquey", "Saint-Émilion", "france", 320, "Référence haute", "Montre le plafond de valeur avec une structure de service nettement plus lourde."],
       ["Commanderie de Ballan", "Indre-et-Loire", "france", 240, "Vie de château", "Le faible nombre de clés est un argument si les espaces réservés sont réels."],
       ["Château Duo", "Drôme", "france", 260, "Grandes suites + spa", "Mètres carrés, salon séparé et terrasse doivent être visibles immédiatement."],
@@ -54,25 +55,47 @@
       ["Bastide Saint-Honorat", "Alpes-Maritimes", "france", 180, "Art de vivre", "Terroir, vaisselle, gestes et senteurs construisent aussi le luxe."],
     ].map((row, index) => ({ index: index + 1, name: row[0], location: row[1], scope: row[2], price: row[3], model: row[4], lesson: row[5] }));
 
-    let activeScenario = "recommended";
+    let activeScenario = "standard";
     const read = () => Object.fromEntries(Array.from(form.elements).filter((field) => field.name).map((field) => [field.name, field.value]));
-    const number = (v, key) => Number(v[key] || 0);
+    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+    const number = (v, key) => {
+      const raw = Number(v[key] || 0);
+      const field = form.elements.namedItem(key);
+      const min = field && field.min !== undefined && field.min !== "" ? Number(field.min) : Number.NEGATIVE_INFINITY;
+      const max = field && field.max !== undefined && field.max !== "" ? Number(field.max) : Number.POSITIVE_INFINITY;
+      return clamp(Number.isFinite(raw) ? raw : 0, min, max);
+    };
+    function normalizeNumericField(field) {
+      if (!field?.name || field.min === undefined || field.max === undefined) return;
+      const raw = Number(field.value);
+      if (!Number.isFinite(raw)) return;
+      const min = field.min !== "" ? Number(field.min) : Number.NEGATIVE_INFINITY;
+      const max = field.max !== "" ? Number(field.max) : Number.POSITIVE_INFINITY;
+      const normalized = clamp(raw, min, max);
+      if (normalized !== raw) field.value = String(normalized);
+    }
+    function normalizeNumericInputs() {
+      Array.from(form.elements).forEach(normalizeNumericField);
+    }
     function setValues(next) { Object.entries(next).forEach(([key, value]) => { const field = form.elements.namedItem(key); if (field) field.value = String(value); }); }
     function output(key, value) { document.querySelectorAll(`[data-output="${key}"]`).forEach((node) => { node.textContent = value; }); }
 
-    const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
     const roundTo = (value, step) => Math.round(value / step) * step;
 
     function calculate(v, overrides) {
       const next = { ...v, ...(overrides || {}) };
       const nightsPerSuite = number(next, "nightsPerSuite");
       const occupiedNights = nightsPerSuite * fixed.suites;
-      const stays = occupiedNights / Math.max(1, number(next, "averageStay"));
-      const spaBookings = stays * number(next, "spaTake") / 100;
-      const diningBookings = stays * number(next, "diningTake") / 100;
+      const averageStay = Math.max(1, number(next, "averageStay"));
+      const stays = occupiedNights / averageStay;
+      const spaTakeRate = clamp(number(next, "spaTake") / 100, 0, 1);
+      const diningTakeRate = clamp(number(next, "diningTake") / 100, 0, 1);
+      const spaBuyerStays = stays * spaTakeRate;
+      const spaSuiteDays = spaBuyerStays * averageStay;
+      const diningSales = occupiedNights * diningTakeRate;
       const lodgingRevenueTtc = occupiedNights * number(next, "averageNightPrice");
-      const spaRevenueTtc = spaBookings * number(next, "spaBasket");
-      const diningRevenueTtc = diningBookings * number(next, "diningBasket");
+      const spaRevenueTtc = spaSuiteDays * number(next, "spaDailyPrice");
+      const diningRevenueTtc = diningSales * number(next, "diningDailyPrice");
       const revenueTtc = lodgingRevenueTtc + spaRevenueTtc + diningRevenueTtc;
 
       const vatMode = next.vatMode === "vat" ? "vat" : "franchise";
@@ -89,102 +112,153 @@
       const turnoverTtc = stays * number(next, "turnoverCost");
       const breakfastTtc = occupiedNights * fixed.averageGuests * number(next, "breakfastCost");
       const energyTtc = occupiedNights * number(next, "energyCost");
-      const spaDirectTtc = spaBookings * number(next, "spaUnitCost");
-      const diningDirectTtc = diningRevenueTtc * number(next, "diningCostRate") / 100;
+      const spaDirectTtc = spaSuiteDays * number(next, "spaUnitCost");
+      const diningDirectTtc = diningSales * number(next, "diningUnitCost");
       const turnover = vatMode === "vat" ? turnoverTtc / 1.2 : turnoverTtc;
       const breakfast = vatMode === "vat" ? breakfastTtc / 1.1 : breakfastTtc;
       const energy = vatMode === "vat" ? energyTtc / 1.2 : energyTtc;
       const spaDirect = vatMode === "vat" ? spaDirectTtc / 1.2 : spaDirectTtc;
-      const diningDirect = vatMode === "vat" ? diningDirectTtc / 1.1 : diningDirectTtc;
+      const diningDirect = vatMode === "vat" ? diningDirectTtc * (1 - alcoholShare) / 1.1 + diningDirectTtc * alcoholShare / 1.2 : diningDirectTtc;
       const incidents = accountingRevenue * number(next, "incidentRate") / 100;
       const variableCosts = commission + paymentFees + turnover + breakfast + energy + spaDirect + diningDirect + incidents;
       const contribution = accountingRevenue - variableCosts;
 
-      const fixedKeys = ["fixedInsurance", "fixedAccounting", "fixedDigital", "fixedMarketing", "fixedTaxes", "fixedBank", "fixedSafety", "fixedTechnical", "fixedSpa", "fixedUtilities", "fixedTraining"];
+      const fixedKeys = ["fixedInsurance", "fixedAccounting", "fixedDigital", "fixedTaxes", "fixedBank", "fixedSafety", "fixedUtilities", "fixedTraining"];
       const fixedCostsTtc = fixedKeys.reduce((sum, key) => sum + number(next, key), 0);
       const fixedVatRecovery = vatMode === "vat" ? Math.min(fixedCostsTtc, number(next, "fixedVatRecovery")) : 0;
       const fixedCosts = fixedCostsTtc - fixedVatRecovery;
 
       const presenceDays = Math.min(275, nightsPerSuite * 1.2);
-      const baseHours = 720;
+      const baseHours = number(next, "baseOperationsHours");
       const presenceHours = presenceDays * 1.75;
       const suiteNightHours = occupiedNights * 0.5;
       const coordinationHours = stays;
       const turnoverHours = stays * number(next, "turnoverInternalHours");
-      const spaHours = spaBookings * number(next, "spaLaborHours");
-      const diningHours = diningBookings * number(next, "diningLaborHours");
+      const suiteUseProbabilityPerPresenceDay = presenceDays > 0 ? clamp(spaSuiteDays / (fixed.suites * presenceDays), 0, 1) : 0;
+      const spaOperatingDays = presenceDays * (1 - Math.pow(1 - suiteUseProbabilityPerPresenceDay, fixed.suites));
+      const spaHours = spaOperatingDays * number(next, "spaLaborHours");
+      const diningHours = diningSales * number(next, "diningLaborHours");
       const operationsHours = baseHours + presenceHours + suiteNightHours + coordinationHours + turnoverHours + spaHours + diningHours;
       const calendarRelief = nightsPerSuite > 0 ? clamp(roundTo(100 + nightsPerSuite * 2, 50), 250, 500) : 0;
       const familyHours = number(next, "familyHours");
       const julesFte = clamp(number(next, "julesFte"), 0, 1);
-      const employeeMonths = clamp(number(next, "employeeMonths"), 0, 12);
+      const employeeMonths = 12;
       const julesFullTimeCost = number(next, "julesFullTimeCost");
       const paidCapacity = fixed.annualHours * julesFte * employeeMonths / 12;
       const workloadRelief = Math.max(0, operationsHours - paidCapacity - familyHours);
       const calendarSupportNeed = Math.max(0, calendarRelief - familyHours);
       const recommendedSupportHours = Math.max(calendarSupportNeed, workloadRelief);
       const supportHours = Math.max(0, number(next, "plannedSupportHours"));
-      const supportGap = Math.max(0, recommendedSupportHours - supportHours);
-      const supportEmployeeMonths = clamp(number(next, "supportEmployeeMonths"), 0, 12);
-      const partTimeAnnualCapacity = fixed.annualHours * supportEmployeeMonths / 12;
+      const supportEmployeeMonths = 12;
+      const partTimeAnnualCapacity = fixed.annualHours;
       const partTimeFte = supportHours > 0 && partTimeAnnualCapacity > 0 ? Math.max(0.2, Math.ceil(supportHours / partTimeAnnualCapacity * 20) / 20) : 0;
+      const supportCapacityHours = next.supportMode === "parttime" ? partTimeAnnualCapacity * partTimeFte : supportHours;
+      const supportGap = Math.max(0, recommendedSupportHours - supportCapacityHours);
       const supportCost = next.supportMode === "parttime" ? julesFullTimeCost * partTimeFte * supportEmployeeMonths / 12 : supportHours * number(next, "supportHourlyRate");
       const julesCost = julesFullTimeCost * julesFte * employeeMonths / 12;
       const operatingResultBeforeRent = contribution - fixedCosts - julesCost - supportCost;
       const contractRent = number(next, "contractRent");
       const operatingResultAfterRent = operatingResultBeforeRent - contractRent;
       const renewalProvision = number(next, "renewalProvision");
-      const cashReserveContribution = number(next, "cashReserveContribution");
-      const cashResult = operatingResultAfterRent - renewalProvision - cashReserveContribution;
-      const rentCapacity = Math.max(0, operatingResultBeforeRent - renewalProvision - cashReserveContribution);
+      const cashResult = operatingResultAfterRent - renewalProvision;
       const recoveredVat = (turnoverTtc - turnover) + (breakfastTtc - breakfast) + (energyTtc - energy) + (spaDirectTtc - spaDirect) + (diningDirectTtc - diningDirect) + fixedVatRecovery;
       const netVat = collectedVat - recoveredVat;
 
-      const julesAssignedHours = Math.max(0, operationsHours - supportHours - familyHours);
-      return { nightsPerSuite, occupiedNights, stays, spaBookings, diningBookings, lodgingRevenueTtc, spaRevenueTtc, diningRevenueTtc, revenueTtc, lodgingRevenue, spaRevenue, diningRevenue, accountingRevenue, collectedVat, recoveredVat, netVat, commission, paymentFees, turnover, breakfast, energy, spaDirect, diningDirect, incidents, variableCosts, contribution, fixedCostsTtc, fixedVatRecovery, fixedCosts, presenceDays, baseHours, presenceHours, suiteNightHours, coordinationHours, turnoverHours, spaHours, diningHours, operationsHours, calendarRelief, calendarSupportNeed, workloadRelief, recommendedSupportHours, supportHours, supportGap, supportEmployeeMonths, partTimeFte, supportCost, familyHours, julesFte, paidCapacity, julesAssignedHours, julesCost, operatingResultBeforeRent, contractRent, operatingResultAfterRent, renewalProvision, cashReserveContribution, cashResult, rentCapacity };
+      const sciShareholderLoan = Math.max(0, number(next, "sciShareholderLoan"));
+      const opcoShareholderLoan = Math.max(0, number(next, "opcoShareholderLoan"));
+      const shareholderLoanYears = Math.max(1, number(next, "shareholderLoanYears"));
+      const shareholderLoanRate = Math.max(0, number(next, "shareholderLoanRate")) / 100;
+      const sciPrincipalRepayment = sciShareholderLoan / shareholderLoanYears;
+      const opcoPrincipalRepayment = opcoShareholderLoan / shareholderLoanYears;
+      const sciFirstYearInterest = sciShareholderLoan * shareholderLoanRate;
+      const opcoFirstYearInterest = opcoShareholderLoan * shareholderLoanRate;
+      const sciFirstYearDebtService = sciPrincipalRepayment + sciFirstYearInterest;
+      const opcoFirstYearDebtService = opcoPrincipalRepayment + opcoFirstYearInterest;
+      const totalFirstYearDebtService = sciFirstYearDebtService + opcoFirstYearDebtService;
+      const sciGrossRepaymentCapacity = contractRent;
+      const opcoRepaymentCapacity = cashResult;
+      const sciRepaymentGap = sciGrossRepaymentCapacity - sciFirstYearDebtService;
+      const opcoRepaymentGap = opcoRepaymentCapacity - opcoFirstYearDebtService;
+      const opcoCashAfterDebtService = opcoRepaymentCapacity - opcoFirstYearDebtService;
+      const consolidatedGrossRepaymentCapacity = contractRent + cashResult;
+      const shareholderLoanCoverageGap = consolidatedGrossRepaymentCapacity - totalFirstYearDebtService;
+      const totalInterestOverTerm = (sciShareholderLoan + opcoShareholderLoan) * shareholderLoanRate * (shareholderLoanYears + 1) / 2;
+
+      const julesAssignedHours = Math.max(0, operationsHours - supportCapacityHours - familyHours);
+      return { nightsPerSuite, occupiedNights, stays, spaBuyerStays, spaSuiteDays, spaOperatingDays, diningSales, lodgingRevenueTtc, spaRevenueTtc, diningRevenueTtc, revenueTtc, lodgingRevenue, spaRevenue, diningRevenue, accountingRevenue, collectedVat, recoveredVat, netVat, commission, paymentFees, turnover, breakfast, energy, spaDirect, diningDirect, incidents, variableCosts, contribution, fixedCostsTtc, fixedVatRecovery, fixedCosts, presenceDays, baseHours, presenceHours, suiteNightHours, coordinationHours, turnoverHours, spaHours, diningHours, operationsHours, calendarRelief, calendarSupportNeed, workloadRelief, recommendedSupportHours, supportHours, supportCapacityHours, supportGap, supportEmployeeMonths, partTimeFte, supportCost, familyHours, julesFte, paidCapacity, julesAssignedHours, julesCost, operatingResultBeforeRent, contractRent, operatingResultAfterRent, renewalProvision, cashResult, sciShareholderLoan, opcoShareholderLoan, shareholderLoanYears, shareholderLoanRate, sciPrincipalRepayment, opcoPrincipalRepayment, sciFirstYearInterest, opcoFirstYearInterest, sciFirstYearDebtService, opcoFirstYearDebtService, totalFirstYearDebtService, sciGrossRepaymentCapacity, opcoRepaymentCapacity, sciRepaymentGap, opcoRepaymentGap, opcoCashAfterDebtService, consolidatedGrossRepaymentCapacity, shareholderLoanCoverageGap, totalInterestOverTerm };
     }
 
     const pnlRows = [
-      ["Ventes publiques TTC · hébergement", "lodgingRevenueTtc", "revenue"], ["Ventes publiques TTC · bien-être", "spaRevenueTtc", "revenue"], ["Ventes publiques TTC · table", "diningRevenueTtc", "revenue"], ["Ventes publiques TTC", "revenueTtc", "subtotal"],
+      ["Ventes publiques TTC · hébergement", "lodgingRevenueTtc", "revenue"], ["Ventes publiques TTC · bien-être", "spaRevenueTtc", "revenue"], ["Ventes publiques TTC · planches du territoire", "diningRevenueTtc", "revenue"], ["Ventes publiques TTC", "revenueTtc", "subtotal"],
       ["TVA collectée estimée", "collectedVat", "cost"], ["Produits comptables simulés", "accountingRevenue", "subtotal"],
-      ["Commissions plateformes", "commission", "cost"], ["Encaissements directs", "paymentFees", "cost"], ["Linge et consommables de rotation", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie marginale", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Matières table", "diningDirect", "cost"], ["Impayés et gestes", "incidents", "cost"], ["Marge contributive", "contribution", "subtotal"],
-      ["Charges fixes analytiques · net TVA simulée", "fixedCosts", "fixed"], ["Jules — budget employeur financé", "julesCost", "fixed"], ["Relève rémunérée", "supportCost", "fixed"], ["Résultat avant loyer SCI", "operatingResultBeforeRent", "subtotal"], ["Loyer SCI contractuel testé", "contractRent", "fixed"], ["Résultat d’exploitation simplifié", "operatingResultAfterRent", "subtotal"],
-      ["Enveloppe de renouvellement", "renewalProvision", "cash"], ["Dotation de trésorerie", "cashReserveContribution", "cash"], ["Solde de trésorerie prudent", "cashResult", "total"],
+      ["Commissions plateformes", "commission", "cost"], ["Encaissements directs", "paymentFees", "cost"], ["Linge et consommables de rotation", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie marginale", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Coûts directs des planches", "diningDirect", "cost"], ["Impayés et gestes", "incidents", "cost"], ["Marge contributive", "contribution", "subtotal"],
+      ["Charges fixes analytiques · net TVA simulée", "fixedCosts", "fixed"], ["Jules — budget employeur financé", "julesCost", "fixed"], ["Relève rémunérée", "supportCost", "fixed"], ["Résultat avant loyer SCI", "operatingResultBeforeRent", "subtotal"], ["Hypothèse de loyer SCI", "contractRent", "fixed"], ["Résultat d’exploitation simplifié", "operatingResultAfterRent", "subtotal"],
+      ["Enveloppe de renouvellement", "renewalProvision", "cash"], ["Solde OpCo avant remboursement du CCA", "cashResult", "total"],
     ];
 
     function renderPnl(data) {
       document.querySelector("[data-pnl]").innerHTML = `<div class="pilotage-pnl__head"><span>Exploitation annuelle simplifiée</span><strong>Montant</strong></div>${pnlRows.map(([label, key, kind]) => `<div class="pilotage-pnl__row ${kind}"><span>${label}</span><strong>${money(data[key])}</strong></div>`).join("")}`;
     }
 
+    function renderFinancing(data) {
+      const rows = [
+        ["Compte courant SCI · principal", data.sciShareholderLoan, "revenue"],
+        ["SCI · capital de l’annuité initiale", data.sciPrincipalRepayment, "cash"],
+        ["SCI · intérêts de l’annuité initiale", data.sciFirstYearInterest, "cash"],
+        ["SCI · service de dette / loyer brut", `${money(data.sciFirstYearDebtService)} / ${money(data.sciGrossRepaymentCapacity)}`, "subtotal"],
+        ["Écart SCI avant ses charges et sa fiscalité", data.sciRepaymentGap, data.sciRepaymentGap >= 0 ? "revenue" : "cash"],
+        ["Compte courant exploitation · principal", data.opcoShareholderLoan, "revenue"],
+        ["Exploitation · capital de l’annuité initiale", data.opcoPrincipalRepayment, "cash"],
+        ["Exploitation · intérêts de l’annuité initiale", data.opcoFirstYearInterest, "cash"],
+        ["Exploitation · service de dette / surplus disponible", `${money(data.opcoFirstYearDebtService)} / ${money(data.opcoRepaymentCapacity)}`, "subtotal"],
+        ["Écart propre à l’exploitation", data.opcoRepaymentGap, data.opcoRepaymentGap >= 0 ? "revenue" : "cash"],
+        ["Service total de l’annuité initiale", data.totalFirstYearDebtService, "subtotal"],
+        ["Intérêts bruts cumulés sur la durée", data.totalInterestOverTerm, "cash"],
+        ["Écart consolidé brut", data.shareholderLoanCoverageGap, "total"],
+      ];
+      document.querySelector("[data-financing]").innerHTML = `<div class="pilotage-pnl__head"><span>Remboursement linéaire du principal</span><strong>Montant</strong></div>${rows.map(([label, value, kind]) => `<div class="pilotage-pnl__row ${kind}"><span>${label}</span><strong>${typeof value === "string" ? value : money(value)}</strong></div>`).join("")}`;
+    }
+
     function render() {
       const v = read(); const data = calculate(v);
-      const fullTime = calculate(v, { julesFte: "1", contractRent: "10000" });
       output("scenario-name", scenarioNames[activeScenario] || scenarioNames.custom);
       output("revenue-ttc", money(data.revenueTtc));
       output("accounting-revenue", money(data.accountingRevenue));
       output("revenue-mix", `${percent(data.lodgingRevenueTtc / Math.max(1, data.revenueTtc))} hébergement · ${percent((data.spaRevenueTtc + data.diningRevenueTtc) / Math.max(1, data.revenueTtc))} expériences`);
       const vatLabel = data.netVat >= 0 ? `TVA nette estimée ${money(data.netVat)}` : `Crédit de TVA estimé ${money(Math.abs(data.netVat))}`;
-      output("vat-summary", v.vatMode === "vat" ? `${vatLabel} · taux spa à confirmer` : "Franchise simulée · aucune TVA récupérée");
+      const franchiseAlert = data.revenueTtc > 93500 ? "Franchise à requalifier : seuil majoré global de 93 500 € dépassé" : data.revenueTtc > 85000 ? "Franchise à vérifier : seuil global de base de 85 000 € dépassé" : data.spaRevenueTtc > 41250 ? "Franchise à requalifier : seuil majoré des services dépassé" : data.spaRevenueTtc > 37500 ? "Franchise à vérifier : seuil de base des services dépassé" : "Franchise simulée · aucune TVA récupérée";
+      output("vat-summary", v.vatMode === "vat" ? `${vatLabel} · taux spa à confirmer` : franchiseAlert);
       output("cash-result", money(data.cashResult));
+      output("opco-after-cca", money(data.opcoCashAfterDebtService));
+      output("after-rent-result", money(data.operatingResultAfterRent));
       output("employment", money(data.julesCost + data.supportCost));
-      output("support-summary", `${data.julesFte.toFixed(2).replace(".", ",")} ETP Jules + ${integer(data.supportHours)} h de relève`);
+      output("support-summary", `${data.julesFte.toFixed(2).replace(".", ",")} ETP Jules + ${integer(data.supportCapacityHours)} h de relève financée`);
+      output("family-summary", `${integer(data.familyHours / 12)} h/mois · ${integer(data.familyHours / 8)} journées de 8 h`);
       output("fixed-total-ttc", money(data.fixedCostsTtc));
       output("fixed-total-net", money(data.fixedCosts));
       output("pre-rent-result", money(data.operatingResultBeforeRent));
       output("contract-rent", money(data.contractRent));
-      output("rent-capacity", money(data.rentCapacity));
+      const rawContractRent = Number(v.contractRent);
+      output("rent-input-warning", Number.isFinite(rawContractRent) && rawContractRent !== data.contractRent ? `Valeur hors corridor : ${money(data.contractRent)} appliqués au calcul.` : "");
       output("jules-cost", `${money(data.julesCost)} · ${data.julesFte.toFixed(2).replace(".", ",")} ETP`);
-      output("support-hours", `${integer(data.supportHours)} h · ${money(data.supportCost)}`);
+      output("support-hours", `${integer(data.supportCapacityHours)} h · ${money(data.supportCost)}`);
       output("support-recommended", `${integer(data.recommendedSupportHours)} h/an`);
       output("support-gap", data.supportGap > 0 ? `${integer(data.supportGap)} h non couvertes` : "0 h · couverture déclarée");
       output("family-hours", `${integer(data.familyHours)} h/an`);
       output("operations-hours", `${integer(data.operationsHours)} h/an`);
       output("operations-copy", `${integer(data.presenceDays)} jours de présence estimés · ${integer(data.paidCapacity)} h de capacité payée pour Jules.`);
-      output("fulltime-gap", fullTime.cashResult < 0 ? `− ${money(Math.abs(fullTime.cashResult))}` : `+ ${money(fullTime.cashResult)}`);
+      output("shareholder-loan-annuity", money(data.totalFirstYearDebtService));
+      output("opco-loan-gap", data.opcoRepaymentGap >= 0 ? `+ ${money(data.opcoRepaymentGap)}` : `− ${money(Math.abs(data.opcoRepaymentGap))}`);
+      output("family-effort-title", `${integer(data.familyHours)} h/an`);
+      output("family-effort-copy", `Environ ${integer(data.familyHours / 12)} h par mois, soit ${integer(data.familyHours / 8)} journées de 8 h à répartir et planifier entre les associés.`);
+
+      const entityFundingGap = Math.min(data.sciRepaymentGap, data.opcoRepaymentGap);
+      output("shareholder-loan-coverage-title", entityFundingGap >= 0 ? "Chaque entité couvre sa part" : "Répartition non couverte");
+      output("shareholder-loan-coverage-copy", `SCI : ${data.sciRepaymentGap >= 0 ? "marge" : "manque"} ${money(Math.abs(data.sciRepaymentGap))}. Exploitation : ${data.opcoRepaymentGap >= 0 ? "marge" : "manque"} ${money(Math.abs(data.opcoRepaymentGap))}. Les flux ne peuvent pas être déplacés librement d’une entité à l’autre.`);
 
       const staffingTitle = data.supportGap > 0 ? `${integer(data.supportGap)} h à couvrir` : "Couverture déclarée complète";
-      const supportForm = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(2).replace(".", ",")} ETP de relève` : `${integer(data.supportHours)} h rémunérées`;
-      const staffingCopy = `${integer(data.calendarRelief)} h de plancher calendaire brut ; ${supportForm} et ${integer(data.familyHours)} h associées. Coût de relève : ${money(data.supportCost)}.`;
+      const supportForm = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(2).replace(".", ",")} ETP · ${integer(data.supportCapacityHours)} h contractuelles` : `${integer(data.supportHours)} h rémunérées`;
+      const staffingCopy = `${integer(data.calendarRelief)} h de besoin calendaire brut ; ${supportForm} et ${integer(data.familyHours)} h associées. Coût de relève : ${money(data.supportCost)}.`;
       output("staffing-title", staffingTitle); output("staffing-copy", staffingCopy);
 
       document.querySelector("[data-workload]").innerHTML = `
@@ -194,26 +268,34 @@
         <div><span>Nuits-suite & communs</span><strong>${integer(data.suiteNightHours)} h</strong></div>
         <div><span>Coordination des séjours</span><strong>${integer(data.coordinationHours)} h</strong></div>
         <div><span>Ménage internalisé</span><strong>${integer(data.turnoverHours)} h</strong></div>
-        <div><span>Bien-être</span><strong>${integer(data.spaHours)} h</strong></div>
-        <div><span>Table d’hôte</span><strong>${integer(data.diningHours)} h</strong></div>
+        <div><span>Bien-être · ${integer(data.spaOperatingDays)} jours ouverts</span><strong>${integer(data.spaHours)} h</strong></div>
+        <div><span>Planches du territoire · ${integer(data.diningSales)} ventes</span><strong>${integer(data.diningHours)} h</strong></div>
         <div class="allocation"><span>Jules assigné / capacité payée</span><strong>${integer(data.julesAssignedHours)} / ${integer(data.paidCapacity)} h</strong></div>
-        <div class="allocation"><span>Relève rémunérée / aide familiale</span><strong>${integer(data.supportHours)} / ${integer(data.familyHours)} h</strong></div>`;
+        <div class="allocation"><span>Relève financée / aide familiale</span><strong>${integer(data.supportCapacityHours)} / ${integer(data.familyHours)} h</strong></div>`;
 
       const verdict = document.querySelector("[data-verdict]");
-      if (data.cashResult < -1000) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Besoin de financement : ${money(Math.abs(data.cashResult))}.</strong><span>Le loyer saisi, l’emploi, la relève, le renouvellement et la réserve ne sont pas tous couverts.${data.supportGap > 0 ? ` Il manque aussi ${integer(data.supportGap)} h de couverture.` : ""}</span>`; }
+      if (data.cashResult < -1000) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Besoin de financement courant : ${money(Math.abs(data.cashResult))}.</strong><span>Le loyer, l’emploi, la relève et le renouvellement ne sont pas tous couverts.${data.supportGap > 0 ? ` Il manque aussi ${integer(data.supportGap)} h de couverture.` : ""}</span>`; }
       else if (data.supportGap > 0) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Couverture humaine incomplète.</strong><span>Le budget ne finance pas ${integer(data.supportGap)} h du besoin estimé. Le solde financier n’est donc pas suffisant pour qualifier le scénario de soutenable.</span>`; }
-      else if (data.cashResult < 3000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre très serré.</strong><span>Le scénario couvre les heures déclarées, mais ne laisse que ${money(Math.max(0, data.cashResult))} de marge de sécurité supplémentaire.</span>`; }
-      else { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Marge de sécurité positive.</strong><span>Après les emplois de trésorerie saisis, le solde atteint ${money(data.cashResult)}. Il ne constitue pas automatiquement un loyer distribuable.</span>`; }
+      else if (data.cashResult < 3000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Exploitation à l’équilibre, sans marge.</strong><span>Après loyer et renouvellement, il ne reste que ${money(Math.max(0, data.cashResult))}. Le remboursement du compte courant de l’exploitation n’est donc pas financé.</span>`; }
+      else if (data.opcoRepaymentGap < 0) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Exploitation positive, avance non remboursée.</strong><span>Le surplus atteint ${money(data.cashResult)}, mais il manque encore ${money(Math.abs(data.opcoRepaymentGap))} pour le service annuel du compte courant de l’exploitation.</span>`; }
+      else { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Modèle courant et financement couverts.</strong><span>Le scénario couvre les moyens humains déclarés et le service annuel propre à l’exploitation. La SCI reste à examiner séparément.</span>`; }
+
+      const economicText = data.cashResult >= 0
+        ? `L’activité couvre le loyer SCI de ${money(data.contractRent)} et le renouvellement, mais ne conserve que ${money(data.cashResult)} dans l’exploitation avant remboursement des avances et impôt.`
+        : `Après le loyer SCI de ${money(data.contractRent)} et le renouvellement, l’exploitation présente un manque annuel de ${money(Math.abs(data.cashResult))}. Ce besoin doit être réduit par les prix, le volume, les coûts ou l’organisation du travail.`;
+      output("economic-interpretation", economicText);
+      output("human-interpretation", `${integer(data.operationsHours)} h sont à organiser. Jules en couvre au maximum ${integer(data.paidCapacity)} h payées ; ${integer(data.supportCapacityHours)} h sont financées en relève et ${integer(data.familyHours)} h, soit environ ${integer(data.familyHours / 12)} h/mois, reposent sur les associés.`);
+      const rateWarning = data.shareholderLoanRate > 0.0576 ? " Le taux testé dépasse le seuil d’alerte de 5,76 % identifié au troisième trimestre 2026 pour certaines qualifications de prêt à une SCI : validation juridique impérative." : " Le taux reste une hypothèse fiscale et contractuelle à actualiser.";
+      output("financing-interpretation", `Le service initial des deux avances atteint ${money(data.totalFirstYearDebtService)}. La lecture consolidée fait apparaître ${data.shareholderLoanCoverageGap >= 0 ? "une marge brute de" : "un manque brut de"} ${money(Math.abs(data.shareholderLoanCoverageGap))}, mais l’exploitation présente séparément ${data.opcoRepaymentGap >= 0 ? "une marge" : "un manque"} de ${money(Math.abs(data.opcoRepaymentGap))}.${rateWarning}`);
       document.querySelector("[data-hourly-field]").hidden = v.supportMode !== "subcontract";
-      document.querySelector("[data-support-months]").hidden = v.supportMode !== "parttime";
       document.querySelectorAll("[data-vat-only]").forEach((label) => {
         const disabled = v.vatMode !== "vat";
         label.classList.toggle("is-disabled", disabled);
         const field = label.querySelector("input, select");
         if (field) field.disabled = disabled;
       });
-      document.querySelectorAll("[data-pilotage-scenario]").forEach((button) => button.classList.toggle("active", button.dataset.pilotageScenario === activeScenario));
       renderPnl(data);
+      renderFinancing(data);
     }
 
     function showPanel(key, updateHash) {
@@ -223,16 +305,16 @@
       window.scrollTo({ top: document.querySelector(".pilotage-tabs").offsetTop - 12, behavior: "smooth" });
     }
     document.querySelectorAll("[data-pilotage-tab]").forEach((button) => button.addEventListener("click", () => showPanel(button.dataset.pilotageTab, true)));
-    document.querySelectorAll("[data-pilotage-scenario]").forEach((button) => button.addEventListener("click", function () { activeScenario = button.dataset.pilotageScenario; if (scenarios[activeScenario]) setValues(scenarios[activeScenario]); render(); }));
     form.addEventListener("input", () => { activeScenario = "custom"; render(); });
-    document.querySelector("[data-pilotage-reset]").addEventListener("click", () => { activeScenario = "recommended"; setValues(scenarios.recommended); window.history.replaceState({}, "", "#simulateur"); render(); });
+    form.addEventListener("change", (event) => { normalizeNumericField(event.target); activeScenario = "custom"; render(); });
+    document.querySelector("[data-pilotage-reset]").addEventListener("click", () => { activeScenario = "standard"; setValues(scenarios.standard); window.history.replaceState({}, "", "#simulateur"); render(); });
     document.querySelector("[data-pilotage-share]").addEventListener("click", async () => {
       const params = new URLSearchParams({ scenario: activeScenario }); Object.entries(read()).forEach(([key, value]) => params.set(key, value));
       const url = `${window.location.origin}${window.location.pathname}?${params.toString()}#simulateur`;
       try { await navigator.clipboard.writeText(url); toast("Le lien du scénario est copié."); } catch (_) { window.prompt("Copiez ce lien :", url); }
     });
     const params = new URLSearchParams(window.location.search);
-    if (params.size) { const next = {}; Array.from(form.elements).filter((field) => field.name && params.has(field.name)).forEach((field) => { next[field.name] = params.get(field.name); }); setValues(next); activeScenario = params.get("scenario") || "custom"; }
+    if (params.size) { const next = {}; Array.from(form.elements).filter((field) => field.name && params.has(field.name)).forEach((field) => { next[field.name] = params.get(field.name); }); setValues(next); normalizeNumericInputs(); activeScenario = params.get("scenario") || "custom"; }
 
     const marketScope = document.querySelector("[data-market-scope]"); const competitorSelect = document.querySelector("[data-competitor-select]");
     competitors.forEach((item) => { const option = document.createElement("option"); option.value = String(item.index - 1); option.textContent = `${String(item.index).padStart(2, "0")} · ${item.name} · ${item.price} €`; competitorSelect.appendChild(option); });

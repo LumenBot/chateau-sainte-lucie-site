@@ -1,218 +1,243 @@
 {
-  "schema_version": "4.0",
+  "schema_version": "5.0",
   "as_of": "2026-08-09",
-  "purpose": "Transparent two-suite operating model for collective decision-making; not an accountant-approved forecast",
+  "model_type": "standard_annual_operating_model",
+  "status": "active_working_reference",
+  "purpose": "Transparent annual model for two guest suites; not an accountant, payroll, tax or legal forecast",
   "currency": "EUR",
-  "active_scenario": "v5_lean_under_constraints",
+  "status_vocabulary": {
+    "validated_project_fact": "Collectively confirmed project fact",
+    "working_assumption": "Current planning input that remains adjustable",
+    "simulation_convention": "Formula convention used to compare cases consistently",
+    "quote_or_measurement_required": "Must be replaced with an invoice, quote or operating measurement",
+    "external_validation_required": "Requires an accountant, payroll, legal, tax, insurance or regulatory opinion"
+  },
   "doctrine": {
+    "single_standard_year": true,
+    "activity_levels_are_comparable_tests_not_yearly_phases": true,
     "public_prices_are_ttc": true,
+    "standard_vat_mode_is_adjustable": true,
     "contractual_sci_rent_is_an_input": true,
     "operating_result_is_the_residual": true,
-    "maximum_rent_capacity_is_only_an_economic_indicator": true,
+    "cca_principal_repayment_is_cash_flow_not_operating_expense": true,
+    "cca_interest_is_separated_from_principal_and_entity_specific": true,
     "renewal_and_cash_reserve_are_separated_from_operating_expenses": true,
-    "planned_support_hours_are_an_exact_user_input": true,
-    "support_recommendation_is_calculated_separately": true,
-    "support_input_must_never_be_silently_overwritten": true,
-    "coverage_gap_must_be_displayed": true,
-    "every_family_hour_must_be_declared_and_rostered": true,
-    "family_hours_are_an_economic_assumption_not_legal_authorization_for_unpaid_work": true,
-    "cash_savings_from_internalized_work_require_corresponding_workload_hours": true,
-    "status": "active"
+    "paid_support_input_is_exact": true,
+    "support_recommendation_and_coverage_gap_are_separate_outputs": true,
+    "associate_hours_must_be_declared_and_rostered": true,
+    "internalized_cash_savings_require_explicit_workload_hours": true
   },
-  "fixed_parameters": {
-    "suite_count": { "value": 2, "status": "validated" },
-    "average_guests": { "value": 2.1, "status": "working_assumption" },
-    "legal_full_time_hours": { "value": 1607, "unit": "hours_per_fte_per_year", "status": "official_reference", "note": "Annual legal working-time reference; paid leave must not be subtracted a second time." },
-    "jules_full_time_employer_budget": { "value": 28000, "unit": "EUR_employer_cost_per_year", "status": "provisional_quote_required" },
-    "initial_capex_ttc": { "value": 65000, "unit": "EUR_TTC", "status": "active_budget", "treatment": "excluded from annual operating result, debt and depreciation model" }
+  "inventory": {
+    "suite_count": { "value": 2, "unit": "suites", "status": "validated_project_fact" },
+    "average_guests": { "value": 2.1, "unit": "guests_per_occupied_suite", "status": "working_assumption" }
   },
-  "vat": {
-    "modes": ["franchise", "vat_real"],
-    "2026_franchise_threshold_main": 85000,
-    "2026_franchise_threshold_major": 93500,
-    "service_subthreshold": 37500,
-    "simulated_rates": {
+  "standard_activity": {
+    "nights_per_suite": { "value": 120, "unit": "nights_per_suite_per_year", "status": "working_assumption" },
+    "occupied_suite_nights": { "value": 240, "unit": "suite_nights_per_year", "formula": "suite_count * nights_per_suite" },
+    "average_public_price_ttc": { "value": 200, "unit": "EUR_TTC_per_suite_night", "public_range": [180, 220], "status": "working_assumption" },
+    "average_length_of_stay": { "value": 2.5, "unit": "nights_per_stay", "status": "working_assumption" },
+    "estimated_stays": { "value": 96, "unit": "stays_per_year", "formula": "occupied_suite_nights / average_length_of_stay" },
+    "direct_booking_share": { "value": 0.5, "unit": "share_of_lodging_sales", "status": "working_assumption" },
+    "comparison_nights_per_suite": { "value": 150, "unit": "nights_per_suite_per_year", "status": "simulation_convention" }
+  },
+  "commercial_offer": {
+    "lodging": {
+      "public_price_range_ttc": [180, 220],
+      "standard_average_price_ttc": 200,
+      "unit": "EUR_TTC_per_suite_night",
+      "status": "working_assumption"
+    },
+    "spa": {
+      "facilities": ["hammam", "bain nordique"],
+      "price_ttc": 50,
+      "price_unit": "EUR_TTC_per_suite_day",
+      "take_rate": 0.75,
+      "take_rate_denominator": "estimated_stays",
+      "billing_rule": "Every buying stay is billed for each occupied suite day of that stay.",
+      "direct_cost_ttc": 10,
+      "direct_cost_unit": "EUR_TTC_per_sold_suite_day",
+      "service_time": 1,
+      "service_time_unit": "hour_per_approximate_open_day",
+      "approximate_open_days_formula": "presence_days * (1 - (1 - buying_suite_days / (suite_count * presence_days)) ^ suite_count)",
+      "status": "working_assumption",
+      "validation": "Measure wood, water, consumables, preparation, heating, testing and cleaning time in dry runs."
+    },
+    "table_board": {
+      "description": "simplified local board offer",
+      "price_ttc": 50,
+      "price_unit": "EUR_TTC_per_suite_day_sale",
+      "take_rate": 0.25,
+      "take_rate_denominator": "occupied_suite_nights",
+      "direct_cost_ttc": 20,
+      "direct_cost_unit": "EUR_TTC_per_sale",
+      "service_time": 1,
+      "service_time_unit": "hour_per_sale",
+      "status": "working_assumption",
+      "validation": "Confirm the commercial contents, food-safety scope, alcohol treatment and real preparation time."
+    }
+  },
+  "tax": {
+    "standard_vat_mode": { "value": "franchise", "status": "working_assumption", "adjustable": true },
+    "alternative_mode": "vat_real",
+    "simulated_rates_if_vat_real": {
       "lodging": 0.1,
-      "spa": { "value": 0.2, "status": "professional_validation_required" },
+      "spa": { "value": 0.2, "status": "external_validation_required" },
       "table_food": 0.1,
       "table_alcohol": 0.2
     },
-    "interpretation": "The applicable regime depends on the year, prior turnover, activity mix and any voluntary election. V5 uses vat_real as the prudent maturity case, without deciding the legal treatment.",
-    "status": "professional_validation_required"
+    "fixed_cost_vat_recovery_in_standard_case": 0,
+    "interpretation": "The standard case uses the VAT franchise as a modifiable planning assumption. Eligibility, thresholds, activity mix and any voluntary election require professional validation."
   },
-  "trajectory": [
-    {
-      "year": "2027_launch_april_to_december",
-      "status": "planning_case_not_budget_commitment",
-      "nights_per_suite": 75,
-      "average_public_price_ttc": 195,
-      "average_length_of_stay": 2.2,
-      "direct_booking_share": 0.35,
-      "spa_take_rate": 0.5,
-      "spa_basket_ttc": 60,
-      "dining_take_rate": 0.3,
-      "dining_basket_ttc": 130,
-      "vat_mode_tested": "franchise",
-      "jules_months": 9,
-      "status_note": "Launch-year staffing, VAT and cash gap remain to be rebudgeted after supplier quotes."
-    },
-    {
-      "year": "2028_consolidation",
-      "status": "planning_case_not_budget_commitment",
-      "nights_per_suite": 110,
-      "average_public_price_ttc": 210,
-      "average_length_of_stay": 2.3,
-      "direct_booking_share": 0.45,
-      "spa_take_rate": 0.6,
-      "spa_basket_ttc": 80,
-      "dining_take_rate": 0.33,
-      "dining_basket_ttc": 170,
-      "status_note": "Intermediate target; it is not the active maturity reference."
-    },
-    {
-      "year": "2029_plus_maturity",
-      "status": "active_target_to_test_not_guarantee",
-      "scenario_id": "v5_lean_under_constraints",
-      "nights_per_suite": 150,
-      "occupied_suite_nights": 300,
-      "average_public_price_ttc": 220,
-      "average_length_of_stay": 2.5,
-      "estimated_stays": 120,
-      "direct_booking_share": 0.5,
-      "spa_take_rate": 0.66,
-      "spa_basket_ttc": 100,
-      "dining_take_rate": 0.33,
-      "dining_basket_ttc": 200,
-      "vat_mode_tested": "vat_real",
-      "public_sales_ttc": 81840,
-      "interpretation": "Commercially demanding but capped at a workload level considered discussable for two suites. All take rates, baskets and direct-booking performance must be demonstrated in operation."
-    }
-  ],
-  "recommended_sustainable_configuration": {
-    "scenario_id": "v5_lean_under_constraints",
-    "horizon": "2029_plus_maturity",
-    "status": "active_reference_to_test_not_budget_commitment",
-    "nights_per_suite": 150,
-    "average_public_price_ttc": 220,
-    "average_length_of_stay": 2.5,
-    "direct_booking_share": 0.5,
-    "spa_take_rate": 0.66,
-    "spa_basket_ttc": 100,
-    "dining_take_rate": 0.33,
-    "dining_basket_ttc": 200,
-    "vat_mode_tested": "vat_real",
-    "public_sales_ttc": 81840,
-    "jules_fte_funded_by_opco": 1,
-    "jules_employer_budget": 28000,
-    "paid_support_hours": 350,
-    "paid_support_hourly_cost": 25,
-    "declared_and_rostered_family_hours": 100,
-    "contractual_sci_rent": 0,
-    "fixed_operating_costs_ttc": 13000,
-    "estimated_fixed_vat_recovery": 2000,
-    "fixed_operating_costs_net_simulated": 11000,
-    "renewal_cash_allocation": 2500,
-    "annual_cash_reserve_contribution": 2500,
-    "accounting_revenue_simulated": 73680,
-    "operations_hours_approx": 2042,
-    "recommended_paid_support_hours_approx": 335,
-    "declared_hour_capacity_margin_approx": 15,
-    "prudent_cash_balance_approx": 2310,
-    "interpretation": "Lean reference under explicit constraints. It prioritizes one full-time Jules position, paid continuity and a small prudent balance. It does not finance an SCI rent. The approximate balance must be reconciled after the simulator v5 formulas, supplier quotes and payroll simulation are frozen."
+  "variable_costs": {
+    "turnover_linen_and_consumables_ttc": { "value": 30, "unit": "EUR_TTC_per_stay", "status": "quote_or_measurement_required" },
+    "internalized_turnover_time": { "value": 4, "unit": "hours_per_stay", "status": "quote_or_measurement_required" },
+    "breakfast_ttc": { "value": 6, "unit": "EUR_TTC_per_guest_night", "status": "quote_or_measurement_required" },
+    "marginal_energy_ttc": { "value": 5, "unit": "EUR_TTC_per_occupied_suite_night", "status": "quote_or_measurement_required" },
+    "spa_direct_cost_ttc": { "value": 10, "unit": "EUR_TTC_per_sold_suite_day", "status": "quote_or_measurement_required", "note": "Working split: about EUR 5 hammam energy and EUR 5 wood per buying suite-day; two buying suites therefore cost about EUR 20 in total." },
+    "table_direct_cost_ttc": { "value": 20, "unit": "EUR_TTC_per_sale", "status": "quote_or_measurement_required" },
+    "ota_commission_rate": { "value": 0.15, "unit": "share_of_OTA_lodging_sales", "status": "working_assumption" },
+    "direct_payment_rate": { "value": 0.015, "unit": "share_of_direct_receipts", "status": "working_assumption" },
+    "incidents_and_commercial_gestures_rate": { "value": 0.002, "unit": "share_of_accounting_revenue", "status": "working_assumption" }
   },
-  "full_time_and_rent_goal": {
-    "jules_fte": 1,
-    "target_sci_rent": 10000,
-    "same_activity_and_cost_structure_cash_gap_approx": -7690,
-    "status": "not_financed_by_active_v5_reference",
-    "interpretation": "At 81,840 EUR TTC public sales, the active v5 reference cannot finance both one full-time position and a 10,000 EUR SCI rent. Rent remains a contractual scenario input, never an automatic residual."
-  },
-  "variable_cost_assumptions": {
-    "turnover_linen_and_consumables_per_stay_ttc": { "value": 30, "unit": "EUR_TTC_per_stay", "status": "lean_target_quote_required", "workload_rule": "Reference pairs this cash cost with 4 internal housekeeping hours per stay. Set internal hours to zero only when the supplier quote covers all modeled work." },
-    "internal_housekeeping_hours_per_stay": { "value": 4, "unit": "hours_per_stay", "status": "timing_required" },
-    "breakfast_per_guest_night_ttc": { "value": 7, "unit": "EUR_TTC_per_guest_night", "range": [6, 9], "status": "menu_test_required" },
-    "energy_per_suite_night_ttc": { "value": 7, "unit": "EUR_TTC_per_occupied_suite_night", "range": [6, 12], "status": "measurement_required" },
-    "spa_direct_cost_per_sale_ttc": { "value": 25, "unit": "EUR_TTC_per_spa_sale", "range": [20, 35], "status": "measurement_required", "note": "Low-tech or wood-fired equipment may reduce cash costs but can increase preparation, heating, cleaning and supervision time." },
-    "spa_labor_hours_per_sale": { "value": 1, "unit": "hours_per_spa_sale", "status": "timing_required" },
-    "dining_material_rate_of_ttc_sales": { "value": 0.3, "unit": "share_of_table_TTC_sales", "range": [0.3, 0.38], "status": "menu_costing_required" },
-    "dining_labor_hours_per_sale": { "value": 4.5, "unit": "hours_per_table_sale", "status": "timing_required" },
-    "ota_commission_rate": { "value": 0.15, "unit": "share_of_OTA_lodging_sales", "range": [0.15, 0.18], "status": "contract_required" },
-    "direct_payment_rate": { "value": 0.015, "unit": "share_of_direct_receipts", "range": [0.015, 0.02], "status": "provider_quote_required" },
-    "incidents_and_commercial_gestures_rate": { "value": 0.005, "unit": "share_of_accounting_revenue", "status": "lean_working_assumption" }
-  },
-  "fixed_operating_cost_budget_ttc": {
-    "central_total": 13000,
-    "estimated_vat_recovery": 2000,
-    "simulated_net_total": 11000,
-    "stress_range": [13000, 18000],
-    "status": "lean_itemized_target_all_quotes_required",
+  "fixed_operating_costs_ttc": {
+    "total": 7000,
+    "unit": "EUR_TTC_per_year",
+    "status": "working_assumption",
+    "fixed_vat_recovery_standard_case": 0,
     "lines": {
       "insurance": 1500,
-      "accounting_and_payroll": 2000,
-      "pms_site_and_telecom": 1800,
-      "acquisition_and_communication": 1000,
+      "accounting_and_payroll": 800,
+      "pms_site_and_telecom": 1500,
+      "acquisition_and_communication": 0,
       "cfe_licences_and_mediation": 700,
       "bank_fixed": 400,
       "safety_and_controls": 600,
-      "technical_maintenance": 2000,
-      "fixed_spa_maintenance": 1300,
-      "water_waste_and_energy_base": 1200,
-      "training_and_prevention": 500
+      "technical_maintenance": 0,
+      "fixed_spa_maintenance": 0,
+      "water_waste_and_base_energy": 1200,
+      "training_and_prevention": 300
     },
-    "allocation_rule": "Each line must be supported by a quote and assigned to OpCo, SCI or shared according to the lease and actual beneficiary.",
-    "warning": "Do-it-yourself savings are acceptable only when the corresponding labor, responsibility and continuity are explicitly assigned."
+    "warning": "Zero-budget lines are explicit self-provision assumptions, not proof that the economic cost is zero. Each line must be assigned to the operating company, SCI or both according to the lease and actual beneficiary."
+  },
+  "staffing": {
+    "jules_fte": { "value": 0.8, "unit": "FTE", "status": "working_assumption" },
+    "jules_employed_months": { "value": 12, "unit": "months_per_year", "status": "working_assumption" },
+    "legal_full_time_hours": { "value": 1607, "unit": "hours_per_FTE_per_year", "status": "external_validation_required" },
+    "jules_full_time_employer_budget": { "value": 28000, "unit": "EUR_employer_cost_per_FTE_per_year", "status": "external_validation_required" },
+    "jules_standard_employer_budget": { "value": 22400, "unit": "EUR_employer_cost_per_year", "formula": "28000 * 0.8" },
+    "paid_support_hours": { "value": 100, "unit": "hours_per_year", "status": "working_assumption" },
+    "paid_support_hourly_cost": { "value": 25, "unit": "EUR_per_hour", "status": "quote_or_measurement_required" },
+    "associate_contribution_hours": { "value": 380, "unit": "hours_per_year", "status": "working_assumption", "validation": "Name, roster and validate the corporate, labor-law and insurance treatment of these hours." },
+    "renewal_cash_allocation": { "value": 1500, "unit": "EUR_per_year", "status": "working_assumption" },
+    "annual_cash_reserve_contribution": { "value": 0, "unit": "EUR_per_year", "status": "working_assumption" }
+  },
+  "sci_rent": {
+    "contractual_test": { "value": 12000, "unit": "EUR_per_year", "status": "working_assumption" },
+    "strategic_target": { "value": 18000, "unit": "EUR_per_year", "status": "working_assumption" },
+    "interpretation": "The annual model must first demonstrate its ability to support 12,000 EUR. The 18,000 EUR amount is a target, not an automatic rent. Lease terms, market value and tax treatment require professional validation."
+  },
+  "shareholder_current_accounts": {
+    "total_principal": { "value": 50000, "unit": "EUR", "status": "working_assumption" },
+    "accounts": [
+      { "debtor_entity": "SCI", "principal": 35000, "unit": "EUR", "status": "working_assumption" },
+      { "debtor_entity": "operating_company", "principal": 15000, "unit": "EUR", "status": "working_assumption" }
+    ],
+    "test_term": { "value": 5, "unit": "years", "status": "working_assumption" },
+    "annual_remuneration_rate": { "value": 0.0433, "unit": "annual_rate", "status": "external_validation_required", "adjustable": true, "note": "Illustrative tax reference current on 2026-08-09 for relevant closing periods; update before signing. A 10% annual rate is a stress case, not the recommended base." },
+    "simulation_method": {
+      "payment_type": "linear_principal_repayment_with_interest_on_opening_balance",
+      "principal_formula": "principal / years",
+      "interest_formula": "opening_principal * annual_rate",
+      "first_year_debt_service_formula": "principal / years + opening_principal * annual_rate",
+      "entity_separation": "SCI debt service is paid by SCI cash; operating-company debt service is paid by operating-company cash",
+      "accounting_treatment": "Interest is separated as a financial expense of the debtor entity; principal repayment is a cash outflow and not an operating expense."
+    },
+    "simulation_outputs_at_standard_inputs": {
+      "combined_first_year_debt_service_approx": 12165,
+      "sci_first_year_debt_service_approx": 8516,
+      "operating_company_first_year_debt_service_approx": 3650,
+      "combined_year_one_interest": 2165,
+      "combined_year_one_principal_repayment": 10000,
+      "combined_interest_over_five_years_approx": 6495
+    },
+    "warning": "The rate is a simulation input, not a promised return. A 10% annual rate can exceed tax deductibility limits and may create an usury-law issue depending on the SCI loan qualification. Convention terms, legal limits, tax treatment, payment subordination and repayment capacity require professional validation."
+  },
+  "investment_financing_bridge": {
+    "active_investment_envelope_ttc": 59000,
+    "cca_financing_total": 50000,
+    "remaining_source_to_define": 9000,
+    "unit": "EUR",
+    "status": "working_assumption"
   },
   "workload_model": {
-    "presence_days": "1.2 * nights_per_suite; heuristic pending real booking calendar",
-    "operations_hours": "base_property_hours + client_presence_hours + occupied_suite_night_hours + stay_coordination_hours + internalized_turnover_hours + spa_service_hours + dining_service_hours",
-    "internalized_turnover_hours": "stays * internal_turnover_hours_per_stay; set to zero only when the quoted turnover service covers all modeled tasks",
-    "spa_service_hours": "spa_sales * spa_hours_per_sale; includes preparation, heating, cleaning, testing and supervision applicable to the chosen equipment",
+    "estimated_client_presence_days": "1.2 * nights_per_suite; heuristic pending the real booking calendar",
+    "base_property_and_administration_hours": { "value": 720, "unit": "hours_per_year", "status": "quote_or_measurement_required" },
+    "client_presence_hours": "1.75 * estimated_client_presence_days",
+    "occupied_suite_night_hours": "0.5 * occupied_suite_nights",
+    "stay_coordination_hours": "estimated_stays",
+    "internalized_turnover_hours": "4 * estimated_stays",
+    "spa_service_hours": "spa_hours_per_open_day * estimated_spa_open_days; estimated_spa_open_days = presence_days * (1 - (1 - spa_suite_days / (suite_count * presence_days)) ^ suite_count)",
+    "table_service_hours": "1 * table_sales",
+    "total_operations_hours": "base_property_and_administration_hours + client_presence_hours + occupied_suite_night_hours + stay_coordination_hours + internalized_turnover_hours + spa_service_hours + table_service_hours",
+    "jules_paid_capacity": "1607 * funded_FTE * employed_months / 12",
+    "planned_coverage_hours": "jules_paid_capacity + paid_support_hours + declared_associate_hours",
     "calendar_support_floor": "round_to_50(100 + 2 * nights_per_suite), bounded between 250 and 500 hours",
-    "planned_paid_support_hours": "exact simulator input; never increased silently",
-    "recommended_support_hours": "max(calendar_support_floor - declared_family_hours, operations_hours - paid_jules_capacity - declared_family_hours, 0)",
-    "coverage_gap": "max(recommended_support_hours - planned_paid_support_hours, 0)",
-    "jules_paid_capacity": "1607 * funded_fte * employed_months / 12",
-    "warning": "Annual heuristics do not replace a named weekly roster respecting daily and weekly rest. Family hours are a coverage assumption whose corporate, labor-law and insurance treatment requires professional validation."
+    "calendar_support_gap": "max(calendar_support_floor - paid_support_hours - declared_associate_hours, 0)",
+    "coverage_gap": "max(total_operations_hours - planned_coverage_hours, calendar_support_gap, 0)",
+    "warning": "Annual totals do not replace a named weekly roster respecting daily and weekly rest. Hours benefiting private property or residents must not be silently charged to the operating company."
   },
-  "staffing_options": {
-    "active_reference": "1.0 FTE Jules + 350 paid support hours + 100 declared and rostered family hours",
-    "preferred_paid_cover_to_quote": [
-      "seasonal part-time employee when demand calendar is predictable",
-      "local employer group for recurring partial needs",
-      "result-based housekeeping and linen service",
-      "short extra shifts only for genuine peaks or replacements"
-    ],
-    "apprenticeship": {
-      "phase": "phase_2_option_not_in_reference_budget",
-      "potential_uses": ["hospitality support", "breakfast and service support", "housekeeping support under supervision"],
-      "conditions_before_modeling": ["identify eligible training and school calendar", "confirm tutor availability", "price employer cost and public aid", "verify working-time, weekend, night and minor rules", "define tasks that remain supervised"],
-      "warning": "An apprentice is a trained employee, not autonomous low-cost continuity cover."
+  "calculation_rules": {
+    "occupied_suite_nights": "suite_count * nights_per_suite",
+    "estimated_stays": "occupied_suite_nights / average_length_of_stay",
+    "lodging_sales_ttc": "occupied_suite_nights * average_public_price_ttc",
+    "spa_buying_stays": "estimated_stays * spa_take_rate",
+    "spa_sold_suite_days": "spa_buying_stays * average_length_of_stay",
+    "spa_sales_ttc": "spa_sold_suite_days * spa_price_ttc",
+    "table_sales_count": "occupied_suite_nights * table_take_rate",
+    "table_sales_ttc": "table_sales_count * table_price_ttc",
+    "operating_result_before_rent_and_interest": "accounting_revenue - variable_costs - fixed_operating_costs - payroll - paid_support",
+    "operating_result_after_rent_before_interest": "operating_result_before_rent_and_interest - contractual_sci_rent",
+    "operating_result_after_financial_interest": "operating_result_after_rent_before_interest - operating_company_CCA_interest",
+    "operating_company_cash_after_financing": "operating_result_after_financial_interest - renewal_allocation - cash_reserve_contribution - operating_company_CCA_principal_repayment",
+    "sci_cash_after_CCA_debt_service_before_other_SCI_costs": "sci_rent_received - sci_CCA_interest - sci_CCA_principal_repayment"
+  },
+  "activity_tests": [
+    {
+      "label": "standard",
+      "nights_per_suite": 120,
+      "average_public_price_ttc": 200,
+      "lodging_sales_ttc": 48000,
+      "spa_sales_ttc": 9000,
+      "table_sales_ttc": 3000,
+      "total_public_sales_ttc": 60000,
+      "public_sales_ttc_at_price_range": [55200, 64800],
+      "estimated_operations_hours": 1756,
+      "estimated_annual_coverage_gap_hours": 0,
+      "interpretation": "Close to annual workload coverage with 0.8 FTE, 100 paid support hours and 380 declared associate hours; calendar feasibility still requires a real roster."
+    },
+    {
+      "label": "higher_activity_test",
+      "nights_per_suite": 150,
+      "average_public_price_ttc": 200,
+      "lodging_sales_ttc": 60000,
+      "spa_sales_ttc": 11250,
+      "table_sales_ttc": 3750,
+      "total_public_sales_ttc": 75000,
+      "public_sales_ttc_at_price_range": [69000, 81000],
+      "estimated_operations_hours": 2015,
+      "estimated_annual_coverage_gap_hours": 249,
+      "interpretation": "Improves economic capacity but exceeds the planned annual labor coverage by about 249 hours before calendar constraints; staffing or task design must change."
     }
-  },
-  "result_model": {
-    "operating_result_before_rent": "accounting_revenue - variable_costs - fixed_operating_costs - jules_employer_cost - paid_support_cost",
-    "operating_result_after_rent": "operating_result_before_rent - contractual_sci_rent",
-    "prudent_cash_balance": "operating_result_after_rent - renewal_allocation - annual_cash_reserve_contribution",
-    "maximum_economic_rent_capacity": "max(0, operating_result_before_rent - renewal_allocation - annual_cash_reserve_contribution)"
-  },
-  "interpretation_rules": [
-    "The validated public launch range remains 180 to 220 EUR. The 220 EUR v5 average is a maturity target and requires a working public range around 200 to 250 EUR, subject to associate approval and market proof.",
-    "The 13k TTC fixed-cost budget is a lean target, not a verified fact. The simulator must preserve an 18k TTC stress case until every line has a quote and an OpCo or SCI allocation.",
-    "The 28k full-time employer budget is provisional and requires an Urssaf simulation, payroll quote and collective-agreement review.",
-    "The 350 paid support hours and 100 family hours must become a named calendar. Savings achieved by internalizing cleaning, spa or maintenance tasks must appear as hours.",
-    "The v5 reference prioritizes full-time employment over SCI rent. A contractual rent can only be introduced if operating evidence creates sufficient margin.",
-    "Debt, depreciation, corporate tax and owner remuneration are outside this simplified annual model."
   ],
-  "official_validation_links": [
-    "https://www.impots.gouv.fr/professionnel/tva",
-    "https://www.impots.gouv.fr/professionnel/questions/en-tant-que-micro-entrepreneur-puis-je-etre-redevable-de-la-tva",
-    "https://www.service-public.fr/particuliers/vosdroits/F17452",
-    "https://www.service-public.fr/particuliers/vosdroits/F1911",
-    "https://www.service-public.fr/particuliers/vosdroits/F2327",
-    "https://www.service-public.fr/particuliers/vosdroits/F990",
-    "https://entreprendre.service-public.fr/vosdroits/F1694",
-    "https://code.travail.gouv.fr/fiche-ministere-travail/le-travail-saisonnier",
-    "https://www.service-public.fr/particuliers/vosdroits/F2918",
-    "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur"
+  "validation_register": [
+    "Confirm VAT regime and activity-specific rates before contracts and pricing are frozen.",
+    "Obtain the payroll cost and working-time structure for 0.8 FTE Jules.",
+    "Validate the lease, the 12,000 EUR rent test and the 18,000 EUR target against market value and cost allocation.",
+    "Draft separate SCI and operating-company shareholder-current-account agreements.",
+    "Update and validate the adjustable CCA remuneration rate; keep 10% annual only as a legal and tax stress test.",
+    "Confirm the local-board unit, contents, food-safety obligations and measured one-hour service assumption.",
+    "Measure hammam and Nordic-bath opening days, wood, water, consumables and labor.",
+    "Replace each fixed and variable cost with a quote, invoice or dry-run measurement.",
+    "Create a named weekly roster for Jules, paid support and associate contribution."
   ]
 }

@@ -6,8 +6,9 @@ Statut : base fonctionnelle validée, à intégrer aux conditions générales de
 vente et à faire relire sur les volets juridique, assurantiel, fiscal et
 comptable avant l'ouverture.
 
-Ce document constitue la source de vérité métier pour le site, le moteur de
-réservation, le portail client, le livret d'accueil et l'applicatif de gestion.
+Ce document définit les règles fonctionnelles de séjour. Les hypothèses
+économiques actives sont centralisées dans
+`23-referentiel-exploitation-standard-v6.md` et dans `public/knowledge/`.
 Les montants sont exprimés TTC sous réserve de validation par l'expert-comptable.
 
 ## 1. Principes de l'offre
@@ -26,7 +27,8 @@ Les montants sont exprimés TTC sous réserve de validation par l'expert-comptab
 
 ### 2.1 Tarif de base
 
-- Tarif d'ouverture 2027 : 180 € par suite et par nuit pour deux adultes.
+- Grille publique de travail : 180 à 220 € par suite et par nuit pour deux
+  adultes ; prix moyen annuel simulé : 200 €.
 - Petit-déjeuner, linge, ménage de fin de séjour et services inclus dans la
   nuitée selon la fiche tarifaire publiée.
 - Le prix final, les prestations comprises et les suppléments sont affichés
@@ -167,34 +169,25 @@ Seules les informations nécessaires au séjour sont collectées.
 
 ## 6. La table du château
 
-### 6.1 Offre recommandée
+### 6.1 Offre simplifiée de travail
 
-- Déjeuner ou dîner proposé sur réservation, sous réserve de validation de la
-  qualification juridique de l'offre.
-- Menu unique pour la tablée, adapté autant que possible aux préférences et
-  contraintes confirmées.
+- Table ou planche simplifiée proposée sur réservation, sous réserve de
+  validation de la qualification juridique de l'offre.
+- Contenu adapté autant que possible aux préférences et contraintes confirmées.
 - Réservé aux clients hébergés.
 - Produits du territoire, de saison, biologiques et locaux dans la mesure où la
   promesse peut être tenue et tracée.
 - Réservation garantie jusqu'à 18 h la veille ; demande le jour même possible,
   sans garantie.
-- Heure du dîner proposée entre 19 h et 21 h ; horaires du déjeuner à définir.
+- Heure de service définie lors de la réservation.
 
-### 6.2 Tarifs recommandés
+### 6.2 Tarif de travail
 
-| Âge | Tarif par personne |
-| --- | ---: |
-| De 0 à 2 ans, sans menu individuel | Gratuit |
-| De 3 à 11 ans inclus | 20 € |
-| À partir de 12 ans | 40 € |
-
-- Une eau plate ou gazeuse et une boisson maison sans alcool sont intégrées à la
-  formule recommandée.
-- Un accord mets et vins peut être proposé au tarif de 20 € par adulte, en
-  complément du dîner. Il est enregistré comme une option distincte.
-- Les autres boissons alcoolisées et références premium restent hors forfait, sous
-  réserve de validation du régime de table d'hôtes, des licences, formations et
-  affichages applicables.
+- 50 € TTC par suite et par jour vendu.
+- Le contenu, les quantités, les boissons et les adaptations enfants doivent
+  être précisés avant publication.
+- Les boissons alcoolisées restent hors promesse tant que le régime, les
+  licences, formations et affichages ne sont pas validés.
 - Le statut exact de « table d'hôtes » et le contenu des boissons comprises
   doivent être validés avec la CCI ou le conseil compétent avant publication des
   conditions définitives.
@@ -214,10 +207,10 @@ Seules les informations nécessaires au séjour sont collectées.
 
 ### 7.1 Forfait journalier
 
-- 40 € par suite et par jour pour un ou deux occupants.
-- 20 € supplémentaires par troisième ou quatrième occupant et par jour.
-- Le forfait ouvre l'accès sur réservation au hammam, à la piscine naturelle, au
-  bain nordique et au sauna finlandais.
+- 50 € par suite et par jour.
+- Le forfait ouvre l'accès sur réservation au hammam et au bain nordique.
+- Le projet ne comprend pas de sauna. Le traitement commercial de la piscine
+  naturelle reste à confirmer.
 - Horaires de réservation : 8 h à minuit.
 - Le forfait est dû dès confirmation et payé sur place.
 - Deux créneaux d'une heure maximum par équipement et par suite chaque jour.
@@ -228,19 +221,18 @@ Seules les informations nécessaires au séjour sont collectées.
 
 - Hammam : une suite à la fois.
 - Bain nordique : une suite à la fois.
-- Sauna : une suite à la fois.
 - Piscine naturelle : deux suites simultanément, sauf privatisation.
 - Un créneau est attaché à une suite, pas à une personne ; tous les occupants de
   la suite peuvent l'utiliser dans la limite de la capacité de sécurité de
   l'équipement.
 - Règle provisoire : la piscine naturelle est accessible aux mineurs accompagnés.
-  Hammam, sauna et bain nordique sont réservés aux 16 ans et plus jusqu'à
+  Hammam et bain nordique sont réservés aux 16 ans et plus jusqu'à
   validation contraire de l'assureur et des fabricants.
 
 ### 7.3 Planning et transitions
 
 - Durée d'usage réservée : 60 minutes.
-- Marge technique recommandée : 15 minutes après un créneau de hammam, sauna ou
+- Marge technique recommandée : 15 minutes après un créneau de hammam ou de
   bain nordique, configurable par équipement.
 - La marge est indisponible à la réservation et ne consomme pas un droit client.
 - La piscine ne nécessite pas de marge systématique, sous réserve des procédures
@@ -272,7 +264,7 @@ Seules les informations nécessaires au séjour sont collectées.
 
 ## 8. Options et encaissement sur place
 
-- Les options comprennent notamment spa, privatisation, dîner, boissons et
+- Les options comprennent notamment spa, privatisation, table ou planche, boissons et
   futurs services additionnels.
 - Une option est ajoutée au panier avec prix, date, bénéficiaires et conditions.
 - La confirmation exige une action explicite du client.
@@ -292,7 +284,7 @@ Chaque dossier distingue :
 - suppléments de troisième et quatrième occupants ;
 - spa journalier ;
 - privatisation de piscine ;
-- dîners adultes, enfants et gratuités ;
+- ventes de table ou planche par suite-jour ;
 - boissons et autres services ;
 - taxe de séjour ;
 - commissions de distribution ;
@@ -316,7 +308,7 @@ Les paramètres suivants ne doivent jamais être codés en dur :
 - calendrier d'ouverture et saisonnalité de la piscine ;
 - temps de transition par équipement ;
 - tarifs de départ tardif et d'arrivée très anticipée ;
-- horaires de petit-déjeuner et de dîner ;
+- horaires de petit-déjeuner et de table ou planche ;
 - boissons comprises et carte des boissons ;
 - capacité de sécurité de chaque équipement ;
 - coordonnées d'urgence et d'assistance ;
@@ -331,8 +323,8 @@ Les paramètres suivants ne doivent jamais être codés en dur :
 - Prestataire de paiement : préautorisation, tokenisation et débit différé.
 - Intégrateur PMS : compatibilité des règles avec Airbnb, Booking et la
   réservation directe.
-- Professionnels techniques : procédures et capacités du hammam, de la piscine,
-  du bain nordique et du sauna.
+- Professionnels techniques : procédures et capacités du hammam, de la piscine
+  et du bain nordique.
 
 ## 12. Sources de cadrage
 

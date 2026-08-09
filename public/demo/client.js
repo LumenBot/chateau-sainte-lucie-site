@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const setText = (selector, value) => { const node = qs(selector); if (node) node.textContent = value; };
 
   function calculateOptionsTotal() {
-    return Number(state.services.spaTotal || 0) + Number(state.services.dinnerTotal || 0) + Number(state.services.wineTotal || 0) + Number(state.services.poolPrivateTotal || 0);
+    return Number(state.services.spaTotal || 0) + Number(state.services.dinnerTotal || 0) + Number(state.services.poolPrivateTotal || 0);
   }
 
   function dateOptions() {
@@ -75,16 +75,10 @@ document.addEventListener("DOMContentLoaded", function () {
     setText("[data-checkout-accommodation]", demo.money(state.booking.accommodationTotal));
     setText("[data-checkout-spa]", demo.money(state.services.spaTotal));
     setText("[data-checkout-dinner]", demo.money(state.services.dinnerTotal));
-    setText("[data-checkout-wine]", demo.money(state.services.wineTotal));
     setText("[data-checkout-pool]", demo.money(pool));
     setText("[data-checkout-options]", demo.money(state.payment.optionsPaid ? 0 : options));
     setText("[data-checkout-nights]", state.booking.nights + " nuit" + (state.booking.nights > 1 ? "s" : ""));
     const invoice = qs("[data-invoice-status]");
-    const wineStatus = qs("[data-wine-payment-status]");
-    if (wineStatus) {
-      wineStatus.textContent = state.services.winePairing ? (state.payment.optionsPaid ? "Réglé" : "À régler") : "Non choisi";
-      wineStatus.className = "demo-status " + (state.services.winePairing ? (state.payment.optionsPaid ? "ok" : "warn") : "simulated");
-    }
     if (state.payment.optionsPaid) {
       invoice.textContent = "Réglé · facture disponible";
       invoice.className = "demo-status ok";
@@ -112,7 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
     qs("#breakfastStyle").value = state.guest.breakfastStyle;
     qs("#dietary").value = state.guest.dietary;
     qs("#dogNoticeAccepted").checked = state.guest.dogNoticeAccepted;
-    qs("#winePairingClient").checked = Boolean(state.services.winePairing);
     progress();
     renderChecklist();
     renderSpa();
@@ -156,12 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   qs("[data-save-dinner]").addEventListener("click", function () {
-    state.services.winePairing = qs("#winePairingClient").checked;
-    state.services.wineGuests = state.booking.adults;
-    state.services.wineTotal = state.services.winePairing ? state.booking.adults * 20 : 0;
     state.payment.optionsTotal = calculateOptionsTotal();
-    demo.save(state, "dinner.updated", "Préférences du dîner et accord des vins mis à jour");
-    demo.toast("Vos préférences fictives ont été transmises à la table.");
+    demo.save(state, "dinner.updated", "Préférences de la planche du territoire mises à jour");
+    demo.toast("Vos préférences fictives ont été transmises.");
     renderFinancials();
   });
 
