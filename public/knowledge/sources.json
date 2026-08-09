@@ -1,5 +1,5 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "as_of": "2026-08-09",
   "publication_policy": "The GitHub repository is public. Raw legal, financial, personal and property documents remain in the local workspace; only derived non-sensitive facts are published.",
   "sources": [
@@ -10,6 +10,7 @@
     { "id": "project-reference", "local_path": "02-sources-associes/blaise-et-agents/Document_Reference_Projet_Les_Nuits_au_Chateau.md", "used_for": ["project consolidation and missing topics"] },
     { "id": "site-iteration-brief", "local_path": "02-sources-associes/blaise-et-agents/Brief_Iteration_2_Site_Les_Nuits_au_Chateau.md", "used_for": ["brand and website decisions"] },
     { "id": "standard-operating-reference", "local_path": "site-web/docs/23-referentiel-exploitation-standard-v6.md", "used_for": ["active annual operating assumptions", "120 and 150 night activity tests", "staffing and workload", "SCI rent and shareholder-current-account simulation"], "warning": "collective working model, not accountant, payroll, tax or legal advice" },
+    { "id": "operating-scenarios-comparison", "local_path": "site-web/docs/24-comparatif-scenarios-exploitation-v1.md", "used_for": ["comparison of active scenario A and study-only scenario B", "scenario B working food, beverage and workload assumptions", "hybrid test recommendation"], "warning": "scenario B does not replace the active offer; its food costs, attachment rates and service hours are working assumptions requiring recipes, quotes and timed tests" },
     { "id": "plans", "local_path": "02-sources-associes/blaise-et-agents/PLANS.pdf", "used_for": ["room organization and dimensions"] },
     { "id": "urssaf-employer-cost", "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur", "used_for": ["future employer-cost validation"] },
     { "id": "impots-vat-2026", "url": "https://www.impots.gouv.fr/professionnel/tva", "used_for": ["2026 VAT franchise thresholds", "VAT regime simulation"] },
@@ -17,7 +18,9 @@
     { "id": "service-public-vat-franchise-2026", "url": "https://entreprendre.service-public.gouv.fr/vosdroits/F21746", "used_for": ["2026 VAT franchise thresholds", "base and increased threshold alerts"] },
     { "id": "bofip-vat-franchise-mixed-activities", "url": "https://bofip.impots.gouv.fr/bofip/849-PGP.html/identifiant%3DBOI-TVA-DECLA-40-10-10-20260701", "used_for": ["VAT franchise rules", "mixed-activity analysis"] },
     { "id": "bofip-hospitality-vat-scope", "url": "https://bofip.impots.gouv.fr/bofip/124-PGP.html/identifiant%3DBOI-TVA-CHAMP-10-10-50-20-20240807", "used_for": ["taxable hospitality-service scope"] },
-    { "id": "service-public-guesthouse", "url": "https://www.service-public.fr/particuliers/vosdroits/F17452", "used_for": ["guesthouse legal scope", "five-room and fifteen-guest limits"] },
+    { "id": "service-public-guesthouse", "url": "https://www.service-public.fr/particuliers/vosdroits/F17452", "used_for": ["guesthouse legal scope", "five-room and fifteen-guest limits", "table-host menu and guest restrictions", "meal-only alcohol rule", "hygiene and price display"] },
+    { "id": "service-public-restaurant-alcohol-license", "url": "https://entreprendre.service-public.fr/vosdroits/F22379", "used_for": ["restaurant and guesthouse alcohol licence", "operating permit and municipal declaration"] },
+    { "id": "agriculture-food-hygiene", "url": "https://agriculture.gouv.fr/la-reglementation-sur-lhygiene-des-aliments", "used_for": ["food traceability", "food-safety responsibility", "hygiene control framework"] },
     { "id": "service-public-working-time", "url": "https://www.service-public.fr/particuliers/vosdroits/F1911", "used_for": ["1607-hour legal full-time reference"] },
     { "id": "service-public-weekly-rest", "url": "https://www.service-public.fr/particuliers/vosdroits/F2327", "used_for": ["weekly-rest planning constraint"] },
     { "id": "service-public-daily-rest", "url": "https://www.service-public.fr/particuliers/vosdroits/F990", "used_for": ["daily-rest planning constraint"] },

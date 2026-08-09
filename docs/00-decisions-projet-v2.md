@@ -93,3 +93,6 @@ au service de table tant que son régime d'exploitation n'est pas validé.
   lancement et jalons de conformité.
 - `docs/23-referentiel-exploitation-standard-v6.md` : modèle annuel actif,
   charge de travail, loyer SCI et comptes courants d'associés.
+- `docs/24-comparatif-scenarios-exploitation-v1.md` : comparaison décisionnelle
+  du modèle annuel avec l'étude saisonnière de table d'hôtes, sans effet sur
+  l'offre publique tant qu'aucun arbitrage collectif n'est intervenu.

@@ -37,7 +37,8 @@ prévisionnelles (`/conditions-sejour`) · 404.
 **Démonstrateur interne non indexé** : vue d’ensemble (`/demo`), réservation
 fictive (`/demo/reservation`), compagnon client (`/demo/client`), cockpit
 gestionnaire (`/demo/gestion`), base de vérité et simulateur des associés
-(`/demo/pilotage`) et architecture (`/demo/integrations`). Les parcours client
+(`/demo/pilotage`), comparatif des scénarios (`/demo/scenarios`) et architecture
+(`/demo/integrations`). Les parcours client
 utilisent des données fictives. Le cockpit associés contient des données projet
 dérivées et non sensibles ; il n'est pas authentifié et doit rester sans donnée personnelle.
 
@@ -91,6 +92,8 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   historique et ne constituent plus la photographie active du projet.
 - `docs/23-referentiel-exploitation-standard-v6.md` documente le modèle annuel
   actif, les tests à 120 et 150 nuits par suite, le loyer et les financements.
+- `docs/24-comparatif-scenarios-exploitation-v1.md` conserve le modèle annuel
+  actif et compare l’étude saisonnière avec table, ses plafonds et sa charge.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes

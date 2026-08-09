@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.1",
+  "as_of": "2026-08-09",
+  "currency": "EUR",
+  "purpose": "Side-by-side internal study of the active operating reference and an alternative commercial-capacity case",
+  "publication_effect": "none",
+  "interpretation": {
+    "scenario_a": "Active operating reference copied from business-model.json schema 5.0",
+    "scenario_b": "Internal study case only; it does not replace the public offer, the active annual model or the booking demonstration",
+    "warning": "Scenario B includes explicit working assumptions for food-and-beverage direct costs and service hours. They are decision-support hypotheses, not supplier quotes or measured operating data."
+  },
+  "shared_project_assumptions": {
+    "suite_count": 2,
+    "average_guests_per_occupied_suite": 2.1,
+    "average_length_of_stay_nights": 2.5,
+    "direct_booking_share_of_lodging": 0.5,
+    "ota_commission_rate": 0.15,
+    "direct_payment_rate": 0.015,
+    "turnover_linen_and_consumables_ttc_per_stay": 30,
+    "internalized_turnover_hours_per_stay": 4,
+    "breakfast_ttc_per_guest_night": 6,
+    "marginal_energy_ttc_per_occupied_suite_night": 5,
+    "incidents_and_commercial_gestures_rate": 0.002,
+    "jules_full_time_employer_budget": 28000,
+    "sci_rent_per_year": 12000,
+    "renewal_cash_allocation_per_year": 1500,
+    "cash_reserve_contribution_per_year": 0,
+    "vat_mode": "franchise",
+    "vat_status": "provisional_and_adjustable",
+    "operating_company_CCA_year_one_interest": 650,
+    "operating_company_CCA_year_one_principal_repayment": 3000
+  },
+  "scenarios": {
+    "A": {
+      "name": "Référentiel annuel actif",
+      "status": "active_operating_reference",
+      "public_offer_replacement": false,
+      "activity": {
+        "sold_nights_per_suite": 120,
+        "occupied_suite_nights": 240,
+        "estimated_stays": 96,
+        "average_public_price_ttc_per_suite_night": 200
+      },
+      "experiences": {
+        "spa": {
+          "take_rate_of_stays": 0.75,
+          "billing_days_per_buying_stay": 2.5,
+          "sold_suite_days": 180,
+          "price_ttc_per_suite_day": 50,
+          "sales_ttc": 9000,
+          "direct_cost_ttc_per_sold_suite_day": 10,
+          "direct_cost_ttc": 1800
+        },
+        "local_board": {
+          "take_rate_of_occupied_suite_nights": 0.25,
+          "sales_count": 60,
+          "price_ttc_per_sale": 50,
+          "sales_ttc": 3000,
+          "direct_cost_ttc_per_sale": 20,
+          "direct_cost_ttc": 1200,
+          "service_hours": 60
+        }
+      },
+      "staffing": {
+        "jules_fte": 0.8,
+        "jules_employer_budget": 22400,
+        "paid_support_hours": 100,
+        "paid_support_hourly_cost": 25,
+        "paid_support_cost": 2500,
+        "associate_contribution_hours": 380,
+        "fixed_operating_costs_ttc": 7000
+      },
+      "calculated_sales": {
+        "lodging_ttc": 48000,
+        "spa_ttc": 9000,
+        "food_and_beverage_ttc": 3000,
+        "experiences_ttc": 12000,
+        "total_public_sales_ttc": 60000,
+        "lodging_share": 0.8,
+        "experiences_share": 0.2
+      },
+      "calculated_variable_costs": {
+        "ota_commissions": 3600,
+        "direct_payment_fees": 540,
+        "turnover_linen_and_consumables": 2880,
+        "breakfast": 3024,
+        "marginal_energy": 1200,
+        "spa": 1800,
+        "food_and_beverage": 1200,
+        "incidents_and_commercial_gestures": 120,
+        "total": 14364
+      },
+      "calculated_results": {
+        "contribution_margin": 45636,
+        "operating_result_before_sci_rent_and_CCA_interest": 13736,
+        "operating_result_after_sci_rent_before_CCA_interest": 1736,
+        "operating_result_after_CCA_interest": 1086,
+        "cash_after_renewal_before_CCA_principal": -414,
+        "cash_after_operating_company_CCA_principal": -3414
+      },
+      "workload": {
+        "estimated_operations_hours": 1756,
+        "planned_capacity_hours": 1766,
+        "estimated_annual_coverage_gap_hours": 0,
+        "calendar_feasibility": "weekly_roster_required"
+      }
+    },
+    "B": {
+      "name": "Capacité resserrée et expériences développées",
+      "status": "study_only_modeled_working_assumptions",
+      "public_offer_replacement": false,
+      "activity": {
+        "commercial_capacity_nights_per_suite": 63,
+        "sold_nights_per_suite": 54,
+        "commercial_capacity_suite_nights": 126,
+        "occupied_suite_nights": 108,
+        "occupancy_of_commercial_capacity": 0.857143,
+        "estimated_stays": 43.2,
+        "average_public_price_ttc_per_suite_night": 200
+      },
+      "experiences": {
+        "spa": {
+          "take_rate_of_occupied_suite_nights": 0.75,
+          "sold_suite_days": 81,
+          "price_ttc_per_suite_day": 60,
+          "sales_ttc": 4860,
+          "direct_cost_ttc_per_sold_suite_day": 10,
+          "direct_cost_ttc": 810
+        },
+        "lunch": {
+          "take_rate_of_occupied_suite_nights": 0.45,
+          "average_guests": 2.1,
+          "guest_covers": 102.06,
+          "price_ttc_per_guest": 25,
+          "sales_ttc": 2551.5,
+          "direct_cost_ttc_per_guest": 10,
+          "direct_cost_ttc": 1020.6,
+          "service_hours_per_open_service_day": 1.5,
+          "estimated_open_service_days": 39.227143,
+          "service_hours": 58.840714,
+          "status": "working_assumption_measurement_required"
+        },
+        "dinner": {
+          "take_rate_of_occupied_suite_nights": 0.75,
+          "average_guests": 2.1,
+          "guest_covers": 170.1,
+          "price_ttc_per_guest": 50,
+          "sales_ttc": 8505,
+          "direct_cost_ttc_per_guest": 17.5,
+          "direct_cost_ttc": 2976.75,
+          "service_hours_per_open_service_day": 4,
+          "estimated_open_service_days": 54.964286,
+          "service_hours": 219.857143,
+          "status": "working_assumption_measurement_required"
+        },
+        "wine_pairing": {
+          "take_rate_of_dinner_guest_covers": 0.5,
+          "guest_covers": 85.05,
+          "price_ttc_per_guest": 30,
+          "sales_ttc": 2551.5,
+          "direct_cost_ttc_per_guest": 12,
+          "direct_cost_ttc": 1020.6,
+          "incremental_service_hours": 0,
+          "status": "working_assumption_quote_required"
+        },
+        "bar": {
+          "take_rate_of_occupied_suite_nights": 0.35,
+          "sold_suite_days": 37.8,
+          "price_ttc_per_suite_day": 25,
+          "sales_ttc": 945,
+          "direct_cost_rate": 0.35,
+          "direct_cost_ttc": 330.75,
+          "service_hours_per_sold_suite_day": 0.5,
+          "service_hours": 18.9,
+          "status": "working_assumption_measurement_required"
+        }
+      },
+      "staffing": {
+        "jules_fte": 0.75,
+        "jules_employer_budget": 21000,
+        "paid_support_hours": 150,
+        "paid_support_hourly_cost": 25,
+        "paid_support_cost": 3750,
+        "associate_contribution_hours": 100,
+        "fixed_operating_costs_ttc": 8000
+      },
+      "calculated_sales": {
+        "lodging_ttc": 21600,
+        "spa_ttc": 4860,
+        "lunch_ttc": 2551.5,
+        "dinner_ttc": 8505,
+        "wine_pairing_ttc": 2551.5,
+        "bar_ttc": 945,
+        "food_and_beverage_ttc": 14553,
+        "experiences_ttc": 19413,
+        "total_public_sales_ttc": 41013,
+        "lodging_share": 0.52666,
+        "experiences_share": 0.47334
+      },
+      "calculated_variable_costs": {
+        "ota_commissions": 1620,
+        "direct_payment_fees": 453.195,
+        "turnover_linen_and_consumables": 1296,
+        "breakfast": 1360.8,
+        "marginal_energy": 540,
+        "spa": 810,
+        "incidents_and_commercial_gestures": 82.026,
+        "lunch": 1020.6,
+        "dinner": 2976.75,
+        "wine_pairing": 1020.6,
+        "bar": 330.75,
+        "total": 11510.721
+      },
+      "calculated_results": {
+        "contribution_margin": 29502.279,
+        "operating_result_before_sci_rent_and_CCA_interest": -3247.721,
+        "operating_result_after_sci_rent_before_CCA_interest": -15247.721,
+        "operating_result_after_CCA_interest": -15897.221,
+        "cash_after_renewal_before_CCA_principal": -17397.221,
+        "cash_after_operating_company_CCA_principal": -20397.221
+      },
+      "workload": {
+        "estimated_operations_hours": 1450.562143,
+        "planned_capacity_hours": 1455.25,
+        "estimated_annual_coverage_gap_hours": 0,
+        "paid_support_plus_family_hours": 250,
+        "remaining_annual_capacity_hours": 4.687857,
+        "status": "annual_capacity_covered_without_resilience_margin_weekly_roster_required"
+      }
+    }
+  },
+  "comparison": {
+    "public_sales_delta_B_minus_A": -18987,
+    "lodging_sales_delta_B_minus_A": -26400,
+    "experiences_sales_delta_B_minus_A": 7413,
+    "operating_result_before_rent_delta_B_minus_A": -16983.721,
+    "cash_after_operating_company_CCA_principal_delta_B_minus_A": -16983.221,
+    "interpretation": "Scenario B increases experience sales by 7,413 EUR but loses 26,400 EUR of lodging sales. With the working food, beverage and service assumptions included, it produces a 20,397 EUR operating-company cash deficit after its CCA service."
+  },
+  "scenario_B_full_capacity_stretch_test": {
+    "status": "demanding_commercial_sensitivity_not_recommendation",
+    "sold_nights_per_suite": 63,
+    "average_public_price_ttc_per_suite_night": 210,
+    "spa_take_rate": 0.85,
+    "lunch_take_rate": 0.6,
+    "dinner_take_rate": 0.85,
+    "wine_pairing_take_rate_of_dinner_guests": 0.65,
+    "bar_take_rate": 0.5,
+    "bar_basket_ttc_per_buying_suite_day": 30,
+    "total_public_sales_ttc": 54376.245,
+    "average_total_basket_ttc_per_occupied_suite_night": 431.5575,
+    "cash_after_renewal_before_CCA_principal": -7973.624,
+    "cash_after_operating_company_CCA_principal": -10973.624,
+    "estimated_operations_hours": 1564.0425,
+    "estimated_uncovered_hours": 108.7925
+  },
+  "scenario_B_theoretical_couple_ceiling": {
+    "status": "arithmetic_ceiling_not_forecast",
+    "lodging_ttc": 200,
+    "spa_ttc": 60,
+    "lunch_for_two_ttc": 50,
+    "dinner_for_two_ttc": 100,
+    "wine_pairing_for_two_ttc": 60,
+    "extras_excluding_spa_ttc": 210,
+    "extras_including_spa_ttc": 270,
+    "total_ttc_per_suite_night": 470,
+    "annual_public_sales_at_126_suite_nights": 59220,
+    "bar_sales": "excluded_unbounded",
+    "warning": "Requires 100% occupancy and 100% purchase of every listed service on every night."
+  },
+  "scenario_B_break_even_indication": {
+    "status": "working_indication_at_central_contribution_rate",
+    "public_sales_before_CCA_service": 64295.075,
+    "average_basket_at_full_capacity_before_CCA_service": 510.278,
+    "public_sales_after_operating_company_CCA_service": 69368.478,
+    "average_basket_at_full_capacity_after_operating_company_CCA_service": 550.543,
+    "warning": "Assumes the central contribution rate remains constant and does not finance additional uncovered labor."
+  },
+  "strategic_recommendation": {
+    "preferred_base": "scenario_A",
+    "recommended_experiment": "Keep the broader sales calendar and test one or two signature table-host weekends per month with 48-hour pre-order, one menu, one service time and measured labor and margin.",
+    "reason": "Scenario B improves the guest proposition but its 126-suite-night annual ceiling cannot support the stated payroll, rent and financing structure under realistic attachment rates."
+  },
+  "validation_required_for_scenario_B": [
+    "Confirm why commercial capacity is limited to 63 nights per suite and whether annual payroll, fixed costs and rent remain fully payable outside that window.",
+    "Replace the working ingredient costs for lunch, dinner, wine pairing and bar with recipes, supplier quotes and wastage measurements.",
+    "Replace the working preparation and service hours with timed dry runs including purchasing, mise en place, service, dishwashing, cleaning and compliance.",
+    "Confirm whether lunch and dinner take rates apply per occupied suite night, per stay or per day with at least one occupied suite.",
+    "Test the VAT regime and activity-specific rates against the 47% experience revenue mix.",
+    "Produce a weekly roster for 0.75 FTE Jules, 150 paid support hours and 100 family hours.",
+    "Validate the table-host qualification, single-meal and drinks-included interpretation, separately priced wine pairing, alcohol licence, meal-only alcohol rule, hygiene procedures and whether any all-day bar offer triggers a different regulatory framework."
+  ]
+}

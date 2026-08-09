@@ -9,6 +9,7 @@ Read these machine-readable files:
 - /chateau-sainte-lucie-site/knowledge/business-model.json — annual formulas, assumptions, staffing, rent and financing
 - /chateau-sainte-lucie-site/knowledge/market.json — benchmark and annual pricing logic
 - /chateau-sainte-lucie-site/knowledge/investments.json — active 59k investment envelope and financing bridge
+- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — scenario A reference and scenario B internal comparison
 - /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones and external validations
 - /chateau-sainte-lucie-site/knowledge/sources.json — provenance and limitations
 
@@ -30,6 +31,12 @@ Interpretation rules:
 15. Interest is a financial expense of the debtor entity. Principal repayment is a cash outflow and balance-sheet movement, not an operating expense. SCI and operating-company debt service must remain separate.
 16. Paid support entered in the simulator is exact. Workload recommendations and coverage gaps are separate outputs.
 17. Cash savings from internalized housekeeping, spa, maintenance or marketing work must be matched by explicit workload hours and named responsibility.
+18. Scenario A remains the active operating reference. Scenario B is an internal study with 63 available and 54 sold nights per suite; it does not replace any public price or service rule.
+19. Scenario B includes explicit working assumptions for food-and-beverage costs and service hours. They enable comparison but are not recipes, quotes or measured operations; replace them before a decision.
+20. Scenario B central reaches EUR 41,013 public sales and an estimated EUR -20,397 operating-company cash position after its CCA service. The full-capacity commercial stress case reaches about EUR 54,376 but leaves about 109 workload hours uncovered.
+21. The EUR 470 theoretical couple basket contains EUR 270 extras including spa. EUR 210 refers to lunch, dinner and pairing only, excluding spa. This ceiling requires 100% occupancy and 100% purchase and is not a forecast.
+22. The recommended next step is to retain scenario A as the base and test one or two signature table-host weekends per month before reducing the annual sales calendar.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/
+- /chateau-sainte-lucie-site/demo/scenarios — human-readable comparison of scenarios A and B
