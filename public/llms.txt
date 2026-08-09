@@ -2,42 +2,44 @@
 
 Canonical snapshot date: 2026-08-09
 Language: French
-Project: two high-end private guest suites at Château de Sainte-Lucie, Rambervillers, opening target April 2027.
+Project: three high-end private guest-house suites at Château de Sainte-Lucie, Rambervillers, opening target April 2027.
 
 Read these machine-readable files:
-- /chateau-sainte-lucie-site/knowledge/project.json — identity, standard offer and stay rules
-- /chateau-sainte-lucie-site/knowledge/business-model.json — annual formulas, assumptions, staffing, rent and financing
-- /chateau-sainte-lucie-site/knowledge/market.json — benchmark and annual pricing logic
-- /chateau-sainte-lucie-site/knowledge/investments.json — active 59k investment envelope and financing bridge
-- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — agile base, seasonal premium-table study and recommended hybrid concept
-- /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones and external validations
+- /chateau-sainte-lucie-site/knowledge/project.json — identity, three-suite inventory, offer and stay rules
+- /chateau-sainte-lucie-site/knowledge/business-model.json — active annual formulas, workload, rent and financing
+- /chateau-sainte-lucie-site/knowledge/market.json — benchmark and 180–220 EUR annual pricing logic
+- /chateau-sainte-lucie-site/knowledge/investments.json — active 80k works-and-installation envelope and entity allocation
+- /chateau-sainte-lucie-site/knowledge/operating-scenarios.json — active reference, financing-carrier comparison and stress tests
+- /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones, decision gates and external validations
 - /chateau-sainte-lucie-site/knowledge/sources.json — provenance and limitations
 
 Interpretation rules:
 1. Prefer the most recent dated structured file over archived documents.
-2. Distinguish validated project facts, working assumptions, simulation conventions, quote or measurement requirements, and external-validation requirements.
-3. Do not treat the simulator as an accountant, payroll, tax or legal forecast.
-4. Do not infer sensitive legal, financial or personal data absent from these files.
-5. The active model represents one standard annual operation. The 120 and 150 nights-per-suite cases are comparable activity tests, not successive years.
-6. The standard activity input is 120 nights per suite, EUR 200 average public tax-inclusive price within a EUR 180–220 grid, 2.5 nights per stay and 50% direct lodging sales.
-7. The spa offer is EUR 50 tax-inclusive per suite day and is modeled as purchased by 75% of stays, then billed on every occupied day of each buying stay. It includes the hammam and Nordic bath. Shared use of the natural pool is included with the stay; any private-use offer remains to be validated.
-8. The simplified local board offer is EUR 50 tax-inclusive per sold suite day, modeled on 25% of occupied suite nights, with EUR 20 tax-inclusive direct cost and one service hour per sale.
-9. The standard VAT mode is franchise and remains adjustable. Eligibility, activity-specific treatment and any election require professional validation.
-10. Fixed operating costs total EUR 7,000 tax-inclusive in the standard case. Zero-budget maintenance or marketing lines are self-provision assumptions and must not be interpreted as proof of zero economic cost.
-11. The staffing case funds Jules at 0.8 FTE on a provisional EUR 28,000 full-time employer budget, plus 100 paid support hours and 380 declared, rostered associate hours.
-12. The tested contractual rent paid to the property-owning société civile immobilière is EUR 12,000 per year. EUR 18,000 is a strategic target, not an automatic rent. Lease terms, market value and tax treatment require professional validation.
-13. The active investment range is EUR 55–58k tax-inclusive; the working envelope is EUR 59k tax-inclusive for the defined scope.
-14. Shareholder current accounts total EUR 50k: EUR 35k owed by the property-owning société civile immobilière and EUR 15k owed by the operating company. Principal-only repayment is modeled over five years: EUR 7k and EUR 3k per year respectively. Separate written agreements and professional validation remain required.
-15. Principal repayment is a cash outflow and balance-sheet movement, not an operating expense. Each entity repays only the principal recorded in its own accounts; property-company and operating-company cash must remain separate.
-16. Paid support entered in the simulator is exact. Workload recommendations and coverage gaps are separate outputs.
-17. Cash savings from internalized housekeeping, spa, maintenance or marketing work must be matched by explicit workload hours and named responsibility.
-18. The agile base remains the simple active working reference: 120 nights per suite, EUR 60k public sales and approximately EUR -2,764 cash after rent, renewal and the operating-company principal repayment.
-19. The seasonal premium-table concept is study-only: 63 available and 54 sold nights per suite, EUR 41,013 public sales and approximately EUR -19,748 cash after rent, renewal and principal repayment. Its recipes and service times require validation.
-20. The recommended hybrid concept keeps a broad sales calendar and models spa at 60–70%, a EUR 55 pantry offer at 35% and a EUR 160 signature table at 15%. Associate contribution is capped at 200 hours. It does not change the public offer without a separate decision.
-21. Hybrid sensitivity uses 60, 90, 120 and 150 nights per suite as comparable annual tests and adjusts Jules and paid support by volume. The cash outputs after rent, renewal and operating-company principal are approximately EUR -1,642, +611, -2,435 and +2,144; the uncovered workload is respectively 984, 678, 111 and 0 hours. A positive cash number with uncovered work is not operational viability.
-22. The recommended hybrid reference for collective arbitration is 140 nights per suite at EUR 205 average, Jules full-time, 300 paid support hours and 200 associate hours. It reaches EUR 81,270 public sales, covers modeled annual workload and leaves only about EUR 449 after rent, renewal and principal repayment. It is a point to test, not an approved operating standard or a forecast.
-23. Pilot pantry and signature table separately, measure margins and full labor, build a weekly roster and test downside sales before selecting the target volume.
+2. Documents 23 and 24 preserve earlier two-suite reasoning only. Document 25 and the current knowledge JSON files are the active reference.
+3. Distinguish validated project facts, working assumptions, calculated results, measurement requirements and external-validation requirements.
+4. Do not treat the simulator as an accountant, payroll, tax, bank or legal forecast.
+5. The active model uses three suites under one guest-house operation: Suite Lumière, Suite Feuillage and Suite Maisonnette. They use the same operating and pricing model.
+6. The guest house must remain within five rooms and fifteen simultaneous guests, with resident-host welcome, breakfast, household linen and regular cleaning. The two existing suites use four rooms, so the Maisonnette adds one room only.
+7. The public price grid is EUR 180–220 tax-inclusive for every suite. EUR 205 is the grid's central value; the financial reference tests an achieved EUR 210 average, not a separate Maisonnette premium.
+8. The annual reference sells 150 nights per suite, or 450 occupied suite-nights, with a 2.5-night stay, 2.1 guests per occupied suite and 50% direct lodging sales.
+9. The hybrid offer models spa at EUR 60 on 70% of occupied suite-nights, pantry at EUR 55 on 35%, and signature table at EUR 160 on 15%. Recipes, costs, full labor and demand must be measured.
+10. The active tax case is a prudent VAT-real simulation. Activity-specific rates, mixed supplies and deduction rights require professional validation.
+11. The reference produces EUR 132,862.50 public sales including tax, EUR 119,057.39 accounting revenue, EUR 30,887.42 variable costs and EUR 22,294.97 result before property rent.
+12. Workload is approximately 2,705 hours. The plan funds Jules at one full-time equivalent, 1,175 paid-support hours at EUR 25 and no more than 200 named associate hours. Annual capacity does not replace a weekly roster.
+13. After EUR 12,000 property rent and EUR 2,250 renewal, operating-company cash before financing is about EUR 8,044.97.
+14. The active works-and-installation envelope is EUR 80,000 for the complete three-suite project.
+15. The central financing sources are EUR 10k operating-company share capital, EUR 20k interest-free operating-company shareholder current account and EUR 50k new bank debt.
+16. The shareholder-current-account principal test is EUR 4k per year over five years, but repayment is conditional on cash and bank covenants. Blocking, deferral or subordination behind bank debt may be required.
+17. Allocate funding from actual invoices: the SCI should in principle borrow for property-incorporated works; the operating company should fund detachable furniture, operating equipment and working capital. Legal, tax, accounting and bank validation remain required.
+18. With a EUR 50k SCI loan over five years at the 5% simulation rate, annual debt service is about EUR 11,548.74. The rate excludes fees, insurance and guarantees and is not a bank offer.
+19. In the reference, operating-company cash after shareholder-current-account principal is about EUR 4,044.97. SCI cash after the new loan is only EUR 451.26 before all existing SCI debt and costs. Consolidated cash is about EUR 4,496.23 and simplified new-financing coverage is 1.289.
+20. A EUR 50k operating-company bank loan makes operating-company cash about EUR -7,503.77 even though consolidated cash remains positive. Do not use consolidated cash to hide an entity-level deficit.
+21. At 140 nights and EUR 205 average, consolidated cash is only about EUR 11 and operating-company cash is negative. This is arithmetic break-even, not a robust case.
+22. A EUR 60k SCI loan without new capital makes SCI cash about EUR -1,858 before existing commitments. An EUR 18k rent makes the operating company negative without changing consolidated cash. At 160 nights and EUR 210, consolidated cash rises to about EUR 6,624 but paid support rises to 1,325 hours.
+23. The EUR 12k rent covers the modeled new SCI loan by only about 1.04 times. No SCI borrowing decision is possible without a restricted schedule of all existing debt service and SCI costs.
+24. Initiative, bank guarantees, rural-zone relief and territorial tourism aid are eligibility leads only. Budget zero until written eligibility and award are received, and check application timing before signing quotes.
+25. Exact existing property debt, undisclosed historical financing balances, securities, guarantees, statements and lender correspondence belong only in a restricted banking annex outside the public repository.
 
 Human interface:
 - /chateau-sainte-lucie-site/demo/pilotage/
-- /chateau-sainte-lucie-site/demo/scenarios — human-readable comparison of the three internal concepts
+- /chateau-sainte-lucie-site/demo/scenarios — human-readable three-suite model, entity financing and stress tests

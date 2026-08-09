@@ -1,60 +1,119 @@
 {
-  "schema_version": "2.1",
+  "schema_version": "4.0",
   "as_of": "2026-08-09",
   "currency": "EUR",
+  "status": "unified_working_budget_to_quote",
   "glossary": {
-    "SCI": "Société civile immobilière CSL, propriétaire du château",
-    "operating_company": "Future société commerciale chargée de l'exploitation"
+    "property_company": "Société civile immobilière CSL, owner of the château",
+    "operating_company": "Future commercial company operating the guest house",
+    "shareholder_current_account": "Interest-free associate advance recorded as a debt of the operating company",
+    "working_capital": "Cash needed to cover launch stock, timing differences and routine operating payments"
   },
-  "active_envelope_ttc": 59000,
-  "documented_range_ttc": [55000, 58000],
-  "status": "working_budget",
+  "active_total_envelope_ttc": 80000,
   "scope": {
+    "guest_suites": ["Suite Lumière", "Suite Feuillage", "Suite Maisonnette"],
     "wellness_facilities": ["hammam", "bain nordique"],
-    "hammam_treatment": "existing_or_included_scope_to_confirm",
-    "warning": "Any hammam work not already included must fit the envelope or be added explicitly."
-  },
-  "items": [
-    { "name": "Suites", "amount_ttc": 12000 },
-    { "name": "Bathrooms", "amount_ttc": 21500, "detail": { "large": 15000, "small": 6500 } },
-    { "name": "Terraces", "amount_ttc": 4000 },
-    { "name": "Additional decoration", "amount_ttc": 2000 },
-    { "name": "Japanese path", "amount_ttc": 2500 },
-    { "name": "Outdoor lighting", "range_ttc": [7500, 10500] },
-    { "name": "Nordic bath", "amount_ttc": 4000 },
-    { "name": "Networks and miscellaneous", "amount_ttc": 1500 }
-  ],
-  "financing_plan": {
-    "shareholder_current_accounts_total": 50000,
-    "shareholder_current_accounts": [
-      { "debtor_entity": "property_company_SCI", "principal": 35000, "status": "working_assumption" },
-      { "debtor_entity": "operating_company", "principal": 15000, "status": "working_assumption" }
+    "included_families": [
+      "building and network works",
+      "bathrooms and fitted equipment",
+      "detachable furniture, bedding and decoration",
+      "terraces, paths and exterior lighting",
+      "wellness equipment",
+      "professional fees, launch equipment, working capital and contingency to identify"
     ],
-    "remaining_source_to_define": 9000,
-    "test_term_years": 5,
-    "repayment_method_test": "linear principal repayment only",
-    "annual_principal_repayments": {
-      "SCI": 7000,
-      "operating_company": 3000,
-      "combined": 10000
+    "quote_requirement": "Every invoice must be classified as property-incorporated work, detachable operating asset, operating expense or working capital before the borrower and payer are selected."
+  },
+  "unified_financing_plan": {
+    "total_sources": 80000,
+    "sources": [
+      {
+        "recipient_entity": "operating_company",
+        "type": "share_capital",
+        "amount": 10000,
+        "status": "working_assumption"
+      },
+      {
+        "recipient_entity": "operating_company",
+        "type": "shareholder_current_account",
+        "amount": 20000,
+        "interest_rate": 0,
+        "test_term_years": 5,
+        "annual_principal_test": 4000,
+        "status": "working_assumption_to_document"
+      },
+      {
+        "recipient_entity": "to_allocate_from_invoices",
+        "recommended_recipient_if_property_works": "property_company_SCI",
+        "type": "bank_loan",
+        "amount": 50000,
+        "test_term_years": 5,
+        "test_annual_rate": 0.05,
+        "annual_debt_service": 11548.7399,
+        "rate_status": "simulation_assumption_not_a_bank_offer"
+      }
+    ],
+    "balance_check": "10,000 + 20,000 + 50,000 = 80,000 EUR"
+  },
+  "shareholder_current_account_policy": {
+    "debtor_entity": "operating_company",
+    "principal": 20000,
+    "interest_rate": 0,
+    "annual_principal_test": 4000,
+    "nominal_term_years": 5,
+    "accounting_treatment": "Principal repayment is a cash outflow and balance-sheet movement, not an operating expense.",
+    "repayment_priority": "Repay only when operating-company liquidity and bank covenants permit.",
+    "clauses_to_consider": ["blocking behind bank debt", "payment deferral", "subordination", "no repayment while the operating company would become cash-negative"],
+    "external_validation": "Written agreement, corporate approval, accounting treatment and bank acceptability"
+  },
+  "carrying_structures": {
+    "A_operating_company_bank_loan": {
+      "status": "not_recommended_for_reference_plan",
+      "appropriate_only_for": ["detachable furniture and equipment", "working capital", "operating-company assets"],
+      "property_work_warning": "If the operating company finances an asset incorporated into property owned by the SCI, a robust works, lease, indemnity and tax agreement is required before payment.",
+      "reference_cash_test": {
+        "operating_company_after_bank_and_shareholder_current_account": -7503.7728,
+        "property_company_before_existing_debt_and_costs": 12000,
+        "consolidated_cash": 4496.2272
+      },
+      "reading": "The consolidated total hides an operating-company deficit. The operating company cannot support the full 50,000 EUR loan in the reference case."
     },
-    "status": "working_assumption",
-    "warning": "The SCI and operating-company accounts require separate written agreements and repayment schedules. Each entity must demonstrate its own repayment capacity."
+    "B_property_company_bank_loan": {
+      "status": "recommended_in_principle_subject_to_invoice_allocation_and_full_debt_review",
+      "appropriate_for": ["building works", "networks and fitted assets incorporated into the château"],
+      "operating_company_funding_role": "Use the 10,000 EUR share capital and 20,000 EUR shareholder current account only for detachable furniture, operating equipment and working capital supported by invoices.",
+      "reference_cash_test": {
+        "operating_company_after_shareholder_current_account_principal": 4044.9671,
+        "property_company_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
+        "consolidated_cash": 4496.2272
+      },
+      "warning": "The 12,000 EUR rent covers the modeled new SCI loan by only about 451 EUR before all existing SCI debt service and costs. A confidential consolidated debt review is mandatory."
+    }
   },
-  "accounting_and_cash_treatment": {
-    "principal_repayment": "cash outflow and balance-sheet movement, not operating expense",
-    "entity_separation": "SCI repayments are not operating-company repayments; the rent is an inter-entity flow governed by the lease"
-  },
-  "excluded": [
-    "family labor valuation",
-    "working capital beyond the stated annual reserve",
-    "legal and accounting setup",
-    "digital stack",
-    "final photography",
-    "launch consumables",
-    "unidentified regulatory works",
-    "financing arrangements beyond the stated principal repayment schedules",
-    "hammam work not already included in the documented items"
+  "funding_and_guarantee_leads": [
+    "Initiative Vosges Centre Ouest interest-free personal honour loan, subject to committee approval and allocation compatible with the plan",
+    "Bpifrance or France Active bank guarantee, subject to borrower, lender and project eligibility",
+    "France Rural Revitalisation Zone tax or employer relief, subject to exact territorial, creation, tax-regime and employment conditions",
+    "2C2R and Vosges Department tourism property-investment aid, only if applicant, guest-house works, timing and expenditure thresholds are confirmed eligible in writing"
   ],
-  "priority_order": ["safety and water-tightness", "bathrooms and networks", "bedding and suite usability", "night park lighting and access", "landscape-integrated wellness", "additional decoration"]
+  "aid_budgeted_in_financing_plan": 0,
+  "decision_gates": [
+    "itemized 80,000 EUR quote and contingency",
+    "invoice-by-invoice allocation between the SCI and operating company",
+    "confirmation of the guest-house five-room and fifteen-guest limits",
+    "updated municipal declaration, works, destination and insurance checks",
+    "two comparable bank offers including annual percentage rate, fees, insurance and security",
+    "confidential review of all existing SCI debt service and costs",
+    "written shareholder-current-account agreement and bank-approved repayment priority",
+    "collective investment and borrowing approval"
+  ],
+  "confidential_financing_annex": {
+    "repository_rule": "Do not publish exact existing property-company debt, undisclosed historical shareholder-current-account balances, securities, guarantees or bank statements.",
+    "required_for_bank_review": [
+      "remaining principal, rates, annual payments and maturity of existing property financing",
+      "undisclosed shareholder-current-account balances and repayment or subordination terms by entity",
+      "security ranking and personal guarantees",
+      "recent accounts, tax returns, cash statements and property valuation"
+    ],
+    "storage": "restricted confidential annex outside the public repository"
+  }
 }

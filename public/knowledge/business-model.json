@@ -1,251 +1,189 @@
 {
-  "schema_version": "5.1",
+  "schema_version": "6.0",
   "as_of": "2026-08-09",
-  "model_type": "standard_annual_operating_model",
+  "model_type": "unified_three_suite_annual_operating_model",
   "status": "active_working_reference",
-  "purpose": "Transparent annual model for two guest suites; not an accountant, payroll, tax or legal forecast",
+  "purpose": "Transparent annual model for three guest-house suites; not an accountant, payroll, tax, bank or legal forecast",
   "currency": "EUR",
-  "scenario_comparison_reference": {
-    "file": "operating-scenarios.json",
-    "concepts": ["agile_base", "seasonal_premium_table", "recommended_hybrid"],
-    "strategic_concept_recommended_for_collective_arbitration": "recommended_hybrid",
-    "recommended_reference_case": { "nights_per_suite": 140, "average_public_price_ttc": 205, "status": "working_assumption" },
-    "public_offer_effect": "none_without_separate_collective_decision",
-    "interpretation": "This file remains the detailed technical reference for the agile base. The hybrid is a strategic recommendation for collective arbitration, not an approved operating standard."
-  },
+  "detailed_scenario_reference": "operating-scenarios.json",
   "glossary": {
-    "SCI": "Société civile immobilière CSL, propriétaire du château",
-    "operating_company": "Future société commerciale chargée de l'exploitation"
-  },
-  "status_vocabulary": {
-    "validated_project_fact": "Collectively confirmed project fact",
-    "working_assumption": "Current planning input that remains adjustable",
-    "simulation_convention": "Formula convention used to compare cases consistently",
-    "quote_or_measurement_required": "Must be replaced with an invoice, quote or operating measurement",
-    "external_validation_required": "Requires an accountant, payroll, legal, tax, insurance or regulatory opinion"
+    "property_company": "Société civile immobilière CSL, owner of the château",
+    "operating_company": "Future commercial company operating the guest house",
+    "shareholder_current_account": "Interest-free associate advance recorded as a debt of the operating company",
+    "average_public_nightly_price": "Average public tax-inclusive price for one suite and one night"
   },
   "doctrine": {
     "single_standard_year": true,
-    "activity_levels_are_comparable_tests_not_yearly_phases": true,
-    "public_prices_are_ttc": true,
-    "standard_vat_mode_is_adjustable": true,
-    "contractual_sci_rent_is_an_input": true,
+    "single_operating_model_for_all_three_suites": true,
+    "public_prices_are_tax_inclusive": true,
+    "public_price_grid_ttc": [180, 220],
+    "pricing_grid_central_value_ttc": 205,
+    "reference_achieved_average_price_ttc": 210,
+    "vat_real_is_the_prudent_reference": true,
+    "contractual_property_rent_is_an_input": true,
+    "entity_cash_must_be_tested_separately": true,
     "operating_result_is_the_residual": true,
-    "shareholder_current_account_principal_repayment_is_cash_flow_not_operating_expense": true,
-    "shareholder_current_accounts_are_repaid_by_their_debtor_entity": true,
-    "renewal_and_cash_reserve_are_separated_from_operating_expenses": true,
-    "paid_support_input_is_exact": true,
-    "support_recommendation_and_coverage_gap_are_separate_outputs": true,
-    "associate_hours_must_be_declared_and_rostered": true,
-    "internalized_cash_savings_require_explicit_workload_hours": true
+    "principal_repayment_is_cash_flow_not_operating_expense": true,
+    "shareholder_current_account_has_no_interest": true,
+    "shareholder_current_account_repayment_is_conditional_on_liquidity": true,
+    "internalized_cash_savings_require_explicit_workload_hours": true,
+    "confidential_existing_property_debt_is_excluded_from_public_knowledge": true
   },
   "inventory": {
-    "suite_count": { "value": 2, "unit": "suites", "status": "validated_project_fact" },
-    "average_guests": { "value": 2.1, "unit": "guests_per_occupied_suite", "status": "working_assumption" }
+    "suite_count": 3,
+    "suite_names": ["Suite Lumière", "Suite Feuillage", "Suite Maisonnette"],
+    "same_pricing_and_operating_model": true,
+    "guest_house_rooms": 5,
+    "maximum_simultaneous_guests": 15,
+    "status": "working_project_reference_pending_external_confirmation"
   },
-  "standard_activity": {
-    "nights_per_suite": { "value": 120, "unit": "nights_per_suite_per_year", "status": "working_assumption" },
-    "occupied_suite_nights": { "value": 240, "unit": "suite_nights_per_year", "formula": "suite_count * nights_per_suite" },
-    "average_public_price_ttc": { "value": 200, "unit": "EUR_TTC_per_suite_night", "public_range": [180, 220], "status": "working_assumption" },
-    "average_length_of_stay": { "value": 2.5, "unit": "nights_per_stay", "status": "working_assumption" },
-    "estimated_stays": { "value": 96, "unit": "stays_per_year", "formula": "occupied_suite_nights / average_length_of_stay" },
-    "direct_booking_share": { "value": 0.5, "unit": "share_of_lodging_sales", "status": "working_assumption" },
-    "comparison_nights_per_suite": { "value": 150, "unit": "nights_per_suite_per_year", "status": "simulation_convention" }
+  "reference_activity": {
+    "sold_nights_per_suite": 150,
+    "occupied_suite_nights": 450,
+    "average_public_price_ttc": 210,
+    "public_price_range_ttc": [180, 220],
+    "pricing_grid_central_value_ttc": 205,
+    "average_length_of_stay": 2.5,
+    "estimated_stays": 180,
+    "average_guests_per_occupied_suite": 2.1,
+    "direct_booking_share": 0.5,
+    "status": "working_assumption"
   },
   "commercial_offer": {
     "lodging": {
-      "public_price_range_ttc": [180, 220],
-      "standard_average_price_ttc": 200,
-      "unit": "EUR_TTC_per_suite_night",
-      "status": "working_assumption"
+      "price_range_ttc": [180, 220],
+      "grid_central_value_ttc": 205,
+      "reference_achieved_average_price_ttc": 210,
+      "unit": "EUR_TTC_per_suite_night"
     },
     "spa": {
       "facilities": ["hammam", "bain nordique"],
-      "price_ttc": 50,
-      "price_unit": "EUR_TTC_per_suite_day",
-      "take_rate": 0.75,
-      "take_rate_denominator": "estimated_stays",
-      "billing_rule": "Every buying stay is billed for each occupied suite day of that stay.",
-      "direct_cost_ttc": 10,
-      "direct_cost_unit": "EUR_TTC_per_sold_suite_day",
-      "service_time": 1,
-      "service_time_unit": "hour_per_approximate_open_day",
-      "approximate_open_days_formula": "presence_days * (1 - (1 - buying_suite_days / (suite_count * presence_days)) ^ suite_count)",
-      "status": "working_assumption",
-      "validation": "Measure wood, water, consumables, preparation, heating, testing and cleaning time in dry runs."
+      "take_rate_of_occupied_suite_nights": 0.7,
+      "price_ttc_per_suite_day": 60,
+      "direct_cost_ttc_per_sold_suite_day": 10,
+      "status": "working_assumption_to_measure"
     },
-    "table_board": {
-      "description": "simplified local board offer",
-      "price_ttc": 50,
-      "price_unit": "EUR_TTC_per_suite_day_sale",
-      "take_rate": 0.25,
-      "take_rate_denominator": "occupied_suite_nights",
-      "direct_cost_ttc": 20,
-      "direct_cost_unit": "EUR_TTC_per_sale",
-      "service_time": 1,
-      "service_time_unit": "hour_per_sale",
-      "status": "working_assumption",
-      "validation": "Confirm the commercial contents, food-safety scope, alcohol treatment and real preparation time."
+    "pantry": {
+      "take_rate_of_occupied_suite_nights": 0.35,
+      "price_ttc_per_sale": 55,
+      "direct_cost_rate": 0.55,
+      "service_hours_per_sale": 0.25,
+      "status": "working_assumption_to_measure"
+    },
+    "signature_table": {
+      "take_rate_of_occupied_suite_nights": 0.15,
+      "price_ttc_per_sale": 160,
+      "direct_cost_rate": 0.35,
+      "service_hours_per_service_day": 4,
+      "commercial_rule": "One menu, advance booking, one fixed service time and deliberately limited service days.",
+      "status": "working_assumption_to_measure"
     }
   },
   "tax": {
-    "standard_vat_mode": { "value": "franchise", "status": "working_assumption", "adjustable": true },
-    "alternative_mode": "vat_real",
-    "simulated_rates_if_vat_real": {
+    "reference_mode": "vat_real_prudent_simulation",
+    "simulated_rates": {
       "lodging": 0.1,
       "spa": { "value": 0.2, "status": "external_validation_required" },
-      "table_food": 0.1,
-      "table_alcohol": 0.2
+      "food": 0.1,
+      "alcohol": 0.2,
+      "food_and_drink_sales_mix": { "food_share": 0.8, "alcohol_share": 0.2, "status": "working_assumption" }
     },
-    "fixed_cost_vat_recovery_in_standard_case": 0,
-    "interpretation": "The standard case uses the VAT franchise as a modifiable planning assumption. Eligibility, thresholds, activity mix and any voluntary election require professional validation."
+    "fixed_cost_vat_recovery": 1500,
+    "warning": "Rates, mixed supplies, deduction rights and invoicing require professional validation."
   },
-  "variable_costs": {
-    "turnover_linen_and_consumables_ttc": { "value": 30, "unit": "EUR_TTC_per_stay", "status": "quote_or_measurement_required" },
-    "internalized_turnover_time": { "value": 4, "unit": "hours_per_stay", "status": "quote_or_measurement_required" },
-    "breakfast_ttc": { "value": 6, "unit": "EUR_TTC_per_guest_night", "status": "quote_or_measurement_required" },
-    "marginal_energy_ttc": { "value": 5, "unit": "EUR_TTC_per_occupied_suite_night", "status": "quote_or_measurement_required" },
-    "spa_direct_cost_ttc": { "value": 10, "unit": "EUR_TTC_per_sold_suite_day", "status": "quote_or_measurement_required", "note": "Working split: about EUR 5 hammam energy and EUR 5 wood per buying suite-day; two buying suites therefore cost about EUR 20 in total." },
-    "table_direct_cost_ttc": { "value": 20, "unit": "EUR_TTC_per_sale", "status": "quote_or_measurement_required" },
-    "ota_commission_rate": { "value": 0.15, "unit": "share_of_OTA_lodging_sales", "status": "working_assumption" },
-    "direct_payment_rate": { "value": 0.015, "unit": "share_of_direct_receipts", "status": "working_assumption" },
-    "incidents_and_commercial_gestures_rate": { "value": 0.002, "unit": "share_of_accounting_revenue", "status": "working_assumption" }
+  "variable_cost_inputs": {
+    "turnover_linen_and_consumables_ttc_per_stay": 30,
+    "internalized_turnover_hours_per_stay": 4,
+    "breakfast_ttc_per_guest_night": 6,
+    "marginal_energy_ttc_per_occupied_suite_night": 5,
+    "platform_commission_rate_of_platform_lodging_sales": 0.15,
+    "direct_payment_fee_rate": 0.015,
+    "incidents_and_commercial_gestures_rate_of_accounting_revenue": 0.002,
+    "status": "measurement_required"
   },
-  "fixed_operating_costs_ttc": {
-    "total": 7000,
-    "unit": "EUR_TTC_per_year",
-    "status": "working_assumption",
-    "fixed_vat_recovery_standard_case": 0,
-    "lines": {
-      "insurance": 1500,
-      "accounting_and_payroll": 800,
-      "pms_site_and_telecom": 1500,
-      "acquisition_and_communication": 0,
-      "cfe_licences_and_mediation": 700,
-      "bank_fixed": 400,
-      "safety_and_controls": 600,
-      "technical_maintenance": 0,
-      "fixed_spa_maintenance": 0,
-      "water_waste_and_base_energy": 1200,
-      "training_and_prevention": 300
-    },
-    "warning": "Zero-budget lines are explicit self-provision assumptions, not proof that the economic cost is zero. Each line must be assigned to the operating company, SCI or both according to the lease and actual beneficiary."
+  "fixed_operating_costs": {
+    "tax_inclusive_budget": 10000,
+    "estimated_vat_recovery": 1500,
+    "net_budget": 8500,
+    "status": "working_assumption_to_quote"
   },
   "staffing": {
-    "jules_fte": { "value": 0.8, "unit": "FTE", "status": "working_assumption" },
-    "jules_employed_months": { "value": 12, "unit": "months_per_year", "status": "working_assumption" },
-    "legal_full_time_hours": { "value": 1607, "unit": "hours_per_FTE_per_year", "status": "external_validation_required" },
-    "jules_full_time_employer_budget": { "value": 28000, "unit": "EUR_employer_cost_per_FTE_per_year", "status": "external_validation_required" },
-    "jules_standard_employer_budget": { "value": 22400, "unit": "EUR_employer_cost_per_year", "formula": "28000 * 0.8" },
-    "paid_support_hours": { "value": 100, "unit": "hours_per_year", "status": "working_assumption" },
-    "paid_support_hourly_cost": { "value": 25, "unit": "EUR_per_hour", "status": "quote_or_measurement_required" },
-    "associate_contribution_hours": { "value": 380, "unit": "hours_per_year", "status": "working_assumption", "validation": "Name, roster and validate the corporate, labor-law and insurance treatment of these hours." },
-    "renewal_cash_allocation": { "value": 1500, "unit": "EUR_per_year", "status": "working_assumption" },
-    "annual_cash_reserve_contribution": { "value": 0, "unit": "EUR_per_year", "status": "working_assumption" }
+    "jules_full_time_equivalent": 1,
+    "legal_full_time_hours_reference": 1607,
+    "jules_annual_employer_budget": 28000,
+    "paid_support_hours": 1175,
+    "paid_support_hourly_cost": 25,
+    "paid_support_cost": 29375,
+    "associate_contribution_hours_cap": 200,
+    "modeled_operations_hours": 2705.0586,
+    "declared_capacity_hours": 2982,
+    "capacity_buffer_hours": 276.9414,
+    "warning": "Annual capacity does not replace a weekly roster respecting rests, leave and simultaneous services."
   },
-  "sci_rent": {
-    "contractual_test": { "value": 12000, "unit": "EUR_per_year", "status": "working_assumption" },
-    "strategic_target": { "value": 18000, "unit": "EUR_per_year", "status": "working_assumption" },
-    "interpretation": "The annual model must first demonstrate its ability to support 12,000 EUR. The 18,000 EUR amount is a target, not an automatic rent. Lease terms, market value and tax treatment require professional validation."
+  "property_rent": {
+    "annual_contractual_test": 12000,
+    "annual_strategic_target_test": 18000,
+    "reference_rule": "The rent must be supported by market value and the lease. An 18,000 EUR rent makes the operating company cash-negative in the reference financing case even though consolidated cash is unchanged."
   },
-  "shareholder_current_accounts": {
-    "total_principal": { "value": 50000, "unit": "EUR", "status": "working_assumption" },
-    "accounts": [
-      { "debtor_entity": "property_company_SCI", "principal": 35000, "unit": "EUR", "status": "working_assumption" },
-      { "debtor_entity": "operating_company", "principal": 15000, "unit": "EUR", "status": "working_assumption" }
-    ],
-    "test_term": { "value": 5, "unit": "years", "status": "working_assumption" },
-    "simulation_method": {
-      "payment_type": "linear_principal_repayment_only",
-      "principal_formula": "principal / years",
-      "entity_separation": "SCI debt service is paid by SCI cash; operating-company debt service is paid by operating-company cash",
-      "accounting_treatment": "Principal repayment is a cash outflow and balance-sheet movement, not an operating expense."
+  "investment_and_financing": {
+    "total_works_and_installation_envelope_ttc": 80000,
+    "operating_company_share_capital": 10000,
+    "operating_company_shareholder_current_account": {
+      "principal": 20000,
+      "interest_rate": 0,
+      "test_term_years": 5,
+      "annual_principal_test": 4000,
+      "repayment_condition": "Only when cash permits; blocking, deferral or subordination behind bank debt may be required."
     },
-    "simulation_outputs_at_standard_inputs": {
-      "combined_annual_principal_repayment": 10000,
-      "sci_annual_principal_repayment": 7000,
-      "operating_company_annual_principal_repayment": 3000,
-      "combined_year_one_principal_repayment": 10000,
-      "combined_principal_repaid_over_five_years": 50000
+    "new_bank_loan": {
+      "principal": 50000,
+      "test_annual_rate": 0.05,
+      "test_term_years": 5,
+      "annual_debt_service": 11548.7399,
+      "recommended_carrier": "property_company_SCI_for_property_incorporated_works_subject_to_invoice_allocation_and_full_debt_review",
+      "rate_status": "simulation_assumption_not_a_bank_offer"
     },
-    "warning": "The two advances require separate written agreements and repayment schedules. Repayment priority, possible subordination and the capacity of each debtor entity require professional validation."
+    "allocation_rule": "The SCI should fund property-incorporated works; the operating company should fund detachable furniture, operating equipment and working capital. Actual invoices control the final allocation."
   },
-  "investment_financing_bridge": {
-    "active_investment_envelope_ttc": 59000,
-    "shareholder_current_account_financing_total": 50000,
-    "remaining_source_to_define": 9000,
-    "unit": "EUR",
-    "status": "working_assumption"
-  },
-  "workload_model": {
-    "estimated_client_presence_days": "1.2 * nights_per_suite; heuristic pending the real booking calendar",
-    "base_property_and_administration_hours": { "value": 720, "unit": "hours_per_year", "status": "quote_or_measurement_required" },
-    "client_presence_hours": "1.75 * estimated_client_presence_days",
-    "occupied_suite_night_hours": "0.5 * occupied_suite_nights",
-    "stay_coordination_hours": "estimated_stays",
-    "internalized_turnover_hours": "4 * estimated_stays",
-    "spa_service_hours": "spa_hours_per_open_day * estimated_spa_open_days; estimated_spa_open_days = presence_days * (1 - (1 - spa_suite_days / (suite_count * presence_days)) ^ suite_count)",
-    "table_service_hours": "1 * table_sales",
-    "total_operations_hours": "base_property_and_administration_hours + client_presence_hours + occupied_suite_night_hours + stay_coordination_hours + internalized_turnover_hours + spa_service_hours + table_service_hours",
-    "jules_paid_capacity": "1607 * funded_FTE * employed_months / 12",
-    "planned_coverage_hours": "jules_paid_capacity + paid_support_hours + declared_associate_hours",
-    "calendar_support_floor": "round_to_50(100 + 2 * nights_per_suite), bounded between 250 and 500 hours",
-    "calendar_support_gap": "max(calendar_support_floor - paid_support_hours - declared_associate_hours, 0)",
-    "coverage_gap": "max(total_operations_hours - planned_coverage_hours, calendar_support_gap, 0)",
-    "warning": "Annual totals do not replace a named weekly roster respecting daily and weekly rest. Hours benefiting private property or residents must not be silently charged to the operating company."
+  "reference_outputs": {
+    "lodging_sales_ttc": 94500,
+    "spa_sales_ttc": 18900,
+    "pantry_sales_ttc": 8662.5,
+    "signature_table_sales_ttc": 10800,
+    "total_public_sales_ttc": 132862.5,
+    "accounting_revenue": 119057.3864,
+    "variable_costs": 30887.4193,
+    "result_before_property_rent": 22294.9671,
+    "result_after_property_rent": 10294.9671,
+    "operating_company_cash_before_financing": 8044.9671,
+    "operating_company_cash_after_shareholder_current_account_principal": 4044.9671,
+    "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
+    "consolidated_cash_after_new_financing": 4496.2272,
+    "simplified_total_debt_service_coverage": 1.28917,
+    "property_rent_to_new_SCI_loan_coverage": 1.03907
   },
   "calculation_rules": {
-    "occupied_suite_nights": "suite_count * nights_per_suite",
+    "occupied_suite_nights": "suite_count * sold_nights_per_suite",
     "estimated_stays": "occupied_suite_nights / average_length_of_stay",
     "lodging_sales_ttc": "occupied_suite_nights * average_public_price_ttc",
-    "spa_buying_stays": "estimated_stays * spa_take_rate",
-    "spa_sold_suite_days": "spa_buying_stays * average_length_of_stay",
-    "spa_sales_ttc": "spa_sold_suite_days * spa_price_ttc",
-    "table_sales_count": "occupied_suite_nights * table_take_rate",
-    "table_sales_ttc": "table_sales_count * table_price_ttc",
-    "operating_result_before_rent": "accounting_revenue - variable_costs - fixed_operating_costs - payroll - paid_support",
-    "operating_result_after_rent": "operating_result_before_rent - contractual_sci_rent",
-    "operating_company_cash_after_financing": "operating_result_after_rent - renewal_allocation - cash_reserve_contribution - operating_company_principal_repayment",
-    "sci_cash_after_principal_repayment_before_other_sci_costs": "sci_rent_received - sci_principal_repayment"
+    "operating_result_before_rent": "accounting_revenue - variable_costs - fixed_operating_costs - Jules employer budget - paid support",
+    "operating_company_cash_before_financing": "operating_result_before_rent - property rent - renewal allocation",
+    "operating_company_cash_after_financing": "operating_company_cash_before_financing - operating-company shareholder-current-account principal - operating-company bank debt service",
+    "property_company_cash_before_existing_commitments": "property rent received - new SCI bank debt service",
+    "project_cash_before_new_financing": "operating_company_cash_before_financing + property rent received",
+    "simplified_total_debt_service_coverage": "project_cash_before_new_financing / (shareholder-current-account principal + new bank debt service)",
+    "warning": "The consolidated calculation excludes undisclosed existing SCI debt service and costs; it is not a lender covenant."
   },
-  "activity_tests": [
-    {
-      "label": "standard",
-      "nights_per_suite": 120,
-      "average_public_price_ttc": 200,
-      "lodging_sales_ttc": 48000,
-      "spa_sales_ttc": 9000,
-      "table_sales_ttc": 3000,
-      "total_public_sales_ttc": 60000,
-      "public_sales_ttc_at_price_range": [55200, 64800],
-      "estimated_operations_hours": 1756,
-      "estimated_annual_coverage_gap_hours": 0,
-      "interpretation": "Close to annual workload coverage with 0.8 FTE, 100 paid support hours and 380 declared associate hours; calendar feasibility still requires a real roster."
-    },
-    {
-      "label": "higher_activity_test",
-      "nights_per_suite": 150,
-      "average_public_price_ttc": 200,
-      "lodging_sales_ttc": 60000,
-      "spa_sales_ttc": 11250,
-      "table_sales_ttc": 3750,
-      "total_public_sales_ttc": 75000,
-      "public_sales_ttc_at_price_range": [69000, 81000],
-      "estimated_operations_hours": 2015,
-      "estimated_annual_coverage_gap_hours": 249,
-      "interpretation": "Improves economic capacity but exceeds the planned annual labor coverage by about 249 hours before calendar constraints; staffing or task design must change."
-    }
-  ],
   "validation_register": [
-    "Confirm VAT regime and activity-specific rates before contracts and pricing are frozen.",
-    "Obtain the payroll cost and working-time structure for 0.8 FTE Jules.",
-    "Validate the lease, the 12,000 EUR rent test and the 18,000 EUR target against market value and cost allocation.",
-    "Draft separate SCI and operating-company shareholder-current-account agreements.",
-    "Define separate written repayment schedules for the SCI and the operating company, including priority and possible subordination.",
-    "Confirm the local-board unit, contents, food-safety obligations and measured one-hour service assumption.",
-    "Measure hammam and Nordic-bath opening days, wood, water, consumables and labor.",
-    "Replace each fixed and variable cost with a quote, invoice or dry-run measurement.",
-    "Create a named weekly roster for Jules, paid support and associate contribution.",
-    "Use operating-scenarios.json to compare the agile base, the seasonal premium-table study and the recommended hybrid concept at 60, 90, 120 and 150 nights per suite."
+    "Confirm that the three suites remain within the guest-house five-room and fifteen-guest limits and update the municipal declaration or registration.",
+    "Confirm VAT treatment and rates before contracts and pricing are frozen.",
+    "Obtain payroll validation for Jules and quotes for 1,175 paid-support hours.",
+    "Replace fixed and variable costs with quotes, invoices and dry-run measurements.",
+    "Create a named weekly roster for Jules, paid support and no more than 200 associate hours.",
+    "Allocate each item of the 80,000 EUR envelope to the SCI or operating company from the actual invoice and asset owner.",
+    "Obtain two bank offers and validate borrower, fees, insurance, guarantees and repayment profile.",
+    "Review all existing SCI debt service and costs in a restricted banking annex before approving SCI borrowing.",
+    "Document the interest-free 20,000 EUR shareholder current account, including blocking, deferral or subordination behind bank debt.",
+    "Validate the 12,000 EUR rent against market value and each entity's standalone cash."
   ]
 }

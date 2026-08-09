@@ -392,3 +392,214 @@ export const hybridRecommendation = calculateHybridScenario({
   julesFte: 1,
   paidReliefHours: 300,
 });
+
+const annualLoanPayment = (principal, annualRate, years) => {
+  if (principal <= 0 || years <= 0) return 0;
+  if (annualRate === 0) return principal / years;
+  const factor = Math.pow(1 + annualRate, years);
+  return principal * (annualRate * factor) / (factor - 1);
+};
+
+export const ambitiousDefaults = {
+  suiteCount: 3,
+  soldNightsPerSuite: 150,
+  averageNightPrice: 210,
+  averageGuests: 2.1,
+  averageStay: 2.5,
+  directShare: 0.5,
+  otaCommission: 0.15,
+  paymentRate: 0.015,
+  incidentRate: 0.002,
+  breakfastCostPerGuestNight: 6,
+  energyCostPerSuiteNight: 5,
+  turnoverCashPerStay: 30,
+  turnoverHoursPerStay: 4,
+  spaPricePerSuiteDay: 60,
+  spaTakeRate: 0.7,
+  spaCostPerSoldSuiteDay: 10,
+  pantryPricePerSuiteDay: 55,
+  pantryTakeRate: 0.35,
+  pantryCostRate: 0.55,
+  pantryLaborHoursPerSale: 0.25,
+  signatureTablePricePerSuiteDay: 160,
+  signatureTableTakeRate: 0.15,
+  signatureTableCostRate: 0.35,
+  signatureTableHoursPerServiceDay: 4,
+  fixedCostsTtc: 10000,
+  fixedVatRecovery: 1500,
+  baseOperationsHours: 780,
+  julesFte: 1,
+  familyHours: 200,
+  staffingSafetyRate: 0.1,
+  paidReliefRate: 25,
+  rent: 12000,
+  renewal: 2250,
+  shareCapital: 10000,
+  operatingCompanyShareholderAdvancePrincipal: 20000,
+  operatingCompanyShareholderAdvanceYears: 5,
+  bankLoanPrincipal: 50000,
+  bankLoanRate: 0.05,
+  bankLoanYears: 5,
+  bankLoanCarrier: "sci",
+};
+
+const foodAndDrinkRevenueExVat = (revenueTtc) => revenueTtc * (0.8 / 1.1 + 0.2 / 1.2);
+const foodAndDrinkCostExVat = (costTtc) => costTtc * (0.8 / 1.055 + 0.2 / 1.2);
+const roundUpTo = (value, step) => Math.ceil(Math.max(0, value) / step) * step;
+
+/**
+ * Prudent three-suite decision model.
+ *
+ * Unlike the two-suite working model, this case assumes recurring VAT liability:
+ * public prices stay tax-inclusive, revenue is converted to accounting revenue,
+ * and only explicitly estimated input VAT is recovered. The staffing budget also
+ * includes a 10% capacity buffer rather than matching the annual workload exactly.
+ */
+export function calculateAmbitiousScenario(input = {}) {
+  const p = { ...ambitiousDefaults, ...input };
+  const occupiedSuiteNights = p.suiteCount * p.soldNightsPerSuite;
+  const stays = occupiedSuiteNights / p.averageStay;
+  const presenceDays = Math.min(275, p.soldNightsPerSuite * 1.2);
+
+  const lodgingRevenueTtc = occupiedSuiteNights * p.averageNightPrice;
+  const spaSales = occupiedSuiteNights * p.spaTakeRate;
+  const pantrySales = occupiedSuiteNights * p.pantryTakeRate;
+  const signatureTableSales = occupiedSuiteNights * p.signatureTableTakeRate;
+  const spaRevenueTtc = spaSales * p.spaPricePerSuiteDay;
+  const pantryRevenueTtc = pantrySales * p.pantryPricePerSuiteDay;
+  const signatureTableRevenueTtc = signatureTableSales * p.signatureTablePricePerSuiteDay;
+  const experienceRevenueTtc = spaRevenueTtc + pantryRevenueTtc + signatureTableRevenueTtc;
+  const publicRevenueTtc = lodgingRevenueTtc + experienceRevenueTtc;
+  const blendedAverageNightPrice = p.averageNightPrice;
+
+  const lodgingRevenue = lodgingRevenueTtc / 1.1;
+  const spaRevenue = spaRevenueTtc / 1.2;
+  const foodRevenue = foodAndDrinkRevenueExVat(pantryRevenueTtc + signatureTableRevenueTtc);
+  const accountingRevenue = lodgingRevenue + spaRevenue + foodRevenue;
+  const collectedVat = publicRevenueTtc - accountingRevenue;
+
+  const otaCommission = lodgingRevenueTtc * (1 - p.directShare) * p.otaCommission;
+  const paymentFees = (lodgingRevenueTtc * p.directShare + experienceRevenueTtc) * p.paymentRate;
+  const turnover = stays * p.turnoverCashPerStay / 1.2;
+  const breakfast = occupiedSuiteNights * p.averageGuests * p.breakfastCostPerGuestNight / 1.055;
+  const energy = occupiedSuiteNights * p.energyCostPerSuiteNight / 1.2;
+  const spaDirect = spaSales * p.spaCostPerSoldSuiteDay / 1.2;
+  const pantryDirect = foodAndDrinkCostExVat(pantryRevenueTtc * p.pantryCostRate);
+  const signatureTableDirect = foodAndDrinkCostExVat(signatureTableRevenueTtc * p.signatureTableCostRate);
+  const incidents = accountingRevenue * p.incidentRate;
+  const variableCosts = otaCommission + paymentFees + turnover + breakfast + energy
+    + spaDirect + pantryDirect + signatureTableDirect + incidents;
+
+  const occupancySharePerPresenceDay = presenceDays > 0 ? Math.min(1, p.soldNightsPerSuite / presenceDays) : 0;
+  const spaProbabilityPerSuiteDay = occupancySharePerPresenceDay * p.spaTakeRate;
+  const tableProbabilityPerSuiteDay = occupancySharePerPresenceDay * p.signatureTableTakeRate;
+  const spaServiceDays = presenceDays * probabilityAtLeastOne(spaProbabilityPerSuiteDay, p.suiteCount);
+  const signatureTableServiceDays = presenceDays * probabilityAtLeastOne(tableProbabilityPerSuiteDay, p.suiteCount);
+  const baseHours = p.baseOperationsHours;
+  const guestPresenceHours = presenceDays * 1.75;
+  const commonAreasHours = occupiedSuiteNights * 0.5;
+  const coordinationHours = stays;
+  const turnoverHours = stays * p.turnoverHoursPerStay;
+  const spaHours = spaServiceDays + Math.max(0, spaSales - spaServiceDays) * 0.25;
+  const pantryHours = pantrySales * p.pantryLaborHoursPerSale;
+  const signatureTableHours = signatureTableServiceDays * p.signatureTableHoursPerServiceDay
+    + Math.max(0, signatureTableSales - signatureTableServiceDays) * 0.5;
+  const operationsHours = baseHours + guestPresenceHours + commonAreasHours + coordinationHours
+    + turnoverHours + spaHours + pantryHours + signatureTableHours;
+
+  const julesCapacityHours = annualHours * p.julesFte;
+  const minimumReliefHours = roundUpTo(operationsHours - julesCapacityHours - p.familyHours, 25);
+  const prudentReliefHours = roundUpTo(operationsHours * (1 + p.staffingSafetyRate) - julesCapacityHours - p.familyHours, 25);
+  const paidReliefHours = Math.max(300, prudentReliefHours);
+  const declaredCapacityHours = julesCapacityHours + paidReliefHours + p.familyHours;
+  const capacityBufferHours = declaredCapacityHours - operationsHours;
+
+  const fixedCosts = Math.max(0, p.fixedCostsTtc - p.fixedVatRecovery);
+  const julesCost = fullTimeEmployerCost * p.julesFte;
+  const paidReliefCost = paidReliefHours * p.paidReliefRate;
+  const resultBeforeRent = accountingRevenue - variableCosts - fixedCosts - julesCost - paidReliefCost;
+  const resultAfterRent = resultBeforeRent - p.rent;
+  const operatingCompanyCashBeforeFinancing = resultAfterRent - p.renewal;
+  const operatingCompanyAnnualPrincipalRepayment = p.operatingCompanyShareholderAdvancePrincipal
+    / p.operatingCompanyShareholderAdvanceYears;
+  const bankAnnualDebtService = annualLoanPayment(p.bankLoanPrincipal, p.bankLoanRate, p.bankLoanYears);
+  const operatingCompanyBankDebtService = p.bankLoanCarrier === "operating_company" ? bankAnnualDebtService : 0;
+  const sciBankDebtService = p.bankLoanCarrier === "sci" ? bankAnnualDebtService : 0;
+  const operatingCompanyCashAfterFinancing = operatingCompanyCashBeforeFinancing
+    - operatingCompanyAnnualPrincipalRepayment - operatingCompanyBankDebtService;
+  const sciCashBeforeExistingCommitments = p.rent - sciBankDebtService;
+  const projectCashBeforeNewFinancing = resultBeforeRent - p.renewal;
+  const totalAnnualFinancingService = bankAnnualDebtService + operatingCompanyAnnualPrincipalRepayment;
+  const consolidatedCashAfterFinancing = projectCashBeforeNewFinancing - totalAnnualFinancingService;
+  const simplifiedDebtCoverage = totalAnnualFinancingService > 0
+    ? projectCashBeforeNewFinancing / totalAnnualFinancingService
+    : null;
+  const rentCoverageOfBankLoan = bankAnnualDebtService > 0 ? p.rent / bankAnnualDebtService : null;
+
+  return {
+    ...p,
+    lotCount: p.suiteCount,
+    occupiedSuiteNights,
+    stays,
+    presenceDays,
+    lodgingRevenueTtc,
+    spaRevenueTtc,
+    pantryRevenueTtc,
+    signatureTableRevenueTtc,
+    experienceRevenueTtc,
+    publicRevenueTtc,
+    blendedAverageNightPrice,
+    accountingRevenue,
+    collectedVat,
+    variableCosts,
+    baseHours,
+    guestPresenceHours,
+    commonAreasHours,
+    coordinationHours,
+    turnoverHours,
+    spaHours,
+    pantryHours,
+    signatureTableHours,
+    operationsHours,
+    julesCapacityHours,
+    minimumReliefHours,
+    prudentReliefHours,
+    paidReliefHours,
+    declaredCapacityHours,
+    capacityBufferHours,
+    fixedCosts,
+    julesCost,
+    paidReliefCost,
+    resultBeforeRent,
+    resultAfterRent,
+    operatingCompanyCashBeforeFinancing,
+    operatingCompanyAnnualPrincipalRepayment,
+    bankAnnualDebtService,
+    operatingCompanyBankDebtService,
+    sciBankDebtService,
+    operatingCompanyCashAfterFinancing,
+    sciCashBeforeExistingCommitments,
+    projectCashBeforeNewFinancing,
+    totalAnnualFinancingService,
+    consolidatedCashAfterFinancing,
+    simplifiedDebtCoverage,
+    rentCoverageOfBankLoan,
+  };
+}
+
+export const ambitiousReference = calculateAmbitiousScenario();
+export const ambitiousFullDebtStress = calculateAmbitiousScenario({
+  shareCapital: 0,
+  bankLoanPrincipal: 60000,
+});
+export const ambitiousHighRentStress = calculateAmbitiousScenario({ rent: 18000 });
+export const ambitiousLowerActivity = calculateAmbitiousScenario({
+  soldNightsPerSuite: 140,
+  averageNightPrice: 205,
+});
+export const ambitiousConsolidation = calculateAmbitiousScenario({
+  soldNightsPerSuite: 160,
+});
+export const ambitiousOperatingCompanyLoanTest = calculateAmbitiousScenario({
+  bankLoanCarrier: "operating_company",
+});

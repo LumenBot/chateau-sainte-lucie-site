@@ -3,6 +3,12 @@ import { Image } from "astro:assets";
 import DemoLayout from "../../layouts/DemoLayout.astro";
 import { withBase } from "../../utils/url";
 import {
+  ambitiousConsolidation,
+  ambitiousFullDebtStress,
+  ambitiousHighRentStress,
+  ambitiousLowerActivity,
+  ambitiousOperatingCompanyLoanTest,
+  ambitiousReference,
   hybridActivityCases,
   hybridRecommendation,
   scenarioA,
@@ -17,10 +23,14 @@ import tableHotes from "../../assets/images/projection/table-hotes.jpg";
 import spaTerrasse from "../../assets/images/projection/spa-terrasse.jpg";
 import petitDejeuner from "../../assets/images/projection/petit-dejeuner-terrasse.jpg";
 import piscine from "../../assets/images/projection/piscine-heure-bleue.jpg";
+import maisonGardien from "../../assets/images/06_maison_gardien_crop.jpeg";
 
 const money = (value: number) => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(value);
 const integer = (value: number) => new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 }).format(value);
 const percent = (value: number) => new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 0 }).format(value);
+const decimal = (value: number | null, digits = 2) => value === null
+  ? "non calculable"
+  : new Intl.NumberFormat("fr-FR", { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(value);
 const signedMoney = (value: number) => `${value >= 0 ? "+ " : "− "}${money(Math.abs(value))}`;
 const fteLabel = (value: number) => value === 0 ? "aucun salaire" : value >= 1 ? "temps plein" : `${integer(value * 100)} % d’un temps plein`;
 const hybridSimulationQuery = new URLSearchParams({
@@ -96,6 +106,22 @@ const workloadB = [
   ["Dîners", scenarioBCentral.dinnerHours],
   ["Bar et boissons", scenarioBCentral.barHours],
 ] as const;
+
+const pnlC = [
+  ["Ventes publiques TTC", ambitiousReference.publicRevenueTtc, "revenue"],
+  ["TVA comprise dans les ventes", ambitiousReference.collectedVat, "cost"],
+  ["Produit comptable simulé", ambitiousReference.accountingRevenue, "subtotal"],
+  ["Coûts variables après récupération estimée", ambitiousReference.variableCosts, "cost"],
+  ["Charges fixes après récupération estimée", ambitiousReference.fixedCosts, "cost"],
+  ["Jules · un temps plein", ambitiousReference.julesCost, "cost"],
+  [`Relève prudente · ${integer(ambitiousReference.paidReliefHours)} h`, ambitiousReference.paidReliefCost, "cost"],
+  ["Résultat avant loyer", ambitiousReference.resultBeforeRent, "subtotal"],
+  ["Loyer versé à la SCI", ambitiousReference.rent, "cost"],
+  ["Renouvellement des équipements", ambitiousReference.renewal, "cash"],
+  ["Trésorerie de l’exploitation avant remboursement", ambitiousReference.operatingCompanyCashBeforeFinancing, "total"],
+  ["Remboursement annuel du compte courant d’associé", ambitiousReference.operatingCompanyAnnualPrincipalRepayment, "cash"],
+  ["Trésorerie finale de la société d’exploitation", ambitiousReference.operatingCompanyCashAfterFinancing, "final-positive"],
+] as const;
 ---
 
 <DemoLayout
@@ -108,7 +134,7 @@ const workloadB = [
       <div class="scenarios-hero__copy">
         <p class="demo-kicker">Aide à la décision · document autonome · 9 août 2026</p>
         <h1>Quel modèle pour<br /><em class="gold light">faire vivre le château ?</em></h1>
-        <p class="lede">Cette page présente le projet, les contraintes et les choix actuellement ouverts. Elle permet à un associé — même sans avoir suivi les échanges précédents — de comprendre deux modèles d’exploitation, leurs conséquences financières et humaines, puis la voie hybride que nous recommandons.</p>
+        <p class="lede">Cette page présente le projet, les contraintes et les choix actuellement ouverts. Elle permet à un associé — même sans avoir suivi les échanges précédents — de comprendre les modèles à deux suites, puis le modèle cible unifié à trois suites avec la Maisonnette.</p>
         <div class="demo-actions">
           <button class="demo-button" type="button" data-scenario-share>Copier ce lien</button>
           <a class="demo-button secondary" href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Explorer la modélisation</a>
@@ -123,30 +149,31 @@ const workloadB = [
     <section class="decision-context" aria-labelledby="context-title">
       <div class="decision-context__intro">
         <p class="demo-kicker">Le projet en une minute</p>
-        <h2 id="context-title">Deux suites. Une expérience intime. Trois équilibres à tenir.</h2>
-        <p>Les Nuits au Château accueilleront deux suites privatives au premier étage du Château de Sainte-Lucie, à Rambervillers. La promesse associe demeure historique, parc d’un hectare, piscine naturelle, hammam et bain nordique. Le prix public de la suite nue restera compris entre 180 et 220 € la nuit, petit-déjeuner inclus.</p>
+        <h2 id="context-title">Trois suites dans une même maison d’hôtes. Trois équilibres à tenir.</h2>
+        <p>Les Nuits au Château associeraient les suites Lumière et Feuillage à une troisième suite aménagée dans la Maisonnette, qui fait partie du château et relève du même modèle d’accueil. L’enveloppe totale de travaux et de lancement est désormais évaluée à 80 000 €. La promesse associe demeure historique, parc d’un hectare, piscine naturelle, hammam et bain nordique.</p>
       </div>
       <div class="decision-context__facts">
         <article><span>01 · Promesse client</span><strong>Un dîner possible chaque soir</strong><p>La faible densité de restauration alentour ne doit jamais devenir un irritant du séjour.</p></article>
         <article><span>02 · Équilibre humain</span><strong>Un emploi juste pour Jules</strong><p>Le temps rémunéré doit rester cohérent avec la charge réelle, les repos et l’implication promise par les associés.</p></article>
-        <article><span>03 · Équilibre économique</span><strong>Loyer et avances remboursés</strong><p>12 000 € de loyer annuel à la société civile immobilière (SCI) et 50 000 € d’avances d’associés à rembourser sur cinq ans, sans intérêt dans cette simulation.</p></article>
+        <article><span>03 · Équilibre économique</span><strong>Loyer et financement remboursés</strong><p>12 000 € de loyer annuel à la société civile immobilière (SCI), 20 000 € de compte courant d’associé et 50 000 € de prêt bancaire simulés sur cinq ans.</p></article>
       </div>
     </section>
 
     <section class="decision-baseline" aria-labelledby="baseline-title">
       <div>
-        <p class="demo-kicker">Ce qui est commun à tous les calculs</p>
-        <h2 id="baseline-title">Une même base pour comparer honnêtement.</h2>
+        <p class="demo-kicker">Cadre financier du modèle cible</p>
+        <h2 id="baseline-title">Une seule exploitation, trois suites, 80 k€ à financer.</h2>
       </div>
       <div class="decision-baseline__grid">
-        <article><span>Capacité</span><strong>2 suites</strong><small>une nuit-suite = une suite occupée pendant une nuit</small></article>
-        <article><span>Prix moyen de travail</span><strong>200 €</strong><small>dans une grille publique de 180 à 220 €</small></article>
+        <article><span>Capacité cible</span><strong>3 suites</strong><small>les deux suites principales et la Suite Maisonnette</small></article>
+        <article><span>Prix moyen de travail</span><strong>210 €</strong><small>dans une grille publique de 180 à 220 €</small></article>
         <article><span>Loyer obligatoire</span><strong>12 000 € / an</strong><small>montant à documenter dans le futur bail</small></article>
         <article><span>Coût employeur de référence</span><strong>28 000 € / an</strong><small>pour Jules à temps plein, à confirmer par devis de paie</small></article>
-        <article><span>Avance à la SCI</span><strong>35 000 €</strong><small>soit 7 000 € de principal à rembourser chaque année</small></article>
-        <article><span>Avance à l’exploitation</span><strong>15 000 €</strong><small>soit 3 000 € de principal à rembourser chaque année</small></article>
+        <article><span>Capital de départ</span><strong>10 000 €</strong><small>apport durable à la société d’exploitation</small></article>
+        <article><span>Compte courant d’associé</span><strong>20 000 €</strong><small>soit 4 000 € de principal par an, sans intérêt simulé</small></article>
+        <article><span>Prêt bancaire étudié</span><strong>50 000 €</strong><small>environ 11 549 € par an sur cinq ans au taux de travail de 5 %</small></article>
       </div>
-      <p class="scenario-note standalone"><strong>Lecture :</strong> les ventes sont présentées toutes taxes comprises (TTC). Le remboursement du capital n’est pas une charge d’exploitation : il apparaît après le résultat, comme une sortie de trésorerie. Les deux entités restent séparées ; le loyer reçu par la SCI ne peut pas combler librement un déficit de la société d’exploitation.</p>
+      <p class="scenario-note standalone"><strong>Lecture :</strong> les ventes sont présentées toutes taxes comprises (TTC). Le montage recommandé affecte le prêt de 50 k€ à la SCI pour les travaux incorporés au château, et le capital ainsi que le compte courant à la société d’exploitation pour le mobilier, les équipements détachables et la trésorerie — sous réserve de la ventilation réelle des devis. Le loyer reçu par la SCI ne peut pas combler librement un déficit de l’exploitation.</p>
     </section>
 
     <nav class="scenario-jump" aria-label="Navigation dans l’aide à la décision">
@@ -155,13 +182,14 @@ const workloadB = [
       <a href="#scenario-b">Saison table</a>
       <a href="#restauration">Solution de dîner</a>
       <a href="#hybride">Voie recommandée</a>
+      <a href="#ambitieux">Modèle 3 suites</a>
       <a href="#seuils">Seuils d’activité</a>
     </nav>
 
     <section id="comparaison" class="scenario-section" aria-labelledby="comparison-title">
       <div class="scenario-section__head">
-        <div><p class="demo-kicker">Les deux hypothèses étudiées</p><h2 id="comparison-title">Deux réponses opposées à la même question.</h2></div>
-        <p>Le scénario A protège la capacité d’hébergement ; le scénario B protège la qualité de service alimentaire en concentrant l’ouverture. Aucun des deux ne constitue encore la décision finale.</p>
+        <div><p class="demo-kicker">Les modèles étudiés</p><h2 id="comparison-title">Deux formats conservateurs, puis un modèle cible.</h2></div>
+        <p>Les scénarios A et B conservent deux suites et éclairent les choix d’exploitation. Le scénario C réunit les trois suites dans un business plan unique afin de tester le financement complet des 80 k€ de travaux et de lancement.</p>
       </div>
       <div class="scenario-reading-grid scenario-introductions">
         <article>
@@ -174,31 +202,38 @@ const workloadB = [
           <p>Avril à octobre, trois semaines sur quatre, uniquement du jeudi au dimanche. Le déjeuner, le dîner, les vins et le spa enrichissent fortement chaque nuit, mais la capacité est limitée à 63 nuits par suite avant même de parler de remplissage.</p>
           <a href={withBase("/demo/pilotage?scenario=saisonnier#simulateur")}>Tester ce scénario dans le simulateur</a>
         </article>
+        <article class="ambitious">
+          <span>C</span><p class="demo-kicker">Modèle cible unifié</p><h3>Trois suites pour absorber la structure.</h3>
+          <p>La Maisonnette devient une troisième suite de la maison d’hôtes, avec la même grille de prix. Sa capacité additionnelle dilue les coûts fixes et sécurise le temps plein de Jules, mais déclenche un besoin de relève bien supérieur, un régime de TVA réel et un financement de 80 k€.</p>
+          <a href="#ambitieux">Étudier les conditions de viabilité</a>
+        </article>
       </div>
 
-      <div class="scenario-scorecard" role="table" aria-label="Comparaison des deux scénarios">
+      <div class="scenario-scorecard" role="table" aria-label="Comparaison des trois scénarios">
         <div class="scenario-scorecard__head" role="row">
           <span role="columnheader">Indicateur</span>
           <strong role="columnheader">A · Socle agile</strong>
           <strong role="columnheader">B · Saison table d’hôtes</strong>
+          <strong role="columnheader">C · Trois suites</strong>
         </div>
         {[
-          ["Calendrier", "ouverture large et flexible", "21 semaines · jeudi au dimanche"],
-          ["Nuits vendues par suite", `${scenarioA.soldNightsPerSuite}`, `${scenarioBCentral.soldNightsPerSuite} sur 63 possibles`],
-          ["Prix moyen de la suite", money(scenarioA.averageNightPrice), money(scenarioBCentral.averageNightPrice)],
-          ["Ventes publiques TTC", money(scenarioA.publicRevenue), money(scenarioBCentral.publicRevenue)],
-          ["Suppléments moyens par nuit-suite", money(scenarioA.averageExtrasPerSuiteNight), money(scenarioBCentral.averageExtrasPerSuiteNight)],
-          ["Temps annuel à organiser", `${integer(scenarioA.operationsHours)} h`, `${integer(scenarioBCentral.operationsHours)} h`],
-          ["Temps familial non rémunéré", `${integer(scenarioA.familyHours)} h`, `${integer(scenarioBCentral.familyHours)} h`],
-          ["Jules financé", "80 % d’un temps plein", "75 % d’un temps plein"],
-          ["Après loyer et renouvellement", signedMoney(scenarioA.cashAfterRenewal), signedMoney(scenarioBCentral.cashAfterRenewal)],
-          ["Après remboursement annuel de l’avance", signedMoney(scenarioA.operatingCompanyCashAfterPrincipalRepayment), signedMoney(scenarioBCentral.operatingCompanyCashAfterPrincipalRepayment)],
-        ].map(([label, a, b]) => (
+          ["Calendrier", "ouverture large et flexible", "21 semaines · jeudi au dimanche", "ouverture large et flexible"],
+          ["Suites commercialisées", "2 suites", "2 suites", "3 suites"],
+          ["Nuits vendues par suite", `${scenarioA.soldNightsPerSuite}`, `${scenarioBCentral.soldNightsPerSuite} sur 63 possibles`, `${ambitiousReference.soldNightsPerSuite}`],
+          ["Prix moyen hébergement", money(scenarioA.averageNightPrice), money(scenarioBCentral.averageNightPrice), money(ambitiousReference.averageNightPrice)],
+          ["Ventes publiques TTC", money(scenarioA.publicRevenue), money(scenarioBCentral.publicRevenue), money(ambitiousReference.publicRevenueTtc)],
+          ["Temps annuel à organiser", `${integer(scenarioA.operationsHours)} h`, `${integer(scenarioBCentral.operationsHours)} h`, `${integer(ambitiousReference.operationsHours)} h`],
+          ["Temps familial non rémunéré", `${integer(scenarioA.familyHours)} h`, `${integer(scenarioBCentral.familyHours)} h`, `${integer(ambitiousReference.familyHours)} h`],
+          ["Jules financé", "80 % d’un temps plein", "75 % d’un temps plein", "un temps plein"],
+          ["Relève rémunérée", "100 h", "150 h", `${integer(ambitiousReference.paidReliefHours)} h avec marge de sécurité`],
+          ["Trésorerie après nouveaux financements", signedMoney(scenarioA.operatingCompanyCashAfterPrincipalRepayment), signedMoney(scenarioBCentral.operatingCompanyCashAfterPrincipalRepayment), signedMoney(ambitiousReference.consolidatedCashAfterFinancing)],
+        ].map(([label, a, b, c]) => (
           <div class="scenario-scorecard__row" role="row">
-            <span role="rowheader">{label}</span><strong>{a}</strong><strong class:list={{ negative: String(b).startsWith("−") }}>{b}</strong>
+            <span role="rowheader">{label}</span><strong>{a}</strong><strong class:list={{ negative: String(b).startsWith("−") }}>{b}</strong><strong class:list={{ negative: String(c).startsWith("−") }}>{c}</strong>
           </div>
         ))}
       </div>
+      <p class="scenario-note standalone"><strong>Comparabilité :</strong> les modèles A et B conservent encore une hypothèse provisoire de franchise de TVA. Le modèle C dépasse durablement les seuils usuels et est donc présenté au régime réel, avec prix publics TTC et produit comptable hors taxe. Sa prudence fiscale rend la comparaison plus exigeante, mais plus proche d’un dossier bancaire.</p>
     </section>
 
     <section id="scenario-a" class="scenario-section scenario-detail" aria-labelledby="scenario-a-title">
@@ -327,6 +362,125 @@ const workloadB = [
       </div>
     </section>
 
+    <section id="ambitieux" class="scenario-section ambitious-option" aria-labelledby="ambitious-title">
+      <div class="ambitious-option__hero">
+        <figure>
+          <Image src={maisonGardien} alt="La Maisonnette du château, éclairée de nuit, envisagée comme troisième suite" widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 48vw" />
+          <figcaption><strong>La Maisonnette : la troisième suite du projet.</strong><span>État actuel · travaux à chiffrer et à ventiler</span></figcaption>
+        </figure>
+        <div>
+          <p class="demo-kicker">Volet C · modèle cible unifié</p>
+          <h2 id="ambitious-title">Et si la bonne échelle était trois suites dès le départ ?</h2>
+          <p>La Maisonnette fait partie du château et serait exploitée comme les suites Lumière et Feuillage, sous le même régime de maison d’hôtes et dans la même grille de prix. Les trois suites partagent la marque, le parc, le spa et l’organisation ; le besoin total de financement atteint 80 k€.</p>
+          <div class="ambitious-option__answer">
+            <strong>Réponse courte</strong>
+            <span>Oui, trois suites peuvent stabiliser le business plan. Le cas devient défendable autour de 150 nuits par suite et 210 € de prix moyen, mais il exige un temps plein pour Jules, environ 1 175 h de relève et une séparation rigoureuse des financements entre la SCI et l’exploitation.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ambitious-option__premises">
+        <div><p class="demo-kicker">Cas central prudent</p><h3>Trois suites, un seul modèle économique.</h3><p>Le calcul ne survalorise plus la Maisonnette : chacune des trois suites est vendue en moyenne 210 € dans la grille de 180 à 220 €. La cible de 150 nuits par suite est plus exigeante que le lancement à deux suites, mais elle est nécessaire pour donner une marge réelle au financement sur cinq ans.</p></div>
+        <div class="scenario-offer-grid compact">
+          <article><span>Hébergement</span><strong>3 × 150 nuits</strong><p>{money(ambitiousReference.lodgingRevenueTtc)} TTC à 210 € de moyenne par suite.</p></article>
+          <article><span>Expériences</span><strong>{money(ambitiousReference.experienceRevenueTtc)}</strong><p>Spa, garde-manger et table signature selon le modèle hybride.</p></article>
+          <article><span>Financement total</span><strong>80 000 €</strong><p>10 k€ de capital, 20 k€ de compte courant et 50 k€ de prêt bancaire.</p></article>
+        </div>
+      </div>
+
+      <div class="scenario-kpis ambitious-kpis">
+        <article><span>Capacité vendue</span><strong>{integer(ambitiousReference.occupiedSuiteNights)}</strong><small>nuits-suite · {ambitiousReference.soldNightsPerSuite} par suite</small></article>
+        <article><span>Ventes publiques</span><strong>{money(ambitiousReference.publicRevenueTtc)}</strong><small>{money(ambitiousReference.accountingRevenue)} de produit comptable simulé</small></article>
+        <article><span>Travail à organiser</span><strong>{integer(ambitiousReference.operationsHours)} h</strong><small>Jules à temps plein + {integer(ambitiousReference.paidReliefHours)} h payées + {integer(ambitiousReference.familyHours)} h associées</small></article>
+        <article class="positive"><span>Après nouveaux financements</span><strong>{signedMoney(ambitiousReference.consolidatedCashAfterFinancing)}</strong><small>avant dettes historiques, fiscalité et amortissements</small></article>
+      </div>
+
+      <div class="ambitious-reading">
+        <article><span>Ce que la 3e suite apporte</span><h3>Environ 52 k€ de ventes TTC supplémentaires.</h3><p>Le cas central passe de {money(hybridRecommendation.publicRevenue)} à {money(ambitiousReference.publicRevenueTtc)}. Cette hausse n’est réelle que si la Maisonnette crée sa propre demande : répartir les mêmes clients sur trois suites ne produit aucun effet économique.</p></article>
+        <article><span>Ce qu’elle exige</span><h3>Un deuxième pilier humain.</h3><p>La charge atteint {integer(ambitiousReference.operationsHours)} h. Avec une marge de continuité de 10 %, le modèle finance {integer(ambitiousReference.paidReliefHours)} h de relève, soit environ {decimal(ambitiousReference.paidReliefHours / 1607, 2)} équivalent temps plein en plus de Jules et de 200 h associées.</p></article>
+        <article><span>Ce qu’elle change fiscalement</span><h3>La TVA devient structurelle.</h3><p>Les {money(ambitiousReference.publicRevenueTtc)} de ventes dépassent les seuils de franchise actuels. Les prix restent affichés TTC, mais le compte d’exploitation ne retient que {money(ambitiousReference.accountingRevenue)} de produit après ventilation indicative des taux.</p></article>
+      </div>
+
+      <details class="scenario-details" open>
+        <summary>Voir le compte d’exploitation prudent des trois suites</summary>
+        <div class="scenario-pnl">{pnlC.map(([label, value, kind]) => <div class:list={["scenario-pnl__row", kind]}><span>{label}</span><strong>{kind === "cost" || kind === "cash" ? `− ${money(Number(value))}` : signedMoney(Number(value)).replace("+ ", "")}</strong></div>)}</div>
+        <p class="scenario-note">Le compte ci-dessus est celui de la société d’exploitation. Il finance le loyer de 12 k€, le renouvellement et 4 k€ de remboursement annuel du compte courant. Le prêt immobilier simulé est porté séparément par la SCI. Lecture avant impôt sur les sociétés, amortissements et frais de garantie.</p>
+      </details>
+
+      <section class="ambitious-bank" aria-labelledby="bank-title">
+        <div class="ambitious-bank__intro"><p class="demo-kicker">Plan de financement recommandé</p><h3 id="bank-title">Financer chaque dépense dans la structure qui possède l’actif.</h3><p>La solution la plus lisible consiste à faire porter le prêt immobilier par la SCI propriétaire, et à réserver les ressources de l’exploitation au mobilier, aux équipements détachables et à la trésorerie. Cette ventilation devra suivre les devis réels.</p></div>
+        <div class="ambitious-bank__facts">
+          <article><span>Capital de l’exploitation</span><strong>10 000 €</strong><p>Apport durable des quatre associés, à répartir selon les statuts.</p></article>
+          <article><span>Compte courant de l’exploitation</span><strong>20 000 €</strong><p>Sans intérêt dans le modèle ; {money(ambitiousReference.operatingCompanyAnnualPrincipalRepayment)} de principal remboursé chaque année.</p></article>
+          <article><span>Prêt porté par la SCI</span><strong>50 000 €</strong><p>{money(ambitiousReference.bankAnnualDebtService)} d’annuité sur cinq ans au taux de travail de 5 %.</p></article>
+        </div>
+        <div class="ambitious-bank__facts split-flows">
+          <article><span>Société d’exploitation</span><strong>{signedMoney(ambitiousReference.operatingCompanyCashAfterFinancing)}</strong><p>Après loyer, renouvellement et remboursement du compte courant.</p></article>
+          <article><span>SCI · nouveau prêt seulement</span><strong>{signedMoney(ambitiousReference.sciCashBeforeExistingCommitments)}</strong><p>12 k€ de loyer moins l’annuité de {money(ambitiousReference.bankAnnualDebtService)}, avant ses emprunts, charges et impôts existants.</p></article>
+          <article><span>Ensemble du projet</span><strong>{signedMoney(ambitiousReference.consolidatedCashAfterFinancing)}</strong><p>Solde avant engagements historiques de la SCI, impôts et amortissements.</p></article>
+        </div>
+        <p class="scenario-correction"><strong>Le loyer de 12 k€ aide donc réellement le dossier bancaire, mais ne suffit pas à lui seul.</strong> Il couvre seulement {decimal(ambitiousReference.rentCoverageOfBankLoan)} fois l’annuité du nouveau prêt. La banque devra intégrer le capital restant dû, les annuités, les garanties et les revenus actuels des associés avant de conclure.</p>
+      </section>
+
+      <div class="ambitious-sensitivity" aria-labelledby="ambitious-sensitivity-title">
+        <div><p class="demo-kicker">Ce qui fait basculer la décision</p><h3 id="ambitious-sensitivity-title">Le cas central est un seuil, pas une rente.</h3><p>Le volume, le prix moyen, l’endettement bancaire et la répartition des flux entre les deux sociétés restent déterminants.</p></div>
+        <div>
+          <article class="warn"><span>140 nuits · prix moyen 205 €</span><strong>{signedMoney(ambitiousLowerActivity.consolidatedCashAfterFinancing)}</strong><p>Couverture {decimal(ambitiousLowerActivity.simplifiedDebtCoverage)} fois : le modèle rembourse, mais sans marge de sécurité.</p></article>
+          <article class="positive"><span>150 nuits · prix moyen 210 €</span><strong>{signedMoney(ambitiousReference.consolidatedCashAfterFinancing)}</strong><p>Cas central ; couverture totale de {decimal(ambitiousReference.simplifiedDebtCoverage)} fois.</p></article>
+          <article class="warn"><span>Sans capital · prêt porté à 60 k€</span><strong>{signedMoney(ambitiousFullDebtStress.consolidatedCashAfterFinancing)}</strong><p>La SCI manque de {money(Math.abs(ambitiousFullDebtStress.sciCashBeforeExistingCommitments))} avant même ses engagements historiques.</p></article>
+          <article class="negative"><span>Loyer porté à 18 k€ immédiatement</span><strong>{signedMoney(ambitiousHighRentStress.operatingCompanyCashAfterFinancing)}</strong><p>L’ensemble reste positif, mais la société d’exploitation devient déficitaire : le flux est placé dans la mauvaise entité.</p></article>
+          <article class="positive"><span>160 nuits · prix moyen 210 €</span><strong>{signedMoney(ambitiousConsolidation.consolidatedCashAfterFinancing)}</strong><p>Couverture {decimal(ambitiousConsolidation.simplifiedDebtCoverage)} fois, avec {integer(ambitiousConsolidation.paidReliefHours)} h de relève.</p></article>
+        </div>
+      </div>
+
+      <p class="scenario-correction prudent"><strong>Portage par la société d’exploitation :</strong> juridiquement possible pour ses propres actifs, mais défavorable pour les travaux incorporés au château. Si elle porte aussi le prêt de 50 k€, sa trésorerie tombe à {signedMoney(ambitiousOperatingCompanyLoanTest.operatingCompanyCashAfterFinancing)} malgré un solde consolidé inchangé. Le bail devrait en outre sécuriser les travaux réalisés sur l’actif de la SCI. Ce n’est pas le montage recommandé.</p>
+
+      <section class="ambitious-structure" aria-labelledby="structure-title">
+        <div><p class="demo-kicker">Montage et gouvernance</p><h3 id="structure-title">Deux sociétés séparées, un projet bancaire consolidé.</h3></div>
+        <div class="ambitious-structure__grid">
+          <article><span>SCI propriétaire</span><h4>Bâti et éléments incorporés</h4><p>Enveloppe, réseaux, salles d’eau et travaux structurels appartiennent normalement à la SCI. Son nouveau prêt doit être testé avec toutes ses annuités existantes.</p></article>
+          <article><span>Société d’exploitation</span><h4>Mobilier, service et trésorerie</h4><p>Capital et compte courant financent le mobilier détachable, le linge, les outils, le lancement et le fonds de roulement, dans la limite des devis affectables.</p></article>
+          <article><span>Quatre associés</span><h4>Trois blocs économiques</h4><p>Une traduction simple serait Pascal 1/3, Blaise 1/3, Jules 1/6 et Julie 1/6. Les statuts et un pacte doivent traiter le travail de Jules, les votes, les apports, les conflits d’intérêts et les sorties.</p></article>
+        </div>
+      </section>
+
+      <section class="ambitious-bank" aria-labelledby="bank-file-title">
+        <div class="ambitious-bank__intro"><p class="demo-kicker">Dossier bancaire local</p><h3 id="bank-file-title">Oui, un business plan peut être présenté — après consolidation de la SCI.</h3><p>Le château acheté sans dette constitue un actif patrimonial, mais les financements de travaux existants pèsent sur la capacité réelle. La banque examinera l’exposition globale, les sûretés, le rang hypothécaire, les revenus des associés et les cautions demandées.</p></div>
+        <div class="ambitious-bank__unknowns">
+          <h4>Les données indispensables avant rendez-vous</h4>
+          <ul><li>capital restant dû, annuités, taux, durées et garanties de chaque prêt de la SCI ;</li><li>valeur actuelle documentée du château et rang des hypothèques ;</li><li>modalités des comptes courants existants : entité, blocage, subordination et échéancier ;</li><li>devis de 80 k€ ventilé entre immobilier SCI, actifs d’exploitation et trésorerie ;</li><li>bail projeté et justification économique du loyer de 12 k€ ;</li><li>prévisionnel mensuel, plan de trésorerie et planning nominatif couvrant {integer(ambitiousReference.operationsHours)} h.</li></ul>
+          <p>Les encours, comptes courants et garanties historiques ne sont volontairement pas publiés sur cette page partageable : ils doivent figurer dans une annexe bancaire confidentielle.</p>
+        </div>
+      </section>
+
+      <section class="ambitious-status" aria-labelledby="status-title">
+        <div><p class="demo-kicker">Cadre réglementaire retenu</p><h3 id="status-title">Une troisième suite de la même maison d’hôtes.</h3></div>
+        <div>
+          <article><span>Continuité de l’accueil</span><p>La Maisonnette fait partie du château et reste exploitée avec accueil personnel, petit-déjeuner indissociable, linge et entretien.</p></article>
+          <article><span>Plafond global</span><p>L’ensemble doit rester limité à cinq chambres et quinze personnes. Si Lumière et Feuillage comptent déjà quatre chambres, la Maisonnette ne doit en ajouter qu’une.</p></article>
+          <article><span>Travaux à sécuriser</span><p>Urbanisme, sécurité, assurance, réseaux et ventilation de la TVA restent à confirmer à partir des plans et des devis.</p></article>
+        </div>
+      </section>
+
+      <section class="ambitious-aids" aria-labelledby="aids-title">
+        <div><p class="demo-kicker">Financements à instruire</p><h3 id="aids-title">Des leviers existent, aucun ne doit être budgété avant accord.</h3></div>
+        <div class="ambitious-aids__grid">
+          <article><h4>Initiative Vosges Centre Ouest</h4><p>Prêt d’honneur personnel à taux zéro, sans garantie, destiné à renforcer l’apport et faciliter le prêt bancaire.</p><a href="https://www.vosges.cci.fr/reseau-initiative-vosges-centre-ouest" target="_blank" rel="noreferrer">Source locale officielle</a></article>
+          <article><h4>Garantie Création Bpifrance</h4><p>La banque peut mobiliser une garantie allant jusqu’à 60 % sur un prêt de création éligible. Ce n’est pas une subvention.</p><a href="https://bpifrance-creation.fr/moment-de-vie/garanties-bancaires-quoi-sagit-il" target="_blank" rel="noreferrer">Voir le dispositif</a></article>
+          <article><h4>France Active · territoire rural</h4><p>Une garantie territoriale peut réduire ou exclure la caution personnelle pour un projet éligible. L’éligibilité locale doit être confirmée.</p><a href="https://bpifrance-creation.fr/encyclopedie/financements/dispositifs-garantie/garanties-bancaires-proposees-france-active" target="_blank" rel="noreferrer">Voir les garanties</a></article>
+          <article><h4>Zone France ruralités revitalisation</h4><p>Une création commerciale remplissant toutes les conditions peut bénéficier d’exonérations fiscales et, pour certaines embauches, sociales.</p><a href="https://entreprendre.service-public.gouv.fr/vosdroits/F31139" target="_blank" rel="noreferrer">Conditions officielles</a></article>
+          <article><h4>Aides touristiques territoriales</h4><p>Tourisme Vosges et la communauté de communes doivent qualifier les aides applicables à la rénovation d’une troisième suite avant toute commande.</p><a href="https://www.2c2r.fr/aides-directes-pour-des-projets-a-vocation-touristique/" target="_blank" rel="noreferrer">Piste territoriale à confirmer</a></article>
+        </div>
+      </section>
+
+      <div class="ambitious-gates">
+        <div><p class="demo-kicker">Décision en cinq portes</p><h3>Ne demander le prêt qu’après avoir levé ces inconnues.</h3></div>
+        <ol><li><strong>Produit.</strong><span>Plan coté, cinquième chambre maximum, salle d’eau, accès et expérience testable.</span></li><li><strong>Coût.</strong><span>Devis fermes de 80 k€ ventilés entre SCI, exploitation et fonds de roulement.</span></li><li><strong>Finance.</strong><span>État confidentiel complet des dettes SCI et accord sur 10 k€ de capital, 20 k€ de compte courant et 50 k€ de prêt.</span></li><li><strong>Marché.</strong><span>Preuve que 150 nuits par suite à 210 € de moyenne sont atteignables sans cannibalisation.</span></li><li><strong>Exploitation.</strong><span>Planning nominatif de Jules, de la relève rémunérée et des 200 h associées.</span></li></ol>
+      </div>
+
+      <p class="scenario-correction prudent"><strong>Recommandation :</strong> préparer dès maintenant le dossier bancaire du modèle à trois suites, sans signer les travaux avant validation. Le point de travail défendable est 150 nuits par suite, 210 € de prix moyen, 10 k€ de capital, 20 k€ de compte courant dans l’exploitation et 50 k€ de prêt porté par la SCI. À 140 nuits et 205 €, le financement est seulement équilibré ; si le service de la dette existante de la SCI ne laisse aucune capacité, il faudra allonger la durée, augmenter l’apport ou différer le projet.</p>
+    </section>
+
     <section id="seuils" class="scenario-section activity-ladder" aria-labelledby="threshold-title">
       <div class="scenario-section__head"><div><p class="demo-kicker">Bornes du modèle hybride recommandé</p><h2 id="threshold-title">Ce que signifient 60, 90, 120 ou 150 nuits.</h2></div><p>Les quatre niveaux appliquent la même offre : 200 € la suite, spa à 60 € acheté sur 70 % des nuits, garde-manger sur 35 % et table signature sur 15 %. Ils incluent 12 000 € de loyer, 1 500 € de renouvellement et 3 000 € de remboursement annuel du principal avancé à l’exploitation.</p></div>
       <div class="activity-ladder__table" role="table" aria-label="Comparaison des niveaux d’activité du modèle hybride">
@@ -348,10 +502,10 @@ const workloadB = [
         <article class="positive"><span>140–150 nuits</span><h3>La première zone réellement cohérente.</h3><p>Vers 140 nuits et 205 € de prix moyen, un temps plein, 300 h de relève et 200 h familiales sont couverts de justesse. À 150 nuits et 200 €, la marge simulée atteint {money(hybridActivityCases[3].cashAfterPrincipalRepayment)}, avec 350 h de relève.</p></article>
       </div>
       <div class="financing-reading">
-        <div><p class="demo-kicker">Remboursement des 50 000 € avancés</p><h3>Deux flux, cinq ans, aucun intérêt simulé.</h3></div>
-        <article><span>Dans la SCI</span><strong>7 000 € / an</strong><p>Prélevés sur les 12 000 € de loyer reçu, avant les autres charges et la fiscalité de la SCI.</p></article>
-        <article><span>Dans la société d’exploitation</span><strong>3 000 € / an</strong><p>Prélevés sur sa propre trésorerie après exploitation et renouvellement.</p></article>
-        <article><span>Total remboursé</span><strong>10 000 € / an</strong><p>Soit 50 000 € de principal en cinq ans si chaque entité couvre réellement sa part.</p></article>
+        <div><p class="demo-kicker">Financement du modèle cible à trois suites</p><h3>80 k€ mobilisés, deux flux à rembourser.</h3></div>
+        <article><span>Capital de l’exploitation</span><strong>10 000 €</strong><p>Ressource durable, sans échéancier de remboursement prévu.</p></article>
+        <article><span>Compte courant de l’exploitation</span><strong>4 000 € / an</strong><p>20 000 € remboursés en cinq ans, sans intérêt dans cette simulation.</p></article>
+        <article><span>Prêt de la SCI</span><strong>{money(ambitiousReference.bankAnnualDebtService)} / an</strong><p>50 000 € sur cinq ans au taux indicatif de 5 %, avant frais et engagements historiques.</p></article>
       </div>
       <p class="scenario-correction"><strong>Conclusion :</strong> 60 nuits par suite constituent un format de découverte financé par les associés, pas un modèle viable au regard des trois objectifs. Autour de 120 nuits, le modèle peut financer environ 80 % d’un temps plein mais reste humainement et financièrement tendu. La zone de décision la plus cohérente se situe autour de 140 à 150 nuits par suite, ou plus bas si le prix moyen, la marge des expériences ou l’implication familiale sont durablement supérieurs aux hypothèses.</p>
       <p class="scenario-correction prudent"><strong>Prudence :</strong> « cohérent » ne signifie pas encore « robuste ». À 150 nuits et 200 € de prix moyen, il ne reste qu’environ {money(hybridActivityCases[3].cashAfterPrincipalRepayment)} après remboursement du principal, sans réserve supplémentaire. Un prix moyen proche de 210 € porterait ce coussin vers 5 000 €, mais rapprocherait les ventes du seuil de TVA : les deux régimes doivent être comparés avant décision.</p>
@@ -364,13 +518,14 @@ const workloadB = [
         <article><span>02</span><h3>Tester trois partenaires</h3><p>Obtenir prix, jours de livraison, minimum de commande, allergènes et protocole de remise en température.</p></article>
         <article><span>03</span><h3>Garantir des heures, pas des intentions</h3><p>Les 200 h familiales du modèle représentent 25 journées de huit heures à inscrire dans un planning nominatif.</p></article>
         <article><span>04</span><h3>Choisir le seuil de lancement</h3><p>Décider si l’objectif est un pilote familial à 60–90 nuits ou une exploitation employeuse à 120–150 nuits.</p></article>
+        <article><span>05</span><h3>Instruire le modèle à trois suites</h3><p>Ventiler les 80 k€ de besoins, consolider la dette de la SCI et tester 10 k€ de capital + 20 k€ de compte courant + 50 k€ de prêt.</p></article>
       </div>
-      <div class="decision-final-cta"><div><p class="demo-kicker">Étape suivante</p><h3>Modifier les hypothèses, puis comparer les conséquences.</h3></div><div><a class="demo-button" href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Simuler le socle agile</a><a class="demo-button secondary" href={withBase("/demo/pilotage?scenario=saisonnier#simulateur")}>Simuler la saison table</a><a class="demo-button quiet" href={withBase("/demo/pilotage?scenario=libre#simulateur")}>Créer un scénario libre</a></div></div>
+      <div class="decision-final-cta"><div><p class="demo-kicker">Étape suivante</p><h3>Modifier les hypothèses, puis comparer les conséquences.</h3></div><div><a class="demo-button" href="#ambitieux">Étudier les 3 suites</a><a class="demo-button secondary" href={withBase("/demo/pilotage?scenario=socle#simulateur")}>Simuler le socle agile</a><a class="demo-button quiet" href={withBase("/demo/pilotage?scenario=libre#simulateur")}>Créer un scénario libre</a></div></div>
     </section>
 
     <footer class="scenario-method">
       <strong>Méthode et limites.</strong>
-      <p>Ces modèles sont des outils de décision, pas des prévisions. Les coûts, taux d’achat, temps de travail, régimes de TVA et conditions de remboursement doivent être remplacés par des devis, tests et validations professionnelles. Le modèle hybride valorise la restauration partenaire comme une promesse client ; les accords commerciaux n’existent pas encore. Les projections visuelles représentent une intention après travaux.</p>
+      <p>Ces modèles sont des outils de décision, pas des prévisions. Les coûts, taux d’achat, temps de travail, régimes de TVA et conditions de remboursement doivent être remplacés par des devis, tests et validations professionnelles. Le modèle à trois suites utilise un taux bancaire indicatif de 5 %, un régime de TVA réel et une marge de capacité humaine de 10 % ; il ne constitue ni une offre de crédit ni un avis juridique. Les projections visuelles représentent une intention après travaux.</p>
       <div><a href={withBase("/knowledge/operating-scenarios.json")}>Données structurées des scénarios</a><a href={withBase("/demo/pilotage#referentiel")}>Consulter la modélisation et ses sources</a></div>
     </footer>
   </div>

@@ -1,173 +1,64 @@
 {
-  "schema_version": "2.0",
+  "schema_version": "4.0",
   "as_of": "2026-08-09",
   "currency": "EUR",
-  "purpose": "Internal comparison of three operating concepts without changing the public offer",
-  "publication_effect": "none",
-  "glossary": {
-    "property_company": "Société civile immobilière (SCI) CSL, owner of the property",
-    "operating_company": "Future commercial company operating the guest-house activity",
-    "shareholder_current_account": "Advance made by an associate and recorded as a debt of the receiving entity",
-    "average_public_nightly_price": "Average public price including tax for one suite and one night"
-  },
+  "purpose": "Single annual operating reference for the three-suite guest house, with financing-allocation and downside tests",
+  "status": "active_working_reference_to_validate",
+  "publication_effect": "The model does not by itself publish prices, authorize borrowing or approve the 80,000 EUR investment.",
   "status_vocabulary": {
     "validated_project_fact": "Collectively confirmed project fact",
     "working_assumption": "Adjustable planning input",
     "calculated_result": "Arithmetic output from the stated assumptions",
     "measurement_required": "Must be replaced by a quote, recipe or timed operating test",
-    "decision_to_validate": "Collective or professional decision still required"
+    "external_validation_required": "Requires written accountant, legal, tax, insurance, bank or public-authority validation"
   },
-  "interpretation": {
-    "agile_base": "Current annual operating base: simple offer and broad opening calendar.",
-    "seasonal_premium_table": "Study case with a short sales calendar and a dense food-and-beverage offer. It is not an active offer.",
-    "recommended_hybrid": "Recommended concept for testing: broad opening calendar, short pantry offer and a deliberately limited signature table.",
-    "warning": "The 60, 90, 120 and 150-night values are sensitivity tests of one annual model. They are not successive years or sales commitments."
+  "superseded_references": {
+    "two_suite_standard": "docs/23-referentiel-exploitation-standard-v6.md",
+    "two_suite_concept_comparison": "docs/24-comparatif-scenarios-exploitation-v1.md",
+    "reading_rule": "These documents remain historical evidence only. They are not active financial references."
   },
-  "shared_assumptions": {
-    "suite_count": { "value": 2, "unit": "suites", "status": "validated_project_fact" },
-    "average_guests_per_occupied_suite": { "value": 2.1, "unit": "guests", "status": "working_assumption" },
-    "average_length_of_stay": { "value": 2.5, "unit": "nights_per_stay", "status": "working_assumption" },
-    "direct_booking_share_of_lodging": { "value": 0.5, "unit": "share", "status": "working_assumption" },
-    "platform_commission_rate": { "value": 0.15, "unit": "share_of_platform_lodging_sales", "status": "working_assumption" },
-    "direct_payment_fee_rate": { "value": 0.015, "unit": "share_of_direct_receipts", "status": "working_assumption" },
-    "turnover_linen_and_consumables": { "value": 30, "unit": "EUR_TTC_per_stay", "status": "measurement_required" },
-    "internalized_turnover_time": { "value": 4, "unit": "hours_per_stay", "status": "measurement_required" },
-    "breakfast_cost": { "value": 6, "unit": "EUR_TTC_per_guest_night", "status": "measurement_required" },
-    "marginal_energy_cost": { "value": 5, "unit": "EUR_TTC_per_occupied_suite_night", "status": "measurement_required" },
-    "incidents_and_commercial_gestures_rate": { "value": 0.002, "unit": "share_of_public_sales", "status": "working_assumption" },
-    "vat_mode": { "value": "franchise", "status": "working_assumption", "adjustable": true },
-    "financing": {
-      "property_company_principal": { "value": 35000, "unit": "EUR", "status": "working_assumption" },
-      "property_company_repayment_term": { "value": 5, "unit": "years", "status": "working_assumption" },
-      "property_company_annual_principal_repayment": { "value": 7000, "unit": "EUR_per_year", "status": "calculated_result" },
-      "operating_company_principal": { "value": 15000, "unit": "EUR", "status": "working_assumption" },
-      "operating_company_repayment_term": { "value": 5, "unit": "years", "status": "working_assumption" },
-      "operating_company_annual_principal_repayment": { "value": 3000, "unit": "EUR_per_year", "status": "calculated_result" },
-      "combined_annual_principal_repayment": { "value": 10000, "unit": "EUR_per_year", "status": "calculated_result" },
-      "entity_separation": "Each entity repays only the principal recorded in its own accounts."
-    }
-  },
-  "concepts": {
-    "agile_base": {
-      "name": "Socle agile",
-      "status": "active_working_reference",
-      "public_offer_replacement": false,
-      "hypotheses": {
-        "sold_nights_per_suite": 120,
-        "occupied_suite_nights": 240,
-        "estimated_stays": 96,
-        "average_public_nightly_price_ttc": 200,
-        "spa": {
-          "take_rate_of_stays": 0.75,
-          "billing_days_per_buying_stay": 2.5,
-          "sold_suite_days": 180,
-          "price_ttc_per_suite_day": 50,
-          "direct_cost_ttc_per_sold_suite_day": 10
-        },
-        "local_board": {
-          "take_rate_of_occupied_suite_nights": 0.25,
-          "sales_count": 60,
-          "price_ttc_per_sale": 50,
-          "direct_cost_ttc_per_sale": 20,
-          "service_hours_per_sale": 1
-        },
-        "staffing": {
-          "jules_full_time_equivalent": 0.8,
-          "jules_employer_budget": 22400,
-          "paid_support_hours": 100,
-          "paid_support_hourly_cost": 25,
-          "associate_contribution_hours": 380
-        },
-        "fixed_operating_costs_ttc": 7000,
-        "property_company_rent": 12000,
-        "renewal_cash_allocation": 1500
-      },
-      "calculated_results": {
-        "lodging_sales_ttc": 48000,
-        "spa_sales_ttc": 9000,
-        "food_sales_ttc": 3000,
-        "total_public_sales_ttc": 60000,
-        "total_variable_costs_ttc": 14364,
-        "contribution_margin": 45636,
-        "operating_result_before_property_rent": 13736,
-        "operating_result_after_property_rent": 1736,
-        "cash_after_renewal": 236,
-        "cash_after_operating_company_principal_repayment": -2764,
-        "estimated_operations_hours": 1756,
-        "planned_capacity_hours": 1766,
-        "estimated_annual_coverage_gap_hours": 0
-      },
-      "decisions_to_validate": [
-        "Confirm that 380 named associate hours can be rostered and treated lawfully.",
-        "Replace the lean fixed costs and internalized hours with quotes and timed tests.",
-        "Confirm the tax regime and the ability of each entity to meet its own principal repayments."
-      ]
+  "guest_house_scope": {
+    "suite_count": { "value": 3, "status": "validated_project_fact" },
+    "suite_names": ["Suite Lumière", "Suite Feuillage", "Suite Maisonnette"],
+    "commercial_structure": "The three suites follow the same operating and pricing model.",
+    "guest_house_room_count": 5,
+    "room_count_detail": {
+      "two_existing_suites": 4,
+      "maisonnette": 1
     },
-    "seasonal_premium_table": {
-      "name": "Saisonnier avec table premium",
-      "status": "study_only",
-      "public_offer_replacement": false,
-      "hypotheses": {
-        "commercial_capacity_nights_per_suite": 63,
-        "sold_nights_per_suite": 54,
-        "occupied_suite_nights": 108,
-        "commercial_capacity_occupancy_rate": 0.857143,
-        "estimated_stays": 43.2,
-        "average_public_nightly_price_ttc": 200,
-        "spa": { "take_rate": 0.75, "price_ttc_per_suite_day": 60 },
-        "lunch": { "take_rate": 0.45, "price_ttc_per_guest": 25, "direct_cost_ttc_per_guest": 10, "service_hours_per_open_day": 1.5 },
-        "dinner": { "take_rate": 0.75, "price_ttc_per_guest": 50, "direct_cost_ttc_per_guest": 17.5, "service_hours_per_open_day": 4 },
-        "wine_pairing": { "take_rate_of_dinner_guests": 0.5, "price_ttc_per_guest": 30, "direct_cost_ttc_per_guest": 12 },
-        "bar": { "take_rate": 0.35, "price_ttc_per_suite_day": 25, "direct_cost_rate": 0.35, "service_hours_per_sale": 0.5 },
-        "staffing": {
-          "jules_full_time_equivalent": 0.75,
-          "jules_employer_budget": 21000,
-          "paid_support_hours": 150,
-          "paid_support_hourly_cost": 25,
-          "associate_contribution_hours": 100
-        },
-        "fixed_operating_costs_ttc": 8000,
-        "property_company_rent": 12000,
-        "renewal_cash_allocation": 1500
-      },
-      "calculated_results": {
-        "lodging_sales_ttc": 21600,
-        "spa_sales_ttc": 4860,
-        "food_and_beverage_sales_ttc": 14553,
-        "total_public_sales_ttc": 41013,
-        "total_variable_costs_ttc": 11510.721,
-        "contribution_margin": 29502.279,
-        "operating_result_before_property_rent": -3247.721,
-        "operating_result_after_property_rent": -15247.721,
-        "cash_after_renewal": -16747.721,
-        "cash_after_operating_company_principal_repayment": -19747.721,
-        "estimated_operations_hours": 1450.562,
-        "planned_capacity_hours": 1455.25,
-        "remaining_capacity_hours": 4.688
-      },
-      "decisions_to_validate": [
-        "Explain and validate the 63-night commercial capacity.",
-        "Replace all food and beverage costs with recipes, supplier prices, losses and stock requirements.",
-        "Time purchasing, preparation, service, dishwashing and cleaning.",
-        "Confirm that the activity and alcohol rules are compatible with the intended guest-house regime.",
-        "Do not adopt this concept while its annual cash deficit and lack of staffing resilience remain unresolved."
-      ]
-    },
-    "recommended_hybrid": {
-      "name": "Compromis hybride recommandé",
-      "status": "recommended_internal_model_to_test",
-      "public_offer_replacement": false,
-      "hypotheses": {
-        "volume_tests_nights_per_suite": [60, 90, 120, 150],
-        "average_public_nightly_price_ttc": 200,
+    "maximum_simultaneous_guests": 15,
+    "regulatory_conditions": [
+      "resident-host welcome",
+      "overnight stay and breakfast supplied together",
+      "household linen supplied",
+      "regular cleaning",
+      "no more than five rooms and fifteen simultaneous guests"
+    ],
+    "status": "external_validation_required"
+  },
+  "active_reference": {
+    "name": "Référence unifiée — trois suites",
+    "hypotheses": {
+      "sold_nights_per_suite": 150,
+      "occupied_suite_nights": 450,
+      "average_public_nightly_price_ttc": 210,
+      "public_price_range_ttc": [180, 220],
+      "pricing_grid_central_value_ttc": 205,
+      "average_length_of_stay": 2.5,
+      "estimated_stays": 180,
+      "average_guests_per_occupied_suite": 2.1,
+      "direct_booking_share_of_lodging": 0.5,
+      "platform_commission_rate": 0.15,
+      "direct_payment_fee_rate": 0.015,
+      "incidents_and_commercial_gestures_rate": 0.002,
+      "vat_mode": "real_regime_prudent_simulation",
+      "offer": {
         "spa": {
           "take_rate_of_occupied_suite_nights": 0.7,
-          "working_range": [0.6, 0.7],
           "price_ttc_per_suite_day": 60,
-          "direct_cost_ttc_per_sold_suite_day": 10,
-          "service_hours_per_approximate_open_day": 1
+          "direct_cost_ttc_per_sold_suite_day": 10
         },
-        "pantry_offer": {
+        "pantry": {
           "take_rate_of_occupied_suite_nights": 0.35,
           "price_ttc_per_sale": 55,
           "direct_cost_rate": 0.55,
@@ -177,111 +68,160 @@
           "take_rate_of_occupied_suite_nights": 0.15,
           "price_ttc_per_sale": 160,
           "direct_cost_rate": 0.35,
-          "service_hours_per_open_day": 4,
-          "commercial_rule": "One menu, advance booking, one fixed service time and a deliberately limited number of service days."
-        },
-        "staffing_policy": {
-          "jules_full_time_equivalent_is_adjusted_by_volume": true,
-          "paid_support_hours_are_adjusted_by_volume": true,
-          "paid_support_hourly_cost": 25,
-          "associate_contribution_hours_cap": 200,
-          "status": "working_assumption"
-        },
-        "fixed_operating_costs_ttc": 8000,
-        "property_company_rent": 12000,
-        "renewal_cash_allocation": 1500,
-        "operating_company_annual_principal_repayment": 3000
-      },
-      "volume_sensitivity": [
-        {
-          "nights_per_suite": 60,
-          "average_public_nightly_price_ttc": 200,
-          "jules_full_time_equivalent": 0,
-          "paid_support_hours": 100,
-          "associate_contribution_hours": 200,
-          "total_public_sales_ttc": 34230,
-          "total_variable_costs_ttc": 8872.41,
-          "operating_result_before_property_rent": 14857.59,
-          "cash_after_property_rent_renewal_and_principal": -1642.41,
-          "estimated_operations_hours": 1283.5,
-          "planned_capacity_hours": 300,
-          "coverage_gap_hours": 983.5,
-          "reading": "The accounting balance is close to zero only because Jules is not funded. The uncovered workload makes this case non-operational."
-        },
-        {
-          "nights_per_suite": 90,
-          "average_public_nightly_price_ttc": 200,
-          "jules_full_time_equivalent": 0.35,
-          "paid_support_hours": 125,
-          "associate_contribution_hours": 200,
-          "total_public_sales_ttc": 51345,
-          "total_variable_costs_ttc": 13308.615,
-          "operating_result_before_property_rent": 17111.385,
-          "cash_after_property_rent_renewal_and_principal": 611.385,
-          "estimated_operations_hours": 1565.25,
-          "planned_capacity_hours": 887.45,
-          "coverage_gap_hours": 677.8,
-          "reading": "The small cash balance is not valid operational capacity: almost 678 work hours remain uncovered."
-        },
-        {
-          "nights_per_suite": 120,
-          "average_public_nightly_price_ttc": 200,
-          "jules_full_time_equivalent": 0.8,
-          "paid_support_hours": 250,
-          "associate_contribution_hours": 200,
-          "total_public_sales_ttc": 68460,
-          "total_variable_costs_ttc": 17744.82,
-          "operating_result_before_property_rent": 14065.18,
-          "cash_after_property_rent_renewal_and_principal": -2434.82,
-          "estimated_operations_hours": 1847,
-          "planned_capacity_hours": 1735.6,
-          "coverage_gap_hours": 111.4,
-          "reading": "Closer to operational coherence, but still negative after financing and short by about 111 work hours."
-        },
-        {
-          "nights_per_suite": 150,
-          "average_public_nightly_price_ttc": 200,
-          "jules_full_time_equivalent": 1,
-          "paid_support_hours": 350,
-          "associate_contribution_hours": 200,
-          "total_public_sales_ttc": 85575,
-          "total_variable_costs_ttc": 22181.025,
-          "operating_result_before_property_rent": 18643.975,
-          "cash_after_property_rent_renewal_and_principal": 2143.975,
-          "estimated_operations_hours": 2128.75,
-          "planned_capacity_hours": 2157,
-          "coverage_gap_hours": 0,
-          "reading": "Finances a full-time Jules, 350 paid support hours, the rent, renewal and principal repayment with a narrow remaining margin."
+          "service_hours_per_service_day": 4
         }
-      ],
-      "recommended_reference_case": {
-        "nights_per_suite": 140,
-        "average_public_nightly_price_ttc": 205,
-        "jules_full_time_equivalent": 1,
-        "paid_support_hours": 300,
-        "associate_contribution_hours": 200,
-        "total_public_sales_ttc": 81270,
-        "total_variable_costs_ttc": 20820.59,
-        "operating_result_before_property_rent": 16949.41,
-        "cash_after_property_rent_renewal_and_principal": 449.41,
-        "estimated_operations_hours": 2034.833,
-        "planned_capacity_hours": 2107,
-        "coverage_gap_hours": 0,
-        "reading": "Recommended equilibrium point for testing: the annual workload is covered and cash remains slightly positive, but the margin of safety is only about 449 EUR."
       },
-      "decisions_to_validate": [
-        "Test the 140-night, 205 EUR reference against a weekly roster and a downside sensitivity; its cash margin is very narrow.",
-        "Pilot the pantry offer and signature table separately and measure take rate, gross margin, preparation time and guest satisfaction.",
-        "Confirm the 60 EUR spa price and the 60% to 70% take-rate range before changing the public offer.",
-        "Decide whether additional coverage is paid, rostered among named associates or obtained through another lawful arrangement.",
-        "Preserve a fixed property rent and leave the operating result as the residual."
-      ]
+      "unit_costs": {
+        "turnover_linen_and_consumables_ttc_per_stay": 30,
+        "internalized_turnover_hours_per_stay": 4,
+        "breakfast_ttc_per_guest_night": 6,
+        "marginal_energy_ttc_per_occupied_suite_night": 5
+      },
+      "fixed_operating_costs_ttc": 10000,
+      "estimated_fixed_cost_vat_recovery": 1500,
+      "fixed_operating_costs_net": 8500,
+      "base_operations_hours": 780,
+      "staffing": {
+        "jules_full_time_equivalent": 1,
+        "jules_annual_employer_budget": 28000,
+        "paid_support_hours": 1175,
+        "paid_support_hourly_cost": 25,
+        "associate_contribution_hours_cap": 200,
+        "staffing_safety_buffer_rate": 0.1
+      },
+      "property_company_rent": 12000,
+      "renewal_cash_allocation": 2250
+    },
+    "calculated_results": {
+      "lodging_sales_ttc": 94500,
+      "spa_sales_ttc": 18900,
+      "pantry_sales_ttc": 8662.5,
+      "signature_table_sales_ttc": 10800,
+      "total_public_sales_ttc": 132862.5,
+      "accounting_revenue_under_vat_real": 119057.3864,
+      "estimated_vat_embedded_in_public_sales": 13805.1136,
+      "variable_costs": 30887.4193,
+      "estimated_operations_hours": 2705.0586,
+      "jules_paid_capacity_hours": 1607,
+      "paid_support_hours": 1175,
+      "associate_contribution_hours_cap": 200,
+      "declared_capacity_hours": 2982,
+      "capacity_buffer_hours": 276.9414,
+      "paid_support_cost": 29375,
+      "result_before_property_rent": 22294.9671,
+      "result_after_property_rent": 10294.9671,
+      "operating_company_cash_before_financing": 8044.9671
     }
   },
-  "comparison": {
-    "recommended_concept": "recommended_hybrid",
-    "reason": "It preserves lodging capacity, limits food-service complexity and makes both service margin and labor explicit.",
-    "economic_caution": "At 120 nights per suite the model remains 2,435 EUR negative and leaves 111.4 hours uncovered. At 150 nights it reaches approximately 2,144 EUR positive with the modeled workload covered. The 140-night, 205 EUR reference is approximately 449 EUR positive with no annual coverage gap, leaving little downside protection.",
-    "public_offer_rule": "None of these internal concepts changes the current public price or service rules without a separate collective decision."
+  "unified_financing": {
+    "total_works_and_installation_envelope_ttc": 80000,
+    "sources": {
+      "operating_company_share_capital": 10000,
+      "operating_company_shareholder_current_account": 20000,
+      "new_bank_loan": 50000
+    },
+    "operating_company_shareholder_current_account": {
+      "interest_rate": 0,
+      "test_term_years": 5,
+      "annual_principal_test": 4000,
+      "accounting_treatment": "Principal repayment is a cash outflow and balance-sheet movement, not an operating expense.",
+      "repayment_condition": "Pay only when operating-company cash and bank covenants permit; a blocking, deferral or subordination clause may be required behind bank debt.",
+      "status": "working_assumption_to_document"
+    },
+    "new_bank_loan_test": {
+      "principal": 50000,
+      "annual_rate": 0.05,
+      "term_years": 5,
+      "annual_debt_service": 11548.7399,
+      "rate_status": "simulation_assumption_not_a_bank_offer",
+      "fees_insurance_and_guarantees_included": false
+    },
+    "recommended_allocation": {
+      "property_company_SCI": "Borrow for building works and assets incorporated into the property, subject to the actual invoice allocation and the SCI's full debt capacity.",
+      "operating_company": "Use share capital and shareholder current account for detachable furniture, operating equipment and working capital, subject to actual invoice allocation.",
+      "status": "recommended_in_principle_subject_to_professional_validation"
+    },
+    "reference_cash_by_entity": {
+      "operating_company_cash_after_shareholder_current_account_principal": 4044.9671,
+      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
+      "consolidated_cash_after_new_financing": 4496.2272,
+      "simplified_total_debt_service_coverage": 1.28917,
+      "property_rent_to_new_SCI_loan_coverage": 1.03907,
+      "warning": "The SCI margin of 451 EUR is before all existing property debt and SCI costs. No approval is possible without the restricted consolidated debt schedule."
+    }
+  },
+  "financing_allocation_tests": {
+    "recommended_SCI_bank_loan": {
+      "description": "The SCI borrows 50,000 EUR for property works; the operating company funds detachable assets and working capital with 10,000 EUR capital and 20,000 EUR shareholder current account.",
+      "operating_company_cash_after_annual_shareholder_current_account_principal": 4044.9671,
+      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
+      "consolidated_cash_after_new_financing": 4496.2272,
+      "reading": "Economically coherent with asset ownership, but the SCI has almost no standalone margin before its existing commitments."
+    },
+    "operating_company_bank_loan_test": {
+      "description": "The operating company borrows the 50,000 EUR and also repays 4,000 EUR of shareholder-current-account principal.",
+      "operating_company_cash_after_new_financing": -7503.7728,
+      "property_company_cash_before_existing_debt_and_costs": 12000,
+      "consolidated_cash_after_new_financing": 4496.2272,
+      "reading": "The operating company cannot support this debt on a standalone basis. This route is also unsuitable for property-incorporated works unless a robust financing and lease agreement is validated."
+    }
+  },
+  "stress_tests": [
+    {
+      "id": "lower_activity_140_nights_adr_205",
+      "changed_inputs": { "sold_nights_per_suite": 140, "average_public_nightly_price_ttc": 205 },
+      "total_public_sales_ttc": 121905,
+      "operating_company_cash_after_shareholder_current_account_principal": -440.05,
+      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 451.2601,
+      "consolidated_cash_after_new_financing": 11.2066,
+      "simplified_total_debt_service_coverage": 1.00072,
+      "reading": "Arithmetic break-even only; not robust and not solvent by entity because the operating company is negative."
+    },
+    {
+      "id": "bank_loan_60000_without_share_capital",
+      "changed_inputs": { "operating_company_share_capital": 0, "new_bank_loan": 60000 },
+      "bank_annual_debt_service": 13858.4879,
+      "operating_company_cash_after_shareholder_current_account_principal": 4044.9671,
+      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": -1858.4879,
+      "consolidated_cash_after_new_financing": 2186.4792,
+      "simplified_total_debt_service_coverage": 1.12243,
+      "reading": "The SCI becomes negative before existing commitments; removing capital weakens the plan."
+    },
+    {
+      "id": "property_rent_18000",
+      "changed_inputs": { "property_company_rent": 18000 },
+      "operating_company_cash_after_shareholder_current_account_principal": -1955.0329,
+      "property_company_cash_after_new_bank_loan_before_existing_debt_and_costs": 6451.2601,
+      "consolidated_cash_after_new_financing": 4496.2272,
+      "reading": "Consolidated cash is unchanged, but the operating company becomes negative. Inter-entity solvency matters more than the consolidated total."
+    },
+    {
+      "id": "consolidation_160_nights_adr_210",
+      "changed_inputs": { "sold_nights_per_suite": 160, "average_public_nightly_price_ttc": 210 },
+      "total_public_sales_ttc": 141720,
+      "paid_support_hours": 1325,
+      "consolidated_cash_after_new_financing": 6624.225,
+      "simplified_total_debt_service_coverage": 1.42603,
+      "reading": "More resilient, but it requires higher occupancy and 150 additional paid-support hours."
+    }
+  ],
+  "decision_rules": [
+    "Use one three-suite model; do not apply a premium price or a separate operating structure to the Maisonnette.",
+    "Keep the public grid at 180–220 EUR, use 205 EUR as its central value and treat 210 EUR as the reference achieved average to prove.",
+    "Do not approve the 80,000 EUR plan before quotes allocate each invoice to property works, detachable assets or working capital.",
+    "Prefer SCI borrowing for property-incorporated works and operating-company funds for detachable furniture and working capital, subject to legal, tax, accounting and bank validation.",
+    "Do not repay the 20,000 EUR shareholder current account ahead of bank debt if doing so creates a liquidity shortfall; document any blocking, deferral or subordination.",
+    "Do not infer SCI debt capacity from the 451 EUR reference margin. Validate all existing SCI debt service and costs in a confidential banking annex.",
+    "Obtain bank offers including annual percentage rate, fees, insurance, security and repayment profile; the 5% rate is only a simulation assumption.",
+    "Build a named weekly roster for 2,705 modeled hours, 1 full-time equivalent Jules, 1,175 paid support hours and no more than 200 associate hours.",
+    "Keep aids and guarantees at zero until eligibility and award are confirmed in writing."
+  ],
+  "confidentiality": {
+    "public_knowledge_excludes": [
+      "exact existing property-company debt balances and terms",
+      "undisclosed historical shareholder-current-account balances",
+      "bank securities, guarantees, statements and lender correspondence"
+    ],
+    "storage_rule": "These data belong only in a restricted banking annex outside the public repository."
   }
 }

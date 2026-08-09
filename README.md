@@ -5,9 +5,9 @@ Site vitrine de **pré-ouverture** de la maison d'hôtes haut de gamme
 Château de Sainte-Lucie — Rambervillers, Vosges. **Ouverture prévue en avril 2027.**
 
 > Refonte v2 du dépôt : l'ancienne vitrine « réception » (séminaires, événements,
-> tournages) est remplacée par le projet de maison d'hôtes à deux suites.
+> tournages) est remplacée par le projet de maison d'hôtes à trois suites.
 > Documentation de reprise et d'exploitation : `docs/00-…` à `docs/08-…`,
-> puis référentiel annuel actif dans `docs/23-referentiel-exploitation-standard-v6.md`.
+> puis référentiel annuel actif dans `docs/25-referentiel-trois-suites-et-financement-v1.md`.
 
 ## Stack
 
@@ -90,11 +90,11 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   les obligations, les jalons et le chemin critique jusqu'à l'ouverture.
 - Les documents numérotés 16 à 22 conservent les travaux préparatoires à titre
   historique et ne constituent plus la photographie active du projet.
-- `docs/23-referentiel-exploitation-standard-v6.md` documente le modèle annuel
-  actif, les tests à 120 et 150 nuits par suite, le loyer et les financements.
-- `docs/24-comparatif-scenarios-exploitation-v1.md` compare le socle agile,
-  l’étude saisonnière avec table premium et le compromis hybride recommandé,
-  avec des sensibilités de 60 à 150 nuits par suite.
+- Les documents 23 et 24 conservent les modèles antérieurs à deux suites à titre
+  historique ; ils ne constituent plus la base active de décision.
+- `docs/25-referentiel-trois-suites-et-financement-v1.md` documente le modèle
+  annuel unifié : trois suites au même positionnement, enveloppe totale de
+  80 k€, charge humaine, financement par entité et scénarios de résistance.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
