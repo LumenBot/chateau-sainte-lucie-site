@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-08-09",
+  "project": {
+    "name": "Les Nuits au Château — Les Suites de Sainte-Lucie",
+    "location": "Château de Sainte-Lucie, Rambervillers, Vosges, France",
+    "opening_target": "2027-04",
+    "positioning": "Maison d'hôtes haut de gamme, intimiste et largement privative dans une demeure familiale de 1876",
+    "status": "validated"
+  },
+  "property": {
+    "year": 1876,
+    "habitable_area_sqm": 750,
+    "park_area_ha": 1,
+    "residents": "Trois foyers d'une même famille",
+    "resident_dogs": 3,
+    "natural_pool": true,
+    "vegetation": ["chênes", "tilleuls", "hêtres", "prairie vosgienne"]
+  },
+  "inventory": {
+    "suites": 2,
+    "names": ["Suite Lumière", "Suite Feuillage"],
+    "sale_unit": "suite entière",
+    "base_occupancy": 2,
+    "maximum_occupancy": 4,
+    "maximum_children": 2,
+    "breakfast_included": true,
+    "status": "validated"
+  },
+  "current_public_offer": {
+    "currency": "EUR",
+    "launch_suite_night": 180,
+    "launch_seasonal_range": [180, 220],
+    "additional_child_per_night": 20,
+    "spa_for_two_per_day": 40,
+    "spa_additional_guest": 20,
+    "table_per_adult": 40,
+    "table_child": 20,
+    "wine_pairing_per_adult": 20,
+    "romantic_private_dinner_working_price_per_couple": 90,
+    "tourist_tax_included": false,
+    "status": "validated_except_romantic_offer"
+  },
+  "stay_rules": {
+    "check_in_from": "15:00",
+    "early_check_in_on_request": "14:00",
+    "check_out_before": "12:00",
+    "pets_allowed": false,
+    "resident_dogs_private_spa_access": false,
+    "languages": ["fr", "en"],
+    "hosting_mode": ["human", "autonomous", "hybrid"],
+    "accommodation_payment": "at_booking",
+    "options_payment": "on_site",
+    "reserved_options_are_billable": true,
+    "status": "validated"
+  },
+  "wellness_rules": {
+    "facilities": ["piscine naturelle", "hammam", "sauna finlandais", "bain nordique"],
+    "opening_hours": ["08:00", "24:00"],
+    "slot_duration_minutes": 60,
+    "maximum_slots_per_facility_per_suite_per_day": 2,
+    "maximum_total_hours_per_suite_per_day": 8,
+    "natural_pool_shared_capacity_suites": 2,
+    "other_facilities_shared_capacity_suites": 1,
+    "private_pool_working_offer": { "duration_minutes": 120, "price": 50, "status": "working_assumption" }
+  },
+  "communication": {
+    "projection_images_allowed_until_real_photos": true,
+    "projection_images_must_be_labeled": true,
+    "commercial_photos_target": "2027-03",
+    "prohibited_in_generated_images": ["recognizable people", "brands or logos", "non-Vosges vegetation", "mountains", "lavender"]
+  }
+}

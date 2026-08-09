@@ -36,9 +36,10 @@ prévisionnelles (`/conditions-sejour`) · 404.
 
 **Démonstrateur interne non indexé** : vue d’ensemble (`/demo`), réservation
 fictive (`/demo/reservation`), compagnon client (`/demo/client`), cockpit
-gestionnaire (`/demo/gestion`), atelier économique des associés
-(`/demo/pilotage`) et architecture (`/demo/integrations`). Les pages
-partagent un scénario local dans le navigateur et ne contiennent aucune donnée réelle.
+gestionnaire (`/demo/gestion`), base de vérité et simulateur des associés
+(`/demo/pilotage`) et architecture (`/demo/integrations`). Les parcours client
+utilisent des données fictives. Le cockpit associés contient des données projet
+dérivées et non sensibles ; il n'est pas authentifié et doit rester sans donnée personnelle.
 
 **Redirections** (base-aware) des anciennes routes v1 → accueil :
 `/seminaires`, `/evenements-prives`, `/tournages`.
@@ -92,6 +93,10 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   ses scénarios, ses formules et ses limites de lecture.
 - `docs/18-integration-benchmark-et-budget-aout-2026-v1.md` consolide le
   benchmark de 30 lieux, le budget corrigé de 65 k€ et leurs arbitrages.
+- `docs/19-base-de-verite-partagee-et-simulateur-v2.md` décrit l'architecture
+  humain/IA, le modèle d'emploi et les règles de publication des données.
+- `public/knowledge/` et `public/llms.txt` exposent la photographie courante
+  sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes
   ou paramètres réellement ouverts.
 

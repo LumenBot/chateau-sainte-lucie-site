@@ -5,282 +5,183 @@ import { withBase } from "../../utils/url";
 import "../../styles/pilotage.css";
 import parc from "../../assets/images/projection/parc-depuis-perron-soir.jpeg";
 import chemin from "../../assets/images/projection/chemin-bain-nordique-soir.jpeg";
-import suite from "../../assets/images/projection/feuillage-chambre.jpg";
-import table from "../../assets/images/projection/table-hotes.jpg";
 ---
 
 <DemoLayout
-  title="Projet et modèle économique — Les Nuits au Château"
-  description="Cockpit interne de simulation économique, d'analyse concurrentielle et de coordination du projet des Suites de Sainte-Lucie."
+  title="Base de vérité du projet — Les Nuits au Château"
+  description="Base de connaissance, simulateur économique, benchmark, investissements et plan directeur des Suites de Sainte-Lucie."
   section="pilotage"
 >
   <div class="demo-shell pilotage-v2">
     <header class="pilotage-hero">
       <div class="pilotage-hero__copy">
-        <p class="demo-kicker">Cockpit des associés · août 2026</p>
-        <h1>Choisir l’ambition.<br /><em class="gold light">Mesurer l’engagement.</em></h1>
-        <p class="lede">Une lecture commune du marché, du budget, de la capacité acceptable et du chemin vers avril 2027. Les chiffres sont modifiables ; les décisions restent à prendre ensemble.</p>
+        <p class="demo-kicker">Base de vérité partagée · mise à jour le 9 août 2026</p>
+        <h1>Comprendre le projet.<br /><em class="gold light">Décider sur les mêmes faits.</em></h1>
+        <p class="lede">La photographie courante du modèle, ses sources et ses hypothèses. Chaque associé — humain ou agent IA — peut explorer les chiffres, reproduire les calculs et préparer un arbitrage argumenté.</p>
         <div class="pilotage-hero__facts">
           <span><strong>30</strong> lieux comparés</span>
           <span><strong>65 k€</strong> enveloppe travaux</span>
-          <span><strong>2</strong> suites privatives</span>
+          <span><strong>avril 2027</strong> ouverture visée</span>
         </div>
       </div>
       <figure class="pilotage-hero__image">
         <Image src={parc} alt="Projection du parc scénographié vu depuis le perron au crépuscule" widths={[700, 1100, 1500]} sizes="(max-width: 900px) 100vw, 47vw" loading="eager" />
-        <figcaption><strong>Le produit signature.</strong><span>Le parc qui s’éveille à la nuit · projection après travaux</span></figcaption>
+        <figcaption><strong>La promesse signature.</strong><span>Une demeure privée, un parc nocturne et un bien-être réservé · projection après travaux</span></figcaption>
       </figure>
     </header>
 
     <div class="pilotage-security" role="note">
-      <strong>Espace de travail non indexé, mais non authentifié.</strong>
-      <span>Le lien peut être partagé entre associés. Ne pas y inscrire de données bancaires, personnelles ou patrimoniales sensibles.</span>
+      <strong>Partageable, non authentifié.</strong>
+      <span>Les sources financières, juridiques et patrimoniales brutes restent hors ligne. Cette page publie des données dérivées, sans information personnelle sensible.</span>
     </div>
 
-    <nav class="pilotage-tabs" role="tablist" aria-label="Rubriques du cockpit stratégique">
-      <button class="active" type="button" role="tab" aria-selected="true" aria-controls="panel-synthese" data-pilotage-tab="synthese"><span>01</span>Synthèse</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="panel-simulateur" data-pilotage-tab="simulateur"><span>02</span>Simulateur</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="panel-marche" data-pilotage-tab="marche"><span>03</span>Marché</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="panel-investissements" data-pilotage-tab="investissements"><span>04</span>Investissements</button>
-      <button type="button" role="tab" aria-selected="false" aria-controls="panel-plan" data-pilotage-tab="plan"><span>05</span>Plan directeur</button>
+    <nav class="pilotage-tabs" role="tablist" aria-label="Rubriques de la base de vérité">
+      <button class="active" type="button" role="tab" aria-selected="true" aria-controls="panel-simulateur" data-pilotage-tab="simulateur"><span>01</span>Simulateur</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="panel-marche" data-pilotage-tab="marche"><span>02</span>Marché</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="panel-investissements" data-pilotage-tab="investissements"><span>03</span>Investissements</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="panel-plan" data-pilotage-tab="plan"><span>04</span>Plan directeur</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="panel-referentiel" data-pilotage-tab="referentiel"><span>05</span>Référentiel</button>
     </nav>
 
-    <section id="panel-synthese" class="pilotage-panel" role="tabpanel" data-pilotage-panel="synthese">
+    <section id="panel-simulateur" class="pilotage-panel" role="tabpanel" data-pilotage-panel="simulateur">
       <div class="pilotage-section-head">
-        <div><p class="demo-kicker">Scénarios comparables</p><h2>Quatre façons d’ouvrir la maison.</h2></div>
-        <p>Le prix public d’ouverture reste à 180 € dans le premier scénario. Les autres paliers traduisent les enseignements du benchmark sans les appliquer silencieusement au site commercial.</p>
+        <div><p class="demo-kicker">Deux années, un modèle explicable</p><h2>Jouer sur l’ambition.<br />Voir immédiatement l’engagement.</h2></div>
+        <div class="pilotage-actions"><button class="demo-button secondary" type="button" data-pilotage-share>Copier le scénario</button><button class="demo-button quiet" type="button" data-pilotage-reset>Réinitialiser</button></div>
       </div>
 
-      <div class="pilotage-scenarios-v2" role="group" aria-label="Choisir un scénario">
-        <button class="active" type="button" data-pilotage-scenario="family"><span>01 · VIE DE LA MAISON</span><strong>Prudence familiale</strong><small>180 € · 80 nuits/suite</small></button>
-        <button type="button" data-pilotage-scenario="opening"><span>02 · MONTÉE EN CHARGE</span><strong>Ouverture affirmée</strong><small>205 € · 110 nuits/suite</small></button>
-        <button type="button" data-pilotage-scenario="target"><span>03 · ÉQUILIBRE</span><strong>Cible de consolidation</strong><small>225 € · 140 nuits/suite</small></button>
-        <button type="button" data-pilotage-scenario="maturity"><span>04 · MATURITÉ</span><strong>Premium démontré</strong><small>235 € · 155 nuits/suite</small></button>
+      <div class="pilotage-scenarios-v2" role="group" aria-label="Choisir un scénario de départ">
+        <button class="active" type="button" data-pilotage-scenario="pilot"><span>01 · APPRENDRE</span><strong>Lancement maîtrisé</strong><small>90 → 120 nuits/suite</small></button>
+        <button type="button" data-pilotage-scenario="balance"><span>02 · CONSOLIDER</span><strong>Équilibre recherché</strong><small>120 → 150 nuits/suite</small></button>
+        <button type="button" data-pilotage-scenario="ambition"><span>03 · DÉMONTRER</span><strong>Premium installé</strong><small>150 → 180 nuits/suite</small></button>
+        <button type="button" data-pilotage-scenario="custom"><span>04 · EXPLORER</span><strong>Scénario libre</strong><small>tous paramètres ajustables</small></button>
       </div>
 
       <div class="pilotage-summary-grid" aria-live="polite">
-        <article class="pilotage-summary-card primary"><span>Chiffre d’affaires simulé</span><strong data-pilotage-output="revenue">—</strong><small data-pilotage-output="revenue-note">—</small></article>
-        <article class="pilotage-summary-card"><span>Solde d’exploitation</span><strong data-pilotage-output="result">—</strong><small>avant impôts, dette et amortissements</small></article>
-        <article class="pilotage-summary-card"><span>Occupation</span><strong data-pilotage-output="occupancy">—</strong><small data-pilotage-output="occupied-detail">—</small></article>
-        <article class="pilotage-summary-card"><span>Présence ressentie</span><strong data-pilotage-output="presence-days">—</strong><small>jours avec au moins une suite occupée</small></article>
-      </div>
-
-      <div class="pilotage-decision-grid">
-        <article>
-          <p class="demo-kicker">Diagnostic</p>
-          <h3 data-pilotage-output="scenario-name">Prudence familiale</h3>
-          <div class="pilotage-verdict" data-pilotage-verdict></div>
-          <button class="demo-button" type="button" data-open-simulator>Explorer les hypothèses</button>
-        </article>
-        <article class="pilotage-market-position">
-          <p class="demo-kicker">Position prix</p>
-          <h3>Du lancement au prix démontré.</h3>
-          <div class="price-ladder">
-            <div><span>Failloux indicatif</span><strong>108 €</strong></div>
-            <div><span>Ouverture validée</span><strong>180 €</strong></div>
-            <div><span>Médiane 30 lieux</span><strong>210 €</strong></div>
-            <div class="active"><span>Cible réalisée</span><strong>220–240 €</strong></div>
-          </div>
-        </article>
-      </div>
-
-      <div class="pilotage-section-head compact">
-        <div><p class="demo-kicker">Preuves de valeur</p><h2>Ce que le client doit comprendre en quelques secondes.</h2></div>
-      </div>
-      <div class="pilotage-value-grid">
-        <figure><Image src={suite} alt="Projection de la Suite Feuillage après travaux" widths={[440, 720]} sizes="(max-width: 760px) 100vw, 33vw" /><figcaption><strong>Une suite, pas une chambre.</strong><span>Volumes, salon séparé, terrasse et finitions irréprochables.</span></figcaption></figure>
-        <figure><Image src={chemin} alt="Projection du chemin éclairé menant au bain nordique" widths={[440, 720]} sizes="(max-width: 760px) 100vw, 33vw" /><figcaption><strong>Un parc habité par la nuit.</strong><span>Le cheminement devient une expérience signature.</span></figcaption></figure>
-        <figure><Image src={table} alt="Projection d’un dîner privatif servi au château" widths={[440, 720]} sizes="(max-width: 760px) 100vw, 33vw" /><figcaption><strong>Une hospitalité incarnée.</strong><span>Petit-déjeuner et table construisent autant la valeur que le spa.</span></figcaption></figure>
-      </div>
-    </section>
-
-    <section id="panel-simulateur" class="pilotage-panel" role="tabpanel" data-pilotage-panel="simulateur" hidden>
-      <div class="pilotage-section-head">
-        <div><p class="demo-kicker">Modèle annuel interactif</p><h2>Tester le prix, le volume et la charge.</h2></div>
-        <div class="pilotage-actions"><button class="demo-button secondary" type="button" data-pilotage-share>Copier le scénario</button><button class="demo-button quiet" type="button" data-pilotage-reset>Réinitialiser</button></div>
+        <article class="pilotage-summary-card primary"><span>CA année 1</span><strong data-output="y1-revenue">—</strong><small data-output="y1-adr">—</small></article>
+        <article class="pilotage-summary-card"><span>Résultat année 1</span><strong data-output="y1-result">—</strong><small>avant impôt, dette et amortissements</small></article>
+        <article class="pilotage-summary-card"><span>CA année 2</span><strong data-output="y2-revenue">—</strong><small data-output="y2-adr">—</small></article>
+        <article class="pilotage-summary-card"><span>Résultat année 2</span><strong data-output="y2-result">—</strong><small data-output="trajectory-note">—</small></article>
       </div>
 
       <div class="pilotage-workbench-v2">
         <form class="pilotage-controls-v2" data-pilotage-form>
           <details open>
-            <summary><span>01</span>Capacité et vie de la maison</summary>
-            <div class="demo-form-grid three">
-              <label class="demo-field"><span class="label">Jours ouverts / an</span><input name="openDays" type="number" min="30" max="365" step="1" value="275" /></label>
-              <label class="demo-field"><span class="label">Nuits vendues / suite</span><input name="nightsPerSuite" type="number" min="0" max="365" step="1" value="80" /></label>
-              <label class="demo-field"><span class="label">Séjours regroupés</span><input name="overlapRate" type="number" min="0" max="100" step="5" value="75" /></label>
-              <label class="demo-field"><span class="label">Durée moyenne</span><input name="los" type="number" min="1" max="14" step="0.1" value="2" /></label>
-              <label class="demo-field"><span class="label">Voyageurs moyens</span><input name="avgGuests" type="number" min="1" max="4" step="0.1" value="2.1" /></label>
-              <label class="demo-field"><span class="label">Heures opératoires / séjour</span><input name="hoursPerStay" type="number" min="0" max="30" step="0.5" value="6" /></label>
+            <summary><span>01</span>Trajectoire commerciale</summary>
+            <p class="pilotage-help">Une gamme saisonnière calcule un prix moyen pondéré. Les nuits sont exprimées par suite : 120 signifie 240 nuits-suite vendues sur les deux suites.</p>
+            <div class="pilotage-year-grid">
+              <fieldset><legend>Année 1 · lancement</legend>
+                <label class="demo-field"><span class="label">Gamme de prix</span><select name="priceProfile1"><option value="launch">180–220 € · prix moyen 198 €</option><option value="180">Prix unique 180 €</option><option value="200">Prix unique 200 €</option><option value="220">Prix unique 220 €</option><option value="240">Prix unique 240 €</option></select></label>
+                <label class="demo-field"><span class="label">Nuits vendues / suite</span><select name="nights1"><option>90</option><option selected>120</option><option>150</option><option>180</option></select></label>
+              </fieldset>
+              <fieldset><legend>Année 2 · consolidation</legend>
+                <label class="demo-field"><span class="label">Gamme de prix</span><select name="priceProfile2"><option value="year2" selected>200–240 € · prix moyen 220 €</option><option value="180">Prix unique 180 €</option><option value="200">Prix unique 200 €</option><option value="220">Prix unique 220 €</option><option value="240">Prix unique 240 €</option></select></label>
+                <label class="demo-field"><span class="label">Nuits vendues / suite</span><select name="nights2"><option>90</option><option>120</option><option selected>150</option><option>180</option></select></label>
+              </fieldset>
             </div>
-            <p class="pilotage-help">Le regroupement rapproche les réservations des deux suites sur les mêmes dates. Il réduit les jours de présence ressentis sans réduire les nuits vendues.</p>
           </details>
 
           <details open>
-            <summary><span>02</span>Prix, distribution et expériences</summary>
+            <summary><span>02</span>Expériences et panier moyen</summary>
             <div class="demo-form-grid three">
-              <label class="demo-field"><span class="label">Prix moyen réalisé</span><input name="adr" type="number" min="100" max="500" step="5" value="180" /></label>
-              <label class="demo-field"><span class="label">Réservations directes</span><input name="directShare" type="number" min="0" max="100" step="5" value="40" /></label>
-              <label class="demo-field"><span class="label">Commission plateformes</span><input name="otaCommission" type="number" min="0" max="30" step="1" value="15" /></label>
-              <label class="demo-field"><span class="label">Politique bien-être</span><select data-spa-policy><option value="entry">Accès simple</option><option value="nordic">Parc nordique</option><option value="signature">Nuit aux lanternes</option><option value="custom">Personnalisée</option></select></label>
-              <label class="demo-field"><span class="label">Acheteurs bien-être</span><input name="spaTake" type="number" min="0" max="100" step="5" value="30" /></label>
-              <label class="demo-field"><span class="label">Panier bien-être / séjour</span><input name="spaBasket" type="number" min="0" max="400" step="5" value="50" /></label>
-              <label class="demo-field"><span class="label">Séjours avec table</span><input name="dinnerTake" type="number" min="0" max="100" step="5" value="20" /></label>
-              <label class="demo-field"><span class="label">Panier table / séjour</span><input name="dinnerBasket" type="number" min="0" max="400" step="5" value="90" /></label>
+              <label class="demo-field"><span class="label">Formule bien-être</span><select name="spaOffer"><option value="pack40">Pack unique · 40 €</option><option value="pack50" selected>Pack unique · 50 €</option><option value="pack60">Pack unique · 60 €</option><option value="catalog">Carte signature · panier moyen 74 €</option></select></label>
+              <label class="demo-field"><span class="label">Séjours acheteurs spa</span><select name="spaTake"><option value="30">30 %</option><option value="45" selected>45 %</option><option value="60">60 %</option><option value="75">75 %</option></select></label>
+              <label class="demo-field"><span class="label">Prix repas / personne</span><select name="mealPrice"><option>40</option><option selected>50</option><option>60</option></select></label>
+              <label class="demo-field"><span class="label">Accord mets & vins</span><select name="winePrice"><option>20</option><option selected>30</option><option>40</option></select></label>
+              <label class="demo-field"><span class="label">Séjours avec table</span><select name="dinnerTake"><option value="15">15 %</option><option value="30" selected>30 %</option><option value="45">45 %</option><option value="60">60 %</option></select></label>
+              <label class="demo-field"><span class="label">Tables en version romantique</span><select name="romanticShare"><option value="0">0 %</option><option value="20" selected>20 %</option><option value="40">40 %</option><option value="60">60 %</option></select></label>
             </div>
+            <div class="pilotage-pack-note"><strong>Carte signature simulée</strong><span>Bain nordique 45 € · sauna 35 € · duo nordique 65 € · bien-être intérieur 50 € · nuit aux lanternes 95 €. Le panier de 74 € est une moyenne de travail, pas un tarif public validé.</span></div>
           </details>
 
           <details>
-            <summary><span>03</span>Coûts et obligations</summary>
+            <summary><span>03</span>Distribution, emploi et charges</summary>
             <div class="demo-form-grid three">
-              <label class="demo-field"><span class="label">Remise en état / séjour</span><input name="turnoverCost" type="number" min="0" max="300" step="1" value="66" /></label>
-              <label class="demo-field"><span class="label">Petit-déjeuner / pers. / nuit</span><input name="breakfastCost" type="number" min="0" max="50" step="0.5" value="7" /></label>
-              <label class="demo-field"><span class="label">Énergie / nuit vendue</span><input name="energyCost" type="number" min="0" max="100" step="0.5" value="7.5" /></label>
-              <label class="demo-field"><span class="label">Coût variable bien-être</span><input name="spaCostRate" type="number" min="0" max="100" step="1" value="28" /></label>
-              <label class="demo-field"><span class="label">Coût variable table</span><input name="dinnerCostRate" type="number" min="0" max="100" step="1" value="35" /></label>
-              <span aria-hidden="true"></span>
-              <label class="demo-field"><span class="label">Loyer annuel SCI</span><input name="rent" type="number" min="0" max="100000" step="500" value="18000" /></label>
-              <label class="demo-field"><span class="label">Coût employeur à confirmer</span><input name="salary" type="number" min="0" max="100000" step="500" value="30000" /></label>
-              <label class="demo-field"><span class="label">Autres frais fixes provisoires</span><input name="otherFixed" type="number" min="0" max="100000" step="500" value="8000" /></label>
-              <label class="demo-field"><span class="label">Investissement initial</span><input name="capex" type="number" min="0" max="500000" step="1000" value="65000" /></label>
+              <label class="demo-field"><span class="label">Réservations directes</span><select name="directShare"><option value="40">40 %</option><option value="55" selected>55 %</option><option value="70">70 %</option></select></label>
+              <label class="demo-field"><span class="label">Coût employeur du poste Jules</span><select name="salaryCost"><option value="30000">Budget limité · 30 000 €</option><option value="40500" selected>30 k€ brut · hypothèse 40 500 €</option><option value="54000">Cible proche de 30 k€ net · 54 000 €</option></select></label>
+              <label class="demo-field"><span class="label">Couverture complémentaire</span><select name="supportMode"><option value="family">Associés / famille · coût non valorisé</option><option value="mixed" selected>Renfort / sous-traitance · 25 €/h</option><option value="second">Deuxième ETP · 40 500 €</option></select></label>
+              <label class="demo-field"><span class="label">Loyer annuel versé à la SCI</span><input name="rent" type="number" min="0" max="60000" step="1000" value="18000" /></label>
+              <label class="demo-field"><span class="label">Autres frais fixes</span><input name="otherFixed" type="number" min="0" max="60000" step="1000" value="8000" /></label>
+              <label class="demo-field"><span class="label">Investissement initial</span><input name="capex" type="number" min="0" max="200000" step="1000" value="65000" /></label>
             </div>
+            <p class="pilotage-help">Le coût de 40 500 € est une hypothèse centrale de simulation pour 30 000 € brut annuel. Le coût réel dépendra du contrat, de la convention collective, des allègements et avantages : il devra être remplacé par une simulation Urssaf et une proposition de paie.</p>
           </details>
         </form>
 
         <aside class="pilotage-live-results" aria-live="polite">
-          <p class="demo-kicker">Résultat recalculé</p>
-          <h3 data-pilotage-output="scenario-name">Prudence familiale</h3>
-          <div class="pilotage-big-result"><span>Solde annuel</span><strong data-pilotage-output="result">—</strong></div>
-          <div class="pilotage-result-row"><span>CA total</span><strong data-pilotage-output="revenue">—</strong></div>
-          <div class="pilotage-result-row"><span>Marge contributive</span><strong data-pilotage-output="contribution">—</strong></div>
-          <div class="pilotage-result-row"><span>Coûts variables</span><strong data-pilotage-output="variable-costs">—</strong></div>
-          <div class="pilotage-result-row"><span>Obligations fixes</span><strong data-pilotage-output="fixed-costs">—</strong></div>
-          <div class="pilotage-result-row"><span>Seuil d’équilibre</span><strong data-pilotage-output="break-even">—</strong></div>
-          <div class="pilotage-result-row"><span>Retour simple des 65 k€</span><strong data-pilotage-output="payback">—</strong></div>
-          <div class="pilotage-result-row"><span>Charge indicative</span><strong data-pilotage-output="operations-hours">—</strong></div>
-          <div class="pilotage-revenue-mix">
-            <span>Répartition du chiffre d’affaires</span>
-            <div><i data-revenue-bar="accommodation"></i><i data-revenue-bar="spa"></i><i data-revenue-bar="dinner"></i></div>
-            <small><b class="lodging-dot"></b> Hébergement <b class="spa-dot"></b> Bien-être <b class="dinner-dot"></b> Table</small>
-          </div>
-          <div class="pilotage-verdict" data-pilotage-verdict></div>
-          <p class="pilotage-footnote">Avant impôts, dette, amortissements, TVA et rémunérations non saisies. Les heures opératoires sont une hypothèse à chronométrer.</p>
+          <p class="demo-kicker">Lecture du scénario</p>
+          <h3 data-output="scenario-name">Équilibre recherché</h3>
+          <div class="pilotage-big-result"><span>Résultat année 2</span><strong data-output="y2-result">—</strong></div>
+          <div class="pilotage-result-row"><span>CA total</span><strong data-output="y2-revenue">—</strong></div>
+          <div class="pilotage-result-row"><span>Part expériences</span><strong data-output="y2-experience-share">—</strong></div>
+          <div class="pilotage-result-row"><span>Seuil d’équilibre</span><strong data-output="break-even">—</strong></div>
+          <div class="pilotage-result-row"><span>Charge annuelle</span><strong data-output="y2-hours">—</strong></div>
+          <div class="pilotage-result-row"><span>Renfort structurel</span><strong data-output="y2-support">—</strong></div>
+          <div class="pilotage-result-row"><span>Retour simple du CAPEX</span><strong data-output="payback">—</strong></div>
+          <div class="pilotage-verdict" data-verdict></div>
+          <p class="pilotage-footnote">Résultat d’exploitation simplifié avant impôt, TVA, dette et amortissements. Il ne constitue ni un prévisionnel comptable ni une validation sociale.</p>
         </aside>
+      </div>
+
+      <div class="pilotage-section-head compact"><div><p class="demo-kicker">Compte de résultat explicable</p><h2>D’où vient chaque euro.</h2></div><p>Année 1 et année 2 sont calculées avec la même structure de coûts. Les lignes peuvent être retrouvées dans le référentiel machine.</p></div>
+      <div class="pilotage-pnl" data-pnl></div>
+
+      <div class="pilotage-capacity-grid">
+        <article><p class="demo-kicker">Un salarié suffit-il ?</p><h3 data-output="staffing-title">—</h3><p data-output="staffing-copy">—</p></article>
+        <article><p class="demo-kicker">Temps des associés</p><h3 data-output="family-hours">—</h3><p>Sans budget de renfort, ce volume devient une contribution familiale à organiser explicitement : week-ends, congés, urgences et continuité de service.</p></article>
+        <article><p class="demo-kicker">Conclusion de pilotage</p><h3>Un ETP + un dispositif de relève.</h3><p>Le premier recrutement peut porter l’exploitation quotidienne. Il ne peut pas garantir seul 7 jours sur 7 l’accueil, la table, le parc, les absences et les pics. Le renfort doit être budgété ou attribué.</p></article>
+      </div>
+
+      <div class="pilotage-insights">
+        <details open><summary>Formules économiques</summary><p>CA hébergement = 2 suites × nuits vendues × prix moyen. Les séjours sont déduits d’une durée moyenne de 2,1 nuits. Commissions, remise en état, petit-déjeuner, énergie, coûts spa et table sont retirés avant le loyer SCI, l’emploi et les autres charges fixes.</p></details>
+        <details><summary>Modèle de temps</summary><p>Hypothèse : 3 h par rotation, 0,65 h par nuit-suite pour le petit-déjeuner, 1 h par séjour pour accueil/administration, 0,75 h par réservation spa, 4,5 h par table, 420 h/an de parc et 300 h/an d’administration/maintenance. Capacité utile de pilotage : 1 350 h sur les 1 607 h légales, afin de conserver une réserve.</p></details>
+        <details><summary>Ce qu’il faut chronométrer</summary><p>Trois séjours à blanc en mars 2027 devront mesurer ménage, petit-déjeuner, accueil, entretien spa, préparation de table et déplacements. Ces mesures remplaceront les hypothèses de travail avant l’ouverture.</p></details>
       </div>
     </section>
 
     <section id="panel-marche" class="pilotage-panel" role="tabpanel" data-pilotage-panel="marche" hidden>
-      <div class="pilotage-section-head">
-        <div><p class="demo-kicker">Benchmark documentaire</p><h2>30 lieux, cinq modèles concurrents.</h2></div>
-        <p>Prix indicatifs pour deux personnes, variables selon date et canal. Ils servent à positionner le projet, pas à établir une comparaison commerciale garantie.</p>
-      </div>
-      <div class="pilotage-market-kpis">
-        <article><span>Médiane Vosges</span><strong>206 €</strong><small>10 références</small></article>
-        <article><span>Médiane France</span><strong>213 €</strong><small>20 références</small></article>
-        <article><span>Médiane globale</span><strong>210 €</strong><small>30 références</small></article>
-        <article><span>Cible réalisée</span><strong>220–240 €</strong><small>conditionnée par l’exécution</small></article>
-      </div>
-      <div class="pilotage-market-tools">
-        <label class="demo-field"><span class="label">Périmètre du graphique</span><select data-market-scope><option value="vosges">Vosges · 10 lieux</option><option value="france">France · 20 lieux</option><option value="all">Ensemble · 30 lieux</option></select></label>
-        <label class="demo-field"><span class="label">Examiner un lieu</span><select data-competitor-select></select></label>
-      </div>
-      <div class="pilotage-market-layout">
-        <div class="pilotage-chart" data-market-chart aria-label="Comparaison des prix indicatifs"></div>
-        <article class="pilotage-competitor-detail" data-competitor-detail></article>
-      </div>
+      <div class="pilotage-section-head"><div><p class="demo-kicker">Benchmark de 30 lieux</p><h2>Le patrimoine seul ne crée pas le premium.</h2></div><p>Les prix sont indicatifs, observés à des dates et sur des canaux différents. Ils donnent des ordres de grandeur et des modèles de valeur, pas un tarif garanti.</p></div>
+      <div class="pilotage-market-kpis"><article><span>Médiane Vosges</span><strong>206 €</strong><small>10 références</small></article><article><span>Médiane France</span><strong>213 €</strong><small>20 références</small></article><article><span>Médiane globale</span><strong>210 €</strong><small>30 références</small></article><article><span>Cible à maturité</span><strong>220–240 €</strong><small>si l’exécution le démontre</small></article></div>
+      <div class="pilotage-market-tools"><label class="demo-field"><span class="label">Périmètre</span><select data-market-scope><option value="vosges">Vosges · 10 lieux</option><option value="france">France · 20 lieux</option><option value="all">Ensemble · 30 lieux</option></select></label><label class="demo-field"><span class="label">Examiner un lieu</span><select data-competitor-select></select></label></div>
+      <div class="pilotage-market-layout"><div class="pilotage-chart" data-market-chart aria-label="Comparaison des prix indicatifs"></div><article class="pilotage-competitor-detail" data-competitor-detail></article></div>
+      <div class="pilotage-section-head compact"><div><p class="demo-kicker">Raisonnement reproductible</p><h2>De l’observation à la recommandation.</h2></div></div>
       <div class="pilotage-insights">
-        <details open><summary>Le concurrent local direct</summary><p>Le Château de Failloux, autour de 108 € dans l’étude, impose une comparaison immédiate. L’écart ne peut être défendu que par la taille réelle des suites, la terrasse, la privatisation, la finition et une scénographie nocturne introuvable ailleurs.</p></details>
-        <details><summary>Les cinq références centrales</summary><p>Failloux valide le marché local ; Landin rapproche patrimoine et bien-être ; Château Réal travaille le territoire ; Maison Durieux prouve le premium hors grande destination ; Château Duo monétise de grandes suites et un spa réellement privatif.</p></details>
-        <details><summary>La recommandation tarifaire</summary><p>Conserver 180 € comme décision d’ouverture si la famille le souhaite, puis tester 205–225 € et viser un prix moyen réalisé de 220–240 €. Les dates fortes pourront porter davantage uniquement après preuves photographiques et avis clients.</p></details>
+        <details open><summary>Conclusion</summary><p>Ouvrir avec une gamme 180–220 € limite le risque sans enfermer la marque dans un prix bas. Après photographies réelles, avis et preuve du service, la gamme 200–240 € devient défendable. Les dates fortes pourront dépasser cette cible.</p></details>
+        <details><summary>Les cinq références centrales</summary><p>Failloux valide la demande locale ; Landin associe patrimoine et bien-être ; Château Réal travaille l’ancrage territorial ; Maison Durieux prouve le premium hors grande destination ; Château Duo monétise de grandes suites et un spa privatif.</p></details>
+        <details><summary>Chaîne de valeur retenue</summary><p>1. Volumes réels d’une suite. 2. Finition des salles de bain. 3. Parc nocturne. 4. Créneaux bien-être réservés. 5. Table incarnée. 6. Vente directe. Le prix n’est que la conséquence de cette exécution.</p></details>
+        <details><summary>Limites de la donnée</summary><p>Échantillon construit pour éclairer le positionnement, non statistiquement représentatif. Les prix doivent être revérifiés sur les mêmes dates, pour deux personnes, avec conditions et prestations comparables avant la grille 2027.</p></details>
       </div>
     </section>
 
     <section id="panel-investissements" class="pilotage-panel" role="tabpanel" data-pilotage-panel="investissements" hidden>
-      <div class="pilotage-section-head">
-        <div><p class="demo-kicker">Chiffrage fournitures corrigé</p><h2>61–64 k€ estimés. 65 k€ à sécuriser.</h2></div>
-        <p>Main-d’œuvre familiale non valorisée. Les montants doivent encore être remplacés par commandes, factures et provisions de trésorerie.</p>
-      </div>
-      <div class="pilotage-budget-overview">
-        <article class="pilotage-budget-total"><span>Enveloppe conseillée</span><strong>65 000 € TTC</strong><div><i style="width: 60.8%"></i><i style="width: 35.4%"></i><i style="width: 3.8%"></i></div><small><b></b> Intérieur 39,5 k€ · <b></b> Extérieur 23 k€ médian · <b></b> Marge 2,5 k€</small></article>
-        <article><span>Écart avec l’ancienne base</span><strong>+15 000 €</strong><p>L’ancienne hypothèse de 50 k€ ne doit plus servir au plan de financement.</p></article>
-        <article><span>Fourchette documentée</span><strong>61–64 k€</strong><p>L’éclairage extérieur explique l’essentiel de la variation.</p></article>
-      </div>
-      <div class="pilotage-budget-grid">
-        <article><span>Suites</span><strong>12 000 €</strong><i style="--share: 18.5%"></i><small>Mobilier, literie, textiles, miroirs, décoration</small></article>
-        <article><span>Salles de bain</span><strong>21 500 €</strong><i style="--share: 33.1%"></i><small>Grande salle de bain 15 k€ + petite 6,5 k€</small></article>
-        <article><span>Terrasses & finitions</span><strong>6 000 €</strong><i style="--share: 9.2%"></i><small>Deux terrasses et décoration complémentaire</small></article>
-        <article><span>Allée & réseaux</span><strong>4 000 €</strong><i style="--share: 6.2%"></i><small>Cheminement, socles, drainage et divers</small></article>
-        <article><span>Éclairage extérieur</span><strong>7 500–10 500 €</strong><i style="--share: 13.8%"></i><small>BEGA, câblage et gaines</small></article>
-        <article><span>Bain & sauna</span><strong>10 000 €</strong><i style="--share: 15.4%"></i><small>Bain nordique qualitatif et sauna finlandais</small></article>
-      </div>
-      <div class="pilotage-priority">
-        <Image src={chemin} alt="Projection du cheminement éclairé et du bain nordique" widths={[580, 900]} sizes="(max-width: 900px) 100vw, 48vw" />
-        <div><p class="demo-kicker">Arbitrage recommandé</p><h3>Investir d’abord dans ce que les photos prouvent.</h3><ol><li>Deux salles de bain irréprochables.</li><li>Literie, linge, terrasses et stylisme.</li><li>Éclairage sûr, chaud et scénographique.</li><li>Une expérience signature parfaitement opérable.</li><li>Équipements secondaires seulement après stabilisation.</li></ol></div>
-      </div>
+      <div class="pilotage-section-head"><div><p class="demo-kicker">Budget Jules · fournitures et équipements</p><h2>61–64 k€ documentés.<br />65 k€ à sécuriser.</h2></div><p>Main-d’œuvre familiale non valorisée. Les devis, aléas de chantier et besoin en fonds de roulement restent à ajouter au plan de financement final.</p></div>
+      <div class="pilotage-budget-overview"><article class="pilotage-budget-total"><span>Enveloppe de travail</span><strong>65 000 € TTC</strong><div><i style="width:60.8%"></i><i style="width:35.4%"></i><i style="width:3.8%"></i></div><small>Intérieur 39,5 k€ · extérieur 21,5–24,5 k€ · marge résiduelle</small></article><article><span>Ancienne base remplacée</span><strong>50 000 €</strong><p>Ne plus l’utiliser pour le financement.</p></article><article><span>Variable principale</span><strong>Éclairage</strong><p>7,5 à 10,5 k€ selon le système retenu.</p></article></div>
+      <div class="pilotage-budget-grid"><article><span>Suites</span><strong>12 000 €</strong><i style="--share:18.5%"></i><small>Mobilier, literie, textiles, miroirs, décoration</small></article><article><span>Salles de bain</span><strong>21 500 €</strong><i style="--share:33.1%"></i><small>Grande 15 k€ + petite 6,5 k€</small></article><article><span>Terrasses & décoration</span><strong>6 000 €</strong><i style="--share:9.2%"></i><small>Deux terrasses et finitions complémentaires</small></article><article><span>Allée & réseaux</span><strong>4 000 €</strong><i style="--share:6.2%"></i><small>Cheminement 2,5 k€ + réseaux 1,5 k€</small></article><article><span>Éclairage extérieur</span><strong>7 500–10 500 €</strong><i style="--share:13.8%"></i><small>Bornes, câblage, gaines et pose technique</small></article><article><span>Bain & sauna</span><strong>10 000 €</strong><i style="--share:15.4%"></i><small>Bain nordique 4 k€ + sauna 6 k€</small></article></div>
+      <div class="pilotage-priority"><Image src={chemin} alt="Projection du chemin éclairé menant au bain nordique" widths={[620, 1000]} sizes="(max-width:900px) 100vw, 50vw" /><div><p class="demo-kicker">Ordre de priorité</p><h3>Investir là où le client voit la différence.</h3><ol><li>Étanchéité, sécurité, salles de bain et réseaux.</li><li>Literie, textiles et qualité d’usage des suites.</li><li>Éclairage du parc et cheminement signature.</li><li>Bain nordique et sauna intégrés au paysage.</li><li>Décoration additionnelle après arbitrage de la marge.</li></ol></div></div>
+      <div class="pilotage-insights"><details open><summary>Ce que couvre le budget</summary><p>Fournitures et équipements listés par Jules pour les deux suites, salles de bain, terrasses, parc et spa extérieur. La fourchette corrigée constitue la base active.</p></details><details><summary>Ce qu’il ne couvre pas encore</summary><p>Valorisation du travail familial, trésorerie de démarrage, coûts juridiques et numériques, assurances, photographie finale, consommables d’ouverture, imprévus et éventuels travaux réglementaires.</p></details><details><summary>Règle de mise à jour</summary><p>Chaque poste devra passer de « estimation » à « devis », puis « commandé » et « payé ». Le budget initial et l’atterrissage doivent rester séparés pour mesurer les écarts.</p></details></div>
     </section>
 
     <section id="panel-plan" class="pilotage-panel" role="tabpanel" data-pilotage-panel="plan" hidden>
-      <div class="pilotage-section-head">
-        <div><p class="demo-kicker">Chemin critique</p><h2>Les preuves à réunir avant avril 2027.</h2></div>
-        <div class="pilotage-progress-copy"><strong data-roadmap-progress>0 %</strong><span>avancement enregistré sur cet appareil</span></div>
-      </div>
+      <div class="pilotage-section-head"><div><p class="demo-kicker">Septembre 2026 → avril 2027</p><h2>Le chemin critique de l’ouverture.</h2></div><div class="pilotage-progress-copy"><strong data-roadmap-progress>0 %</strong><span>avancement enregistré dans ce navigateur</span></div></div>
       <div class="pilotage-progress"><i data-roadmap-progress-bar></i></div>
       <div class="pilotage-roadmap-v2">
-        <details open>
-          <summary><span>AOÛT–15 SEPT.</span><strong>Décider la structure</strong><em class="demo-status danger">Critique</em></summary>
-          <p>La propriété, le payeur et le financement de chaque actif doivent être identifiés avant les commandes.</p>
-          <label><input type="checkbox" data-roadmap-task="structure" /> Arbitrer société, TVA, capital et gouvernance</label>
-          <label><input type="checkbox" data-roadmap-task="bail" /> Valider bail, loyer SCI et charges</label>
-          <label><input type="checkbox" data-roadmap-task="salary" /> Chiffrer le coût employeur et le rôle de Jules</label>
-          <label><input type="checkbox" data-roadmap-task="quotes" /> Obtenir les devis structurants et affecter chaque facture</label>
-        </details>
-        <details>
-          <summary><span>SEPT.–OCT.</span><strong>Qualifier les obligations</strong><em class="demo-status warn">À instruire</em></summary>
-          <p>Aucune promesse commerciale ne doit précéder la qualification écrite des usages sensibles.</p>
-          <label><input type="checkbox" data-roadmap-task="erp" /> Position mairie/SDIS : sécurité, ERP et accessibilité</label>
-          <label><input type="checkbox" data-roadmap-task="ars" /> Position ARS : piscine naturelle et équipements spa</label>
-          <label><input type="checkbox" data-roadmap-task="food" /> Qualifier table, hygiène, allergènes et boissons</label>
-          <label><input type="checkbox" data-roadmap-task="insurance" /> Sécuriser assurances travaux, murs et exploitation</label>
-        </details>
-        <details>
-          <summary><span>NOV.–DÉC.</span><strong>Préparer la vente</strong><em class="demo-status simulated">Prévu</em></summary>
-          <p>La communication peut commencer en décembre si elle distingue clairement projections et réalité.</p>
-          <label><input type="checkbox" data-roadmap-task="pricing" /> Tester trois paliers tarifaires et leurs marges</label>
-          <label><input type="checkbox" data-roadmap-task="cgv" /> Finaliser CGV, annulation, règlement et médiateur</label>
-          <label><input type="checkbox" data-roadmap-task="signature" /> Définir une seule expérience signature vendable</label>
-          <label><input type="checkbox" data-roadmap-task="prelaunch" /> Préparer liste d’attente et communication de pré-ouverture</label>
-        </details>
-        <details>
-          <summary><span>JANV.–FÉV.</span><strong>Construire l’exploitation</strong><em class="demo-status simulated">Prévu</em></summary>
-          <p>Le système d’information orchestre les opérations ; il ne remplace ni les procédures ni les responsabilités.</p>
-          <label><input type="checkbox" data-roadmap-task="pms" /> Choisir PMS, paiement et canal de lancement</label>
-          <label><input type="checkbox" data-roadmap-task="procedures" /> Écrire accueil, ménage, table, spa et incidents</label>
-          <label><input type="checkbox" data-roadmap-task="registrations" /> Réaliser déclarations, taxe, emploi et licences</label>
-          <label><input type="checkbox" data-roadmap-task="continuity" /> Tester les modes dégradés et le plan de continuité</label>
-        </details>
-        <details>
-          <summary><span>MARS</span><strong>Recetter en conditions réelles</strong><em class="demo-status simulated">Prévu</em></summary>
-          <p>Trois séjours à blanc doivent prouver la qualité, la sécurité et la soutenabilité du quotidien.</p>
-          <label><input type="checkbox" data-roadmap-task="photos" /> Remplacer les projections par les photos réelles</label>
-          <label><input type="checkbox" data-roadmap-task="dryruns" /> Réussir les scénarios direct, OTA et incident</label>
-          <label><input type="checkbox" data-roadmap-task="timings" /> Chronométrer ménage, petit-déjeuner, spa et table</label>
-          <label><input type="checkbox" data-roadmap-task="gono" /> Prononcer le go/no-go du 31 mars</label>
-        </details>
-        <details>
-          <summary><span>AVRIL</span><strong>Ouvrir et apprendre</strong><em class="demo-status simulated">Prévu</em></summary>
-          <p>La montée en charge reste volontairement progressive jusqu’à preuve de la qualité et de la marge.</p>
-          <label><input type="checkbox" data-roadmap-task="softopen" /> Ouvrir un calendrier volontairement maîtrisé</label>
-          <label><input type="checkbox" data-roadmap-task="reviews" /> Suivre avis, incidents et temps hôte chaque semaine</label>
-          <label><input type="checkbox" data-roadmap-task="margin" /> Mesurer prix net, coût par séjour et marge par option</label>
-          <label><input type="checkbox" data-roadmap-task="review2028" /> Préparer l’arbitrage tarifaire 2028</label>
-        </details>
+        <details open><summary><span>SEPT.–OCT.</span><strong>Verrouiller le cadre</strong><em class="demo-status urgent">Critique</em></summary><p>Le montage, les responsabilités et la sécurité conditionnent tous les contrats suivants.</p><label><input type="checkbox" data-roadmap-task="company" /> Choisir la société d’exploitation et son régime fiscal</label><label><input type="checkbox" data-roadmap-task="lease" /> Formaliser bail SCI / société et allocation des travaux</label><label><input type="checkbox" data-roadmap-task="townhall" /> Déclarations mairie, classement ERP et taxe de séjour</label><label><input type="checkbox" data-roadmap-task="ars" /> Sécuriser piscine naturelle et équipements bien-être</label><label><input type="checkbox" data-roadmap-task="food" /> Qualifier table, hygiène, allergènes et licences boissons</label><label><input type="checkbox" data-roadmap-task="insurance" /> Assurances murs, travaux, exploitation et responsabilité</label></details>
+        <details><summary><span>NOV.–DÉC.</span><strong>Rendre l’offre vendable</strong><em class="demo-status simulated">À préparer</em></summary><p>La communication de décembre suppose une offre vraie, des conditions lisibles et une preuve explicite du caractère projeté des images.</p><label><input type="checkbox" data-roadmap-task="pricing" /> Valider gammes saisonnières et règles de remise</label><label><input type="checkbox" data-roadmap-task="cgv" /> Finaliser CGV, annulation, caution et médiateur</label><label><input type="checkbox" data-roadmap-task="signature" /> Choisir l’expérience signature et ses coûts</label><label><input type="checkbox" data-roadmap-task="prelaunch" /> Ouvrir liste d’attente et pré-lancement</label></details>
+        <details><summary><span>JANV.–FÉV.</span><strong>Construire l’exploitation</strong><em class="demo-status simulated">À préparer</em></summary><p>Outils, contrats et procédures doivent être testables sans dépendre d’une mémoire individuelle.</p><label><input type="checkbox" data-roadmap-task="pms" /> Choisir PMS/channel manager, paiement et vente directe</label><label><input type="checkbox" data-roadmap-task="employment" /> Contrat, classification, paie, planning et relève du salarié</label><label><input type="checkbox" data-roadmap-task="procedures" /> Écrire accueil, ménage, table, spa, incidents et astreinte</label><label><input type="checkbox" data-roadmap-task="accounting" /> Construire plan comptable, facturation et exports</label><label><input type="checkbox" data-roadmap-task="privacy" /> RGPD, consentements, conservation et sécurité</label><label><input type="checkbox" data-roadmap-task="continuity" /> Modes dégradés, clés, paiement et continuité</label></details>
+        <details><summary><span>MARS</span><strong>Recetter en conditions réelles</strong><em class="demo-status simulated">À préparer</em></summary><p>Les essais transforment les hypothèses de temps et de coût en données d’exploitation.</p><label><input type="checkbox" data-roadmap-task="photos" /> Remplacer les projections par les photos réelles</label><label><input type="checkbox" data-roadmap-task="dryruns" /> Trois séjours à blanc : direct, OTA et incident</label><label><input type="checkbox" data-roadmap-task="timings" /> Chronométrer tous les gestes opératoires</label><label><input type="checkbox" data-roadmap-task="stock" /> Constituer stocks, contrôles et carnets d’entretien</label><label><input type="checkbox" data-roadmap-task="training" /> Former les personnes de relève</label><label><input type="checkbox" data-roadmap-task="gono" /> Go/no-go formalisé le 31 mars</label></details>
+        <details><summary><span>AVRIL</span><strong>Ouvrir et apprendre</strong><em class="demo-status simulated">Objectif</em></summary><p>La montée en charge doit préserver les avis, la famille et la soutenabilité.</p><label><input type="checkbox" data-roadmap-task="softopen" /> Calendrier maîtrisé et capacité plafonnée</label><label><input type="checkbox" data-roadmap-task="reviews" /> Revue hebdomadaire avis, incidents et temps</label><label><input type="checkbox" data-roadmap-task="margin" /> Mesurer prix net, coût par séjour et marge par option</label><label><input type="checkbox" data-roadmap-task="monthly" /> Revue mensuelle associés : finance, charge, qualité</label><label><input type="checkbox" data-roadmap-task="review2028" /> Arbitrage de la gamme tarifaire 2028</label></details>
       </div>
-      <div class="demo-callout"><p>Cette checklist est enregistrée uniquement dans le navigateur utilisé. Elle facilite la réunion familiale mais ne remplace pas un registre partagé, daté et attribué à des responsables.</p></div>
+      <div class="pilotage-insights"><details open><summary>Dépendances critiques</summary><p>Société d’exploitation → bail → comptes et contrats → PMS/paiement → conditions de vente. Sécurité du spa et de la piscine → assurances → ouverture des créneaux. Offre de table → hygiène/licence/allergènes → réservation et facturation.</p></details><details><summary>Gouvernance proposée</summary><p>Une réunion mensuelle avec un propriétaire par chantier, une date cible et une preuve de clôture. Le cockpit éclaire la décision ; le suivi opérationnel devra migrer vers un outil authentifié avant le lancement.</p></details><details><summary>Jalons de décision</summary><p>30 septembre : montage cible. 31 octobre : conformité et assurances. 15 décembre : offre vendable. 28 février : outils et procédures prêts. 31 mars : go/no-go. Avril : ouverture progressive.</p></details></div>
     </section>
 
-    <footer class="pilotage-method">
-      <strong>Périmètre et prudence.</strong>
-      <p>Le benchmark est documentaire et doit être actualisé à dates comparables avant l’ouverture. Le budget est une estimation de fournitures avec main-d’œuvre familiale non valorisée. Le simulateur n’est ni un prévisionnel d’expert-comptable ni une validation juridique.</p>
-    </footer>
+    <section id="panel-referentiel" class="pilotage-panel" role="tabpanel" data-pilotage-panel="referentiel" hidden>
+      <div class="pilotage-section-head"><div><p class="demo-kicker">Lisible par les humains et les agents</p><h2>La vérité courante, avec son niveau de certitude.</h2></div><p>Les décisions obsolètes ne sont pas affichées comme options actives. La provenance et le raisonnement restent accessibles pour auditer une recommandation.</p></div>
+      <div class="pilotage-truth-grid"><article><span class="truth-status validated">Validé</span><h3>Produit</h3><p>Deux suites vendues intégralement, jusqu’à quatre personnes, petit-déjeuner inclus. Ouverture visée en avril 2027.</p></article><article><span class="truth-status validated">Validé</span><h3>Prix public d’ouverture</h3><p>180 € la nuit comme point d’entrée, à traduire en gamme saisonnière 180–220 €. Enfant : +20 €. Spa : base +40 €. Table : 40 € ; accord 20 €.</p></article><article><span class="truth-status assumption">Hypothèse</span><h3>Trajectoire</h3><p>Année 2 : gamme 200–240 €, sous réserve de finition, photographie réelle, avis et qualité opérationnelle démontrée.</p></article><article><span class="truth-status external">À confirmer</span><h3>Montage et emploi</h3><p>Société commerciale, bail avec la SCI, régime fiscal, convention collective, coût de paie, licences et conformité doivent être validés par les conseils compétents.</p></article></div>
+      <div class="pilotage-section-head compact"><div><p class="demo-kicker">Points d’entrée machine</p><h2>Un agent peut reprendre le projet sans reconstruire le contexte.</h2></div></div>
+      <div class="pilotage-machine-grid"><a href={withBase("/llms.txt")}><span>TXT</span><strong>llms.txt</strong><small>Index compact et consignes de lecture</small></a><a href={withBase("/knowledge/project.json")}><span>JSON</span><strong>project.json</strong><small>Offre, règles et identité</small></a><a href={withBase("/knowledge/business-model.json")}><span>JSON</span><strong>business-model.json</strong><small>Hypothèses, formules et emploi</small></a><a href={withBase("/knowledge/market.json")}><span>JSON</span><strong>market.json</strong><small>Benchmark et positionnement</small></a><a href={withBase("/knowledge/investments.json")}><span>JSON</span><strong>investments.json</strong><small>Budget et périmètre</small></a><a href={withBase("/knowledge/roadmap.json")}><span>JSON</span><strong>roadmap.json</strong><small>Plan directeur et dépendances</small></a><a href={withBase("/knowledge/sources.json")}><span>JSON</span><strong>sources.json</strong><small>Provenance et limites des sources</small></a></div>
+      <div class="pilotage-source-map"><details open><summary>Offre et expérience</summary><p>Référentiel fonctionnel v3, arbitrages tarifaires d’août 2026, maquette client et règles de séjour. Statut : valeurs publiques validées ; packs avancés encore simulés.</p></details><details><summary>Modèle économique</summary><p>Business plan Julie pour les idées de packs et coûts directs ; simulateur reconstruit avec 65 k€ de CAPEX, loyer SCI de 18 k€ et coût employeur distinct du salaire brut.</p></details><details><summary>Marché</summary><p>Analyse de 30 lieux : 10 dans les Vosges, 20 en France. Les médianes et le raisonnement de positionnement sont publiés ; les URLs et observations brutes sont conservées dans la source locale.</p></details><details><summary>Investissements</summary><p>Budget corrigé Jules : 39,5 k€ intérieur, 21,5–24,5 k€ extérieur, enveloppe active 65 k€. Main-d’œuvre familiale et BFR hors périmètre.</p></details><details><summary>Juridique et réglementaire</summary><p>Le dossier de consultation structure les questions mais ne constitue pas un avis. Toute mention juridique reste marquée « validation externe requise » jusqu’aux consultations de septembre 2026.</p></details></div>
+    </section>
+
+    <footer class="pilotage-method"><strong>Doctrine documentaire.</strong><p>La page montre l’état courant. Les fichiers structurés portent les statuts et formules. Les sources originales restent classées localement. Les hypothèses financières devront être remplacées par des devis, simulations de paie, chronométrages et validations professionnelles.</p></footer>
   </div>
-  <script is:inline src={withBase("/demo/pilotage.js?v=20260809-2")}></script>
+  <script is:inline src={withBase("/demo/pilotage.js?v=20260809-3")}></script>
 </DemoLayout>

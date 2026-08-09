@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-08-09",
+  "currency": "EUR",
+  "active_envelope": 65000,
+  "documented_range": [61000, 64000],
+  "status": "working_budget",
+  "items": [
+    { "name": "Suites", "amount": 12000 },
+    { "name": "Bathrooms", "amount": 21500, "detail": { "large": 15000, "small": 6500 } },
+    { "name": "Terraces", "amount": 4000 },
+    { "name": "Additional decoration", "amount": 2000 },
+    { "name": "Japanese path", "amount": 2500 },
+    { "name": "Outdoor lighting", "range": [7500, 10500] },
+    { "name": "Nordic bath", "amount": 4000 },
+    { "name": "Finnish sauna", "amount": 6000 },
+    { "name": "Networks and miscellaneous", "amount": 1500 }
+  ],
+  "excluded": ["family labor valuation", "working capital", "legal and accounting setup", "digital stack", "final photography", "launch consumables", "unidentified regulatory works", "financing costs"],
+  "priority_order": ["safety and water-tightness", "bathrooms and networks", "bedding and suite usability", "night park lighting and access", "landscape-integrated wellness", "additional decoration"]
+}

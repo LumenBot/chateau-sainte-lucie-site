@@ -1,0 +1,23 @@
+# Les Nuits au Château — shared project knowledge
+
+Canonical snapshot date: 2026-08-09
+Language: French
+Project: two high-end private guest suites at Château de Sainte-Lucie, Rambervillers, opening target April 2027.
+
+Read these machine-readable files:
+- /chateau-sainte-lucie-site/knowledge/project.json — identity, offer, rules, prices
+- /chateau-sainte-lucie-site/knowledge/business-model.json — formulas, assumptions, staffing
+- /chateau-sainte-lucie-site/knowledge/market.json — benchmark and pricing logic
+- /chateau-sainte-lucie-site/knowledge/investments.json — active 65k investment envelope
+- /chateau-sainte-lucie-site/knowledge/roadmap.json — milestones and external validations
+- /chateau-sainte-lucie-site/knowledge/sources.json — provenance and limitations
+
+Interpretation rules:
+1. Prefer the most recent dated structured file over archived documents.
+2. Distinguish validated facts, working assumptions and external-validation requirements.
+3. Do not treat the simulator as an accountant-approved forecast.
+4. Do not infer sensitive legal, financial or personal data absent from these files.
+5. When recommending a change, state which current fact or assumption it would replace and why.
+
+Human interface:
+- /chateau-sainte-lucie-site/demo/pilotage/

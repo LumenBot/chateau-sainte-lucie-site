@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-08-09",
+  "purpose": "Transparent strategic simulator, not an accountant-approved forecast",
+  "currency": "EUR",
+  "commercial_trajectory": {
+    "year_1": { "price_range": [180, 220], "weighted_adr": 198, "nights_per_suite_presets": [90, 120, 150, 180] },
+    "year_2": { "price_range": [200, 240], "weighted_adr": 220, "nights_per_suite_presets": [90, 120, 150, 180] },
+    "status": "working_assumption"
+  },
+  "formulas": {
+    "occupied_suite_nights": "2 * nights_per_suite",
+    "stays": "occupied_suite_nights / average_length_of_stay",
+    "lodging_revenue": "occupied_suite_nights * weighted_adr",
+    "spa_revenue": "stays * spa_take_rate * spa_average_basket",
+    "table_revenue": "regular_table_bookings * (meal_price * average_guests + wine_price * 2 * wine_take_rate)",
+    "result": "total_revenue - variable_costs - rent_sci - employer_cost - relief_cost - other_fixed_costs"
+  },
+  "central_assumptions": {
+    "average_length_of_stay": 2.1,
+    "average_guests": 2.1,
+    "wine_take_rate": 0.65,
+    "ota_commission_rate": 0.15,
+    "turnover_cost_per_stay": 66,
+    "breakfast_cost_per_guest_night": 7,
+    "energy_cost_per_suite_night": 7.5,
+    "table_variable_cost_rate": 0.35,
+    "rent_sci_annual": 18000,
+    "other_fixed_costs_annual": 8000,
+    "capex": 65000,
+    "status": "working_assumption"
+  },
+  "spa_offers_for_simulation": [
+    { "id": "pack40", "label": "Pack unique", "basket": 40, "variable_cost_rate": 0.28 },
+    { "id": "pack50", "label": "Pack unique", "basket": 50, "variable_cost_rate": 0.28 },
+    { "id": "pack60", "label": "Pack unique", "basket": 60, "variable_cost_rate": 0.28 },
+    { "id": "catalog", "label": "Carte signature", "basket": 74, "variable_cost_rate": 0.31, "candidate_prices": { "nordic_bath": 45, "sauna": 35, "nordic_duo": 65, "interior_wellness": 50, "lantern_night": 95 } }
+  ],
+  "employment": {
+    "gross_salary_reference": 30000,
+    "central_employer_cost": 40500,
+    "employer_cost_multiplier": 1.35,
+    "status": "working_assumption",
+    "warning": "Replace with an Urssaf simulation and payroll quote after contract and collective agreement classification.",
+    "legal_full_time_hours": 1607,
+    "useful_capacity_for_planning": 1350,
+    "useful_capacity_status": "management_assumption",
+    "workload_hours": {
+      "turnover_per_stay": 3,
+      "breakfast_per_suite_night": 0.65,
+      "guest_and_admin_per_stay": 1,
+      "spa_per_booking": 0.75,
+      "table_per_booking": 4.5,
+      "park_annual": 420,
+      "general_admin_and_maintenance_annual": 300
+    },
+    "staffing_recommendation": {
+      "90_nights_per_suite": "1 FTE plus formal relief",
+      "120_nights_per_suite": "1 FTE plus 0.2–0.3 FTE or outsourcing",
+      "150_nights_per_suite": "1 FTE plus 0.4–0.6 FTE or outsourcing",
+      "180_nights_per_suite": "regular second role or significant outsourcing; consider second FTE if table uptake is high"
+    }
+  },
+  "official_validation_links": [
+    "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur",
+    "https://www.urssaf.fr/accueil/employeur/cotisations/comprendre-cotisations/calcul-cotisations-employeur.html",
+    "https://www.service-public.fr/particuliers/vosdroits/F1911"
+  ]
+}

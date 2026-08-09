@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-08-09",
+  "opening_target": "2027-04",
+  "workstreams": ["governance", "legal and tax", "finance", "regulatory and safety", "offer and pricing", "operations and staffing", "sales and distribution", "digital system", "brand and communication", "quality and launch"],
+  "milestones": [
+    { "date": "2026-09-30", "objective": "target legal and operating structure selected", "status": "planned" },
+    { "date": "2026-10-31", "objective": "regulatory, insurance and wellness safety path secured", "status": "planned" },
+    { "date": "2026-12-15", "objective": "sellable offer, conditions and pre-launch communication ready", "status": "planned" },
+    { "date": "2027-02-28", "objective": "tools, contracts, staffing and procedures ready for testing", "status": "planned" },
+    { "date": "2027-03-31", "objective": "go/no-go after dry runs and real photography", "status": "planned" },
+    { "date": "2027-04-01", "objective": "progressive opening", "status": "planned" }
+  ],
+  "critical_dependencies": [
+    "operating company -> lease with SCI -> bank/accounting/contracts -> booking and payment",
+    "pool and wellness safety -> insurance -> guest access and slots",
+    "table offer -> hygiene/allergens/alcohol licensing -> booking and invoicing",
+    "real operating procedures -> dry runs -> opening decision"
+  ],
+  "external_validation_required": ["legal structure", "lease and allocation of works", "tax and VAT", "chambres d'hotes qualification", "ERP/fire/accessibility", "pool and wellness obligations", "food hygiene and alcohol licence", "employment classification and payroll", "insurance", "CGV and consumer mediation", "GDPR"]
+}

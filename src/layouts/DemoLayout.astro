@@ -17,7 +17,7 @@ const demoNav = [
   { key: "reservation", label: "Réservation", href: "/demo/reservation" },
   { key: "client", label: "Espace client", href: "/demo/client" },
   { key: "gestion", label: "Gestion", href: "/demo/gestion" },
-  { key: "pilotage", label: "Projet & économie", href: "/demo/pilotage" },
+  { key: "pilotage", label: "Base de vérité", href: "/demo/pilotage" },
   { key: "integrations", label: "Intégrations", href: "/demo/integrations" },
 ] as const;
 ---
@@ -30,7 +30,7 @@ const demoNav = [
   <body class="demo-body">
     <a class="skip-link" href="#contenu-demo">Aller au contenu</a>
     <div class="demo-ribbon" role="status">
-      Démonstrateur fonctionnel · données fictives · aucune transaction réelle
+      {section === "pilotage" ? "Espace associés · données projet non sensibles · aucune transaction" : "Démonstrateur fonctionnel · données fictives · aucune transaction réelle"}
     </div>
     <header class="demo-header">
       <a class="demo-brand" href={withBase("/demo")} aria-label="Accueil du démonstrateur">

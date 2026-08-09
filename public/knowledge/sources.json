@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-08-09",
+  "publication_policy": "The GitHub repository is public. Raw legal, financial, personal and property documents remain in the local workspace; only derived non-sensitive facts are published.",
+  "sources": [
+    { "id": "julie-business-plan-v1", "local_path": "02-sources-associes/julie/Draft_Business_Plan_Chateau_Sainte_Lucie_page2_remplacee.pdf", "used_for": ["spa offer ideas", "direct cost hypotheses"], "warning": "historical prices and 50k capex are superseded" },
+    { "id": "julie-market-30", "local_path": "02-sources-associes/julie/Analyse_concurrence_Chateau_Sainte_Lucie_30_lieux.pdf", "used_for": ["30-property benchmark", "medians", "positioning logic"] },
+    { "id": "jules-budget-corrected", "local_path": "02-sources-associes/jules/budget_amenagement_chateau_corrige.pdf", "used_for": ["65k active investment envelope", "itemized budget"] },
+    { "id": "legal-consultation-questions", "local_path": "02-sources-associes/blaise-et-agents/Dossier_Consultation_Structuration_SCI_CSL.pdf", "used_for": ["external legal and tax questions"], "warning": "not a professional opinion" },
+    { "id": "project-reference", "local_path": "02-sources-associes/blaise-et-agents/Document_Reference_Projet_Les_Nuits_au_Chateau.md", "used_for": ["project consolidation and missing topics"] },
+    { "id": "site-iteration-brief", "local_path": "02-sources-associes/blaise-et-agents/Brief_Iteration_2_Site_Les_Nuits_au_Chateau.md", "used_for": ["brand and website decisions"] },
+    { "id": "plans", "local_path": "02-sources-associes/blaise-et-agents/PLANS.pdf", "used_for": ["room organization and dimensions"] },
+    { "id": "urssaf-employer-cost", "url": "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur", "used_for": ["future employer-cost validation"] },
+    { "id": "service-public-working-time", "url": "https://www.service-public.fr/particuliers/vosdroits/F1911", "used_for": ["1607-hour legal full-time reference"] }
+  ]
+}

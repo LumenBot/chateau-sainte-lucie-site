@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-08-09",
+  "sample": { "total": 30, "vosges": 10, "france_outside_vosges": 20 },
+  "indicative_medians": { "vosges": 206, "france": 213, "global": 210, "currency": "EUR" },
+  "central_benchmarks": [
+    { "name": "Château de Failloux", "role": "local demand and price comparison" },
+    { "name": "Château du Landin", "role": "heritage plus wellness" },
+    { "name": "Château Réal", "role": "territorial storytelling" },
+    { "name": "Maison Durieux", "role": "premium in a secondary destination" },
+    { "name": "Château Duo", "role": "large suites and private spa" }
+  ],
+  "current_recommendation": {
+    "launch_range": [180, 220],
+    "maturity_realized_range": [220, 240],
+    "conditions": ["finished bathrooms", "professional real photography", "verified private spaces", "night park lighting", "reliable service", "strong guest reviews"],
+    "status": "working_assumption"
+  },
+  "positioning_logic": [
+    "The local market validates demand but does not justify the premium by heritage alone.",
+    "The defensible premium comes from suite volume, privacy, night landscape, reserved wellness and embodied hospitality.",
+    "A seasonal range preserves an accessible launch point while monetizing strong dates.",
+    "Pricing must be recalibrated after real photography, reviews and observed conversion."
+  ],
+  "limitations": "Documentary sample with prices observed on differing dates and channels; refresh on identical dates and conditions before the 2027 rate grid."
+}
