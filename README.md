@@ -95,6 +95,8 @@ maquette simule explicitement l'envoi dans le navigateur et ne transmet rien.
   benchmark de 30 lieux, le budget corrigé de 65 k€ et leurs arbitrages.
 - `docs/19-base-de-verite-partagee-et-simulateur-v2.md` décrit l'architecture
   humain/IA, le modèle d'emploi et les règles de publication des données.
+- `docs/20-simulateur-exploitation-equilibre-v3.md` documente le simulateur
+  annuel simplifié, la relève auto-calculée et le loyer SCI résiduel.
 - `public/knowledge/` et `public/llms.txt` exposent la photographie courante
   sous des formats structurés directement consultables par les agents IA.
 - `docs/06-points-a-confirmer.md` ne contient plus que les validations externes

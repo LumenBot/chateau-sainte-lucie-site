@@ -8,25 +8,10 @@
     const percent = (value) => new Intl.NumberFormat("fr-FR", { style: "percent", maximumFractionDigits: 0 }).format(Number(value || 0));
     const toast = window.CSLDemo?.toast || ((message) => window.alert(message));
 
-    const pricing = {
-      launch: { label: "180–220 €", adr: 198 },
-      year2: { label: "200–240 €", adr: 220 },
-      180: { label: "180 €", adr: 180 },
-      200: { label: "200 €", adr: 200 },
-      220: { label: "220 €", adr: 220 },
-      240: { label: "240 €", adr: 240 },
-    };
-    const spaOffers = {
-      pack40: { label: "Pack unique 40 €", basket: 40, costRate: 0.28, hours: 0.55 },
-      pack50: { label: "Pack unique 50 €", basket: 50, costRate: 0.28, hours: 0.6 },
-      pack60: { label: "Pack unique 60 €", basket: 60, costRate: 0.28, hours: 0.65 },
-      catalog: { label: "Carte signature", basket: 74, costRate: 0.31, hours: 0.75 },
-    };
-    const scenarioNames = { pilot: "Lancement maîtrisé", balance: "Équilibre recherché", ambition: "Premium installé", custom: "Scénario personnalisé" };
+    const fixed = { suites: 2, averageGuests: 2.1, julesCost: 28000, julesUsefulHours: 1350, annualHours: 1607, capex: 65000 };
+    const scenarioNames = { recommended: "Scénario recommandé", custom: "Scénario libre" };
     const scenarios = {
-      pilot: { priceProfile1: "launch", nights1: "90", priceProfile2: "year2", nights2: "120", spaOffer: "pack40", spaTake: "30", mealPrice: "40", winePrice: "20", dinnerTake: "15", romanticShare: "0", directShare: "40", salaryCost: "40500", supportMode: "mixed", rent: "18000", otherFixed: "8000", capex: "65000" },
-      balance: { priceProfile1: "launch", nights1: "120", priceProfile2: "year2", nights2: "150", spaOffer: "pack50", spaTake: "45", mealPrice: "50", winePrice: "30", dinnerTake: "30", romanticShare: "20", directShare: "55", salaryCost: "40500", supportMode: "mixed", rent: "18000", otherFixed: "8000", capex: "65000" },
-      ambition: { priceProfile1: "year2", nights1: "150", priceProfile2: "240", nights2: "180", spaOffer: "catalog", spaTake: "60", mealPrice: "60", winePrice: "40", dinnerTake: "45", romanticShare: "40", directShare: "70", salaryCost: "40500", supportMode: "second", rent: "18000", otherFixed: "10000", capex: "65000" },
+      recommended: { nightsPerSuite: "155", averageNightPrice: "235", averageStay: "2.4", directShare: "65", spaTake: "60", spaBasket: "80", diningTake: "30", diningBasket: "170", turnoverCost: "90", breakfastCost: "7", energyCost: "7.5", spaUnitCost: "24", diningUnitCost: "60", otaCommission: "15", miscRate: "6", operatingReserve: "5000", supportMode: "subcontract", supportHourlyRate: "25" },
     };
 
     const competitors = [
@@ -62,99 +47,85 @@
       ["Bastide Saint-Honorat", "Alpes-Maritimes", "france", 180, "Art de vivre", "Terroir, vaisselle, gestes et senteurs construisent aussi le luxe."],
     ].map((row, index) => ({ index: index + 1, name: row[0], location: row[1], scope: row[2], price: row[3], model: row[4], lesson: row[5] }));
 
-    let activeScenario = "balance";
+    let activeScenario = "recommended";
     const read = () => Object.fromEntries(Array.from(form.elements).filter((field) => field.name).map((field) => [field.name, field.value]));
     const number = (v, key) => Number(v[key] || 0);
     function setValues(next) { Object.entries(next).forEach(([key, value]) => { const field = form.elements.namedItem(key); if (field) field.value = String(value); }); }
     function output(key, value) { document.querySelectorAll(`[data-output="${key}"]`).forEach((node) => { node.textContent = value; }); }
 
-    function supportHoursFor(nights, totalHours) {
-      const calendarRelief = nights <= 90 ? 180 : nights <= 120 ? 320 : nights <= 150 ? 520 : 760;
-      return Math.max(calendarRelief, Math.max(0, totalHours - 1350));
-    }
-
-    function calculate(v, year, overrideNights) {
-      const profile = pricing[v[`priceProfile${year}`]] || pricing.launch;
-      const nights = overrideNights ?? number(v, `nights${year}`);
-      const occupiedNights = nights * 2;
-      const los = 2.1;
-      const avgGuests = 2.1;
-      const stays = occupiedNights / los;
-      const spa = spaOffers[v.spaOffer] || spaOffers.pack50;
+    function calculate(v) {
+      const nightsPerSuite = number(v, "nightsPerSuite");
+      const occupiedNights = nightsPerSuite * fixed.suites;
+      const stays = occupiedNights / Math.max(1, number(v, "averageStay"));
       const spaBookings = stays * number(v, "spaTake") / 100;
-      const dinnerBookings = stays * number(v, "dinnerTake") / 100;
-      const romanticBookings = dinnerBookings * number(v, "romanticShare") / 100;
-      const regularDinnerBookings = dinnerBookings - romanticBookings;
-      const lodgingRevenue = occupiedNights * profile.adr;
-      const spaRevenue = spaBookings * spa.basket;
-      const regularDinnerBasket = number(v, "mealPrice") * avgGuests + number(v, "winePrice") * 2 * 0.65;
-      const tableRevenue = regularDinnerBookings * regularDinnerBasket;
-      const romanticRevenue = romanticBookings * 90;
-      const revenue = lodgingRevenue + spaRevenue + tableRevenue + romanticRevenue;
+      const diningBookings = stays * number(v, "diningTake") / 100;
+      const lodgingRevenue = occupiedNights * number(v, "averageNightPrice");
+      const spaRevenue = spaBookings * number(v, "spaBasket");
+      const diningRevenue = diningBookings * number(v, "diningBasket");
+      const revenue = lodgingRevenue + spaRevenue + diningRevenue;
 
-      const commission = lodgingRevenue * (1 - number(v, "directShare") / 100) * 0.15;
-      const turnover = stays * 66;
-      const breakfast = occupiedNights * avgGuests * 7;
-      const energy = occupiedNights * 7.5;
-      const spaDirect = spaRevenue * spa.costRate;
-      const tableDirect = tableRevenue * 0.35 + romanticRevenue * 0.32;
-      const variableCosts = commission + turnover + breakfast + energy + spaDirect + tableDirect;
+      const commission = lodgingRevenue * (1 - number(v, "directShare") / 100) * number(v, "otaCommission") / 100;
+      const turnover = stays * number(v, "turnoverCost");
+      const breakfast = occupiedNights * fixed.averageGuests * number(v, "breakfastCost");
+      const energy = occupiedNights * number(v, "energyCost");
+      const spaDirect = spaBookings * number(v, "spaUnitCost");
+      const diningDirect = diningBookings * number(v, "diningUnitCost");
+      const misc = revenue * number(v, "miscRate") / 100;
+      const variableCosts = commission + turnover + breakfast + energy + spaDirect + diningDirect + misc;
       const contribution = revenue - variableCosts;
 
-      const operationsHours = stays * 3 + occupiedNights * 0.65 + stays * 1 + spaBookings * spa.hours + dinnerBookings * 4.5 + 420 + 300;
-      const supportHours = supportHoursFor(nights, operationsHours);
-      const supportCost = v.supportMode === "second" ? 40500 : v.supportMode === "mixed" ? supportHours * 25 : 0;
-      const fixedCosts = number(v, "rent") + number(v, "salaryCost") + number(v, "otherFixed") + supportCost;
-      const result = contribution - fixedCosts;
-      return { year, profile, nights, occupiedNights, stays, lodgingRevenue, spaRevenue, tableRevenue, romanticRevenue, revenue, commission, turnover, breakfast, energy, spaDirect, tableDirect, variableCosts, contribution, operationsHours, supportHours, supportCost, fixedCosts, result };
-    }
-
-    function findBreakEven(v) {
-      if (calculate(v, 2, 275).result < 0) return null;
-      let low = 0; let high = 275;
-      for (let i = 0; i < 35; i += 1) { const mid = (low + high) / 2; if (calculate(v, 2, mid).result >= 0) high = mid; else low = mid; }
-      return Math.ceil(high);
+      const operationsHours = 720 + occupiedNights * 0.65 + stays + spaBookings * 0.75 + diningBookings * 4.5;
+      const calendarRelief = 80 + nightsPerSuite * 0.5;
+      const supportHours = Math.max(calendarRelief, operationsHours - fixed.julesUsefulHours, 0);
+      const partTimeFte = Math.max(0.2, Math.ceil(supportHours / fixed.annualHours * 10) / 10);
+      const supportCost = v.supportMode === "parttime" ? fixed.julesCost * partTimeFte : supportHours * number(v, "supportHourlyRate");
+      const reserve = number(v, "operatingReserve");
+      const rentCapacity = contribution - fixed.julesCost - supportCost - reserve;
+      const rent = Math.max(0, rentCapacity);
+      const deficit = Math.max(0, -rentCapacity);
+      const presenceDays = Math.min(275, Math.max(nightsPerSuite, occupiedNights - nightsPerSuite * 0.8));
+      return { nightsPerSuite, occupiedNights, stays, spaBookings, diningBookings, lodgingRevenue, spaRevenue, diningRevenue, revenue, commission, turnover, breakfast, energy, spaDirect, diningDirect, misc, variableCosts, contribution, operationsHours, calendarRelief, supportHours, partTimeFte, supportCost, reserve, rent, deficit, presenceDays };
     }
 
     const pnlRows = [
-      ["Hébergement", "lodgingRevenue", "revenue"], ["Bien-être", "spaRevenue", "revenue"], ["Table classique", "tableRevenue", "revenue"], ["Dîner romantique", "romanticRevenue", "revenue"], ["Chiffre d’affaires", "revenue", "subtotal"],
-      ["Commissions plateformes", "commission", "cost"], ["Remise en état", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Coûts directs table", "tableDirect", "cost"], ["Marge contributive", "contribution", "subtotal"],
-      ["Loyer SCI", "rent", "fixed"], ["Poste Jules — coût employeur", "salary", "fixed"], ["Renfort / relève", "supportCost", "fixed"], ["Autres frais fixes", "other", "fixed"], ["Résultat d’exploitation simplifié", "result", "total"],
+      ["Hébergement", "lodgingRevenue", "revenue"], ["Bien-être", "spaRevenue", "revenue"], ["Table d’hôte", "diningRevenue", "revenue"], ["Chiffre d’affaires", "revenue", "subtotal"],
+      ["Commissions plateformes", "commission", "cost"], ["Rotation ménage, linge & accueil", "turnover", "cost"], ["Petit-déjeuner", "breakfast", "cost"], ["Énergie", "energy", "cost"], ["Coûts directs spa", "spaDirect", "cost"], ["Coûts directs table", "diningDirect", "cost"], ["Charges diverses", "misc", "cost"], ["Marge avant emploi", "contribution", "subtotal"],
+      ["CDI Jules — budget employeur", "julesCost", "fixed"], ["Renfort / relève", "supportCost", "fixed"], ["Réserve d’exploitation", "reserve", "fixed"], ["Loyer SCI automatique", "rent", "fixed"], ["Déficit à financer", "deficit", "total"],
     ];
 
-    function renderPnl(y1, y2, v) {
-      const enrich = (data) => ({ ...data, rent: number(v, "rent"), salary: number(v, "salaryCost"), other: number(v, "otherFixed") });
-      const a = enrich(y1); const b = enrich(y2);
-      document.querySelector("[data-pnl]").innerHTML = `<div class="pilotage-pnl__head"><span>Compte de résultat</span><strong>Année 1</strong><strong>Année 2</strong></div>${pnlRows.map(([label, key, kind]) => `<div class="pilotage-pnl__row ${kind}"><span>${label}</span><strong>${money(a[key])}</strong><strong>${money(b[key])}</strong></div>`).join("")}`;
+    function renderPnl(data) {
+      const values = { ...data, julesCost: fixed.julesCost };
+      document.querySelector("[data-pnl]").innerHTML = `<div class="pilotage-pnl__head"><span>Compte de résultat annuel</span><strong>Montant</strong></div>${pnlRows.map(([label, key, kind]) => `<div class="pilotage-pnl__row ${kind}"><span>${label}</span><strong>${money(values[key])}</strong></div>`).join("")}`;
     }
 
     function render() {
-      const v = read(); const y1 = calculate(v, 1); const y2 = calculate(v, 2); const breakEven = findBreakEven(v);
-      const payback = y2.result > 0 ? number(v, "capex") / y2.result : null;
+      const v = read(); const data = calculate(v);
       output("scenario-name", scenarioNames[activeScenario] || scenarioNames.custom);
-      output("y1-revenue", money(y1.revenue)); output("y1-result", money(y1.result)); output("y1-adr", `${y1.profile.label} · prix moyen ${money(y1.profile.adr)}`);
-      output("y2-revenue", money(y2.revenue)); output("y2-result", money(y2.result)); output("y2-adr", `${y2.profile.label} · prix moyen ${money(y2.profile.adr)}`);
-      output("trajectory-note", `${money(y2.revenue - y1.revenue)} de CA entre les deux années`);
-      output("y2-experience-share", percent((y2.spaRevenue + y2.tableRevenue + y2.romanticRevenue) / Math.max(1, y2.revenue)));
-      output("break-even", breakEven === null ? "hors capacité" : `${breakEven} nuits/suite`);
-      output("y2-hours", `${integer(y2.operationsHours)} h · ${percent(y2.operationsHours / 1350)} d’une capacité utile`);
-      output("y2-support", `${integer(y2.supportHours)} h/an`);
-      output("payback", payback ? `${payback.toFixed(1).replace(".", ",")} ans` : "non financé par ce scénario");
-      output("family-hours", v.supportMode === "family" ? `${integer(y2.supportHours)} h/an` : `${integer(Math.max(0, y2.supportHours - (v.supportMode === "second" ? 1350 : y2.supportHours)))} h non financées`);
+      output("revenue", money(data.revenue));
+      output("revenue-mix", `${percent(data.lodgingRevenue / Math.max(1, data.revenue))} hébergement · ${percent((data.spaRevenue + data.diningRevenue) / Math.max(1, data.revenue))} expériences`);
+      output("rent", money(data.rent));
+      output("employment", money(fixed.julesCost + data.supportCost));
+      output("support-summary", v.supportMode === "parttime" ? `CDI Jules + ${data.partTimeFte.toFixed(1).replace(".", ",")} ETP` : `CDI Jules + ${integer(data.supportHours)} h sous-traitées`);
+      output("reserve", money(data.reserve));
+      output("contribution", money(data.contribution));
+      output("support-cost", money(data.supportCost));
+      output("support-hours", `${integer(data.supportHours)} h/an`);
+      output("presence-days", `${integer(data.presenceDays)} jours/an`);
+      output("deficit", data.deficit ? money(data.deficit) : "0 €");
+      output("operations-hours", `${integer(data.operationsHours)} h/an`);
+      output("operations-copy", `${percent(data.operationsHours / fixed.julesUsefulHours)} de la capacité utile de Jules avant organisation de la relève.`);
 
-      let staffingTitle; let staffingCopy;
-      if (number(v, "nights2") <= 90) { staffingTitle = "Possible, avec une relève formalisée."; staffingCopy = "Le volume reste compatible avec un poste central, mais pas avec une disponibilité solitaire sept jours sur sept."; }
-      else if (number(v, "nights2") <= 120) { staffingTitle = "Un ETP + 0,2 à 0,3 ETP."; staffingCopy = "Prévoir des week-ends, congés et pics couverts par la famille, du saisonnier ou de la sous-traitance."; }
-      else if (number(v, "nights2") <= 150) { staffingTitle = "Un ETP + 0,4 à 0,6 ETP."; staffingCopy = "La table et le parc rendent une relève régulière nécessaire, même si le total annuel paraît tenir."; }
-      else { staffingTitle = "Une seconde force devient structurelle."; staffingCopy = "À 180 nuits par suite, saisonnier long, second poste ou externalisation du ménage/parc doivent être arbitrés."; }
+      const staffingTitle = v.supportMode === "parttime" ? `${data.partTimeFte.toFixed(1).replace(".", ",")} ETP complémentaire` : `${integer(data.supportHours)} h sous-traitées`;
+      const staffingCopy = v.supportMode === "parttime" ? `Budget estimé à ${money(data.supportCost)} au prorata d’un coût employeur annuel de 28 k€ au SMIC.` : `Budget estimé à ${money(data.supportCost)}, au tarif de ${money(number(v, "supportHourlyRate"))} par heure.`;
       output("staffing-title", staffingTitle); output("staffing-copy", staffingCopy);
 
       const verdict = document.querySelector("[data-verdict]");
-      if (y2.result >= 10000) { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Modèle finançable.</strong><span>Le loyer SCI et l’emploi sont couverts, avec ${money(y2.result)} avant fiscalité et financement.</span>`; }
-      else if (y2.result >= 0) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre fragile.</strong><span>${money(y2.result)} restent avant aléas, dette et fiscalité : la marge de sécurité est faible.</span>`; }
-      else { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Obligations non couvertes.</strong><span>Il manque ${money(Math.abs(y2.result))}. Le volume, le prix net, les expériences ou l’organisation doivent évoluer.</span>`; }
+      if (data.deficit > 0) { verdict.className = "pilotage-verdict negative"; verdict.innerHTML = `<strong>Activité insuffisante.</strong><span>Après un loyer SCI ramené à zéro, il manque encore ${money(data.deficit)} pour financer emploi, relève et réserve.</span>`; }
+      else if (data.rent < 12000) { verdict.className = "pilotage-verdict warn"; verdict.innerHTML = `<strong>Équilibre opérationnel, contribution limitée.</strong><span>Le modèle finance l’emploi et la réserve, mais seulement ${money(data.rent)} de loyer SCI.</span>`; }
+      else { verdict.className = "pilotage-verdict positive"; verdict.innerHTML = `<strong>Modèle équilibré.</strong><span>L’emploi, la relève et ${money(data.reserve)} de réserve sont financés ; ${money(data.rent)} peuvent contribuer à la SCI.</span>`; }
+      document.querySelector("[data-hourly-field]").hidden = v.supportMode !== "subcontract";
       document.querySelectorAll("[data-pilotage-scenario]").forEach((button) => button.classList.toggle("active", button.dataset.pilotageScenario === activeScenario));
-      renderPnl(y1, y2, v);
+      renderPnl(data);
     }
 
     function showPanel(key, updateHash) {
@@ -166,7 +137,7 @@
     document.querySelectorAll("[data-pilotage-tab]").forEach((button) => button.addEventListener("click", () => showPanel(button.dataset.pilotageTab, true)));
     document.querySelectorAll("[data-pilotage-scenario]").forEach((button) => button.addEventListener("click", function () { activeScenario = button.dataset.pilotageScenario; if (scenarios[activeScenario]) setValues(scenarios[activeScenario]); render(); }));
     form.addEventListener("input", () => { activeScenario = "custom"; render(); });
-    document.querySelector("[data-pilotage-reset]").addEventListener("click", () => { activeScenario = "balance"; setValues(scenarios.balance); window.history.replaceState({}, "", "#simulateur"); render(); });
+    document.querySelector("[data-pilotage-reset]").addEventListener("click", () => { activeScenario = "recommended"; setValues(scenarios.recommended); window.history.replaceState({}, "", "#simulateur"); render(); });
     document.querySelector("[data-pilotage-share]").addEventListener("click", async () => {
       const params = new URLSearchParams({ scenario: activeScenario }); Object.entries(read()).forEach(([key, value]) => params.set(key, value));
       const url = `${window.location.origin}${window.location.pathname}?${params.toString()}#simulateur`;

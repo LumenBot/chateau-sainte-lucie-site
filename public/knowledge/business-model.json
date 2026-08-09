@@ -1,66 +1,81 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "as_of": "2026-08-09",
-  "purpose": "Transparent strategic simulator, not an accountant-approved forecast",
+  "purpose": "Transparent annual operating simulator, not an accountant-approved forecast",
   "currency": "EUR",
-  "commercial_trajectory": {
-    "year_1": { "price_range": [180, 220], "weighted_adr": 198, "nights_per_suite_presets": [90, 120, 150, 180] },
-    "year_2": { "price_range": [200, 240], "weighted_adr": 220, "nights_per_suite_presets": [90, 120, 150, 180] },
-    "status": "working_assumption"
+  "fixed_parameters": {
+    "suite_count": 2,
+    "average_guests": 2.1,
+    "jules_full_time_employer_budget": 28000,
+    "jules_full_time_employer_budget_status": "provisional_working_assumption_to_validate_with_urssaf_and_payroll_quote",
+    "legal_full_time_hours": 1607,
+    "useful_capacity_for_planning": 1350,
+    "initial_capex": 65000,
+    "initial_capex_treatment": "fixed and excluded from annual P&L and SCI rent formula"
+  },
+  "recommended_scenario": {
+    "status": "stabilized_target_not_first_year_guarantee",
+    "nights_per_suite": 155,
+    "average_night_price": 235,
+    "average_length_of_stay": 2.4,
+    "direct_booking_share": 0.65,
+    "spa_take_rate": 0.6,
+    "spa_average_basket_per_buying_stay": 80,
+    "dining_take_rate": 0.3,
+    "dining_average_basket_per_buying_stay": 170,
+    "support_mode": "hourly_outsourcing",
+    "support_hourly_rate": 25,
+    "operating_reserve_before_sci_rent": 5000,
+    "indicative_outputs": {
+      "annual_revenue": 85638,
+      "annual_support_hours": 158,
+      "annual_support_cost": 3938,
+      "maximum_sustainable_sci_rent": 17045
+    }
+  },
+  "editable_activity_parameters": [
+    "nights_per_suite",
+    "average_night_price",
+    "average_length_of_stay",
+    "direct_booking_share",
+    "spa_take_rate",
+    "spa_average_basket_per_buying_stay",
+    "dining_take_rate",
+    "dining_average_basket_per_buying_stay"
+  ],
+  "editable_cost_parameters": {
+    "turnover_cleaning_linen_welcome_per_stay": 90,
+    "breakfast_per_guest_night": 7,
+    "energy_per_suite_night": 7.5,
+    "spa_direct_cost_per_sale": 24,
+    "dining_direct_cost_per_sale": 60,
+    "ota_commission_rate": 0.15,
+    "miscellaneous_operating_cost_rate_of_revenue": 0.06,
+    "operating_reserve_before_sci_rent": 5000
   },
   "formulas": {
     "occupied_suite_nights": "2 * nights_per_suite",
     "stays": "occupied_suite_nights / average_length_of_stay",
-    "lodging_revenue": "occupied_suite_nights * weighted_adr",
-    "spa_revenue": "stays * spa_take_rate * spa_average_basket",
-    "table_revenue": "regular_table_bookings * (meal_price * average_guests + wine_price * 2 * wine_take_rate)",
-    "result": "total_revenue - variable_costs - rent_sci - employer_cost - relief_cost - other_fixed_costs"
+    "lodging_revenue": "occupied_suite_nights * average_night_price",
+    "spa_revenue": "stays * spa_take_rate * spa_average_basket_per_buying_stay",
+    "dining_revenue": "stays * dining_take_rate * dining_average_basket_per_buying_stay",
+    "variable_costs": "OTA commissions + turnover + breakfast + energy + spa direct cost + dining direct cost + miscellaneous operating costs",
+    "internal_operations_hours": "720 + occupied_suite_nights * 0.65 + stays + spa_sales * 0.75 + dining_sales * 4.5",
+    "minimum_relief_hours": "80 + nights_per_suite * 0.5",
+    "support_hours": "max(minimum_relief_hours, internal_operations_hours - 1350, 0)",
+    "hourly_support_cost": "support_hours * hourly_rate",
+    "part_time_support_fte": "max(0.2, round_up_to_0.1(support_hours / 1607))",
+    "part_time_support_cost": "part_time_support_fte * 28000",
+    "maximum_sustainable_sci_rent": "max(0, revenue - variable_costs - 28000 - support_cost - operating_reserve)",
+    "remaining_deficit": "max(0, -(revenue - variable_costs - 28000 - support_cost - operating_reserve))"
   },
-  "central_assumptions": {
-    "average_length_of_stay": 2.1,
-    "average_guests": 2.1,
-    "wine_take_rate": 0.65,
-    "ota_commission_rate": 0.15,
-    "turnover_cost_per_stay": 66,
-    "breakfast_cost_per_guest_night": 7,
-    "energy_cost_per_suite_night": 7.5,
-    "table_variable_cost_rate": 0.35,
-    "rent_sci_annual": 18000,
-    "other_fixed_costs_annual": 8000,
-    "capex": 65000,
-    "status": "working_assumption"
-  },
-  "spa_offers_for_simulation": [
-    { "id": "pack40", "label": "Pack unique", "basket": 40, "variable_cost_rate": 0.28 },
-    { "id": "pack50", "label": "Pack unique", "basket": 50, "variable_cost_rate": 0.28 },
-    { "id": "pack60", "label": "Pack unique", "basket": 60, "variable_cost_rate": 0.28 },
-    { "id": "catalog", "label": "Carte signature", "basket": 74, "variable_cost_rate": 0.31, "candidate_prices": { "nordic_bath": 45, "sauna": 35, "nordic_duo": 65, "interior_wellness": 50, "lantern_night": 95 } }
+  "interpretation_rules": [
+    "SCI rent is an economic contribution capacity, not a validated legal or fiscal market rent.",
+    "When obligations are not covered, SCI rent is zero and the remaining deficit is shown; no negative rent is created.",
+    "Turnover cost includes externalized cleaning, linen and welcome consumables; cleaning hours are therefore excluded from internal workload.",
+    "Miscellaneous operating costs are a revenue percentage for unallocated recurring costs and must be replaced by actual accounting data.",
+    "All assumptions must be replaced by invoices, payroll simulations and measured operating times after launch."
   ],
-  "employment": {
-    "gross_salary_reference": 30000,
-    "central_employer_cost": 40500,
-    "employer_cost_multiplier": 1.35,
-    "status": "working_assumption",
-    "warning": "Replace with an Urssaf simulation and payroll quote after contract and collective agreement classification.",
-    "legal_full_time_hours": 1607,
-    "useful_capacity_for_planning": 1350,
-    "useful_capacity_status": "management_assumption",
-    "workload_hours": {
-      "turnover_per_stay": 3,
-      "breakfast_per_suite_night": 0.65,
-      "guest_and_admin_per_stay": 1,
-      "spa_per_booking": 0.75,
-      "table_per_booking": 4.5,
-      "park_annual": 420,
-      "general_admin_and_maintenance_annual": 300
-    },
-    "staffing_recommendation": {
-      "90_nights_per_suite": "1 FTE plus formal relief",
-      "120_nights_per_suite": "1 FTE plus 0.2–0.3 FTE or outsourcing",
-      "150_nights_per_suite": "1 FTE plus 0.4–0.6 FTE or outsourcing",
-      "180_nights_per_suite": "regular second role or significant outsourcing; consider second FTE if table uptake is high"
-    }
-  },
   "official_validation_links": [
     "https://mon-entreprise.urssaf.fr/simulateurs/salaire-brut-net?view=employeur",
     "https://www.urssaf.fr/accueil/employeur/cotisations/comprendre-cotisations/calcul-cotisations-employeur.html",
